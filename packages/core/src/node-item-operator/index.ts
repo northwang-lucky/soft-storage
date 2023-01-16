@@ -57,7 +57,7 @@ export class NodeItemOperator<T> {
    */
   public contains(key: string): boolean {
     const rootNode = this.operator.getRootNode();
-    return rootNode.hasOwnProperty(key);
+    return Object.prototype.hasOwnProperty.call(rootNode, key);
   }
 
   /**

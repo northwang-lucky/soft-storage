@@ -18,7 +18,9 @@
     "localStorage",
     "sessionStorage"
   ],
-  "scripts": {},
+  "scripts": {
+    "format": "prettier -w \"src/**/*.(js|ts)\""
+  },
   "main": "./src/index.ts",
   "license": "MIT",
   "dependencies": {

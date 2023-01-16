@@ -7,7 +7,8 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "format": "prettier -w \"src/**/*.(js|ts|tsx|vue)\""
   },
   "dependencies": {
     "@smart-storage/hooks": "workspace:*",

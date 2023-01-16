@@ -29,10 +29,10 @@ function createStorage<T>(type: StorageType, rootNodeKey: string, initial?: Part
   return () => ({ storage, storageActions });
 }
 
-export function createLocalStorage<T extends RootNode = {}>(rootNodeKey: string, initial?: Partial<T>) {
+export function createLocalStorage<T extends RootNode = RootNode>(rootNodeKey: string, initial?: Partial<T>) {
   return createStorage(StorageType.LOCAL, rootNodeKey, initial);
 }
 
-export function createSessionStorage<T extends RootNode = {}>(rootNodeKey: string, initial?: Partial<T>) {
+export function createSessionStorage<T extends RootNode = RootNode>(rootNodeKey: string, initial?: Partial<T>) {
   return createStorage(StorageType.SESSION, rootNodeKey, initial);
 }

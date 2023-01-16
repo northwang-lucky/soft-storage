@@ -1,7 +1,9 @@
 {
   "name": "@smart-storage/core",
   "version": "0.0.1",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier -w \"src/**/*.(js|ts)\""
+  },
   "private": true,
   "main": "./src/index.ts",
   "license": "MIT"
