@@ -1,0 +1,13 @@
+{
+  "name": "smart-storage",
+  "version": "0.0.1",
+  "packageManager": "pnpm@7.1.0",
+  "scripts": {
+    "play:vue": "pnpm -F @smart-storage/vue-demo start"
+  },
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "4.9.4"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@smart-storage/hooks",
+  "version": "0.0.1",
+  "description": "Smarter storage management",
+  "homepage": "https://github.com/northwang-lucky/smart-storage",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/northwang-lucky/smart-storage.git",
+    "directory": "packages/hooks"
+  },
+  "author": {
+    "name": "northwang-lucky",
+    "email": "wyb_goodluck@163.com",
+    "url": "https://github.com/northwang-lucky"
+  },
+  "keywords": [
+    "storage",
+    "localStorage",
+    "sessionStorage"
+  ],
+  "scripts": {},
+  "main": "./src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@smart-storage/core": "workspace:*"
+  }
+}

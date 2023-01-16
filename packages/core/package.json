@@ -1,0 +1,8 @@
+{
+  "name": "@smart-storage/core",
+  "version": "0.0.1",
+  "scripts": {},
+  "private": true,
+  "main": "./src/index.ts",
+  "license": "MIT"
+}
