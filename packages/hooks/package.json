@@ -18,7 +18,12 @@
     "localStorage",
     "sessionStorage"
   ],
+  "config": {
+    "name": "hooks"
+  },
   "scripts": {
+    "test": "jest",
+    "test:cov": "jest --coverage && node ../../scripts/coverage.cjs",
     "format": "prettier -w \"src/**/*.(js|ts)\""
   },
   "main": "./src/index.ts",
