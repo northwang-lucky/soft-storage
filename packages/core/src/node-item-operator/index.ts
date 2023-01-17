@@ -1,11 +1,11 @@
 import { StorageType } from '../root-node-operator/types';
 import { RootNodeOperator } from '../root-node-operator';
 
-export class NodeItemOperator<T> {
+export class NodeItemOperator<T extends object> {
   /**
    * Root nodes manager
    */
-  private operator: RootNodeOperator;
+  private operator: RootNodeOperator<T>;
 
   /**
    * @param key root storage key
@@ -20,9 +20,9 @@ export class NodeItemOperator<T> {
    * @param key item key
    * @returns item value
    */
-  public getItem(key: string): T | null {
+  public getItem<K extends keyof T>(key: K) {
     const rootNode = this.operator.getRootNode();
-    return (rootNode[key] as T) ?? null;
+    return rootNode[key] ?? null;
   }
 
   /**
@@ -30,7 +30,7 @@ export class NodeItemOperator<T> {
    * @param key item key
    * @param value item value
    */
-  public setItem(key: string, value: unknown): void {
+  public setItem<K extends keyof T>(key: K, value: T[K]): void {
     const rootNode = this.operator.getRootNode();
     rootNode[key] = value;
     this.operator.setRootNode(rootNode);
@@ -40,10 +40,10 @@ export class NodeItemOperator<T> {
    * Remove item from root node
    * @param key item key
    */
-  public removeItem(key: string): void {
+  public removeItem<K extends keyof T>(key: K): void {
     const rootNode = this.operator.getRootNode();
     delete rootNode[key];
-    if (!Object.keys(rootNode).length) {
+    if (!Object.keys(rootNode as object).length) {
       this.clear();
       return;
     }
@@ -71,14 +71,14 @@ export class NodeItemOperator<T> {
    * Keys total
    */
   public get size(): number {
-    return Object.keys(this.operator.getRootNode()).length;
+    return Object.keys(this.operator.getRootNode() as object).length;
   }
 
   /**
    * Get root node operator instance
    * @returns root node operator
    */
-  public getRootNodeOperator(): RootNodeOperator {
+  public getRootNodeOperator(): RootNodeOperator<T> {
     return this.operator;
   }
 }

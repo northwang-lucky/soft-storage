@@ -2,6 +2,8 @@
   "name": "@smart-storage/core",
   "version": "0.0.1",
   "scripts": {
+    "test": "jest",
+    "test:cov": "jest --coverage && node ./scripts/coverage.cjs",
     "format": "prettier -w \"src/**/*.(js|ts)\""
   },
   "private": true,

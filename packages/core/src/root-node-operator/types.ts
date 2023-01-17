@@ -4,3 +4,5 @@ export enum StorageType {
 }
 
 export type RootNode = Record<string, unknown>;
+
+export type Key = string;

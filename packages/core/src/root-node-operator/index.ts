@@ -1,6 +1,6 @@
-import { RootNode, StorageType } from './types';
+import { StorageType } from './types';
 
-export class RootNodeOperator {
+export class RootNodeOperator<T> {
   /**
    * Storage instance
    */
@@ -17,14 +17,14 @@ export class RootNodeOperator {
    */
   public constructor(key: string, storage: StorageType) {
     this.storageKey = key;
-    this.storage = storage === StorageType.LOCAL ? window.localStorage : window.sessionStorage;
+    this.storage = storage === StorageType.LOCAL ? localStorage : sessionStorage;
   }
 
   /**
    * Get the root node
    * @returns root node
    */
-  public getRootNode(): RootNode {
+  public getRootNode(): T {
     const rootNode = this.storage.getItem(this.storageKey);
     return rootNode ? JSON.parse(rootNode) : {};
   }
@@ -34,7 +34,7 @@ export class RootNodeOperator {
    * @param root root node
    * @returns stringified root node
    */
-  public setRootNode(root: RootNode): void {
+  public setRootNode(root: Partial<T>): void {
     this.storage.setItem(this.storageKey, JSON.stringify(root));
   }
 
