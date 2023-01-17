@@ -11,6 +11,7 @@ importers:
       jest: 29.3.1
       jest-environment-jsdom: 29.3.1
       lint-staged: 13.1.0
+      open: 8.4.0
       prettier: 2.7.1
       rimraf: 4.0.7
       ts-jest: 29.0.5
@@ -23,6 +24,7 @@ importers:
       jest: 29.3.1
       jest-environment-jsdom: 29.3.1
       lint-staged: 13.1.0
+      open: 8.4.0
       prettier: 2.7.1
       rimraf: 4.0.7
       ts-jest: 29.0.5_p6ekqnroyms5nhqbfxosryz7rm
@@ -32,19 +34,13 @@ importers:
     specifiers: {}
 
   packages/core:
-    specifiers:
-      open: 8.4.0
-    devDependencies:
-      open: 8.4.0
+    specifiers: {}
 
   packages/hooks:
     specifiers:
       '@smart-storage/core': workspace:*
-      open: 8.4.0
     dependencies:
       '@smart-storage/core': link:../core
-    devDependencies:
-      open: 8.4.0
 
   playground/react-demo:
     specifiers: {}
