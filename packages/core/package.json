@@ -1,0 +1,44 @@
+{
+  "name": "@smart-storage/core",
+  "version": "0.0.1",
+  "description": "It is the core dependency package for @smart-storage/hooks",
+  "homepage": "https://github.com/northwang-lucky/smart-storage",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/northwang-lucky/smart-storage.git",
+    "directory": "packages/core"
+  },
+  "author": {
+    "name": "northwang-lucky",
+    "email": "wyb_goodluck@163.com",
+    "url": "https://github.com/northwang-lucky"
+  },
+  "keywords": [
+    "storage",
+    "localStorage",
+    "sessionStorage"
+  ],
+  "config": {
+    "name": "core"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:cov": "jest --coverage && node ../../scripts/coverage.cjs",
+    "build": "pnpm test && rimraf \"./dist\" --impl=native && rollup -c",
+    "format": "prettier -w \"src/**/*.(js|ts)\"",
+    "clean": "pnpx rimraf \"./node_modules\" --impl=native"
+  },
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    "require": "./dist/index.cjs.js",
+    "import": "./dist/index.es.js",
+    "types": "./dist/index.d.ts"
+  },
+  "files": [
+    "./dist"
+  ],
+  "license": "MIT"
+}
