@@ -1,0 +1,18 @@
+{
+  "cSpell.words": [
+    "imgs",
+    "lcov",
+    "peaceiris",
+    "plusplus",
+    "PNPM",
+    "reco",
+    "rollup",
+    "testid",
+    "Uncapitalize",
+    "vuepress"
+  ],
+  "markdownlint.config": {
+    "MD024": false,
+    "MD025": false
+  }
+}
