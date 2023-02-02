@@ -1,0 +1,64 @@
+{
+  "name": "@smart-storage/react-hooks",
+  "version": "0.0.1",
+  "description": "Smarter storage management for React",
+  "homepage": "https://github.com/northwang-lucky/smart-storage",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/northwang-lucky/smart-storage.git",
+    "directory": "packages/react-hooks"
+  },
+  "author": {
+    "name": "northwang-lucky",
+    "email": "wyb_goodluck@163.com",
+    "url": "https://github.com/northwang-lucky"
+  },
+  "keywords": [
+    "storage",
+    "localStorage",
+    "sessionStorage",
+    "hook",
+    "react"
+  ],
+  "config": {
+    "name": "react-hooks"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:cov": "jest --coverage && node ../../scripts/coverage.cjs",
+    "build": "pnpm test && rimraf \"./dist\" --impl=native && rollup -c",
+    "build-only": "rimraf \"./dist\" --impl=native && rollup -c",
+    "format": "prettier -w \"src/**/*.(js|ts)\"",
+    "clean": "pnpx rimraf \"./node_modules\" --impl=native"
+  },
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    "require": "./dist/index.cjs.js",
+    "import": "./dist/index.es.js",
+    "types": "./dist/index.d.ts"
+  },
+  "files": [
+    "./dist"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@smart-storage/hooks": "latest",
+    "@smart-storage/shared": "latest",
+    "@types/react": ">=16.8.0",
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "@smart-storage/hooks": "workspace:*",
+    "@smart-storage/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@testing-library/react": "13.4.0",
+    "@types/react": "18.0.0",
+    "@types/react-dom": "18.0.0",
+    "react": "18.0.0",
+    "react-dom": "18.0.0"
+  }
+}
