@@ -1,0 +1,34 @@
+input {
+  margin: 0;
+}
+
+.box button {
+  margin-left: 12px;
+  width: 60px;
+}
+
+.box {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.form-item {
+  margin-right: 30px;
+  width: 500px;
+}
+
+.form-item label {
+  width: 100px;
+  display: inline-block;
+  text-align: end;
+  margin-right: 6px;
+}
+
+.tool-bar {
+  padding-bottom: 24px;
+}
+
+.storage-item span:first-child {
+  width: 100px;
+  display: inline-block;
+}
