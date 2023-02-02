@@ -1,6 +1,6 @@
 # Module Protect
 
-## Let's take a look at this case
+## Let's Take a Look at This Case
 
 We have used the `createLocalStorage` API to create a storage module whose key content is "unprotected_storage_key":
 
@@ -35,7 +35,7 @@ So we all know that once this line of code is executed, the data structure of th
 
 And once the storage module is destroyed, Smart Storage will not work normally!!!
 
-## How to solve
+## How to Solve?
 
 To prevent the data structure of the storage module from being corrupted, Smart Storage provides a configuration item that prevents the storage API from making the original call to the storage module key:
 
