@@ -22,18 +22,18 @@ Create a new file anywhere, and use like this:
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface TestStorage {
-  str?: string;
-  num?: number;
-  bool: boolean;
-  arr: string[];
+interface UserInfo {
+  token?: string;
+  hasSigned: boolean;
 }
 
-export const { useStorage } = createLocalStorage<TestStorage>({
+export const { useStorage } = createLocalStorage<UserInfo>({
   // This is storage key
-  rootNodeKey: 'vue_test_key',
-  // Optional properties must be initialed
-  initial: { bool: false, arr: [] },
+  rootNodeKey: 'user_info',
+  // Used to initialize
+  initial: {
+    hasSigned: false, // Non-nullable properties must be initialized
+  },
 });
 ```
 
@@ -41,24 +41,35 @@ export const { useStorage } = createLocalStorage<TestStorage>({
 
 ```vue
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
 import { useStorage } from './storage';
 
-/* You can safely destructure the return value of this hook,
-because TypeScript will provide you with great type hints */
+/* You can easily deconstruct the hook's return value,
+because TypeScript will give you great type hints */
 const {
-  refs: { str, num, bool, arr },
-  resetters: { resetStr, resetNum, resetBool, resetArr },
-  checkers: { containsStr, containsNum, containsBool, containsArr },
+  refs: { token, hasSigned },
+  resetters: { resetToken, resetHasSigned },
+  checkers: { containsToken, containsHasSigned },
 } = useStorage();
 
-str.value = 'string'; // It's a ref
-console.log(str.value);
-resetStr(); // Reset the value of str
-containsStr(); // Whether the key exists in the module (Recommended)
+onMounted(() => {
+  getUserInfo().then(res => {
+    token.value = res.token; // It's a ref
+    hasSigned.value = true; // Same as above
+  });
+});
+
+const onSignOut = () => {
+  resetToken(); // Reset the value of token
+  resetHasSigned(); // Reset the value of hasSigned
+};
 </script>
 
 <template>
-  <div>{{ str }}</div>
+  <div>Contains token: {{ containsToken() }}</div>
+  <div>Contains hasSigned: {{ containsHasSigned() }}</div>
+  <button @click="onSignOut">Sign out</button>
 </template>
 ```
 
@@ -76,20 +87,20 @@ Create a new file anywhere, and use like this:
 
 ```ts
 // storage.ts
-import { createSessionStorage } from '@smart-storage/vue-hooks';
+import { createSessionStorage } from '@smart-storage/react-hooks';
 
-interface TestStorage {
-  str?: string;
-  num?: number;
-  bool: boolean;
-  arr: string[];
+interface UserInfo {
+  token?: string;
+  hasSigned: boolean;
 }
 
-export const { useStorage } = createSessionStorage<TestStorage>({
+export const { useStorage } = createSessionStorage<UserInfo>({
   // This is storage key
-  rootNodeKey: 'react_test_key',
-  // Optional properties must be initialed
-  initial: { bool: false, arr: [] },
+  rootNodeKey: 'user_info',
+  // Used to initialize
+  initial: {
+    hasSigned: false, // Non-nullable properties must be initialized
+  },
 });
 ```
 
@@ -97,31 +108,42 @@ export const { useStorage } = createSessionStorage<TestStorage>({
 
 ```tsx
 import React, { useEffect } from 'react';
+import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
 import { useStorage } from './storage';
 
 function TestComponent() {
-  /* You can safely destructure the return value of this hook,
-  because TypeScript will provide you with great type hints */
+  /* You can easily deconstruct the hook's return value,
+  because TypeScript will give you great type hints */
   const {
-    strState: { str, setStr, resetStr, containsStr },
-    numState: { num, setNum, resetNum, containsNum },
-    boolState: { bool, setBool, resetBool, containsBool },
-    arrState: { arr, setArr, resetArr, containsArr },
+    tokenState: { token, setToken, resetToken, containsToken },
+    hasSignedState: { hasSigned, setHasSigned, resetHasSigned, containsHasSigned },
   } = useStorage();
 
   useEffect(() => {
-    setStr('string');
-    resetStr(); // Reset the value of str
-    containsStr(); // Whether the key exists in the module (Recommended)
+    getUserInfo().then(res => {
+      setToken(res.token);
+      setHasSigned(true);
+    });
   }, []);
 
-  return <div>{str}</div>;
+  const onSignOut = () => {
+    resetToken(); // Reset the value of token
+    resetHasSigned(); // Reset the value of hasSigned
+  };
+
+  return (
+    <>
+      <div>Contains token: {containsToken()}</div>
+      <div>Contains hasSigned: {containsHasSigned()}</div>
+      <button onClick={onSignOut}>Sign out</button>
+    </>
+  );
 }
 
 export default TestComponent;
 ```
 
-## Other
+## Standalone Use
 
 ### Install
 
@@ -137,34 +159,45 @@ Create a new file anywhere, and use like this:
 // storage.ts
 import { createSessionStorage } from '@smart-storage/hooks';
 
-interface TestStorage {
-  str?: string;
-  num?: number;
-  bool: boolean;
-  arr: string[];
+interface UserInfo {
+  token?: string;
+  hasSigned: boolean;
 }
 
-export const { useStorage } = createSessionStorage<TestStorage>({
+export const { useStorage } = createSessionStorage<UserInfo>({
   // This is storage key
-  rootNodeKey: 'react_test_key',
-  // Optional properties must be initialed
-  initial: { bool: false, arr: [] },
+  rootNodeKey: 'user_info',
+  // Used to initialize
+  initial: {
+    hasSigned: false, // Non-nullable properties must be initialized
+  },
 });
 ```
 
 ### Use hooks in a script file
 
 ```ts
+import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
 import { useStorage } from './storage';
 
-const { str, num, bool, arr } = useStorage();
-str.get();
-str.set('string');
-str.remove(); // Will delete the key and value from storage module
-str.exist();
+const { token, hasSigned } = useStorage();
+
+(() => {
+  getUserInfo().then(res => {
+    token.set(res.token);
+    hasSigned.set(true);
+    console.log(hasSigned.get()); // Output: true
+  });
+})();
+
+const onSignOut = () => {
+  token.remove(); // Will delete the key and value from storage module
+  hasSigned.set(false);
+  console.log(token.get(), token.exist()); // Output: undefined, false
+};
 ```
 
-## Raw usage
+## Raw Usage
 
 ### Install
 
@@ -176,20 +209,34 @@ npm install @smart-storage/core --save
 
 ```ts
 import { RootNode, StorageType } from '@smart-storage/core';
+import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
 
-interface TestStorage {
-  num: number;
-  str: string;
+interface UserInfo {
+  token?: string;
+  hasSigned: boolean;
 }
 
-const rootNode = new RootNode<TestStorage>('raw_usage', StorageType.SESSION);
+const rootNode = new RootNode<UserInfo>('user_info', StorageType.SESSION);
 
-rootNode.setItem('num', 1);
-rootNode.getItem('num');
-rootNode.removeItem('num');
-rootNode.contains('num');
-rootNode.clear();
-rootNode.size();
+(() => {
+  getUserInfo().then(res => {
+    rootNode.setItem('token', res.token);
+    rootNode.setItem('hasSigned', true);
+    console.log(rootNode.getItem('hasSigned')); // Output: true
+    console.log(rootNode.contains('token')); // Output: true
+  });
+})();
+
+const onSignOut = () => {
+  rootNode.removeItem('token');
+  rootNode.setItem('hasSigned', false);
+  console.log(rootNode.getItem('token')); // Output: undefined
+  console.log(rootNode.size()); // Output: 1
+
+  // Or
+  rootNode.clear();
+  console.log(rootNode.size()); // Output: 0
+};
 ```
 
 ## Next
