@@ -1,0 +1,29 @@
+{
+  "msg_type": "interactive",
+  "card": {
+    "header": {
+      "template": "${header_color}",
+      "title": { "tag": "plain_text", "content": "${header_title}" }
+    },
+    "elements": [
+      {
+        "tag": "markdown",
+        "content": "**[Repository]:** ${repository}\\n**[Workflow]:** ${workflow}"
+      },
+      {
+        "tag": "hr"
+      },
+      {
+        "tag": "action",
+        "actions": [
+          {
+            "tag": "button",
+            "text": { "tag": "plain_text", "content": "Show More" },
+            "type": "primary",
+            "url": "${workflow_url}"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+name: Deploy Demo and Document Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - config/rollup.config.js
+      - config/tsconfig.base.json
+      - docs/**/*
+      - packages/**/*
+      - playground/**/*
+      - scripts/build-pages.js
+
+env:
+  APP_NAME: Lark
+  WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+jobs:
+  notify-start:
+    runs-on: ubuntu-latest
+    name: Report Start
+    steps:
+      - name: Notify start
+        uses: northwang-personal/chatbot-webhook-client@v1.0.1
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          params: >-
+            {
+              "msg_type": "interactive",
+              "card": {
+                "header": {
+                  "template": "blue",
+                  "title": { "tag": "plain_text", "content": "Workflow Start" }
+                },
+                "elements": [{
+                  "tag": "markdown",
+                  "content": "**[Repository]:** ${{ github.repository }}\n**[Workflow]:** ${{ github.workflow }}"
+                }, { 
+                  "tag": "hr" 
+                }, {
+                  "tag": "action",
+                  "actions": [{
+                    "tag": "button",
+                    "text": { "tag": "plain_text", "content": "Show More" },
+                    "type": "primary",
+                    "url": "${{ env.WORKFLOW_URL }}"
+                  }]
+                }]
+              } 
+            }
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build pages
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Enable Cache
+        if: success()
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Set up Node 16
+        if: success()
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Set up PNPM
+        if: success()
+        run: npm i pnpm --location=global
+      - name: Install dependencies
+        if: success()
+        run: pnpm install
+      - name: Run build
+        if: success()
+        run: pnpm build:pages
+      - name: Run Deploy
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          full_commit_message: ${{ github.event.head_commit.message }}
+  notify-success:
+    if: success()
+    runs-on: ubuntu-latest
+    name: Report Success
+    needs: build-and-deploy
+    steps:
+      - name: Notify success
+        uses: northwang-personal/chatbot-webhook-client@v1.0.1
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          params: >-
+            {
+              "msg_type": "interactive",
+              "card": {
+                "header": {
+                  "template": "green",
+                  "title": { "tag": "plain_text", "content": "Workflow Succeed" }
+                },
+                "elements": [{
+                  "tag": "markdown",
+                  "content": "**[Repository]:** ${{ github.repository }}\n**[Workflow]:** ${{ github.workflow }}"
+                }, { 
+                  "tag": "hr" 
+                }, {
+                  "tag": "action",
+                  "actions": [{
+                    "tag": "button",
+                    "text": { "tag": "plain_text", "content": "Show More" },
+                    "type": "primary",
+                    "url": "${{ env.WORKFLOW_URL }}"
+                  }]
+                }]
+              } 
+            }
+  notify-failure:
+    if: failure()
+    runs-on: ubuntu-latest
+    name: Report Failure
+    needs: build-and-deploy
+    steps:
+      - name: Notify failure
+        uses: northwang-personal/chatbot-webhook-client@v1.0.1
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          params: >-
+            {
+              "msg_type": "interactive",
+              "card": {
+                "header": {
+                  "template": "red",
+                  "title": { "tag": "plain_text", "content": "Workflow Failed" }
+                },
+                "elements": [{
+                  "tag": "markdown",
+                  "content": "**[Repository]:** ${{ github.repository }}\n**[Workflow]:** ${{ github.workflow }}"
+                }, { 
+                  "tag": "hr" 
+                }, {
+                  "tag": "action",
+                  "actions": [{
+                    "tag": "button",
+                    "text": { "tag": "plain_text", "content": "Show More" },
+                    "type": "primary",
+                    "url": "${{ env.WORKFLOW_URL }}"
+                  }]
+                }]
+              } 
+            }
