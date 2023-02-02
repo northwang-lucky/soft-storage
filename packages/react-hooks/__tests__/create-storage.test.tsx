@@ -1,0 +1,179 @@
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { createLocalStorage, createSessionStorage, discardLocalStorage, discardSessionStorage } from '../src';
+
+interface TestStorage {
+  str?: string;
+  num?: number;
+  bool: boolean;
+}
+
+const { useStorage: useLocalStorage, useStorageHelper: useLocalStorageHelper } = createLocalStorage<TestStorage>({
+  rootNodeKey: 'createLocalStorageTest',
+  initial: { bool: true },
+});
+
+const { useStorage: useSessionStorage, useStorageHelper: useSessionStorageHelper } = createSessionStorage<TestStorage>({
+  rootNodeKey: 'createSessionStorageTest',
+  initial: { bool: true },
+});
+
+const { useStorage: useProtectStorage, useStorageHelper: useProtectStorageHelper } = createSessionStorage<TestStorage>({
+  rootNodeKey: 'createProtectStorageTest',
+  protect: true,
+  initial: { bool: true },
+});
+
+function App(props: { type: 'local' | 'session'; protect: boolean }) {
+  const { type, protect } = props;
+
+  const {
+    strState: { str, setStr, containsStr },
+    numState: { num, setNum, resetNum },
+    boolState: { bool, setBool, resetBool },
+  } = (() => {
+    if (protect) return useProtectStorage;
+    return type === 'local' ? useLocalStorage : useSessionStorage;
+  })()();
+  const storageHelper = (() => {
+    if (protect) return useProtectStorageHelper;
+    return type === 'local' ? useLocalStorageHelper : useSessionStorageHelper;
+  })()();
+
+  return (
+    <>
+      <span data-testid="str">{str}</span>
+      <span data-testid="str-exist">{containsStr().toString()}</span>
+      <button data-testid="str-set" type="button" onClick={() => setStr('string')}>
+        Set str to &apos;string&apos;
+      </button>
+
+      <span data-testid="num">{num}</span>
+      <button data-testid="num-set" type="button" onClick={() => setNum(1)}>
+        Set num to 1
+      </button>
+      <button data-testid="num-reset" type="button" onClick={() => resetNum()}>
+        Reset num
+      </button>
+
+      <span data-testid="bool">{bool.toString()}</span>
+      <button data-testid="bool-set" type="button" onClick={() => setBool(() => false)}>
+        Set bool to false
+      </button>
+      <button data-testid="bool-reset" type="button" onClick={() => resetBool()}>
+        Reset bool
+      </button>
+
+      <span data-testid="num-contains">{storageHelper.contains('num').toString()}</span>
+      <span data-testid="size">{storageHelper.size()}</span>
+      <button data-testid="initialize" type="button" onClick={() => storageHelper.initialize()}>
+        Initialize
+      </button>
+    </>
+  );
+}
+
+function useTestCase(type: 'local' | 'session', protect = false) {
+  render(<App type={type} protect={protect} />);
+
+  fireEvent.click(screen.getByTestId('str-set'));
+  expect(screen.getByTestId('str').textContent).toBe('string');
+  expect(screen.getByTestId('str-exist').textContent).toBe('true');
+
+  expect(screen.getByTestId('num-contains').textContent).toBe('false');
+  expect(screen.getByTestId('size').textContent).toBe('2');
+
+  fireEvent.click(screen.getByTestId('num-set'));
+  expect(screen.getByTestId('num').textContent).toBe('1');
+  expect(screen.getByTestId('size').textContent).toBe('3');
+
+  expect(screen.getByTestId('bool').textContent).toBe('true');
+  fireEvent.click(screen.getByTestId('bool-reset'));
+  expect(screen.getByTestId('bool').textContent).toBe('true');
+  expect(screen.getByTestId('size').textContent).toBe('3');
+
+  fireEvent.click(screen.getByTestId('num-reset'));
+  expect(screen.getByTestId('size').textContent).toBe('2');
+  expect(screen.getByTestId('num').textContent).toBe('');
+
+  fireEvent.click(screen.getByTestId('initialize'));
+  expect(screen.getByTestId('size').textContent).toBe('1');
+
+  if (protect) {
+    let windowStorage: Storage;
+    if (type === 'local') {
+      windowStorage = window.localStorage;
+    } else {
+      windowStorage = window.sessionStorage;
+    }
+
+    try {
+      windowStorage.setItem('createProtectStorageTest', '123');
+    } catch (err: any) {
+      const message = `Direct calls for setItem to "createProtectStorageTest" are disabled! Do not use the 'protect' property if this is not your preference.`;
+      expect(err.message).toBe(message);
+    }
+
+    try {
+      windowStorage.removeItem('createProtectStorageTest');
+    } catch (err: any) {
+      const message = `Direct calls for removeItem to "createProtectStorageTest" are disabled! Do not use the 'protect' property if this is not your preference.`;
+      expect(err.message).toBe(message);
+    }
+
+    expect(screen.getByTestId('bool').textContent).toBe('true');
+
+    fireEvent.click(screen.getByTestId('bool-set'));
+    expect(screen.getByTestId('bool').textContent).toBe('false');
+  }
+}
+
+test('createLocalStorage', () => {
+  useTestCase('local');
+});
+
+test('createSessionStorage', () => {
+  useTestCase('session');
+});
+
+test('createProtectStorage', () => {
+  useTestCase('session', true);
+});
+
+createSessionStorage({ rootNodeKey: 'discardSessionKeys', initial: { key: 1 } });
+discardSessionStorage({ rootNodeKey: 'discardSessionKeys', shouldRun: true });
+const { useStorageHelper: useDiscardSessionStorageHelper } = createSessionStorage({
+  rootNodeKey: 'discardSessionKeys',
+  initial: { newKey: 1 },
+});
+
+createLocalStorage({ rootNodeKey: 'discardLocalKeys', initial: { key: 1 } });
+discardLocalStorage({ rootNodeKey: 'discardLocalKeys', shouldRun: () => true });
+const { useStorageHelper: useDiscardLocalStorageHelper } = createLocalStorage({
+  rootNodeKey: 'discardLocalKeys',
+  initial: { newKey: 1 },
+});
+
+function DiscardApp({ type }: { type: 'local' | 'session' }) {
+  const storageHelper = type === 'local' ? useDiscardLocalStorageHelper() : useDiscardSessionStorageHelper();
+  return (
+    <>
+      <span data-testid="newKey-contains">{storageHelper.contains('newKey').toString()}</span>
+      <span data-testid="key-contains">{storageHelper.contains('key').toString()}</span>
+    </>
+  );
+}
+
+function useDiscardTestCase(type: 'local' | 'session') {
+  render(<DiscardApp type={type} />);
+  expect(screen.getByTestId('newKey-contains').textContent).toBe('true');
+  expect(screen.getByTestId('key-contains').textContent).toBe('false');
+}
+
+test('discardSessionKeys', () => {
+  useDiscardTestCase('session');
+});
+
+test('discardLocalKeys', () => {
+  useDiscardTestCase('local');
+});
