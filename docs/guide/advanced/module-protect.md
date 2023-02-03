@@ -65,8 +65,8 @@ After opening the module protection like this, the three functions `setItem()`, 
 
   ![remove-item-error](~@imgs/advanced/module-protect/remove-item-error.png)
 
-- When calling `localStorage.clear()`, all key pairs except "protected_storage_key" and its corresponding value are deleted
+- When calling `localStorage.clear()`, **"protected_storage_key" and its corresponding value will be kept**, the others will be deleted.
 
 ::: tip
-`setItem()`, `removeItem()` will only be blocked with an error if you try to change the protected module key (like "protected_storage_key"), and will work properly if you change other keys
+`setItem()`, `removeItem()` will only be blocked with an error if you try to change the key that belongs to a protected module (such as "protected_storage_key" above), and will work properly if you change other keys.
 :::
