@@ -1,12 +1,5 @@
 import { createApp, defineComponent } from 'vue';
-import {
-  createLocalStorage,
-  createSessionStorage,
-  discardLocalStorage,
-  discardSessionStorage,
-  UseStorage,
-  UseStorageHelper,
-} from '../src';
+import { createLocalStorage, createSessionStorage, UseStorage, UseStorageHelper } from '../src';
 
 interface TestStorage {
   str?: string;
@@ -122,28 +115,4 @@ test('createProtectStorage', () => {
     initial: { bool: true, arr: [] },
   });
   useTestCase(useStorage, useStorageHelper, true);
-});
-
-test('discardSessionKeys', () => {
-  createSessionStorage({ rootNodeKey: 'discardSessionKeys', initial: { key: 1 } });
-  discardSessionStorage({ rootNodeKey: 'discardSessionKeys', shouldRun: true });
-  const { useStorageHelper } = createSessionStorage({ rootNodeKey: 'discardSessionKeys', initial: { newKey: 1 } });
-
-  (() => {
-    const storageHelper = useStorageHelper();
-    expect(storageHelper.contains('newKey')).toBe(true);
-    expect(storageHelper.contains('key')).toBe(false);
-  })();
-});
-
-test('discardLocalKeys', () => {
-  createLocalStorage({ rootNodeKey: 'discardLocalKeys', initial: { key: 1 } });
-  discardLocalStorage({ rootNodeKey: 'discardLocalKeys', shouldRun: () => true });
-  const { useStorageHelper } = createLocalStorage({ rootNodeKey: 'discardLocalKeys', initial: { newKey: 1 } });
-
-  (() => {
-    const storageHelper = useStorageHelper();
-    expect(storageHelper.contains('newKey')).toBe(true);
-    expect(storageHelper.contains('key')).toBe(false);
-  })();
 });
