@@ -18,9 +18,9 @@ But now it's like this:
 
 ## How It Works?
 
-Smart Storage will read the storage objects created in the project and serialize them into strings using JSON. Then internally call the browser's localStorage (or sessionStorage) API to create storage.
+Smart Storage will read the storage objects created in the project and serialize them into strings using `JSON`. Then internally call the browser's `localStorage` (or `sessionStorage`) API to create storage.
 
-In addition, Smart Storage will use Proxy API to create Vue or React responsive variables to facilitate developers to modify storage values
+In addition, Smart Storage will use `Proxy` API to create Vue or React responsive variables to facilitate developers to modify storage values
 
 ::: warning
 **Proxy** and **Reflect** are used in the source code, so **IE series browsers are not supported**
