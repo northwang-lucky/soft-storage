@@ -40,7 +40,7 @@ export default defineConfig({
         {
           title: 'Advanced',
           collapsable: false,
-          children: ['advanced/storage-helper', 'advanced/module-protect', 'advanced/discard-storage'],
+          children: ['advanced/storage-helper', 'advanced/module-protect'],
         },
       ],
     },
