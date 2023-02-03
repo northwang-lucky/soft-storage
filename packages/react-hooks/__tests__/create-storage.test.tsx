@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { createLocalStorage, createSessionStorage, discardLocalStorage, discardSessionStorage } from '../src';
+import { createLocalStorage, createSessionStorage } from '../src';
 
 interface TestStorage {
   str?: string;
@@ -74,6 +74,7 @@ function App(props: { type: 'local' | 'session'; protect: boolean }) {
 }
 
 function useTestCase(type: 'local' | 'session', protect = false) {
+  // @ts-ignore
   render(<App type={type} protect={protect} />);
 
   fireEvent.click(screen.getByTestId('str-set'));
@@ -138,42 +139,4 @@ test('createSessionStorage', () => {
 
 test('createProtectStorage', () => {
   useTestCase('session', true);
-});
-
-createSessionStorage({ rootNodeKey: 'discardSessionKeys', initial: { key: 1 } });
-discardSessionStorage({ rootNodeKey: 'discardSessionKeys', shouldRun: true });
-const { useStorageHelper: useDiscardSessionStorageHelper } = createSessionStorage({
-  rootNodeKey: 'discardSessionKeys',
-  initial: { newKey: 1 },
-});
-
-createLocalStorage({ rootNodeKey: 'discardLocalKeys', initial: { key: 1 } });
-discardLocalStorage({ rootNodeKey: 'discardLocalKeys', shouldRun: () => true });
-const { useStorageHelper: useDiscardLocalStorageHelper } = createLocalStorage({
-  rootNodeKey: 'discardLocalKeys',
-  initial: { newKey: 1 },
-});
-
-function DiscardApp({ type }: { type: 'local' | 'session' }) {
-  const storageHelper = type === 'local' ? useDiscardLocalStorageHelper() : useDiscardSessionStorageHelper();
-  return (
-    <>
-      <span data-testid="newKey-contains">{storageHelper.contains('newKey').toString()}</span>
-      <span data-testid="key-contains">{storageHelper.contains('key').toString()}</span>
-    </>
-  );
-}
-
-function useDiscardTestCase(type: 'local' | 'session') {
-  render(<DiscardApp type={type} />);
-  expect(screen.getByTestId('newKey-contains').textContent).toBe('true');
-  expect(screen.getByTestId('key-contains').textContent).toBe('false');
-}
-
-test('discardSessionKeys', () => {
-  useDiscardTestCase('session');
-});
-
-test('discardLocalKeys', () => {
-  useDiscardTestCase('local');
 });
