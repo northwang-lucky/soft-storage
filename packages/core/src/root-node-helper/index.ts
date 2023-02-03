@@ -46,6 +46,11 @@ export class RootNodeHelper<T> {
     return this.storageType;
   }
 
+  public getExistence(): boolean {
+    const rootNode = this.storage.getItem(this.storageKey);
+    return Boolean(rootNode);
+  }
+
   public protect(): void {
     if (!this.protectRan) {
       this.protectRan = true;

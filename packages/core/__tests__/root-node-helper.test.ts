@@ -22,6 +22,7 @@ test('RootNodeHelper', () => {
   helper.removeRootValue();
   rootNode = helper.getRootValue();
   expect(rootNode).toStrictEqual({});
+  expect(helper.getExistence()).toBe(false);
 });
 
 interface FirstModule {
