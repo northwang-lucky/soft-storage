@@ -83,9 +83,9 @@ function createStorage<T extends object>(
           if (initial && Object.prototype.hasOwnProperty.call(initial, key)) {
             const defVal = initial[key];
             itemRefDict[key].value = (defVal instanceof Object ? cloneDeep(defVal) : defVal) as UnwrapRef<T[keyof T]>;
-            return;
+          } else {
+            itemRefDict[key].value = undefined as UnwrapRef<T[keyof T]>;
           }
-          itemRefDict[key].value = undefined as UnwrapRef<T[keyof T]>;
         }
       },
     }),
