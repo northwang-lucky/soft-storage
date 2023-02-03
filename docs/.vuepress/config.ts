@@ -1,4 +1,5 @@
 import { defineConfig } from 'vuepress/config';
+import { resolve } from 'path';
 
 export default defineConfig({
   base: '/smart-storage/docs/',
@@ -39,9 +40,16 @@ export default defineConfig({
         {
           title: 'Advanced',
           collapsable: false,
-          children: ['advanced/storage-helper', 'advanced/module-protect'],
+          children: ['advanced/storage-helper', 'advanced/module-protect', 'advanced/discard-storage'],
         },
       ],
+    },
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@imgs': resolve(__dirname, '../imgs'),
+      },
     },
   },
 });

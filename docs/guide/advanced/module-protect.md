@@ -13,7 +13,7 @@ interface UnprotectedStorage {
   num?: number;
 }
 
-export const { useStorageHelper } = createLocalStorage<UnprotectedStorage>({
+export const { useStorage } = createLocalStorage<UnprotectedStorage>({
   rootNodeKey: 'unprotected_storage_key',
   initial: { str: '' },
 });
@@ -21,7 +21,7 @@ export const { useStorageHelper } = createLocalStorage<UnprotectedStorage>({
 
 We can then see our storage module in chrome's developer tool:
 
-![devtools-storage](./imgs/module-protect/origin-storage.jpg)
+![devtools-storage](~@imgs/advanced/module-protect/origin-storage.jpg)
 
 And then, someone writes code that looks like this:
 
@@ -31,7 +31,7 @@ window.localStorage.setItem('unprotected_storage_key', 'foo');
 
 So we all know that once this line of code is executed, the data structure of the storage module will be destroyed:
 
-![foo-storage](./imgs/module-protect/foo-storage.jpg)
+![foo-storage](~@imgs/advanced/module-protect/foo-storage.jpg)
 
 And once the storage module is destroyed, Smart Storage will not work normally!!!
 
@@ -48,7 +48,7 @@ interface ProtectedStorage {
   num?: number;
 }
 
-export const { useStorageHelper } = createLocalStorage<ProtectedStorage>({
+export const { useStorage } = createLocalStorage<ProtectedStorage>({
   rootNodeKey: 'protected_storage_key',
   protect: true, // Just need set it to true
   initial: { str: '' },
@@ -59,11 +59,11 @@ After opening the module protection like this, the three functions `setItem()`, 
 
 - When calling `localStorage.setItem('protected_storage_key', 'foo')`, you will receive an error like this:
 
-  ![set-item-error](./imgs/module-protect/set-item-error.png)
+  ![set-item-error](~@imgs/advanced/module-protect/set-item-error.png)
 
 - When calling `localStorage.removeItem('protected_storage_key')`, you will receive an error like this:
 
-  ![remove-item-error](./imgs/module-protect/remove-item-error.png)
+  ![remove-item-error](~@imgs/advanced/module-protect/remove-item-error.png)
 
 - When calling `localStorage.clear()`, all key pairs except "protected_storage_key" and its corresponding value are deleted
 
