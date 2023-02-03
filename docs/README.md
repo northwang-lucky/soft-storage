@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /imgs/logo.svg
+heroImage: /logo.png
 heroText: Smart Storage
 tagline: Smarter storage management
 actionText: Get Started →
@@ -14,3 +14,10 @@ features:
     details: Can be directly associated with Vue's ref or React's state
 footer: MIT Licensed | Copyright © 2023-present Yubo Wang
 ---
+
+<style>
+  img[alt=hero] {
+    width: 230px;
+    height: 230px;
+  }
+</style>

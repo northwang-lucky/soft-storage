@@ -6,9 +6,9 @@ export default defineConfig({
   title: 'Smart Storage',
   description: 'Smarter storage management',
   plugins: ['@vuepress/plugin-back-to-top'],
-  head: [['link', { rel: 'icon', href: '/imgs/logo.svg' }]],
+  head: [['link', { rel: 'icon', href: '/logo.png' }]],
   themeConfig: {
-    logo: '/imgs/logo.svg',
+    logo: '/logo.png',
     lastUpdated: true,
     repo: 'northwang-lucky/smart-storage',
     docsBranch: 'main',
