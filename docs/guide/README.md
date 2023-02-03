@@ -16,7 +16,7 @@ But now it's like this:
 - ✅ Uniformly maintained storage modules
 - ✅ Can be directly associated with Vue's ref or React's state
 
-## How it Works?
+## How It Works?
 
 Smart Storage will read the storage objects created in the project and serialize them into strings using JSON. Then internally call the browser's localStorage (or sessionStorage) API to create storage.
 
