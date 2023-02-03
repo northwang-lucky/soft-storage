@@ -7,7 +7,7 @@ export default defineConfig({
   title: 'Smart Storage',
   description: 'Smarter storage management',
   plugins: ['@vuepress/plugin-back-to-top'],
-  head: [['link', { rel: 'icon', href: '/logo.png' }]],
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {
     logo: '/logo.png',
     lastUpdated: true,
