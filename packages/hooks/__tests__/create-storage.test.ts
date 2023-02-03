@@ -1,4 +1,4 @@
-import { createLocalStorage, createSessionStorage, discardLocalStorage, discardSessionStorage } from '../src';
+import { createLocalStorage, createSessionStorage } from '../src';
 import { UseStorage, UseStorageHelper } from '../src/create-storage/types';
 
 interface TestStorage {
@@ -80,10 +80,17 @@ test('storageProtect', () => {
   })();
 });
 
-test('discardSessionKeys', () => {
-  createSessionStorage({ rootNodeKey: 'discardSessionKeys', initial: { key: 1 } });
-  discardSessionStorage({ rootNodeKey: 'discardSessionKeys', shouldRun: true });
-  const { useStorageHelper } = createSessionStorage({ rootNodeKey: 'discardSessionKeys', initial: { newKey: 1 } });
+test('storageVersion', () => {
+  createSessionStorage({
+    rootNodeKey: 'storageVersionKey',
+    initial: { key: 1 },
+  });
+
+  const { useStorageHelper } = createSessionStorage({
+    rootNodeKey: 'storageVersionKey',
+    version: 2,
+    initial: { newKey: 1 },
+  });
 
   (() => {
     const storageHelper = useStorageHelper();
@@ -92,14 +99,71 @@ test('discardSessionKeys', () => {
   })();
 });
 
-test('discardLocalKeys', () => {
-  createLocalStorage({ rootNodeKey: 'discardLocalKeys', initial: { key: 1 } });
-  discardLocalStorage({ rootNodeKey: 'discardLocalKeys', shouldRun: () => true });
-  const { useStorageHelper } = createLocalStorage({ rootNodeKey: 'discardLocalKeys', initial: { newKey: 1 } });
+test('storagePreVersion', () => {
+  createLocalStorage({
+    rootNodeKey: 'storagePreVersionKey',
+    version: 2,
+    initial: { key: 1 },
+  });
+
+  const { useStorageHelper } = createLocalStorage({
+    rootNodeKey: 'storagePreVersionKey',
+    version: 4,
+    preVersion: 2,
+    initial: { newKey: 1 },
+  });
 
   (() => {
     const storageHelper = useStorageHelper();
     expect(storageHelper.contains('newKey')).toBe(true);
     expect(storageHelper.contains('key')).toBe(false);
   })();
+});
+
+test('storageVersionMinimumError', () => {
+  try {
+    createSessionStorage({
+      rootNodeKey: 'storageVersionMinimumErrorKey',
+      initial: { key: 1 },
+    });
+
+    const { useStorageHelper } = createSessionStorage({
+      rootNodeKey: 'storageVersionMinimumErrorKey',
+      version: 0,
+      initial: { newKey: 1 },
+    });
+
+    (() => {
+      const storageHelper = useStorageHelper();
+      expect(storageHelper.contains('newKey')).toBe(true);
+      expect(storageHelper.contains('key')).toBe(false);
+    })();
+  } catch (err: any) {
+    expect(err.message).toBe("The minimum value of property 'version' is 1!");
+  }
+});
+
+test('storagePreVersionGreaterThenVersion', () => {
+  try {
+    createLocalStorage({
+      rootNodeKey: 'storagePreVersionGreaterThenVersionKey',
+      version: 2,
+      initial: { key: 1 },
+    });
+
+    const { useStorageHelper } = createLocalStorage({
+      rootNodeKey: 'storagePreVersionGreaterThenVersionKey',
+      version: 1,
+      preVersion: 2,
+      initial: { newKey: 1 },
+    });
+
+    (() => {
+      const storageHelper = useStorageHelper();
+      expect(storageHelper.contains('newKey')).toBe(true);
+      expect(storageHelper.contains('key')).toBe(false);
+    })();
+  } catch (err: any) {
+    expect(err.message).toBe("Property 'preVersion' must be less than property 'version'!");
+  }
 });

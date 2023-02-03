@@ -30,6 +30,8 @@ export interface CreateStorageBaseOptions<T> {
   type: StorageType;
   rootNodeKey: string;
   protect?: boolean;
+  version?: number;
+  preVersion?: number;
   initial: T;
 }
 

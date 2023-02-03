@@ -1,13 +1,16 @@
-import { RootNode, StorageType } from '@smart-storage/core';
+import { StorageType } from '@smart-storage/core';
+import { processVersion } from './version';
 import { CreateStorageBaseOptions, CreateStorageOptions, StorageInstance, CreateStorage } from './types';
 
 function createStorage<T extends object>({
   type,
   rootNodeKey,
   protect = false,
+  version = 1,
+  preVersion,
   initial,
 }: CreateStorageBaseOptions<T>): CreateStorage<T> {
-  const rootNode = new RootNode<T>(rootNodeKey, type);
+  const rootNode = processVersion<T>(rootNodeKey, type, version, preVersion);
   const helper = rootNode.getHelper();
 
   // Only run when root node is empty
