@@ -23,7 +23,10 @@ Smart Storage will read the storage objects created in the project and serialize
 In addition, Smart Storage will use `Proxy` API to create Vue or React responsive variables to facilitate developers to modify storage values
 
 ::: warning
-**Proxy** and **Reflect** are used in the source code, so **IE series browsers are not supported**
+
+- **Proxy** and **Reflect** are used in the source code, so **IE series browsers are not supported**
+- The minimum supported Vue version is **3.1.0** and React version is **16.8.0**
+
 :::
 
 ## Demo Projects
