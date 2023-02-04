@@ -1,6 +1,6 @@
 # Storage Helper
 
-Smart Storage provides a hook function called useStorageHelper to use the other capabilities of the storage module.
+Smart Storage provides a hook function called `useStorageHelper` to use the other capabilities of the storage module.
 
 ## For Vue and React
 
