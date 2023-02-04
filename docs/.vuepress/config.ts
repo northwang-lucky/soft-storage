@@ -7,7 +7,10 @@ export default defineConfig({
   title: 'Smart Storage',
   description: 'Smarter storage management',
   plugins: ['@vuepress/plugin-back-to-top'],
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'stylesheet', href: '/global.css' }],
+  ],
   locales: {
     '/': {
       lang: 'en-US',
@@ -50,6 +53,14 @@ export default defineConfig({
               title: 'Advanced',
               collapsable: false,
               children: ['advanced/storage-helper', 'advanced/module-protect', 'advanced/version-control'],
+            },
+          ],
+          '/api/': [
+            {
+              title: 'API',
+              path: '/api/',
+              collapsable: false,
+              children: ['vue-hooks', 'react-hooks', 'hooks', 'core'],
             },
           ],
         },

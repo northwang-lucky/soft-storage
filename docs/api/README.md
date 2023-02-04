@@ -1,0 +1,5 @@
+# API Reference
+
+## API
+
+<APIReference />
