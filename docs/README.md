@@ -14,10 +14,3 @@ features:
     details: Can be directly associated with Vue's ref or React's state
 footer: MIT Licensed | Copyright © 2023-present Yubo Wang
 ---
-
-<style>
-  img[alt=hero] {
-    width: 230px;
-    height: 230px;
-  }
-</style>

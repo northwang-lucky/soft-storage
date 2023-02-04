@@ -14,10 +14,3 @@ features:
     details: 可直接关联 Vue 的 ref 或 React 的 state
 footer: MIT Licensed | Copyright © 2023-present Yubo Wang
 ---
-
-<style>
-  img[alt=hero] {
-    width: 230px;
-    height: 230px;
-  }
-</style>
