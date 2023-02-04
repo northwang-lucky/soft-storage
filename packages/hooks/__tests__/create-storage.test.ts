@@ -100,13 +100,13 @@ test('storageVersion', () => {
 });
 
 test('storagePreVersion', () => {
-  createLocalStorage({
+  const { useStorageHelper } = createLocalStorage({
     rootNodeKey: 'storagePreVersionKey',
     version: 2,
     initial: { key: 1 },
   });
 
-  const { useStorageHelper } = createLocalStorage({
+  const { useStorageHelper: useNewStorageHelper } = createLocalStorage({
     rootNodeKey: 'storagePreVersionKey',
     version: 4,
     preVersion: 2,
@@ -115,8 +115,9 @@ test('storagePreVersion', () => {
 
   (() => {
     const storageHelper = useStorageHelper();
-    expect(storageHelper.contains('newKey')).toBe(true);
+    const storageNewHelper = useNewStorageHelper();
     expect(storageHelper.contains('key')).toBe(false);
+    expect(storageNewHelper.contains('newKey')).toBe(true);
   })();
 });
 
@@ -127,17 +128,11 @@ test('storageVersionMinimumError', () => {
       initial: { key: 1 },
     });
 
-    const { useStorageHelper } = createSessionStorage({
+    createSessionStorage({
       rootNodeKey: 'storageVersionMinimumErrorKey',
       version: 0,
       initial: { newKey: 1 },
     });
-
-    (() => {
-      const storageHelper = useStorageHelper();
-      expect(storageHelper.contains('newKey')).toBe(true);
-      expect(storageHelper.contains('key')).toBe(false);
-    })();
   } catch (err: any) {
     expect(err.message).toBe("The minimum value of property 'version' is 1!");
   }
@@ -151,18 +146,12 @@ test('storagePreVersionGreaterThenVersion', () => {
       initial: { key: 1 },
     });
 
-    const { useStorageHelper } = createLocalStorage({
+    createLocalStorage({
       rootNodeKey: 'storagePreVersionGreaterThenVersionKey',
       version: 1,
       preVersion: 2,
       initial: { newKey: 1 },
     });
-
-    (() => {
-      const storageHelper = useStorageHelper();
-      expect(storageHelper.contains('newKey')).toBe(true);
-      expect(storageHelper.contains('key')).toBe(false);
-    })();
   } catch (err: any) {
     expect(err.message).toBe("Property 'preVersion' must be less than property 'version'!");
   }
