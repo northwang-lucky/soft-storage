@@ -2,7 +2,7 @@
 
 A smarter storage management.
 
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/deploy-pages.yaml?label=build:doc)](https://github.com/northwang-lucky/smart-storage/actions/workflows/deploy-pages.yaml) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/coverage-upload.yaml?label=test)](https://github.com/northwang-lucky/smart-storage/actions/workflows/coverage-upload.yaml) [![Codecov](https://img.shields.io/codecov/c/gh/northwang-lucky/smart-storage)](https://app.codecov.io/gh/northwang-lucky/smart-storage)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=northwang-lucky.smart-storage&right_color=red) ![GitHub last commit](https://img.shields.io/github/last-commit/northwang-lucky/smart-storage) ![GitHub top language](https://img.shields.io/github/languages/top/northwang-lucky/smart-storage) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/deploy-pages.yaml?label=build:doc)](https://github.com/northwang-lucky/smart-storage/actions/workflows/deploy-pages.yaml) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/coverage-upload.yaml?label=test)](https://github.com/northwang-lucky/smart-storage/actions/workflows/coverage-upload.yaml) [![Codecov](https://img.shields.io/codecov/c/gh/northwang-lucky/smart-storage)](https://app.codecov.io/gh/northwang-lucky/smart-storage) ![GitHub](https://img.shields.io/github/license/northwang-lucky/smart-storage)
 
 ## 📚 Usage
 
