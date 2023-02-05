@@ -23,8 +23,10 @@
   },
   "scripts": {
     "test": "jest",
-    "test:cov": "jest --coverage && node ../../scripts/coverage.cjs",
-    "build": "pnpm test && rimraf \"./dist\" --impl=native && rollup -c",
+    "test:cov": "jest --coverage",
+    "test:cov-serve": "pnpm test && node ../../scripts/cov-serve.js",
+    "build-only": "rimraf \"./dist\" --impl=native && rollup -c",
+    "build": "pnpm test && pnpm build-only",
     "format": "prettier -w \"src/**/*.(js|ts)\"",
     "clean": "pnpx rimraf \"./node_modules\" --impl=native"
   },

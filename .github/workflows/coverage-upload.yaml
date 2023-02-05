@@ -1,0 +1,128 @@
+name: Test and Upload Coverage
+
+push:
+  branches:
+    - main
+  paths:
+    - scripts/cov-move.js
+    - config/rollup.config.js
+    - config/tsconfig.base.json
+    - packages/**/*
+
+env:
+  APP_NAME: Lark
+  WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+jobs:
+  notify-start:
+    runs-on: ubuntu-latest
+    name: Report Start
+    steps:
+      - name: Notify start
+        uses: northwang-personal/chatbot-webhook-client@v1.1.0
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          template: file://.template/lark-message-card.json
+          params: >-
+            {
+              "header_color": "blue",
+              "header_title": "Workflow Start",
+              "repository": "${{ github.repository }}",
+              "workflow": "${{ github.workflow }}",
+              "workflow_url": "${{ env.WORKFLOW_URL }}"
+            }
+  test-and-upload:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Set up Node 16
+        if: success()
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Set up PNPM
+        if: success()
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+      - name: Get PNPM store directory
+        id: pnpm-cache
+        if: success()
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Setup pnpm cache
+        if: success()
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        if: success()
+        run: pnpm install
+      - name: Run build
+        if: success()
+        run: pnpm build-only
+      - name: Run Test
+        if: success()
+        run: pnpm test:cov
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage
+          fail_ci_if_error: true
+  notify-success:
+    if: success()
+    runs-on: ubuntu-latest
+    name: Report Success
+    needs: build-and-deploy
+    steps:
+      - name: Notify success
+        uses: northwang-personal/chatbot-webhook-client@v1.1.0
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          template: file://.template/lark-message-card.json
+          params: >-
+            {
+              "header_color": "green",
+              "header_title": "Workflow Succeed",
+              "repository": "${{ github.repository }}",
+              "workflow": "${{ github.workflow }}",
+              "workflow_url": "${{ env.WORKFLOW_URL }}"
+            }
+  notify-failure:
+    if: failure()
+    runs-on: ubuntu-latest
+    name: Report Failure
+    needs: build-and-deploy
+    steps:
+      - name: Notify failure
+        uses: northwang-personal/chatbot-webhook-client@v1.1.0
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          template: file://.template/lark-message-card.json
+          params: >-
+            {
+              "header_color": "red",
+              "header_title": "Workflow Failed",
+              "repository": "${{ github.repository }}",
+              "workflow": "${{ github.workflow }}",
+              "workflow_url": "${{ env.WORKFLOW_URL }}"
+            }
