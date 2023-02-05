@@ -6,15 +6,15 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/deploy-pages.yaml
       - scripts/build-pages.js
       - config/rollup.config.js
       - config/tsconfig.base.json
       - docs/**/*
-      - packages/**/*
+      - packages/*/src
+      - packages/*/package.json
+      - packages/*/tsconfig.json
       - playground/**/*
-    paths-ignore:
-      - packages/*/__tests__
-      - packages/*/jest.config.cjs
 
 env:
   APP_NAME: Lark

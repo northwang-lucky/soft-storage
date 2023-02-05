@@ -1,13 +1,16 @@
 name: Test and Upload Coverage
 
-push:
-  branches:
-    - main
-  paths:
-    - scripts/cov-move.js
-    - config/rollup.config.js
-    - config/tsconfig.base.json
-    - packages/**/*
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/coverage-upload.yaml
+      - scripts/cov-move.js
+      - config/rollup.config.js
+      - config/tsconfig.base.json
+      - packages/**/*
 
 env:
   APP_NAME: Lark
