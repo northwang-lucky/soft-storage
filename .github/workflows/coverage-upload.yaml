@@ -84,6 +84,12 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage
+          files: >-
+            ./core-clover.xml,
+            ./hooks-clover.xml,
+            ./react-hooks-clover.xml,
+            ./shared-clover.xml,
+            ./vue-hooks-clover.xml
           fail_ci_if_error: true
   notify-success:
     if: success()
