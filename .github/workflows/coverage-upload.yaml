@@ -89,7 +89,7 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
     name: Report Success
-    needs: build-and-deploy
+    needs: test-and-upload
     steps:
       - name: Notify success
         uses: northwang-personal/chatbot-webhook-client@v1.1.0
@@ -111,7 +111,7 @@ jobs:
     if: failure()
     runs-on: ubuntu-latest
     name: Report Failure
-    needs: build-and-deploy
+    needs: test-and-upload
     steps:
       - name: Notify failure
         uses: northwang-personal/chatbot-webhook-client@v1.1.0
