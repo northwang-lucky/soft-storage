@@ -26,7 +26,7 @@ jobs:
     name: Report Start
     steps:
       - name: Notify start
-        uses: northwang-personal/chatbot-webhook-client@v1.1.0
+        uses: northwang-personal/chatbot-webhook-client@v1.1.1
         with:
           app: ${{ env.APP_NAME }}
           webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
@@ -97,7 +97,7 @@ jobs:
     needs: build-and-deploy
     steps:
       - name: Notify success
-        uses: northwang-personal/chatbot-webhook-client@v1.1.0
+        uses: northwang-personal/chatbot-webhook-client@v1.1.1
         with:
           app: ${{ env.APP_NAME }}
           webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
@@ -119,7 +119,7 @@ jobs:
     needs: build-and-deploy
     steps:
       - name: Notify failure
-        uses: northwang-personal/chatbot-webhook-client@v1.1.0
+        uses: northwang-personal/chatbot-webhook-client@v1.1.1
         with:
           app: ${{ env.APP_NAME }}
           webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
