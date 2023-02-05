@@ -5,7 +5,7 @@ const path = require('path');
 const outputPath = path.resolve(__dirname, '../dist');
 
 if (fs.existsSync(outputPath)) {
-  fs.rmdirSync(outputPath);
+  fs.rmdirSync(outputPath, { recursive: true, force: true });
 }
 
 const result = sh.exec('pnpm -F "smart-storage-*" build');
