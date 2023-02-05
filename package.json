@@ -11,7 +11,7 @@
     "docs:start": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "test": "pnpm -F \"@smart-storage/*\" test",
-    "test:cov": "pnpm -F \"@smart-storage/*\" test:cov && node ./scripts/cov-move.js",
+    "test:cov": "pnpm -F \"@smart-storage/*\" test:cov",
     "build": "pnpm -F \"@smart-storage/*\" build",
     "build-only": "pnpm -F \"@smart-storage/*\" build-only",
     "build:pages": "pnpm build && pnpm docs:build && node ./scripts/build-pages.js",
