@@ -2,15 +2,17 @@
 
 A smarter storage management.
 
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/deploy-pages.yaml?label=build:doc)](https://github.com/northwang-lucky/smart-storage/actions/workflows/deploy-pages.yaml) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/coverage-upload.yaml?label=test)](https://github.com/northwang-lucky/smart-storage/actions/workflows/coverage-upload.yaml) [![Codecov](https://img.shields.io/codecov/c/gh/northwang-lucky/smart-storage)](https://app.codecov.io/gh/northwang-lucky/smart-storage)
+
 ## 📚 Usage
 
-🚧 (WIP) [English](https://northwang-lucky.github.io/smart-storage/docs) | 简体中文
+🚧 (WIP) [English](https://northwang-lucky.github.io/smart-storage/docs/) | [简体中文](https://northwang-lucky.github.io/smart-storage/docs/zh/)
 
 ## 🚀 Demo
 
 > If you would like to open these hyper links in a new tab, please use context menu.
 
-[Vue 3 Demo](https://northwang-lucky.github.io/smart-storage/vue-demo) | [React Demo](https://northwang-lucky.github.io/smart-storage/react-demo)
+[Vue 3 Demo](https://northwang-lucky.github.io/smart-storage/vue-demo/) | [React Demo](https://northwang-lucky.github.io/smart-storage/react-demo/)
 
 ## ⚠️ Warning
 
