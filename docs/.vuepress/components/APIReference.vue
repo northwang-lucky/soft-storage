@@ -99,8 +99,14 @@ export default {
 }
 
 .api-col {
-  margin-right: 1em;
-  width: calc((100% - 1em) / 2);
+  width: 100%;
+}
+
+@media screen and (min-width: 960px) {
+  .api-col {
+    margin-right: 1em;
+    width: calc((100% - 1em) / 2);
+  }
 }
 
 .api-col:nth-child(even) {
