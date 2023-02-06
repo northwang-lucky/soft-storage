@@ -1,4 +1,4 @@
-name: Deploy Demo and Document Pages
+name: Deploy Demo & Doc
 
 on:
   workflow_dispatch:
