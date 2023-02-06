@@ -14,7 +14,7 @@ Smart Storage provides three ways to manage storage:
 npm install @smart-storage/vue-hooks --save
 ```
 
-### Create a storage module
+### Create a Storage Module
 
 Create a new file anywhere, and use like this:
 
@@ -37,7 +37,7 @@ export const { useStorage } = createLocalStorage<UserInfo>({
 });
 ```
 
-### Use hooks in component
+### Use Hooks in Component
 
 ```vue
 <script setup lang="ts">
@@ -81,7 +81,7 @@ const onSignOut = () => {
 npm install @smart-storage/react-hooks --save
 ```
 
-### Create a storage module
+### Create a Storage Module
 
 Create a new file anywhere, and use like this:
 
@@ -104,7 +104,7 @@ export const { useStorage } = createSessionStorage<UserInfo>({
 });
 ```
 
-### Use hooks in a component
+### Use Hooks in Component
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -151,7 +151,7 @@ export default TestComponent;
 npm install @smart-storage/hooks --save
 ```
 
-### Create a storage module
+### Create a Storage Module
 
 Create a new file anywhere, and use like this:
 
@@ -174,7 +174,7 @@ export const { useStorage } = createSessionStorage<UserInfo>({
 });
 ```
 
-### Use hooks in a script file
+### Use Hooks in a Script File
 
 ```ts
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
