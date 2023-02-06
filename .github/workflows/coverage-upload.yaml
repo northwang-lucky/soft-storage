@@ -1,4 +1,4 @@
-name: Test and Upload Coverage
+name: Test & Upload Coverage
 
 on:
   workflow_dispatch:
