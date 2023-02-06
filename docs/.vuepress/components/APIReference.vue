@@ -86,7 +86,7 @@ export default {
      * @param {string} api
      */
     goGoGo(path, api) {
-      this.$router.push(`./${path}.html#${api}`);
+      this.$router.push(`./${path}.html#${api.toLowerCase()}`);
     },
   },
 };
