@@ -1,52 +1,52 @@
 import { StorageType } from '../root-node-helper/types';
-import { IRootNode } from '../root-node/types';
+import { IStorageModule } from '../root-node/types';
 
-class RootNodePool {
-  private rootNodesLocal: IRootNode<object>[];
+class StorageModulePool {
+  private storageModulesLocal: IStorageModule<object>[];
 
-  private rootNodesSession: IRootNode<object>[];
+  private storageModulesSession: IStorageModule<object>[];
 
   constructor() {
-    this.rootNodesLocal = [];
-    this.rootNodesSession = [];
+    this.storageModulesLocal = [];
+    this.storageModulesSession = [];
   }
 
-  public addRootNode(rootNode: IRootNode<object>) {
-    const rootNodes = this.getRootNodes(rootNode);
-    const argRootNodeKey = rootNode.getHelper().getStorageKey();
-    const exist = rootNodes.some(node => node.getHelper().getStorageKey() === argRootNodeKey);
+  public addStorageModule(storageModule: IStorageModule<object>) {
+    const storageModules = this.getStorageModules(storageModule);
+    const argStorageModuleKey = storageModule.getHelper().getStorageKey();
+    const exist = storageModules.some(node => node.getHelper().getStorageKey() === argStorageModuleKey);
     if (exist) {
-      throw new Error(`Root node key '${argRootNodeKey}' is already existed!`);
+      throw new Error(`Storage module key '${argStorageModuleKey}' is already existed!`);
     }
-    rootNodes.push(rootNode);
+    storageModules.push(storageModule);
   }
 
-  public removeRootNode(rootNode: IRootNode<object>) {
-    const rootNodes = this.getRootNodes(rootNode);
-    const rootNodeKey = rootNode.getHelper().getStorageKey();
-    for (let i = 0; i < rootNodes.length; ++i) {
-      if (rootNodes[i].getHelper().getStorageKey() === rootNodeKey) {
-        rootNodes.splice(i, 1);
+  public removeStorageModule(storageModule: IStorageModule<object>) {
+    const storageModules = this.getStorageModules(storageModule);
+    const storageModuleKey = storageModule.getHelper().getStorageKey();
+    for (let i = 0; i < storageModules.length; ++i) {
+      if (storageModules[i].getHelper().getStorageKey() === storageModuleKey) {
+        storageModules.splice(i, 1);
         break;
       }
     }
   }
 
-  public contains(rootNode: IRootNode<object>): boolean {
-    const rootNodes = this.getRootNodes(rootNode);
-    const rootNodeKey = rootNode.getHelper().getStorageKey();
-    return rootNodes.some(node => node.getHelper().getStorageKey() === rootNodeKey);
+  public contains(storageModule: IStorageModule<object>): boolean {
+    const storageModules = this.getStorageModules(storageModule);
+    const storageModuleKey = storageModule.getHelper().getStorageKey();
+    return storageModules.some(node => node.getHelper().getStorageKey() === storageModuleKey);
   }
 
-  private getRootNodes(rootNode: IRootNode<object>) {
-    let rootNodes: IRootNode<object>[];
-    if (rootNode.getHelper().getStorageType() === StorageType.LOCAL) {
-      rootNodes = this.rootNodesLocal;
+  private getStorageModules(storageModule: IStorageModule<object>) {
+    let storageModules: IStorageModule<object>[];
+    if (storageModule.getHelper().getStorageType() === StorageType.LOCAL) {
+      storageModules = this.storageModulesLocal;
     } else {
-      rootNodes = this.rootNodesSession;
+      storageModules = this.storageModulesSession;
     }
-    return rootNodes;
+    return storageModules;
   }
 }
 
-export const rootNodePool = new RootNodePool();
+export const storageModulePool = new StorageModulePool();

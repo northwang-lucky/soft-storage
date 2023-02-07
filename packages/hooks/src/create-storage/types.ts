@@ -28,7 +28,7 @@ export type CreateStorage<T> = {
 
 export interface CreateStorageBaseOptions<T> {
   type: StorageType;
-  rootNodeKey: string;
+  storageModuleKey: string;
   protect?: boolean;
   version?: number;
   preVersion?: number;

@@ -1,7 +1,7 @@
-import { RootNode, StorageType } from '@smart-storage/core';
+import { StorageModule, StorageType } from '@smart-storage/core';
 
 export function processVersion<T extends object>(
-  rootNodeKey: string,
+  storageModuleKey: string,
   storageType: StorageType,
   version: number,
   preVersion = version - 1
@@ -15,16 +15,16 @@ export function processVersion<T extends object>(
   }
 
   if (version === 1) {
-    return new RootNode<T>(rootNodeKey, storageType);
+    return new StorageModule<T>(storageModuleKey, storageType);
   }
 
-  // Remove preRootNodeKey and its value
-  const preRootNodeKey = preVersion > 1 ? `${rootNodeKey}_v${preVersion}` : rootNodeKey;
-  const preRootNode = new RootNode(preRootNodeKey, storageType, true);
-  if (preRootNode.getHelper().getExistence()) {
-    preRootNode.clear();
+  // Remove preStorageModuleKey and its value
+  const preStorageModuleKey = preVersion > 1 ? `${storageModuleKey}_v${preVersion}` : storageModuleKey;
+  const preStorageModule = new StorageModule(preStorageModuleKey, storageType, true);
+  if (preStorageModule.getHelper().getExistence()) {
+    preStorageModule.clear();
   }
 
-  // Return current version's RootNode
-  return new RootNode<T>(`${rootNodeKey}_v${version}`, storageType);
+  // Return current version's StorageModule
+  return new StorageModule<T>(`${storageModuleKey}_v${version}`, storageType);
 }

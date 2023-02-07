@@ -13,7 +13,7 @@ interface TestStorage {
 }
 
 export const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>({
-  rootNodeKey: 'vue_test_key',
+  storageModuleKey: 'vue_test_key',
   initial: {
     bool: false,
     arr: [],
@@ -26,7 +26,7 @@ export const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>(
 });
 
 export const { useStorage: useProtectedStorage } = createLocalStorage<{ test: string }>({
-  rootNodeKey: 'vue_test_protect_key',
+  storageModuleKey: 'vue_test_protect_key',
   protect: true,
   initial: { test: '456' },
 });

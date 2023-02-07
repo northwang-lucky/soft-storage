@@ -1,27 +1,27 @@
 import { StorageType } from '../src';
-import { RootNodeHelper } from '../src/root-node-helper';
+import { StorageModuleHelper } from '../src/root-node-helper';
 
 interface TestStorage {
   key: string;
 }
 
-test('RootNodeHelper', () => {
+test('StorageModuleHelper', () => {
   const origin = { key: 'test-value' };
-  const helper = new RootNodeHelper<TestStorage>('rootNodeHelperTest', StorageType.SESSION);
+  const helper = new StorageModuleHelper<TestStorage>('storageModuleHelperTest', StorageType.SESSION);
 
   const storageKey = helper.getStorageKey();
-  expect(storageKey).toBe('rootNodeHelperTest');
+  expect(storageKey).toBe('storageModuleHelperTest');
 
   helper.setRootValue(origin);
-  let rootNode = helper.getRootValue();
-  expect(rootNode).toStrictEqual(origin);
+  let storageModule = helper.getRootValue();
+  expect(storageModule).toStrictEqual(origin);
 
-  rootNode = helper.getRootValue();
-  expect(rootNode).toStrictEqual(origin);
+  storageModule = helper.getRootValue();
+  expect(storageModule).toStrictEqual(origin);
 
   helper.removeRootValue();
-  rootNode = helper.getRootValue();
-  expect(rootNode).toStrictEqual({});
+  storageModule = helper.getRootValue();
+  expect(storageModule).toStrictEqual({});
   expect(helper.getExistence()).toBe(false);
 });
 
@@ -37,12 +37,12 @@ interface SecondModule {
 
 function disableDirectCalls(storageType: StorageType) {
   const firstKey = 'disableDirectCallsFirstTest';
-  const firstHelper = new RootNodeHelper<FirstModule>(firstKey, storageType);
+  const firstHelper = new StorageModuleHelper<FirstModule>(firstKey, storageType);
   firstHelper.setRootValue({ keep: 1, first: '1' });
   firstHelper.protect();
 
   const secondKey = 'disableDirectCallsSecondTest';
-  const secondHelper = new RootNodeHelper<SecondModule>(secondKey, storageType);
+  const secondHelper = new StorageModuleHelper<SecondModule>(secondKey, storageType);
   secondHelper.setRootValue({ keep: 2, second: '2' });
   secondHelper.protect();
 
@@ -137,10 +137,10 @@ function disableDirectCalls(storageType: StorageType) {
   expect(windowStorage.getItem(secondKey)).toBe(null);
 }
 
-test('RootNodeHelper.disableDirectCalls', () => {
+test('StorageModuleHelper.disableDirectCalls', () => {
   disableDirectCalls(StorageType.SESSION);
 });
 
-test('RootNodeHelper.disableDirectCalls.reverse', () => {
+test('StorageModuleHelper.disableDirectCalls.reverse', () => {
   disableDirectCalls(StorageType.LOCAL);
 });

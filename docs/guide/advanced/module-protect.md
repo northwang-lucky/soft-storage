@@ -14,7 +14,7 @@ interface UnprotectedStorage {
 }
 
 export const { useStorage } = createLocalStorage<UnprotectedStorage>({
-  rootNodeKey: 'unprotected_storage_key',
+  storageModuleKey: 'unprotected_storage_key',
   initial: { str: '' },
 });
 ```
@@ -49,7 +49,7 @@ interface ProtectedStorage {
 }
 
 export const { useStorage } = createLocalStorage<ProtectedStorage>({
-  rootNodeKey: 'protected_storage_key',
+  storageModuleKey: 'protected_storage_key',
   protect: true, // Just need set it to true
   initial: { str: '' },
 });

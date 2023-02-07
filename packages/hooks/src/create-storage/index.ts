@@ -4,17 +4,17 @@ import { CreateStorageBaseOptions, CreateStorageOptions, StorageInstance, Create
 
 function createStorage<T extends object>({
   type,
-  rootNodeKey,
+  storageModuleKey,
   protect = false,
   version = 1,
   preVersion,
   initial,
 }: CreateStorageBaseOptions<T>): CreateStorage<T> {
-  const rootNode = processVersion<T>(rootNodeKey, type, version, preVersion);
-  const helper = rootNode.getHelper();
+  const storageModule = processVersion<T>(storageModuleKey, type, version, preVersion);
+  const helper = storageModule.getHelper();
 
-  // Only run when root node is empty
-  if (initial && !rootNode.size()) {
+  // Only run when storage module is empty
+  if (initial && !storageModule.size()) {
     helper.setRootValue(initial);
   }
 
@@ -31,20 +31,20 @@ function createStorage<T extends object>({
         get: (_, p) => {
           const property = p as keyof T;
           return {
-            get: () => rootNode.getItem(property),
-            set: (value: T[keyof T]) => rootNode.setItem(property, value),
-            remove: () => rootNode.removeItem(property),
-            exist: () => rootNode.contains(property as string),
+            get: () => storageModule.getItem(property),
+            set: (value: T[keyof T]) => storageModule.setItem(property, value),
+            remove: () => storageModule.removeItem(property),
+            exist: () => storageModule.contains(property as string),
           };
         },
       });
     },
     useStorageHelper: () => ({
-      // The function rootNode.size contains this pointer inside
+      // The function storageModule.size contains this pointer inside
       //  please do not use the function directly for assignment
-      size: () => rootNode.size(),
-      clear: () => rootNode.clear(),
-      contains: (key: string) => rootNode.contains(key),
+      size: () => storageModule.size(),
+      clear: () => storageModule.clear(),
+      contains: (key: string) => storageModule.contains(key),
       initialize: () => helper.setRootValue(initial),
     }),
   };

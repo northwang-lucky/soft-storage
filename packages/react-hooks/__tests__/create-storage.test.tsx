@@ -9,17 +9,17 @@ interface TestStorage {
 }
 
 const { useStorage: useLocalStorage, useStorageHelper: useLocalStorageHelper } = createLocalStorage<TestStorage>({
-  rootNodeKey: 'createLocalStorageTest',
+  storageModuleKey: 'createLocalStorageTest',
   initial: { bool: true },
 });
 
 const { useStorage: useSessionStorage, useStorageHelper: useSessionStorageHelper } = createSessionStorage<TestStorage>({
-  rootNodeKey: 'createSessionStorageTest',
+  storageModuleKey: 'createSessionStorageTest',
   initial: { bool: true },
 });
 
 const { useStorage: useProtectStorage, useStorageHelper: useProtectStorageHelper } = createSessionStorage<TestStorage>({
-  rootNodeKey: 'createProtectStorageTest',
+  storageModuleKey: 'createProtectStorageTest',
   protect: true,
   initial: { bool: true },
 });

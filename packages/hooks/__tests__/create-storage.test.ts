@@ -36,7 +36,7 @@ function useTestCase(useStorage: UseStorage<TestStorage>, useStorageHelper: UseS
 
 test('createLocalStorage', () => {
   const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>({
-    rootNodeKey: 'createLocalStorageTest',
+    storageModuleKey: 'createLocalStorageTest',
     initial: { bool: true },
   });
   useTestCase(useStorage, useStorageHelper);
@@ -44,7 +44,7 @@ test('createLocalStorage', () => {
 
 test('createSessionStorage', () => {
   const { useStorage, useStorageHelper } = createSessionStorage<TestStorage>({
-    rootNodeKey: 'createSessionStorageTest',
+    storageModuleKey: 'createSessionStorageTest',
     initial: { bool: true },
   });
   useTestCase(useStorage, useStorageHelper);
@@ -52,7 +52,7 @@ test('createSessionStorage', () => {
 
 test('storageProtect', () => {
   const { useStorage } = createSessionStorage<TestStorage>({
-    rootNodeKey: 'storageProtectTest',
+    storageModuleKey: 'storageProtectTest',
     protect: true,
     initial: { bool: true },
   });
@@ -82,12 +82,12 @@ test('storageProtect', () => {
 
 test('storageVersion', () => {
   createSessionStorage({
-    rootNodeKey: 'storageVersionKey',
+    storageModuleKey: 'storageVersionKey',
     initial: { key: 1 },
   });
 
   const { useStorageHelper } = createSessionStorage({
-    rootNodeKey: 'storageVersionKey',
+    storageModuleKey: 'storageVersionKey',
     version: 2,
     initial: { newKey: 1 },
   });
@@ -101,13 +101,13 @@ test('storageVersion', () => {
 
 test('storagePreVersion', () => {
   const { useStorageHelper } = createLocalStorage({
-    rootNodeKey: 'storagePreVersionKey',
+    storageModuleKey: 'storagePreVersionKey',
     version: 2,
     initial: { key: 1 },
   });
 
   const { useStorageHelper: useNewStorageHelper } = createLocalStorage({
-    rootNodeKey: 'storagePreVersionKey',
+    storageModuleKey: 'storagePreVersionKey',
     version: 4,
     preVersion: 2,
     initial: { newKey: 1 },
@@ -124,12 +124,12 @@ test('storagePreVersion', () => {
 test('storageVersionMinimumError', () => {
   try {
     createSessionStorage({
-      rootNodeKey: 'storageVersionMinimumErrorKey',
+      storageModuleKey: 'storageVersionMinimumErrorKey',
       initial: { key: 1 },
     });
 
     createSessionStorage({
-      rootNodeKey: 'storageVersionMinimumErrorKey',
+      storageModuleKey: 'storageVersionMinimumErrorKey',
       version: 0,
       initial: { newKey: 1 },
     });
@@ -141,13 +141,13 @@ test('storageVersionMinimumError', () => {
 test('storagePreVersionGreaterThenVersion', () => {
   try {
     createLocalStorage({
-      rootNodeKey: 'storagePreVersionGreaterThenVersionKey',
+      storageModuleKey: 'storagePreVersionGreaterThenVersionKey',
       version: 2,
       initial: { key: 1 },
     });
 
     createLocalStorage({
-      rootNodeKey: 'storagePreVersionGreaterThenVersionKey',
+      storageModuleKey: 'storagePreVersionGreaterThenVersionKey',
       version: 1,
       preVersion: 2,
       initial: { newKey: 1 },

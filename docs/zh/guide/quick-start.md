@@ -6,6 +6,10 @@ Smart Storage 提供三种方式来管理存储：
 - 结合 **React**中的 `useState` API
 - 在任何支持 `cjs` 模块或 `esm` 模块的项目中独立使用
 
+::: warning
+特别提醒，当创建存储模块的类型定义时，请勿使用 `null` 作为类型。因为在 `@smart-storage/core` 子模块中，会自动将 `null` 处理为 `undefined`，所以您永远无法得到您所期望的 `null` 值。
+:::
+
 ## Vue 3
 
 ### 安装
@@ -29,7 +33,7 @@ interface UserInfo {
 
 export const { useStorage } = createLocalStorage<UserInfo>({
   // 存储键
-  rootNodeKey: 'user_info',
+  storageModuleKey: 'user_info',
   // 用于初始化
   initial: {
     hasSigned: false, // 非空属性必须初始化
@@ -97,7 +101,7 @@ interface TestStorage {
 
 export const { useStorage } = createSessionStorage<TestStorage>({
   // 存储键
-  rootNodeKey: 'react_test_key',
+  storageModuleKey: 'react_test_key',
   // 非空属性必须初始化
   initial: { bool: false, arr: [] },
 });
@@ -164,7 +168,7 @@ interface UserInfo {
 
 export const { useStorage } = createSessionStorage<UserInfo>({
   // 存储键
-  rootNodeKey: 'user_info',
+  storageModuleKey: 'user_info',
   // 用于初始化
   initial: {
     hasSigned: false, // 非空属性必须初始化
@@ -206,7 +210,7 @@ npm install @smart-storage/core --save
 ### 使用
 
 ```ts
-import { RootNode, StorageType } from '@smart-storage/core';
+import { StorageModule, StorageType } from '@smart-storage/core';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
 
 interface UserInfo {
@@ -214,26 +218,26 @@ interface UserInfo {
   hasSigned: boolean;
 }
 
-const rootNode = new RootNode<UserInfo>('user_info', StorageType.SESSION);
+const storageModule = new StorageModule<UserInfo>('user_info', StorageType.SESSION);
 
 (() => {
   getUserInfo().then(res => {
-    rootNode.setItem('token', res.token);
-    rootNode.setItem('hasSigned', true);
-    console.log(rootNode.getItem('hasSigned')); // true
-    console.log(rootNode.contains('token')); // true
+    storageModule.setItem('token', res.token);
+    storageModule.setItem('hasSigned', true);
+    console.log(storageModule.getItem('hasSigned')); // true
+    console.log(storageModule.contains('token')); // true
   });
 })();
 
 const onSignOut = () => {
-  rootNode.removeItem('token');
-  rootNode.setItem('hasSigned', false);
-  console.log(rootNode.getItem('token')); // undefined
-  console.log(rootNode.size()); // 1
+  storageModule.removeItem('token');
+  storageModule.setItem('hasSigned', false);
+  console.log(storageModule.getItem('token')); // undefined
+  console.log(storageModule.size()); // 1
 
   // Or
-  rootNode.clear();
-  console.log(rootNode.size()); // 0
+  storageModule.clear();
+  console.log(storageModule.size()); // 0
 };
 ```
 

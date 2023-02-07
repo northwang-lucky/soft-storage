@@ -14,7 +14,7 @@ interface UserInfo {
 }
 
 export const { useStorageHelper } = createLocalStorage<UserInfo>({
-  rootNodeKey: 'user_info',
+  storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
 ```
@@ -53,7 +53,7 @@ interface UserInfo {
 }
 
 export const { useStorageHelper } = createLocalStorage<UserInfo>({
-  rootNodeKey: 'user_info',
+  storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
 ```

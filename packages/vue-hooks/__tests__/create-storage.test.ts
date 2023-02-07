@@ -94,7 +94,7 @@ function useTestCase(
 
 test('createLocalStorage', () => {
   const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>({
-    rootNodeKey: 'createLocalStorageTest',
+    storageModuleKey: 'createLocalStorageTest',
     initial: { bool: true, arr: [] },
   });
   useTestCase(useStorage, useStorageHelper);
@@ -102,7 +102,7 @@ test('createLocalStorage', () => {
 
 test('createSessionStorage', () => {
   const { useStorage, useStorageHelper } = createSessionStorage<TestStorage>({
-    rootNodeKey: 'createSessionStorageTest',
+    storageModuleKey: 'createSessionStorageTest',
     initial: { bool: true, arr: [] },
   });
   useTestCase(useStorage, useStorageHelper);
@@ -110,7 +110,7 @@ test('createSessionStorage', () => {
 
 test('createProtectStorage', () => {
   const { useStorage, useStorageHelper } = createSessionStorage<TestStorage>({
-    rootNodeKey: 'createProtectStorageTest',
+    storageModuleKey: 'createProtectStorageTest',
     protect: true,
     initial: { bool: true, arr: [] },
   });

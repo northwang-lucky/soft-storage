@@ -21,7 +21,7 @@ function createLocalStorage<T extends object>(options: CreateStorageOptions<T>):
   ```ts
   type CreateStorageOptions<T> = {
     /** Storage module key (must be unique) */
-    rootNodeKey: string;
+    storageModuleKey: string;
     /** Initial value (non-nullable properties must be initialized) */
     initial: T;
     /** Whether to enable module protection */
@@ -53,7 +53,7 @@ interface UserInfo {
 }
 
 export const { useStorage } = createLocalStorage<UserInfo>({
-  rootNodeKey: 'user_info',
+  storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
 ```
@@ -85,7 +85,7 @@ interface UserInfo {
 }
 
 export const { useStorage } = createSessionStorage<UserInfo>({
-  rootNodeKey: 'user_info',
+  storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
 ```

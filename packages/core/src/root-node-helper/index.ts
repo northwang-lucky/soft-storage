@@ -1,7 +1,7 @@
 import { StorageType } from './types';
 import { storageGuard } from '../storage-guard';
 
-export class RootNodeHelper<T> {
+export class StorageModuleHelper<T> {
   private storage: Storage;
 
   private storageKey: string;
@@ -20,8 +20,8 @@ export class RootNodeHelper<T> {
   }
 
   public getRootValue(): T {
-    const rootNode = this.storage.getItem(this.storageKey);
-    return rootNode ? JSON.parse(rootNode) : {};
+    const storageModule = this.storage.getItem(this.storageKey);
+    return storageModule ? JSON.parse(storageModule) : {};
   }
 
   public setRootValue(root: T): void {
@@ -47,8 +47,8 @@ export class RootNodeHelper<T> {
   }
 
   public getExistence(): boolean {
-    const rootNode = this.storage.getItem(this.storageKey);
-    return Boolean(rootNode);
+    const storageModule = this.storage.getItem(this.storageKey);
+    return Boolean(storageModule);
   }
 
   public protect(): void {

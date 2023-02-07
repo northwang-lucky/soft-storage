@@ -1,74 +1,74 @@
-import { RootNode, StorageType } from '../src';
-import { rootNodePool } from '../src/root-node-pool';
+import { StorageModule, StorageType } from '../src';
+import { storageModulePool } from '../src/root-node-pool';
 
 interface TestStorage {
   num: number;
   str: string;
 }
 
-function testRootNode(storageType: StorageType) {
-  const rootNode = new RootNode<TestStorage>('rootNodeTest', storageType);
+function testStorageModule(storageType: StorageType) {
+  const storageModule = new StorageModule<TestStorage>('storageModuleTest', storageType);
 
-  rootNode.setItem('num', 1);
-  let numValue = rootNode.getItem('num');
+  storageModule.setItem('num', 1);
+  let numValue = storageModule.getItem('num');
   expect(numValue).toBe(1);
 
-  let exist = rootNode.contains('num');
+  let exist = storageModule.contains('num');
   expect(exist).toBe(true);
 
-  exist = rootNode.contains('str');
+  exist = storageModule.contains('str');
   expect(exist).toBe(false);
 
-  expect(rootNode.size()).toBe(1);
+  expect(storageModule.size()).toBe(1);
 
-  rootNode.removeItem('num');
-  numValue = rootNode.getItem('num');
+  storageModule.removeItem('num');
+  numValue = storageModule.getItem('num');
   expect(numValue).toBe(undefined);
 
-  rootNode.setItem('num', 1);
-  rootNode.setItem('str', 'string');
-  rootNode.removeItem('str');
-  const strValue = rootNode.getItem('str');
+  storageModule.setItem('num', 1);
+  storageModule.setItem('str', 'string');
+  storageModule.removeItem('str');
+  const strValue = storageModule.getItem('str');
   expect(strValue).toBe(undefined);
 
-  const helper = rootNode.getHelper();
+  const helper = storageModule.getHelper();
   const rootValue = helper.getRootValue();
   expect(rootValue).toStrictEqual({ num: 1 });
 }
 
-test('RootNodeLocal', () => {
-  testRootNode(StorageType.LOCAL);
+test('StorageModuleLocal', () => {
+  testStorageModule(StorageType.LOCAL);
 });
-test('RootNodeSession', () => {
-  testRootNode(StorageType.SESSION);
+test('StorageModuleSession', () => {
+  testStorageModule(StorageType.SESSION);
 });
 
 test('ConflictCheckLocal', () => {
-  const rootNode = new RootNode<TestStorage>('conflictCheckLocalTest', StorageType.LOCAL);
-  rootNode.getHelper().setRootValue({ num: 1, str: '2' });
+  const storageModule = new StorageModule<TestStorage>('conflictCheckLocalTest', StorageType.LOCAL);
+  storageModule.getHelper().setRootValue({ num: 1, str: '2' });
 
   try {
-    const anotherRootNode = new RootNode<TestStorage>('conflictCheckLocalTest', StorageType.LOCAL);
-    anotherRootNode.getHelper().setRootValue({ num: 1, str: '2' });
+    const anotherStorageModule = new StorageModule<TestStorage>('conflictCheckLocalTest', StorageType.LOCAL);
+    anotherStorageModule.getHelper().setRootValue({ num: 1, str: '2' });
   } catch (err: any) {
-    expect(err.message).toBe("Root node key 'conflictCheckLocalTest' is already existed!");
+    expect(err.message).toBe("Storage module key 'conflictCheckLocalTest' is already existed!");
   }
 });
 
 test('ConflictCheckSession', () => {
-  const rootNode = new RootNode<TestStorage>('conflictCheckSessionTest', StorageType.SESSION);
-  rootNode.getHelper().setRootValue({ num: 1, str: '2' });
+  const storageModule = new StorageModule<TestStorage>('conflictCheckSessionTest', StorageType.SESSION);
+  storageModule.getHelper().setRootValue({ num: 1, str: '2' });
 
   try {
-    const anotherRootNode = new RootNode<TestStorage>('conflictCheckSessionTest', StorageType.SESSION);
-    anotherRootNode.getHelper().setRootValue({ num: 1, str: '2' });
+    const anotherStorageModule = new StorageModule<TestStorage>('conflictCheckSessionTest', StorageType.SESSION);
+    anotherStorageModule.getHelper().setRootValue({ num: 1, str: '2' });
   } catch (err: any) {
-    expect(err.message).toBe("Root node key 'conflictCheckSessionTest' is already existed!");
+    expect(err.message).toBe("Storage module key 'conflictCheckSessionTest' is already existed!");
   }
 });
 
-test('NoPoolRootNode', () => {
-  const rootNode = new RootNode('noPoolRootNodeTest', StorageType.SESSION, true);
-  const contains = rootNodePool.contains(rootNode);
+test('NoPoolStorageModule', () => {
+  const storageModule = new StorageModule('noPoolStorageModuleTest', StorageType.SESSION, true);
+  const contains = storageModulePool.contains(storageModule);
   expect(contains).toBe(false);
 });
