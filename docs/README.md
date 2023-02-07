@@ -4,7 +4,7 @@ heroImage: /logo.png
 heroText: Smart Storage
 tagline: Smarter storage management
 actionText: Get Started →
-actionLink: /guide/
+actionLink: /guide/introduction.html
 features:
   - title: TypeScript
     details: Smart TypeScript type hints.

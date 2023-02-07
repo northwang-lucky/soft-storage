@@ -57,6 +57,10 @@ export default {
               'helper.cancelProtect',
             ],
           },
+          {
+            path: 'shared',
+            apis: ['restorePrefixedKey', 'restoreSuffixedKey'],
+          },
         ],
       ],
     };

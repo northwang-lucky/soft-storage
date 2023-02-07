@@ -3,6 +3,7 @@
     "codecov",
     "commitlint",
     "imgs",
+    "keyof",
     "lcov",
     "peaceiris",
     "plusplus",
@@ -11,6 +12,7 @@
     "rollup",
     "testid",
     "Uncapitalize",
+    "vdoing",
     "vuepress"
   ],
   "markdownlint.config": {

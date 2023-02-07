@@ -1,9 +1,11 @@
 import { defineConfig } from 'vuepress/config';
 import { resolve } from 'path';
+import { nav_en, nav_zh } from './configs/nav';
+import { sidebar_en, sidebar_zh } from './configs/sidebar';
 
 export default defineConfig({
-  base: '/smart-storage/docs/',
   port: 5175,
+  base: '/smart-storage/docs/',
   title: 'Smart Storage',
   description: 'Smarter storage management',
   plugins: ['@vuepress/plugin-back-to-top'],
@@ -26,70 +28,24 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.png',
     docsDir: 'docs',
-    lastUpdated: true,
     repo: 'northwang-lucky/smart-storage',
     docsBranch: 'main',
     editLinks: true,
+    lastUpdated: true,
     locales: {
       '/': {
         editLinkText: 'Edit this page on GitHub',
         selectText: 'Languages',
         label: 'English',
-        nav: [
-          { text: 'Guide', link: '/guide/' },
-          { text: 'API', link: '/api/' },
-          {
-            text: 'Demos',
-            items: [
-              { text: 'Vue 3 Demo', link: 'https://northwang-lucky.github.io/smart-storage/vue-demo/' },
-              { text: 'React Demo', link: 'https://northwang-lucky.github.io/smart-storage/react-demo/' },
-            ],
-          },
-        ],
-        sidebar: {
-          '/guide/': [
-            { title: 'Getting Started', collapsable: false, children: ['', 'quick-start'] },
-            {
-              title: 'Advanced',
-              collapsable: false,
-              children: ['advanced/storage-helper', 'advanced/module-protect', 'advanced/version-control'],
-            },
-          ],
-          '/api/': [
-            {
-              title: 'API',
-              path: '/api/',
-              collapsable: false,
-              children: ['vue-hooks', 'react-hooks', 'hooks', 'core'],
-            },
-          ],
-        },
+        nav: nav_en,
+        sidebar: sidebar_en,
       },
       '/zh/': {
         editLinkText: '在GitHub上编辑此页',
         selectText: '选择语言',
         label: '简体中文',
-        nav: [
-          { text: '指南', link: '/zh/guide/' },
-          { text: 'API', link: '/zh/api/' },
-          {
-            text: '演示',
-            items: [
-              { text: 'Vue 3 演示', link: 'https://northwang-lucky.github.io/smart-storage/vue-demo/' },
-              { text: 'React 演示', link: 'https://northwang-lucky.github.io/smart-storage/react-demo/' },
-            ],
-          },
-        ],
-        sidebar: {
-          '/zh/guide/': [
-            { title: '快速上手', collapsable: false, children: ['', 'quick-start'] },
-            {
-              title: '进阶指南',
-              collapsable: false,
-              children: ['advanced/storage-helper', 'advanced/module-protect'],
-            },
-          ],
-        },
+        nav: nav_zh,
+        sidebar: sidebar_zh,
       },
     },
   },

@@ -4,102 +4,146 @@
 
 Create a storage module by `localStorage`.
 
-- **Type**
+### Type
+
+```ts
+function createLocalStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T>;
+```
+
+### Parameters
+
+- `options: CreateStorageOptions<T>`
 
   ```ts
-  function createLocalStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T>;
-  ```
-
-- **Parameters**
-
-  - `options: CreateStorageOptions<T>`
-
-    ```ts
-    type CreateStorageOptions<T> = {
-      /** Storage module key (must be unique) */
-      rootNodeKey: string;
-      /** Initial value (non-nullable properties must be initialized) */
-      initial: T;
-      /** Whether to enable module protection */
-      protect?: boolean;
-      /** Version number of the storage module */
-      version?: number;
-      /** Previous version number of the storage module */
-      preVersion?: number;
-    };
-    ```
-
-- **Return Value**
-
-  The function returns an object containing two hooks, [`useStorage`](#usestorage) and [`useStorageHelper`](#usesstoragehelper).
-
-  ```ts
-  type CreateStorage<T> = {
-    useStorage: UseStorage<T>;
-    useStorageHelper: UseStorageHelper;
+  type CreateStorageOptions<T> = {
+    /** Storage module key (must be unique) */
+    rootNodeKey: string;
+    /** Initial value (non-nullable properties must be initialized) */
+    initial: T;
+    /** Whether to enable module protection */
+    protect?: boolean;
+    /** Version number of the storage module */
+    version?: number;
+    /** Previous version number of the storage module */
+    preVersion?: number;
   };
   ```
+
+### Return Value
+
+The function returns an object containing two hooks, [`useStorage`](#usestorage) and [`useStorageHelper`](#usestoragehelper).
+
+```ts
+type CreateStorage<T> = {
+  useStorage: UseStorage<T>;
+  useStorageHelper: UseStorageHelper;
+};
+```
+
+### Example
+
+```ts
+interface UserInfo {
+  token?: string;
+  hasSigned: boolean;
+}
+
+export const { useStorage } = createLocalStorage<UserInfo>({
+  rootNodeKey: 'user_info',
+  initial: { hasSigned: false },
+});
+```
 
 ## createSessionStorage()
 
 Create a storage module by `sessionStorage`.
 
-- **Type**
+### Type
 
-  ```ts
-  function createSessionStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T>;
-  ```
+```ts
+function createSessionStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T>;
+```
 
-- **Parameters**
+### Parameters
 
-  Same as [`createLocalStorage`](#createlocalstorage)
+Same as [`createLocalStorage() -> Parameters`](#parameters)
 
-- **Return Value**
+### Return Value
 
-  Same as [`createLocalStorage`](#createlocalstorage)
+Same as [`createLocalStorage() -> Return Value`](#return-value)
+
+### Example
+
+```ts
+interface UserInfo {
+  token?: string;
+  hasSigned: boolean;
+}
+
+export const { useStorage } = createSessionStorage<UserInfo>({
+  rootNodeKey: 'user_info',
+  initial: { hasSigned: false },
+});
+```
 
 ## useStorage()
 
 Get `refs`, `resetters` and `checkers` from storage module.
 
-- **Type**
+### Type
 
-  ```ts
-  type UseStorage<T> = () => StorageReactions<T>;
-  ```
+```ts
+type UseStorage<T> = () => StorageReactions<T>;
+```
 
-- **Return Value**
+### Return Value
 
-  The function returns an object containing:
+The function returns an object containing:
 
-  - [`refs: StorageRefs<T>`](../type-definition/vue-hooks.html#storagerefs)
-  - [`resetters: StorageResetters<T>`](../type-definition/vue-hooks.html#storageresetters)
-  - [`checkers: StorageCheckers<T>`](../type-definition/vue-hooks.html#storagecheckers)
+- [`refs: StorageRefs<T>`](../type-definition/vue-hooks.html#storagerefs)
+- [`resetters: StorageResetters<T>`](../type-definition/vue-hooks.html#storageresetters)
+- [`checkers: StorageCheckers<T>`](../type-definition/vue-hooks.html#storagecheckers)
 
-  ```ts
-  type StorageReactions<T> = {
-    refs: StorageRefs<T>;
-    resetters: StorageResetters<T>;
-    checkers: StorageCheckers<T>;
-  };
-  ```
+```ts
+type StorageReactions<T> = {
+  refs: StorageRefs<T>;
+  resetters: StorageResetters<T>;
+  checkers: StorageCheckers<T>;
+};
+```
+
+### Example
+
+```ts
+const {
+  refs: { token },
+  resetters: { resetToken },
+  checkers: { containsToken },
+} = useStorage();
+```
 
 ## useStorageHelper()
 
 Get instance of storage module helper.
 
-- **Type**
+### Type
 
-  ```ts
-  type UseStorageHelper = () => StorageSafeHelper;
-  ```
+```ts
+type UseStorageHelper = () => StorageSafeHelper;
+```
 
-- **Return Value**
+### Return Value
 
-  ```ts
-  type StorageSafeHelper = {
-    contains: (key: string) => boolean;
-    size: () => number;
-    initialize: () => void;
-  };
-  ```
+```ts
+type StorageSafeHelper = {
+  contains: (key: string) => boolean;
+  size: () => number;
+  initialize: () => void;
+};
+```
+
+### Example
+
+```ts
+const storageHelper = useStorageHelper();
+```
