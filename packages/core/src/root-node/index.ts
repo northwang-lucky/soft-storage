@@ -15,7 +15,7 @@ export class StorageModule<T extends object> implements IStorageModule<T> {
 
   public getItem<K extends keyof T>(key: K) {
     const storageModule = this.helper.getRootValue();
-    return storageModule[key] ?? undefined;
+    return Object.prototype.hasOwnProperty.call(storageModule, key) ? storageModule[key] : undefined;
   }
 
   public setItem<K extends keyof T>(key: K, value: T[K]): void {
