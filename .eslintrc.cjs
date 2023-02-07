@@ -19,6 +19,7 @@ module.exports = {
     ],
     'no-plusplus': 'off',
     'no-underscore-dangle': 'off',
+    'prefer-spread': 'off',
     'react/function-component-definition': 'off',
     'react-hooks/rules-of-hooks': 'off',
   },

@@ -92,7 +92,7 @@ class StorageGuard {
         if (property === 'length') {
           return originStorage.length;
         }
-        return (...args: unknown[]) => originStorage[property]?.call(originStorage, ...args);
+        return (...args: unknown[]) => originStorage[property]?.apply(originStorage, args);
       },
     });
     Object.defineProperty(window, `${storageType}Storage`, { value: instance });
