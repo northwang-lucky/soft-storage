@@ -27,7 +27,7 @@ export const sidebar_zh: SidebarConfig4Multiple = {
     {
       title: '进阶指南',
       collapsable: false,
-      children: prefixed('/guide/', ['advanced/storage-helper', 'advanced/module-protect']),
+      children: prefixed('/zh/guide/', ['advanced/storage-helper', 'advanced/module-protect']),
     },
   ],
 };
