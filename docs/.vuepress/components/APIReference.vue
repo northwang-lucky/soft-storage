@@ -1,38 +1,13 @@
 <template>
   <div class="api-reference">
-    <div class="api-col">
-      <div class="api-block">
-        <h3 class="title">Vue Hooks</h3>
+    <div class="api-col" v-for="(apiCol, index) in apiCols" :key="index">
+      <div class="api-block" v-for="block in apiCol" :key="block.path">
+        <h3 class="title">{{ block.path | title }}</h3>
         <div class="apis">
-          <a v-for="api in vueHooks.apis" :key="api" @click="() => goGoGo(vueHooks.path, api)">{{ api }}()</a>
-        </div>
-      </div>
-
-      <div class="api-block">
-        <h3 class="title">React Hooks</h3>
-        <div class="apis">
-          <a v-for="api in reactHooks.apis" :key="api" @click="() => goGoGo(reactHooks.path, api)">{{ api }}()</a>
-        </div>
-      </div>
-
-      <div class="api-block">
-        <h3 class="title">Hooks</h3>
-        <div class="apis">
-          <a v-for="api in hooks.apis" :key="api" @click="() => goGoGo(hooks.path, api)">{{ api }}()</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="api-col">
-      <div class="api-block">
-        <h3 class="title">Core</h3>
-        <div class="apis">
-          <a v-for="api in core.apis" :key="api" @click="() => goGoGo(core.path, api)">
-            <template v-if="api">{{ api }}() </template>
-            <template v-else>
-              <hr />
-            </template>
-          </a>
+          <RouterLink v-for="api in block.apis" :key="api" :to="`./${block.path}.html#${api.toLowerCase()}`">
+            <template v-if="api">{{ api }}()</template>
+            <template v-else><hr /></template>
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -44,41 +19,52 @@ export default {
   name: 'APIReference',
   data() {
     return {
-      vueHooks: {
-        path: 'vue-hooks',
-        apis: ['createLocalStorage', 'createSessionStorage', 'useStorage', 'useStorageHelper'],
-      },
-      reactHooks: {
-        path: 'react-hooks',
-        apis: ['createLocalStorage', 'createSessionStorage', 'useStorage', 'useStorageHelper'],
-      },
-      hooks: {
-        path: 'hooks',
-        apis: ['createLocalStorage', 'createSessionStorage', 'useStorage', 'useStorageHelper'],
-      },
-      core: {
-        path: 'core',
-        apis: [
-          'RootNode',
-          'rootNode.getItem',
-          'rootNode.setItem',
-          'rootNode.removeItem',
-          'rootNode.clear',
-          'rootNode.contains',
-          'rootNode.size',
-          'rootNode.getHelper',
-          '',
-          'helper.getRootValue',
-          'helper.setRootValue',
-          'helper.removeRootValue',
-          'helper.getStorageKey',
-          'helper.getStorageType',
-          'helper.getExistence',
-          'helper.protect',
-          'helper.cancelProtect',
+      apiCols: [
+        [
+          {
+            path: 'vue-hooks',
+            apis: ['createLocalStorage', 'createSessionStorage', 'useStorage', 'useStorageHelper'],
+          },
+          {
+            path: 'react-hooks',
+            apis: ['createLocalStorage', 'createSessionStorage', 'useStorage', 'useStorageHelper'],
+          },
+          {
+            path: 'hooks',
+            apis: ['createLocalStorage', 'createSessionStorage', 'useStorage', 'useStorageHelper'],
+          },
         ],
-      },
+        [
+          {
+            path: 'core',
+            apis: [
+              'RootNode',
+              'rootNode.getItem',
+              'rootNode.setItem',
+              'rootNode.removeItem',
+              'rootNode.clear',
+              'rootNode.contains',
+              'rootNode.size',
+              'rootNode.getHelper',
+              '',
+              'helper.getRootValue',
+              'helper.setRootValue',
+              'helper.removeRootValue',
+              'helper.getStorageKey',
+              'helper.getStorageType',
+              'helper.getExistence',
+              'helper.protect',
+              'helper.cancelProtect',
+            ],
+          },
+        ],
+      ],
     };
+  },
+  filters: {
+    title(value) {
+      return value.replace(/^[a-z]/, c => c.toUpperCase()).replace(/-([a-z])/, (_, f) => ` ${f.toUpperCase()}`);
+    },
   },
   methods: {
     /**
