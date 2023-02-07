@@ -63,10 +63,6 @@ StorageModule<T extends object>.getItem<K extends keyof T>(key: K): NonNullable<
 
 The value of storage item.
 
-::: warning
-If the value is `null`, `getItem()` will return `undefined`.
-:::
-
 ### Example
 
 ```ts

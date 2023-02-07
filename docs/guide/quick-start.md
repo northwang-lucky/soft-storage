@@ -6,10 +6,6 @@ Smart Storage provides three ways to manage storage:
 - Combined with `useState` API in **React**
 - Standalone use in any project that supports **cjs modules** or **esm modules**
 
-::: warning
-In particular, when creating a type definition for a storage module, you should never use `null` as a type. Because `null` is automatically treated as `undefined` in the `@smart-storage/core` submodule, you will not get the `null` value as your expectation.
-:::
-
 ## For Vue 3
 
 ### Install

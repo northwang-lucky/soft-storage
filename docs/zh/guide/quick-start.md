@@ -6,10 +6,6 @@ Smart Storage 提供三种方式来管理存储：
 - 结合 **React**中的 `useState` API
 - 在任何支持 `cjs` 模块或 `esm` 模块的项目中独立使用
 
-::: warning
-特别提醒，当创建存储模块的类型定义时，请勿使用 `null` 作为类型。因为在 `@smart-storage/core` 子模块中，会自动将 `null` 处理为 `undefined`，所以您永远无法得到您所期望的 `null` 值。
-:::
-
 ## Vue 3
 
 ### 安装
