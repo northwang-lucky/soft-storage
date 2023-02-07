@@ -2,8 +2,8 @@
 
 Smart Storage provides three ways to manage storage:
 
-- Combined with the ref API in **Vue 3**
-- Combined with useState API in **React**
+- Combined with the `ref` API in **Vue 3**
+- Combined with `useState` API in **React**
 - Standalone use in any project that supports **cjs modules** or **esm modules**
 
 ## For Vue 3
