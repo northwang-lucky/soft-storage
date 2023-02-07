@@ -13,14 +13,14 @@ import {
 export type Setter<T> = Dispatch<SetStateAction<T>>;
 export type SetterKey<T> = PrefixedKey<T, 'set'>;
 
-export type StorageState<T, KeyofT extends keyof T> = {
-  [K in KeyofT]: T[KeyofT];
+export type StorageState<T, K extends keyof T> = {
+  [Key in K]: T[K];
 } & {
-  [K in SetterKey<KeyofT>]: Setter<T[KeyofT]>;
+  [Key in SetterKey<K>]: Setter<T[K]>;
 } & {
-  [K in ResetterKey<KeyofT>]: Resetter;
+  [Key in ResetterKey<K>]: Resetter;
 } & {
-  [K in CheckerKey<KeyofT>]: Checker;
+  [Key in CheckerKey<K>]: Checker;
 };
 
 export type StateKey<T> = SuffixedKeys<T, 'state'>;
