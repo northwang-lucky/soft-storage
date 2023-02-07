@@ -25,8 +25,8 @@ export default defineConfig({
       description: '更“聪明”的WebStorage管理',
     },
   },
+  theme: 'vt',
   themeConfig: {
-    logo: '/logo.png',
     docsDir: 'docs',
     repo: 'northwang-lucky/smart-storage',
     docsBranch: 'main',

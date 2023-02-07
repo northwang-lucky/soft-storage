@@ -1,3 +1,7 @@
+---
+extractApiHeaders: [2]
+---
+
 # Vue Hooks API
 
 ## createLocalStorage()
@@ -66,11 +70,11 @@ function createSessionStorage<T extends object>(options: CreateStorageOptions<T>
 
 ### Parameters
 
-Same as [`createLocalStorage() -> Parameters`](#parameters)
+Same as [`createLocalStorage() > Parameters`](#parameters)
 
 ### Return Value
 
-Same as [`createLocalStorage() -> Return Value`](#return-value)
+Same as [`createLocalStorage() > Return Value`](#return-value)
 
 ### Example
 

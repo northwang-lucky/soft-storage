@@ -1,3 +1,7 @@
+---
+extractApiHeaders: [2]
+---
+
 # Core API
 
 ## RootNode()

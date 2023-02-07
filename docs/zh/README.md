@@ -3,7 +3,7 @@ home: true
 heroImage: /logo.png
 heroText: Smart Storage
 tagline: 更“聪明”的 WebStorage 管理
-actionText: 快速上手 →
+actionText: 快速上手
 actionLink: /zh/guide/introduction.html
 features:
   - title: TypeScript

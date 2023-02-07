@@ -1,9 +1,3 @@
 ---
-sidebar: false
+api: true
 ---
-
-# API Reference
-
-## API
-
-<APIReference />

@@ -1,9 +1,12 @@
-img[alt=hero] {
-  width: 230px;
-  height: 230px;
+a code {
+  text-decoration: underline;
 }
 
-a code {
-  color: #3eaf7c !important;
-  text-decoration: underline;
+#hero p.tagline {
+  display: block !important;
+  margin-top: 0 !important;
+}
+
+.theme-container.no-sidebar .navbar .home-link {
+  min-width: fit-content !important;
 }

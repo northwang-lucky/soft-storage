@@ -3,7 +3,7 @@ home: true
 heroImage: /logo.png
 heroText: Smart Storage
 tagline: Smarter storage management
-actionText: Get Started →
+actionText: Get Started
 actionLink: /guide/introduction.html
 features:
   - title: TypeScript
