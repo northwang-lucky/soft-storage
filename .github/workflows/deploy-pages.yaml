@@ -11,7 +11,7 @@ on:
       - config/rollup.config.js
       - config/tsconfig.base.json
       - docs/**/*
-      - packages/*/src
+      - packages/*/src/**/*
       - packages/*/package.json
       - packages/*/tsconfig.json
       - playground/**/*
