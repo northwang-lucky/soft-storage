@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Checker, Resetter } from '@smart-storage/shared';
+import { Checker, createProxy, Resetter, StorageModuleSchema } from '@smart-storage/shared';
 import {
   createLocalStorage as createLocalStorageRaw,
   createSessionStorage as createSessionStorageRaw,
@@ -9,7 +9,7 @@ import {
 } from '@smart-storage/hooks';
 import { CreateStorage, Setter, StateKey, StorageStates, UseState } from './types';
 
-function createStorage<T extends object>(
+function createStorage<T extends StorageModuleSchema>(
   useStorage: UseStorage<T>,
   useStorageHelper: UseStorageHelper,
   { initial }: CreateStorageOptions<T>
@@ -22,7 +22,7 @@ function createStorage<T extends object>(
 
   return {
     useStorage: () => {
-      const proxyGetter = useCallback<NonNullable<ProxyHandler<StorageStates<T>>['get']>>((_, p) => {
+      const proxyGetter = useCallback((_: object, p: string) => {
         const stateKey = p as StateKey<T>;
         const property = stateKey.replace(/^([a-zA-Z]+)State$/, (_ch, first) => first) as keyof T;
 
@@ -70,7 +70,7 @@ function createStorage<T extends object>(
         };
       }, []);
 
-      return new Proxy({} as StorageStates<T>, { get: proxyGetter });
+      return createProxy<object, StorageStates<T>>({}, { get: proxyGetter });
     },
     useStorageHelper: () => ({
       size: () => storageHelperRaw.size(),
@@ -90,12 +90,14 @@ function createStorage<T extends object>(
   };
 }
 
-export function createLocalStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T> {
+export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createLocalStorageRaw<T>(options);
   return createStorage(useStorage, useStorageHelper, options);
 }
 
-export function createSessionStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T> {
+export function createSessionStorage<T extends StorageModuleSchema>(
+  options: CreateStorageOptions<T>
+): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createSessionStorageRaw<T>(options);
   return createStorage(useStorage, useStorageHelper, options);
 }

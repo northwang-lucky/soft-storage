@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { createLocalStorage, createSessionStorage } from '../src';
+import { createLocalStorage, createSessionStorage, UseStorage, UseStorageHelper } from '../src';
 
-interface TestStorage {
+type TestStorage = {
   str?: string;
   num?: number;
   bool: boolean;
-}
+};
 
 const { useStorage: useLocalStorage, useStorageHelper: useLocalStorageHelper } = createLocalStorage<TestStorage>({
   storageModuleKey: 'createLocalStorageTest',
@@ -24,18 +24,18 @@ const { useStorage: useProtectStorage, useStorageHelper: useProtectStorageHelper
   initial: { bool: true },
 });
 
-function App(props: { type: 'local' | 'session'; protect: boolean }) {
+function App(props: { type: 'local' | 'session'; protect: boolean }): JSX.Element {
   const { type, protect } = props;
 
   const {
     strState: { str, setStr, containsStr },
     numState: { num, setNum, resetNum },
     boolState: { bool, setBool, resetBool },
-  } = (() => {
+  } = ((): UseStorage<TestStorage> => {
     if (protect) return useProtectStorage;
     return type === 'local' ? useLocalStorage : useSessionStorage;
   })()();
-  const storageHelper = (() => {
+  const storageHelper = ((): UseStorageHelper => {
     if (protect) return useProtectStorageHelper;
     return type === 'local' ? useLocalStorageHelper : useSessionStorageHelper;
   })()();
@@ -73,7 +73,7 @@ function App(props: { type: 'local' | 'session'; protect: boolean }) {
   );
 }
 
-function useTestCase(type: 'local' | 'session', protect = false) {
+function useTestCase(type: 'local' | 'session', protect = false): void {
   // @ts-ignore
   render(<App type={type} protect={protect} />);
 
