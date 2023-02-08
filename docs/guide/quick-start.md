@@ -10,9 +10,33 @@ Smart Storage provides three ways to manage storage:
 
 ### Install
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+<template v-slot:npm>
+
 ```sh
-npm install @smart-storage/vue-hooks --save
+npm install @smart-storage/vue-hooks
 ```
+
+</template>
+
+<template v-slot:yarn>
+
+```sh
+yarn add @smart-storage/vue-hooks
+```
+
+</template>
+
+<template v-slot:pnpm>
+
+```sh
+pnpm add @smart-storage/vue-hooks
+```
+
+</template>
+
+</CodeSwitcher>
 
 ### Create a Storage Module
 
@@ -77,9 +101,33 @@ const onSignOut = () => {
 
 ### Install
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+<template v-slot:npm>
+
 ```sh
-npm install @smart-storage/react-hooks --save
+npm install @smart-storage/react-hooks
 ```
+
+</template>
+
+<template v-slot:yarn>
+
+```sh
+yarn add @smart-storage/react-hooks
+```
+
+</template>
+
+<template v-slot:pnpm>
+
+```sh
+pnpm add @smart-storage/react-hooks
+```
+
+</template>
+
+</CodeSwitcher>
 
 ### Create a Storage Module
 
@@ -147,9 +195,33 @@ export default TestComponent;
 
 ### Install
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+<template v-slot:npm>
+
 ```sh
-npm install @smart-storage/hooks --save
+npm install @smart-storage/hooks
 ```
+
+</template>
+
+<template v-slot:yarn>
+
+```sh
+yarn add @smart-storage/hooks
+```
+
+</template>
+
+<template v-slot:pnpm>
+
+```sh
+pnpm add @smart-storage/hooks
+```
+
+</template>
+
+</CodeSwitcher>
 
 ### Create a Storage Module
 
@@ -201,9 +273,33 @@ const onSignOut = () => {
 
 ### Install
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+<template v-slot:npm>
+
 ```sh
-npm install @smart-storage/core --save
+npm install @smart-storage/core
 ```
+
+</template>
+
+<template v-slot:yarn>
+
+```sh
+yarn add @smart-storage/core
+```
+
+</template>
+
+<template v-slot:pnpm>
+
+```sh
+pnpm add @smart-storage/core
+```
+
+</template>
+
+</CodeSwitcher>
 
 ### Usage
 
