@@ -15,7 +15,7 @@ function createStorage<T extends object>({
 
   // Only run when storage module is empty
   if (initial && !storageModule.size()) {
-    helper.setRootValue(initial);
+    helper.setModule(initial);
   }
 
   // Enable storage key protect
@@ -45,7 +45,7 @@ function createStorage<T extends object>({
       size: () => storageModule.size(),
       clear: () => storageModule.clear(),
       contains: (key: string) => storageModule.contains(key),
-      initialize: () => helper.setRootValue(initial),
+      initialize: () => helper.setModule(initial),
     }),
   };
 }

@@ -32,7 +32,7 @@ function testStorageModule(storageType: StorageType) {
   expect(strValue).toBe(undefined);
 
   const helper = storageModule.getHelper();
-  const rootValue = helper.getRootValue();
+  const rootValue = helper.getModule();
   expect(rootValue).toStrictEqual({ num: 1 });
 }
 
@@ -45,11 +45,11 @@ test('StorageModuleSession', () => {
 
 test('ConflictCheckLocal', () => {
   const storageModule = new StorageModule<TestStorage>('conflictCheckLocalTest', StorageType.LOCAL);
-  storageModule.getHelper().setRootValue({ num: 1, str: '2' });
+  storageModule.getHelper().setModule({ num: 1, str: '2' });
 
   try {
     const anotherStorageModule = new StorageModule<TestStorage>('conflictCheckLocalTest', StorageType.LOCAL);
-    anotherStorageModule.getHelper().setRootValue({ num: 1, str: '2' });
+    anotherStorageModule.getHelper().setModule({ num: 1, str: '2' });
   } catch (err: any) {
     expect(err.message).toBe("Storage module key 'conflictCheckLocalTest' is already existed!");
   }
@@ -57,11 +57,11 @@ test('ConflictCheckLocal', () => {
 
 test('ConflictCheckSession', () => {
   const storageModule = new StorageModule<TestStorage>('conflictCheckSessionTest', StorageType.SESSION);
-  storageModule.getHelper().setRootValue({ num: 1, str: '2' });
+  storageModule.getHelper().setModule({ num: 1, str: '2' });
 
   try {
     const anotherStorageModule = new StorageModule<TestStorage>('conflictCheckSessionTest', StorageType.SESSION);
-    anotherStorageModule.getHelper().setRootValue({ num: 1, str: '2' });
+    anotherStorageModule.getHelper().setModule({ num: 1, str: '2' });
   } catch (err: any) {
     expect(err.message).toBe("Storage module key 'conflictCheckSessionTest' is already existed!");
   }

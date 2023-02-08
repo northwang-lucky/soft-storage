@@ -19,19 +19,19 @@ export class StorageModuleHelper<T> {
     this.protectRan = false;
   }
 
-  public getRootValue(): T {
+  public getModule(): T {
     const storageModule = this.storage.getItem(this.storageKey);
     return storageModule ? JSON.parse(storageModule) : {};
   }
 
-  public setRootValue(root: T): void {
+  public setModule(root: T): void {
     this.storage.setItem(this.storageKey, JSON.stringify(root));
     if (this.protectRan) {
       storageGuard.addKey(this.storageType, this.storageKey);
     }
   }
 
-  public removeRootValue(): void {
+  public clearModule(): void {
     this.storage.removeItem(this.storageKey);
     if (this.protectRan) {
       storageGuard.removeKey(this.storageType, this.storageKey);

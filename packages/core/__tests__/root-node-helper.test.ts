@@ -12,15 +12,15 @@ test('StorageModuleHelper', () => {
   const storageKey = helper.getStorageKey();
   expect(storageKey).toBe('storageModuleHelperTest');
 
-  helper.setRootValue(origin);
-  let storageModule = helper.getRootValue();
+  helper.setModule(origin);
+  let storageModule = helper.getModule();
   expect(storageModule).toStrictEqual(origin);
 
-  storageModule = helper.getRootValue();
+  storageModule = helper.getModule();
   expect(storageModule).toStrictEqual(origin);
 
-  helper.removeRootValue();
-  storageModule = helper.getRootValue();
+  helper.clearModule();
+  storageModule = helper.getModule();
   expect(storageModule).toStrictEqual({});
   expect(helper.getExistence()).toBe(false);
 });
@@ -38,12 +38,12 @@ interface SecondModule {
 function disableDirectCalls(storageType: StorageType) {
   const firstKey = 'disableDirectCallsFirstTest';
   const firstHelper = new StorageModuleHelper<FirstModule>(firstKey, storageType);
-  firstHelper.setRootValue({ keep: 1, first: '1' });
+  firstHelper.setModule({ keep: 1, first: '1' });
   firstHelper.protect();
 
   const secondKey = 'disableDirectCallsSecondTest';
   const secondHelper = new StorageModuleHelper<SecondModule>(secondKey, storageType);
-  secondHelper.setRootValue({ keep: 2, second: '2' });
+  secondHelper.setModule({ keep: 2, second: '2' });
   secondHelper.protect();
 
   const windowStorage = storageType === StorageType.LOCAL ? window.localStorage : window.sessionStorage;
@@ -69,11 +69,11 @@ function disableDirectCalls(storageType: StorageType) {
   windowStorage.setItem('noProtectKey', '123');
   expect(windowStorage.getItem('noProtectKey')).toBe('123');
 
-  firstHelper.setRootValue({ keep: 11 });
-  expect(firstHelper.getRootValue()).toStrictEqual({ keep: 11 });
+  firstHelper.setModule({ keep: 11 });
+  expect(firstHelper.getModule()).toStrictEqual({ keep: 11 });
 
-  secondHelper.setRootValue({ keep: 22 });
-  expect(secondHelper.getRootValue()).toStrictEqual({ keep: 22 });
+  secondHelper.setModule({ keep: 22 });
+  expect(secondHelper.getModule()).toStrictEqual({ keep: 22 });
 
   // Test removeItem()
   try {
@@ -96,25 +96,25 @@ function disableDirectCalls(storageType: StorageType) {
   windowStorage.removeItem('noProtectKey');
   expect(windowStorage.getItem('noProtectKey')).toBe(null);
 
-  firstHelper.removeRootValue();
-  expect(firstHelper.getRootValue()).toStrictEqual({});
+  firstHelper.clearModule();
+  expect(firstHelper.getModule()).toStrictEqual({});
 
-  secondHelper.removeRootValue();
-  expect(secondHelper.getRootValue()).toStrictEqual({});
+  secondHelper.clearModule();
+  expect(secondHelper.getModule()).toStrictEqual({});
 
   // Test clear()
   windowStorage.setItem('noProtectKey', '123');
   expect(windowStorage.getItem('noProtectKey')).toBe('123');
 
-  firstHelper.setRootValue({ keep: 11 });
-  expect(firstHelper.getRootValue()).toStrictEqual({ keep: 11 });
+  firstHelper.setModule({ keep: 11 });
+  expect(firstHelper.getModule()).toStrictEqual({ keep: 11 });
 
-  secondHelper.setRootValue({ keep: 22 });
-  expect(secondHelper.getRootValue()).toStrictEqual({ keep: 22 });
+  secondHelper.setModule({ keep: 22 });
+  expect(secondHelper.getModule()).toStrictEqual({ keep: 22 });
 
   windowStorage.clear();
-  expect(firstHelper.getRootValue()).toStrictEqual({ keep: 11 });
-  expect(secondHelper.getRootValue()).toStrictEqual({ keep: 22 });
+  expect(firstHelper.getModule()).toStrictEqual({ keep: 11 });
+  expect(secondHelper.getModule()).toStrictEqual({ keep: 22 });
   expect(windowStorage.length).toBe(2);
   expect(windowStorage.getItem('noProtectKey')).toBe(null);
 

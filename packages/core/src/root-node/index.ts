@@ -14,38 +14,38 @@ export class StorageModule<T extends object> implements IStorageModule<T> {
   }
 
   public getItem<K extends keyof T>(key: K) {
-    const storageModule = this.helper.getRootValue();
+    const storageModule = this.helper.getModule();
     return Object.prototype.hasOwnProperty.call(storageModule, key) ? storageModule[key] : undefined;
   }
 
   public setItem<K extends keyof T>(key: K, value: T[K]): void {
-    const storageModule = this.helper.getRootValue();
+    const storageModule = this.helper.getModule();
     storageModule[key] = value;
-    this.helper.setRootValue(storageModule);
+    this.helper.setModule(storageModule);
   }
 
   public removeItem<K extends keyof T>(key: K): void {
-    const storageModule = this.helper.getRootValue();
+    const storageModule = this.helper.getModule();
     delete storageModule[key];
     if (!Object.keys(storageModule as object).length) {
       this.clear();
       return;
     }
-    this.helper.setRootValue(storageModule);
+    this.helper.setModule(storageModule);
   }
 
   public contains(key: string): boolean {
-    const storageModule = this.helper.getRootValue();
+    const storageModule = this.helper.getModule();
     return Object.prototype.hasOwnProperty.call(storageModule, key);
   }
 
   public clear(): void {
-    this.helper.removeRootValue();
+    this.helper.clearModule();
     storageModulePool.removeStorageModule(this);
   }
 
   public size(): number {
-    return Object.keys(this.helper.getRootValue() as object).length;
+    return Object.keys(this.helper.getModule() as object).length;
   }
 
   public getHelper(): StorageModuleHelper<T> {
