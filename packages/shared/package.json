@@ -22,7 +22,7 @@
   "scripts": {
     "test": "jest",
     "test:cov": "jest --coverage",
-    "test:cov-serve": "pnpm test && node ../../scripts/cov-serve.js",
+    "test:cov-serve": "pnpm test:cov && node ../../scripts/cov-serve.js",
     "build-only": "rimraf \"./dist\" --impl=native && rollup -c",
     "build": "pnpm test && pnpm build-only",
     "format": "prettier -w \"src/**/*.(js|ts)\"",
