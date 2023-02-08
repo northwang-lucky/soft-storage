@@ -8,10 +8,10 @@ Smart Storage provides a hook function called `useStorageHelper` to use the othe
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks'; // or @smart-storage/react-hooks
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorageHelper } = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
@@ -47,10 +47,10 @@ The `storageHelper.clear()` is not recommended in the framework because in the f
 // storage.ts
 import { createLocalStorage } from '@smart-storage/hooks';
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorageHelper } = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',

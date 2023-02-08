@@ -8,9 +8,9 @@ Suppose we have used the `createLocalStorage` API to create a storage module who
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface AlwaysChangeStorage {
+type AlwaysChangeStorage = {
   foo: string;
-}
+};
 
 export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
@@ -46,9 +46,9 @@ For example:
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface AlwaysChangeStorage {
+type AlwaysChangeStorage = {
   bar: string;
-}
+};
 
 export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
@@ -69,9 +69,9 @@ In the example in the previous section, we upgraded the version of the storage m
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface AlwaysChangeStorage {
+type AlwaysChangeStorage = {
   bar: string;
-}
+};
 
 export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',

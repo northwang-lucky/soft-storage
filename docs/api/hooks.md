@@ -47,10 +47,10 @@ type CreateStorage<T> = {
 ### Example
 
 ```ts
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
@@ -79,10 +79,10 @@ Same as [`createLocalStorage() > Return Value`](#return-value)
 ### Example
 
 ```ts
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createSessionStorage<UserInfo>({
   storageModuleKey: 'user_info',

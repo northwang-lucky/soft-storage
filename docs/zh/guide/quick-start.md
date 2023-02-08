@@ -22,10 +22,10 @@ npm install @smart-storage/vue-hooks --save
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createLocalStorage<UserInfo>({
   // 存储键
@@ -33,11 +33,12 @@ export const { useStorage } = createLocalStorage<UserInfo>({
   // 用于初始化
   initial: {
     hasSigned: false, // 非空属性必须初始化
+    // 可选属性不能初始化
   },
 });
 ```
 
-### 在 vue 组件中使用
+### 在 Vue 组件中使用
 
 ```vue
 <script setup lang="ts">
@@ -86,20 +87,21 @@ npm install @smart-storage/react-hooks --save
 
 ```ts
 // storage.ts
-import { createSessionStorage } from '@smart-storage/vue-hooks';
+import { createSessionStorage } from '@smart-storage/react-hooks';
 
-interface TestStorage {
-  str?: string;
-  num?: number;
-  bool: boolean;
-  arr: string[];
-}
+type UserInfo = {
+  token?: string;
+  hasSigned: boolean;
+};
 
-export const { useStorage } = createSessionStorage<TestStorage>({
+export const { useStorage } = createSessionStorage<UserInfo>({
   // 存储键
-  storageModuleKey: 'react_test_key',
-  // 非空属性必须初始化
-  initial: { bool: false, arr: [] },
+  storageModuleKey: 'user_info',
+  // 用于初始化
+  initial: {
+    hasSigned: false, // 非空属性必须初始化
+    // 可选属性不能初始化
+  },
 });
 ```
 
@@ -110,7 +112,7 @@ import React, { useEffect } from 'react';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
 import { useStorage } from './storage';
 
-function TestComponent() {
+function UserInfoFC() {
   /* 在Typescript的帮助下，您可以轻松地解构hook的返回值 */
   const {
     tokenState: { token, setToken, resetToken, containsToken },
@@ -138,7 +140,7 @@ function TestComponent() {
   );
 }
 
-export default TestComponent;
+export default UserInfoFC;
 ```
 
 ## 独立使用
@@ -157,10 +159,10 @@ npm install @smart-storage/hooks --save
 // storage.ts
 import { createSessionStorage } from '@smart-storage/hooks';
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createSessionStorage<UserInfo>({
   // 存储键
@@ -168,6 +170,7 @@ export const { useStorage } = createSessionStorage<UserInfo>({
   // 用于初始化
   initial: {
     hasSigned: false, // 非空属性必须初始化
+    // 可选属性不能初始化
   },
 });
 ```
@@ -190,6 +193,7 @@ const { token, hasSigned } = useStorage();
 
 const onSignOut = () => {
   token.remove(); // 从存储模块中删除此键值对
+  // 或者，您可以使用“token.reset()”，它可以将值设置为初始值
   hasSigned.set(false);
   console.log(token.get(), token.exist()); // undefined, false
 };
@@ -209,10 +213,10 @@ npm install @smart-storage/core --save
 import { StorageModule, StorageType } from '@smart-storage/core';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 const storageModule = new StorageModule<UserInfo>('user_info', StorageType.SESSION);
 

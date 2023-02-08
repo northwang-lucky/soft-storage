@@ -20,15 +20,16 @@ function createLocalStorage<T extends object>(options: CreateStorageOptions<T>):
 
   ```ts
   type CreateStorageOptions<T> = {
-    /** Storage module key (must be unique) */
+    /* Storage module key (must be unique) */
     storageModuleKey: string;
-    /** Initial value (non-nullable properties must be initialized) */
+    /* Initial value (non-nullable properties must be initialized, 
+    and optional properties cannot be initialized) */
     initial: T;
-    /** Whether to enable module protection */
+    /* Whether to enable module protection */
     protect?: boolean;
-    /** Version number of the storage module */
+    /* Version number of the storage module */
     version?: number;
-    /** Previous version number of the storage module */
+    /* Previous version number of the storage module */
     preVersion?: number;
   };
   ```
@@ -47,10 +48,10 @@ type CreateStorage<T> = {
 ### Example
 
 ```ts
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
@@ -79,10 +80,10 @@ Same as [`createLocalStorage() > Return Value`](#return-value)
 ### Example
 
 ```ts
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createSessionStorage<UserInfo>({
   storageModuleKey: 'user_info',
@@ -133,13 +134,13 @@ Get instance of storage module helper.
 ### Type
 
 ```ts
-type UseStorageHelper = () => StorageSafeHelper;
+type UseStorageHelper = () => StorageHelper;
 ```
 
 ### Return Value
 
 ```ts
-type StorageSafeHelper = {
+type StorageHelper = {
   contains: (key: string) => boolean;
   size: () => number;
   initialize: () => void;

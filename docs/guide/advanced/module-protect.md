@@ -8,10 +8,10 @@ We have used the `createLocalStorage` API to create a storage module whose key c
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface UnprotectedStorage {
+type UnprotectedStorage = {
   str: string;
   num?: number;
-}
+};
 
 export const { useStorage } = createLocalStorage<UnprotectedStorage>({
   storageModuleKey: 'unprotected_storage_key',
@@ -43,10 +43,10 @@ To prevent the data structure of the storage module from being corrupted, Smart 
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface ProtectedStorage {
+type ProtectedStorage = {
   str: string;
   num?: number;
-}
+};
 
 export const { useStorage } = createLocalStorage<ProtectedStorage>({
   storageModuleKey: 'protected_storage_key',

@@ -6,35 +6,39 @@ Smart Storage provides three ways to manage storage:
 - Combined with `useState` API in **React**
 - Standalone use in any project that supports **cjs modules** or **esm modules**
 
+::: warning
+Attention please! You should never use `interface` to define a type in Smart Storage. Because the key of the type defined by `interface` does not have a `string` type signature. But Smart Storage sets type constraints like `Record<string, unknown>` for the incoming generics. So, use `type` to instead of it.
+:::
+
 ## For Vue 3
 
 ### Install
 
 <CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
 
-<template v-slot:npm>
+::: slot npm
 
 ```sh
 npm install @smart-storage/vue-hooks
 ```
 
-</template>
+:::
 
-<template v-slot:yarn>
+::: slot yarn
 
 ```sh
 yarn add @smart-storage/vue-hooks
 ```
 
-</template>
+:::
 
-<template v-slot:pnpm>
+::: slot pnpm
 
 ```sh
 pnpm add @smart-storage/vue-hooks
 ```
 
-</template>
+:::
 
 </CodeSwitcher>
 
@@ -46,10 +50,10 @@ Create a new file anywhere, and use like this:
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createLocalStorage<UserInfo>({
   // This is storage key
@@ -57,6 +61,7 @@ export const { useStorage } = createLocalStorage<UserInfo>({
   // Used to initialize
   initial: {
     hasSigned: false, // Non-nullable properties must be initialized
+    // Optional properties cannot be initialized
   },
 });
 ```
@@ -103,29 +108,29 @@ const onSignOut = () => {
 
 <CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
 
-<template v-slot:npm>
+::: slot npm
 
 ```sh
 npm install @smart-storage/react-hooks
 ```
 
-</template>
+:::
 
-<template v-slot:yarn>
+::: slot yarn
 
 ```sh
 yarn add @smart-storage/react-hooks
 ```
 
-</template>
+:::
 
-<template v-slot:pnpm>
+::: slot pnpm
 
 ```sh
 pnpm add @smart-storage/react-hooks
 ```
 
-</template>
+:::
 
 </CodeSwitcher>
 
@@ -137,10 +142,10 @@ Create a new file anywhere, and use like this:
 // storage.ts
 import { createSessionStorage } from '@smart-storage/react-hooks';
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createSessionStorage<UserInfo>({
   // This is storage key
@@ -148,6 +153,7 @@ export const { useStorage } = createSessionStorage<UserInfo>({
   // Used to initialize
   initial: {
     hasSigned: false, // Non-nullable properties must be initialized
+    // Optional properties cannot be initialized
   },
 });
 ```
@@ -159,7 +165,7 @@ import React, { useEffect } from 'react';
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
 import { useStorage } from './storage';
 
-function TestComponent() {
+function UserInfoFC() {
   /* You can easily deconstruct the hook's return value,
   because TypeScript will give you great type hints */
   const {
@@ -188,7 +194,7 @@ function TestComponent() {
   );
 }
 
-export default TestComponent;
+export default UserInfoFC;
 ```
 
 ## Standalone Use
@@ -197,29 +203,29 @@ export default TestComponent;
 
 <CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
 
-<template v-slot:npm>
+::: slot npm
 
 ```sh
 npm install @smart-storage/hooks
 ```
 
-</template>
+:::
 
-<template v-slot:yarn>
+::: slot yarn
 
 ```sh
 yarn add @smart-storage/hooks
 ```
 
-</template>
+:::
 
-<template v-slot:pnpm>
+::: slot pnpm
 
 ```sh
 pnpm add @smart-storage/hooks
 ```
 
-</template>
+:::
 
 </CodeSwitcher>
 
@@ -231,10 +237,10 @@ Create a new file anywhere, and use like this:
 // storage.ts
 import { createSessionStorage } from '@smart-storage/hooks';
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 export const { useStorage } = createSessionStorage<UserInfo>({
   // This is storage key
@@ -242,6 +248,7 @@ export const { useStorage } = createSessionStorage<UserInfo>({
   // Used to initialize
   initial: {
     hasSigned: false, // Non-nullable properties must be initialized
+    // Optional properties cannot be initialized
   },
 });
 ```
@@ -264,6 +271,7 @@ const { token, hasSigned } = useStorage();
 
 const onSignOut = () => {
   token.remove(); // Will delete the key and value from storage module
+  // Or, you can either use "token.reset()", it can set value to initial value
   hasSigned.set(false);
   console.log(token.get(), token.exist()); // Output: undefined, false
 };
@@ -275,29 +283,29 @@ const onSignOut = () => {
 
 <CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
 
-<template v-slot:npm>
+::: slot npm
 
 ```sh
 npm install @smart-storage/core
 ```
 
-</template>
+:::
 
-<template v-slot:yarn>
+::: slot yarn
 
 ```sh
 yarn add @smart-storage/core
 ```
 
-</template>
+:::
 
-<template v-slot:pnpm>
+::: slot pnpm
 
 ```sh
 pnpm add @smart-storage/core
 ```
 
-</template>
+:::
 
 </CodeSwitcher>
 
@@ -307,10 +315,10 @@ pnpm add @smart-storage/core
 import { StorageModule, StorageType } from '@smart-storage/core';
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
 
-interface UserInfo {
+type UserInfo = {
   token?: string;
   hasSigned: boolean;
-}
+};
 
 const storageModule = new StorageModule<UserInfo>('user_info', StorageType.SESSION);
 
