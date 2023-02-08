@@ -1,6 +1,6 @@
 import { createLocalStorage } from '@smart-storage/vue-hooks';
 
-interface TestStorage {
+type TestStorage = {
   str?: string;
   num?: number;
   bool: boolean;
@@ -10,7 +10,7 @@ interface TestStorage {
     arr: { str: string }[];
     obj: { str?: string };
   };
-}
+};
 
 export const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>({
   storageModuleKey: 'vue_test_key',
