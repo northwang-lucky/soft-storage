@@ -1,19 +1,19 @@
 import { createApp, defineComponent } from 'vue';
 import { createLocalStorage, createSessionStorage, UseStorage, UseStorageHelper } from '../src';
 
-interface TestStorage {
+type TestStorage = {
   str?: string;
   num?: number;
   bool: boolean;
   arr: number[];
-}
+};
 
 function useTestCase(
   useStorage: UseStorage<TestStorage>,
   useStorageHelper: UseStorageHelper,
   protect = false,
   type: 'local' | 'session' = 'local'
-) {
+): void {
   const container = document.createElement('div');
   const App = defineComponent({
     template: 'vue',

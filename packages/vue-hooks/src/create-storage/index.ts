@@ -8,10 +8,10 @@ import {
   UseStorage,
   UseStorageHelper,
 } from '@smart-storage/hooks';
-import { restorePrefixedKey } from '@smart-storage/shared';
-import { CreateStorage, StorageCheckers, StorageReactions, StorageRefs, StorageResetters } from './types';
+import { createProxy, restorePrefixedKey, Runnable, Supplier, StorageModuleSchema } from '@smart-storage/shared';
+import { CreateStorage, StorageCheckers, StorageRefs, StorageResetters } from './types';
 
-function createStorage<T extends object>(
+function createStorage<T extends StorageModuleSchema>(
   useStorage: UseStorage<T>,
   useStorageHelper: UseStorageHelper,
   { initial }: CreateStorageOptions<T>
@@ -22,7 +22,7 @@ function createStorage<T extends object>(
   const itemRefDict = {} as Record<keyof T, Ref<UnwrapRef<T[keyof T]>>>;
   const properties: (keyof T)[] = [];
 
-  function useItemRef(item: StorageItem<T[keyof T]>, property: keyof T) {
+  function useItemRef(item: StorageItem<T[keyof T]>, property: keyof T): Ref<UnwrapRef<T[keyof T]>> {
     if (properties.indexOf(property) > -1) {
       return itemRefDict[property];
     }
@@ -35,7 +35,11 @@ function createStorage<T extends object>(
 
   return {
     useStorage: () => {
-      const resetter = (property: keyof T, itemRef: Ref<UnwrapRef<T[keyof T]>>, item: StorageItem<T[keyof T]>) => {
+      const resetter = (
+        property: keyof T,
+        itemRef: Ref<UnwrapRef<T[keyof T]>>,
+        item: StorageItem<T[keyof T]>
+      ): void => {
         if (initial && Object.prototype.hasOwnProperty.call(initial, property)) {
           const defVal = initial[property];
           itemRef.value = (defVal instanceof Object ? cloneDeep(defVal) : defVal) as UnwrapRef<T[keyof T]>;
@@ -46,32 +50,40 @@ function createStorage<T extends object>(
         item.remove();
       };
 
-      const refs = new Proxy({} as StorageRefs<T>, {
-        get: (_, p) => {
-          const property = p as keyof T;
-          const item = storage[property];
-          return useItemRef(item, property);
-        },
-      });
+      const refs = createProxy<object, StorageRefs<T>>(
+        {},
+        {
+          get: (_, property: string): Ref<UnwrapRef<T[keyof T]>> => {
+            const item = storage[property];
+            return useItemRef(item, property);
+          },
+        }
+      );
 
-      const resetters = new Proxy({} as StorageResetters<T>, {
-        get: (_, p: string) => {
-          const property = restorePrefixedKey(p, 'reset') as keyof T;
-          const item = storage[property];
-          const itemRef = useItemRef(item, property);
-          return () => resetter(property, itemRef, item);
-        },
-      });
+      const resetters = createProxy<object, StorageResetters<T>>(
+        {},
+        {
+          get: (_, p: string): Runnable => {
+            const property = restorePrefixedKey(p, 'reset') as keyof T;
+            const item = storage[property];
+            const itemRef = useItemRef(item, property);
+            return () => resetter(property, itemRef, item);
+          },
+        }
+      );
 
-      const checkers = new Proxy({} as StorageCheckers<T>, {
-        get: (_, p: string) => {
-          const property = restorePrefixedKey(p, 'contains') as keyof T;
-          const item = storage[property];
-          return () => item.exist();
-        },
-      });
+      const checkers = createProxy<object, StorageCheckers<T>>(
+        {},
+        {
+          get: (_, p: string): Supplier<boolean> => {
+            const property = restorePrefixedKey(p, 'contains') as keyof T;
+            const item = storage[property];
+            return () => item.exist();
+          },
+        }
+      );
 
-      return { refs, resetters, checkers } as StorageReactions<T>;
+      return { refs, resetters, checkers };
     },
     useStorageHelper: () => ({
       size: () => storageHelperRaw.size(),
@@ -92,12 +104,14 @@ function createStorage<T extends object>(
   };
 }
 
-export function createLocalStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T> {
+export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createLocalStorageRaw<T>(options);
   return createStorage(useStorage, useStorageHelper, options);
 }
 
-export function createSessionStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T> {
+export function createSessionStorage<T extends StorageModuleSchema>(
+  options: CreateStorageOptions<T>
+): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createSessionStorageRaw<T>(options);
   return createStorage(useStorage, useStorageHelper, options);
 }
