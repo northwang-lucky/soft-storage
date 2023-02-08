@@ -1,14 +1,15 @@
-a code {
-  text-decoration: underline;
+html:not(.dark) .theme-default-content.content__default a, 
+html:not(.dark) .theme-default-content.content__default a code {
+  color: var(--vp-c-active-link) !important;
 }
 
-html:not(.dark) .theme-default-content.content__default a.link-hover-effect {
-  text-decoration: none;
-  color: var(--vp-c-active-link);
-  max-width: 100%;
-  position: relative;
-  display: inline-block;
-  vertical-align: bottom
+html:not(.dark) .theme-default-content.content__default a span,
+html:not(.dark) .theme-default-content.content__default a::after {
+  display: none !important;
+}
+
+html:not(.dark) .theme-default-content.content__default a:hover {
+  text-decoration: underline !important;
 }
 
 #hero p.tagline {

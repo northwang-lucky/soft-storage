@@ -31,4 +31,4 @@ Smart Storage 将读取项目中创建的存储对象，并使用 JSON 将它们
 
 ## 演示项目
 
-这里有两个演示项目( [Vue 3 演示](https://northwang-lucky.github.io/smart-storage/vue-demo) | [React 演示](https://northwang-lucky.github.io/smart-storage/react-demo)) 展示了 Smart Storage 的基本用法，你可以去看看！
+这里有两个演示项目([Vue 3 演示](https://northwang-lucky.github.io/smart-storage/vue-demo) | [React 演示](https://northwang-lucky.github.io/smart-storage/react-demo)) 展示了 Smart Storage 的基本用法，你可以去看看！
