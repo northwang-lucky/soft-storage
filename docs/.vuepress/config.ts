@@ -9,11 +9,7 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   base: '/smart-storage/docs/',
   title: 'Smart Storage',
   description: 'Smarter storage management',
-  plugins: ['@vuepress/plugin-back-to-top'],
-  head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['link', { rel: 'stylesheet', href: '/global.css' }],
-  ],
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   locales: {
     '/': {
       lang: 'en-US',
@@ -26,8 +22,12 @@ export default defineConfig4CustomTheme<ThemeConfig>({
       description: '更“聪明”的WebStorage管理',
     },
   },
+  markdown: {
+    extractHeaders: ['h2'],
+  },
   theme: 'vt',
   themeConfig: {
+    logo: '/logo.png',
     docsDir: 'docs',
     repo: 'northwang-lucky/smart-storage',
     docsBranch: 'main',
