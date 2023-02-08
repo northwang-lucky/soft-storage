@@ -16,8 +16,10 @@
     "build-only": "pnpm -F \"@smart-storage/*\" build-only",
     "build:pages": "pnpm build && pnpm docs:build && node ./scripts/build-pages.js",
     "format": "pnpm -F \"@smart-storage/*\" format",
-    "eslint": "eslint --ext .js,.cjs,.mjs,.ts,.cts,.mts",
+    "eslint": "eslint . --ext .js,.cjs,.mjs,.ts,.cts,.mts",
     "lint-staged": "lint-staged",
+    "lint-staged:format": "prettier -w",
+    "lint-staged:eslint": "eslint",
     "commitlint": "commitlint --edit ${1}",
     "clean-all": "pnpx rimraf \"./node_modules\" --impl=native && pnpm -F \"*\" clean",
     "force-update": "pnpx rimraf ./pnpm-lock.yaml && pnpm install && pnpm build && pnpm clean-all && pnpx rimraf ./pnpm-lock.yaml && pnpm install"
