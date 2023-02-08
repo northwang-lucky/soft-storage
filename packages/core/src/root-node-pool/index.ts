@@ -1,18 +1,19 @@
+import { StorageModuleSchema } from '@smart-storage/shared';
 import { StorageType } from '../root-node-helper/types';
 import { IStorageModule } from '../root-node/types';
 
 class StorageModulePool {
-  private storageModulesLocal: IStorageModule<object>[];
+  private storageModulesLocal: IStorageModule<StorageModuleSchema>[];
 
-  private storageModulesSession: IStorageModule<object>[];
+  private storageModulesSession: IStorageModule<StorageModuleSchema>[];
 
   constructor() {
     this.storageModulesLocal = [];
     this.storageModulesSession = [];
   }
 
-  public addStorageModule(storageModule: IStorageModule<object>) {
-    const storageModules = this.getStorageModules(storageModule);
+  public addStorageModule(storageModule: IStorageModule<StorageModuleSchema>): void {
+    const storageModules = this.getStorageModules(storageModule.getHelper().getStorageType());
     const argStorageModuleKey = storageModule.getHelper().getStorageKey();
     const exist = storageModules.some(node => node.getHelper().getStorageKey() === argStorageModuleKey);
     if (exist) {
@@ -21,8 +22,8 @@ class StorageModulePool {
     storageModules.push(storageModule);
   }
 
-  public removeStorageModule(storageModule: IStorageModule<object>) {
-    const storageModules = this.getStorageModules(storageModule);
+  public removeStorageModule(storageModule: IStorageModule<StorageModuleSchema>): void {
+    const storageModules = this.getStorageModules(storageModule.getHelper().getStorageType());
     const storageModuleKey = storageModule.getHelper().getStorageKey();
     for (let i = 0; i < storageModules.length; ++i) {
       if (storageModules[i].getHelper().getStorageKey() === storageModuleKey) {
@@ -32,15 +33,15 @@ class StorageModulePool {
     }
   }
 
-  public contains(storageModule: IStorageModule<object>): boolean {
-    const storageModules = this.getStorageModules(storageModule);
+  public contains(storageModule: IStorageModule<StorageModuleSchema>): boolean {
+    const storageModules = this.getStorageModules(storageModule.getHelper().getStorageType());
     const storageModuleKey = storageModule.getHelper().getStorageKey();
     return storageModules.some(node => node.getHelper().getStorageKey() === storageModuleKey);
   }
 
-  private getStorageModules(storageModule: IStorageModule<object>) {
-    let storageModules: IStorageModule<object>[];
-    if (storageModule.getHelper().getStorageType() === StorageType.LOCAL) {
+  private getStorageModules(storageType: StorageType): IStorageModule<StorageModuleSchema>[] {
+    let storageModules: IStorageModule<StorageModuleSchema>[];
+    if (storageType === StorageType.LOCAL) {
       storageModules = this.storageModulesLocal;
     } else {
       storageModules = this.storageModulesSession;

@@ -1,12 +1,12 @@
 import { StorageModule, StorageType } from '../src';
 import { storageModulePool } from '../src/root-node-pool';
 
-interface TestStorage {
+type TestStorage = {
   num: number;
   str: string;
-}
+};
 
-function testStorageModule(storageType: StorageType) {
+function testStorageModule(storageType: StorageType): void {
   const storageModule = new StorageModule<TestStorage>('storageModuleTest', storageType);
 
   storageModule.setItem('num', 1);

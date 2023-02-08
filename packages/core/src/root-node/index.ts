@@ -1,10 +1,11 @@
+import { StorageModuleSchema } from '@smart-storage/shared';
 import { IStorageModule } from './types';
-import { StorageType } from '../root-node-helper/types';
+import { IStorageModuleHelper, StorageType } from '../root-node-helper/types';
 import { StorageModuleHelper } from '../root-node-helper';
 import { storageModulePool } from '../root-node-pool';
 
-export class StorageModule<T extends object> implements IStorageModule<T> {
-  private helper: StorageModuleHelper<T>;
+export class StorageModule<T extends StorageModuleSchema> implements IStorageModule<T> {
+  private helper: IStorageModuleHelper<T>;
 
   public constructor(key: string, storageType: StorageType, outOfPool?: boolean) {
     this.helper = new StorageModuleHelper(key, storageType);
@@ -13,7 +14,7 @@ export class StorageModule<T extends object> implements IStorageModule<T> {
     }
   }
 
-  public getItem<K extends keyof T>(key: K) {
+  public getItem<K extends keyof T>(key: K): T[K] | undefined {
     const storageModule = this.helper.getModule();
     return Object.prototype.hasOwnProperty.call(storageModule, key) ? storageModule[key] : undefined;
   }
@@ -48,7 +49,7 @@ export class StorageModule<T extends object> implements IStorageModule<T> {
     return Object.keys(this.helper.getModule() as object).length;
   }
 
-  public getHelper(): StorageModuleHelper<T> {
+  public getHelper(): IStorageModuleHelper<T> {
     return this.helper;
   }
 }

@@ -1,7 +1,8 @@
-import { StorageType } from './types';
+import { StorageModuleSchema } from '@smart-storage/shared';
+import { IStorageModuleHelper, StorageType } from './types';
 import { storageGuard } from '../storage-guard';
 
-export class StorageModuleHelper<T> {
+export class StorageModuleHelper<T extends StorageModuleSchema> implements IStorageModuleHelper<T> {
   private storage: Storage;
 
   private storageKey: string;

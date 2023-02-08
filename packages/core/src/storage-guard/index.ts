@@ -1,3 +1,4 @@
+import { BiFunction, createProxy } from '@smart-storage/shared';
 import { StorageType } from '../root-node-helper/types';
 
 class StorageGuard {
@@ -16,15 +17,15 @@ class StorageGuard {
     this.originSessionStorage = sessionStorage;
   }
 
-  public getOriginLocalStorage() {
+  public getOriginLocalStorage(): Storage {
     return this.originLocalStorage;
   }
 
-  public getOriginSessionStorage() {
+  public getOriginSessionStorage(): Storage {
     return this.originSessionStorage;
   }
 
-  public addKey(storageType: StorageType, storageKey: string) {
+  public addKey(storageType: StorageType, storageKey: string): void {
     const protectedKeys = this.getProtectedKeys(storageType);
     const index = protectedKeys.indexOf(storageKey);
     if (index < 0) {
@@ -32,7 +33,7 @@ class StorageGuard {
     }
   }
 
-  public removeKey(storageType: StorageType, storageKey: string) {
+  public removeKey(storageType: StorageType, storageKey: string): void {
     const protectedKeys = this.getProtectedKeys(storageType);
     const index = protectedKeys.indexOf(storageKey);
     if (index > -1) {
@@ -40,7 +41,7 @@ class StorageGuard {
     }
   }
 
-  public disableDirectCalls(storageType: StorageType, storageKey: string) {
+  public disableDirectCalls(storageType: StorageType, storageKey: string): void {
     const protectedKeys = this.getProtectedKeys(storageType);
     const preLen = protectedKeys.length;
     this.addKey(storageType, storageKey);
@@ -50,7 +51,7 @@ class StorageGuard {
 
     const originStorage = this.getOriginStorage(storageType);
 
-    const setItem = (key: string, value: string) => {
+    const setItem = (key: string, value: string): void => {
       if (protectedKeys.indexOf(key) > -1) {
         const message = `Direct calls for setItem to "${key}" are disabled! Do not use the 'protect' property if this is not your preference.`;
         throw new Error(message);
@@ -58,7 +59,7 @@ class StorageGuard {
       originStorage.setItem(key, value);
     };
 
-    const removeItem = (key: string) => {
+    const removeItem = (key: string): void => {
       if (protectedKeys.indexOf(key) > -1) {
         const message = `Direct calls for removeItem to "${key}" are disabled! Do not use the 'protect' property if this is not your preference.`;
         throw new Error(message);
@@ -66,7 +67,7 @@ class StorageGuard {
       originStorage.removeItem(key);
     };
 
-    const clear = () => {
+    const clear = (): void => {
       const protectValues = protectedKeys.map(key => originStorage.getItem(key));
       originStorage.clear();
       protectedKeys.forEach((key, index) => {
@@ -77,8 +78,8 @@ class StorageGuard {
       });
     };
 
-    const instance = new Proxy(originStorage, {
-      get(_, p) {
+    const instance = createProxy(originStorage, {
+      get(_, p): BiFunction<any[], any> | number {
         const property = p as keyof Storage;
         if (property === 'setItem') {
           return setItem;
@@ -98,7 +99,7 @@ class StorageGuard {
     Object.defineProperty(window, `${storageType}Storage`, { value: instance });
   }
 
-  public enableDirectCalls(storageType: StorageType, storageKey: string) {
+  public enableDirectCalls(storageType: StorageType, storageKey: string): void {
     this.removeKey(storageType, storageKey);
     const protectedKeys = this.getProtectedKeys(storageType);
     if (protectedKeys.length) {
@@ -109,11 +110,11 @@ class StorageGuard {
     Object.defineProperty(window, `${storageType}Storage`, { value: originStorage });
   }
 
-  private getProtectedKeys(storageType: StorageType) {
+  private getProtectedKeys(storageType: StorageType): string[] {
     return storageType === StorageType.LOCAL ? this.localStorageProtectedKeys : this.sessionStorageProtectedKeys;
   }
 
-  private getOriginStorage(storageType: StorageType) {
+  private getOriginStorage(storageType: StorageType): Storage {
     return storageType === StorageType.LOCAL ? this.originLocalStorage : this.originSessionStorage;
   }
 }

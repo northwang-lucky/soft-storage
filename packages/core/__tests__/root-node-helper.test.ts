@@ -1,9 +1,9 @@
 import { StorageType } from '../src';
 import { StorageModuleHelper } from '../src/root-node-helper';
 
-interface TestStorage {
+type TestStorage = {
   key: string;
-}
+};
 
 test('StorageModuleHelper', () => {
   const origin = { key: 'test-value' };
@@ -25,17 +25,17 @@ test('StorageModuleHelper', () => {
   expect(helper.getExistence()).toBe(false);
 });
 
-interface FirstModule {
+type FirstModule = {
   keep: number;
   first?: string;
-}
+};
 
-interface SecondModule {
+type SecondModule = {
   keep: number;
   second?: string;
-}
+};
 
-function disableDirectCalls(storageType: StorageType) {
+function disableDirectCalls(storageType: StorageType): void {
   const firstKey = 'disableDirectCallsFirstTest';
   const firstHelper = new StorageModuleHelper<FirstModule>(firstKey, storageType);
   firstHelper.setModule({ keep: 1, first: '1' });
