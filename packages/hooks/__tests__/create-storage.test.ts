@@ -1,13 +1,13 @@
 import { createLocalStorage, createSessionStorage } from '../src';
 import { UseStorage, UseStorageHelper } from '../src/create-storage/types';
 
-interface TestStorage {
+type TestStorage = {
   str?: string;
   num?: number;
   bool: boolean;
-}
+};
 
-function useTestCase(useStorage: UseStorage<TestStorage>, useStorageHelper: UseStorageHelper) {
+function useTestCase(useStorage: UseStorage<TestStorage>, useStorageHelper: UseStorageHelper): void {
   const { str, num, bool } = useStorage();
   const storageHelper = useStorageHelper();
 
@@ -22,15 +22,36 @@ function useTestCase(useStorage: UseStorage<TestStorage>, useStorageHelper: UseS
   expect(num.get()).toBe(1);
   expect(storageHelper.size()).toBe(3);
 
-  expect(bool.get()).toBe(true);
-  bool.remove();
+  num.remove();
+  expect(num.get()).toBe(undefined);
   expect(storageHelper.size()).toBe(2);
 
-  storageHelper.clear();
-  expect(storageHelper.size()).toBe(0);
+  try {
+    expect(bool.get()).toBe(true);
+    bool.remove();
+  } catch (err: any) {
+    expect(err.message).toBe('You cannot remove a non-nullable key!');
+  } finally {
+    expect(storageHelper.size()).toBe(2);
+  }
+
+  str.reset();
+  expect(str.get()).toBe(undefined);
+  expect(storageHelper.size()).toBe(1);
+
+  num.set(100);
+  expect(num.get()).toBe(100);
+  bool.set(false);
+  expect(bool.get()).toBe(false);
+  expect(storageHelper.size()).toBe(2);
 
   storageHelper.initialize();
   expect(storageHelper.size()).toBe(1);
+  expect(bool.get()).toBe(true);
+
+  bool.set(false);
+  expect(bool.get()).toBe(false);
+  bool.reset();
   expect(bool.get()).toBe(true);
 }
 
@@ -57,7 +78,7 @@ test('storageProtect', () => {
     initial: { bool: true },
   });
 
-  (() => {
+  ((): void => {
     const { bool } = useStorage();
     try {
       window.sessionStorage.setItem('storageProtectTest', '123');
@@ -92,7 +113,7 @@ test('storageVersion', () => {
     initial: { newKey: 1 },
   });
 
-  (() => {
+  ((): void => {
     const storageHelper = useStorageHelper();
     expect(storageHelper.contains('newKey')).toBe(true);
     expect(storageHelper.contains('key')).toBe(false);
@@ -113,7 +134,7 @@ test('storagePreVersion', () => {
     initial: { newKey: 1 },
   });
 
-  (() => {
+  ((): void => {
     const storageHelper = useStorageHelper();
     const storageNewHelper = useNewStorageHelper();
     expect(storageHelper.contains('key')).toBe(false);

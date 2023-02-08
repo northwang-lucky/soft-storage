@@ -1,8 +1,9 @@
 import { StorageType } from '@smart-storage/core';
+import { createProxy, StorageModuleSchema } from '@smart-storage/shared';
 import { processVersion } from './version';
-import { CreateStorageBaseOptions, CreateStorageOptions, StorageInstance, CreateStorage } from './types';
+import { CreateStorageBaseOptions, CreateStorageOptions, StorageInstance, CreateStorage, StorageItem } from './types';
 
-function createStorage<T extends object>({
+function createStorage<T extends StorageModuleSchema>({
   type,
   storageModuleKey,
   protect = false,
@@ -27,33 +28,42 @@ function createStorage<T extends object>({
 
   return {
     useStorage: () => {
-      return new Proxy({} as StorageInstance<T>, {
-        get: (_, p) => {
-          const property = p as keyof T;
-          return {
-            get: () => storageModule.getItem(property),
-            set: (value: T[keyof T]) => storageModule.setItem(property, value),
-            remove: () => storageModule.removeItem(property),
-            exist: () => storageModule.contains(property as string),
-          };
+      const proxyGetter = (_: object, property: string): StorageItem<T[keyof T]> => ({
+        get: () => storageModule.getItem(property) as T[keyof T],
+        set: (value: T[keyof T]) => storageModule.setItem(property, value),
+        remove: (): void => {
+          if (Object.prototype.hasOwnProperty.call(initial, property)) {
+            throw new Error('You cannot remove a non-nullable key!');
+          }
+          storageModule.removeItem(property);
         },
+        reset: (): void => {
+          if (Object.prototype.hasOwnProperty.call(initial, property)) {
+            storageModule.setItem(property, initial[property] as T[keyof T]);
+            return;
+          }
+          storageModule.setItem(property, undefined as T[keyof T]);
+        },
+        exist: () => storageModule.contains(property),
       });
+      return createProxy<object, StorageInstance<T>>({}, { get: proxyGetter });
     },
     useStorageHelper: () => ({
       // The function storageModule.size contains this pointer inside
       //  please do not use the function directly for assignment
       size: () => storageModule.size(),
-      clear: () => storageModule.clear(),
       contains: (key: string) => storageModule.contains(key),
       initialize: () => helper.setModule(initial),
     }),
   };
 }
 
-export function createLocalStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T> {
+export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): CreateStorage<T> {
   return createStorage<T>({ type: StorageType.LOCAL, ...options });
 }
 
-export function createSessionStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T> {
+export function createSessionStorage<T extends StorageModuleSchema>(
+  options: CreateStorageOptions<T>
+): CreateStorage<T> {
   return createStorage<T>({ type: StorageType.SESSION, ...options });
 }

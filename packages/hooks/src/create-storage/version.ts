@@ -1,11 +1,12 @@
-import { StorageModule, StorageType } from '@smart-storage/core';
+import { IStorageModule, StorageModule, StorageType } from '@smart-storage/core';
+import { StorageModuleSchema } from '@smart-storage/shared';
 
-export function processVersion<T extends object>(
+export function processVersion<T extends StorageModuleSchema>(
   storageModuleKey: string,
   storageType: StorageType,
   version: number,
   preVersion = version - 1
-) {
+): IStorageModule<T> {
   if (version < 1) {
     throw new Error("The minimum value of property 'version' is 1!");
   }
