@@ -11,8 +11,7 @@ import { CreateStorage, Setter, StateKey, StorageStates, UseState } from './type
 
 function createStorage<T extends StorageModuleSchema>(
   useStorage: UseStorage<T>,
-  useStorageHelper: UseStorageHelper,
-  { initial }: CreateStorageOptions<T>
+  useStorageHelper: UseStorageHelper
 ): CreateStorage<T> {
   const storage = useStorage();
   const storageHelperRaw = useStorageHelper();
@@ -47,13 +46,8 @@ function createStorage<T extends StorageModuleSchema>(
         };
 
         const resetter: Resetter = () => {
-          if (initial && Object.prototype.hasOwnProperty.call(initial, property)) {
-            state[1](initial[property]);
-            item.set(initial[property]);
-          } else {
-            state[1](undefined as T[keyof T]);
-            item.remove();
-          }
+          item.reset();
+          state[1](item.get());
         };
 
         const existenceChecker: Checker = () => {
@@ -79,11 +73,8 @@ function createStorage<T extends StorageModuleSchema>(
         storageHelperRaw.initialize();
         for (let i = 0; i < properties.length; ++i) {
           const key = properties[i];
-          if (initial && Object.prototype.hasOwnProperty.call(initial, key)) {
-            itemStateDict[key][1](() => initial[key]);
-          } else {
-            itemStateDict[key][1](() => undefined as T[keyof T]);
-          }
+          const item = storage[properties[i]];
+          itemStateDict[key][1](() => item.get());
         }
       },
     }),
@@ -92,12 +83,12 @@ function createStorage<T extends StorageModuleSchema>(
 
 export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createLocalStorageRaw<T>(options);
-  return createStorage(useStorage, useStorageHelper, options);
+  return createStorage(useStorage, useStorageHelper);
 }
 
 export function createSessionStorage<T extends StorageModuleSchema>(
   options: CreateStorageOptions<T>
 ): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createSessionStorageRaw<T>(options);
-  return createStorage(useStorage, useStorageHelper, options);
+  return createStorage(useStorage, useStorageHelper);
 }
