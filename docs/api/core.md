@@ -50,7 +50,7 @@ Get value of an storage item from storage module.
 ### Type
 
 ```ts
-StorageModule<T extends object>.getItem<K extends keyof T>(key: K): T[K] | undefined;
+StorageModule<T>.getItem<K extends keyof T>(key: K): T[K] | undefined;
 ```
 
 ### Parameters
@@ -76,7 +76,7 @@ Set value for an storage item in storage module.
 ### Type
 
 ```ts
-StorageModule<T extends object>.setItem<K extends keyof T>(key: K, value: T[K]): void;
+StorageModule<T>.setItem<K extends keyof T>(key: K, value: T[K]): void;
 ```
 
 ### Parameters
@@ -102,7 +102,7 @@ Delete key and its value from storage module.
 ### Type
 
 ```ts
-StorageModule<T extends object>.removeItem<K extends keyof T>(key: K): void;
+StorageModule<T>.removeItem<K extends keyof T>(key: K): void;
 ```
 
 ### Parameters
@@ -124,7 +124,7 @@ Delete all keys and their values from storage module.
 ### Type
 
 ```ts
-StorageModule<T extends object>.clear(): void;
+StorageModule<T>.clear(): void;
 ```
 
 ### Example
@@ -140,7 +140,7 @@ Get whether the key exists in the storage module.
 ### Type
 
 ```ts
-StorageModule<T extends object>.contains(key: string): boolean
+StorageModule<T>.contains(key: string): boolean
 ```
 
 ### Parameters
@@ -166,7 +166,7 @@ Get the number of keys in the storage module.
 ### Type
 
 ```ts
-StorageModule<T extends object>.size(): number;
+StorageModule<T>.size(): number;
 ```
 
 ### Return Value
@@ -181,17 +181,17 @@ const size = storageModule.size();
 
 ## storageModule.getHelper()
 
-Get `StorageModuleHelper` instance for storage module.
+Get `IStorageModuleHelper` instance for storage module.
 
 ### Type
 
 ```ts
-StorageModule<T extends object>.getHelper(): IStorageModuleHelper<T>;
+StorageModule<T>.getHelper(): IStorageModuleHelper<T>;
 ```
 
 ### Return Value
 
-A `StorageModuleHelper` instance for storage module:
+A `IStorageModuleHelper` instance for storage module:
 
 ```ts
 interface IStorageModuleHelper<T> {
@@ -210,4 +210,159 @@ interface IStorageModuleHelper<T> {
 
 ```ts
 const helper = storageModule.getHelper();
+```
+
+## helper.getModule()
+
+Get the value of the storage module as a JSON object.
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.getModule(): T;
+```
+
+### Return Value
+
+All key-value pairs in storage module.
+
+### Example
+
+```ts
+const valueDict = helper.getModule();
+```
+
+## helper.setModule()
+
+Set a JSON object as the value of the storage module. <Badge text="Overlay Update" type="warning" />
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.setModule(root: T): void;
+```
+
+### Parameters
+
+- `root: T`
+
+  A JSON object, which will be the value of storage module.
+
+### Example
+
+```ts
+helper.setModule({ token: 'xxx', hasSigned: true });
+```
+
+## helper.clearModule()
+
+Clear storage module.
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.clearModule(): void;
+```
+
+### Example
+
+```ts
+helper.clearModule();
+```
+
+## helper.getStorageKey()
+
+Get the key of storage module.
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.getStorageKey(): string;
+```
+
+### Return Value
+
+Storage module key.
+
+### Example
+
+```ts
+const storageModuleKey = helper.getStorageKey();
+```
+
+## helper.getStorageType()
+
+Get the type of storage module.
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.getStorageType(): StorageType;
+```
+
+### Return Value
+
+```ts
+enum StorageType {
+  LOCAL = 'local',
+  SESSION = 'session',
+}
+```
+
+### Example
+
+```ts
+const storageType = helper.getStorageType();
+```
+
+## helper.getExistence()
+
+Determine whether the storage module exists.
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.getExistence(): boolean;
+```
+
+### Return Value
+
+Whether the storage module exists.
+
+### Example
+
+```ts
+const exist = helper.getExistence();
+```
+
+## helper.protect()
+
+Enable [storage module protect](/guide/advanced/module-protect.html).
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.protect(): void;
+```
+
+### Example
+
+```ts
+helper.protect();
+```
+
+## helper.cancelProtect()
+
+Disable [storage module protect](/guide/advanced/module-protect.html).
+
+### Type
+
+```ts
+IStorageModuleHelper<T>.cancelProtect(): void;
+```
+
+### Example
+
+```ts
+helper.cancelProtect();
 ```
