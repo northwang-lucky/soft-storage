@@ -13,7 +13,7 @@ export const sidebar_en: SidebarConfig4Multiple = {
     {
       title: 'Other',
       collapsable: false,
-      children: prefixed('/guide/', ['other/qa']),
+      children: prefixed('/guide/', ['other/qa', 'other/how-to-contribute']),
     },
   ],
   '/api/': [
