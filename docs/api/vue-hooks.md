@@ -11,7 +11,7 @@ Create a storage module by `localStorage`.
 ### Type
 
 ```ts
-function createLocalStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T>;
+function createLocalStorage<T>(options: CreateStorageOptions<T>): CreateStorage<T>;
 ```
 
 ### Parameters
@@ -66,7 +66,7 @@ Create a storage module by `sessionStorage`.
 ### Type
 
 ```ts
-function createSessionStorage<T extends object>(options: CreateStorageOptions<T>): CreateStorage<T>;
+function createSessionStorage<T>(options: CreateStorageOptions<T>): CreateStorage<T>;
 ```
 
 ### Parameters
