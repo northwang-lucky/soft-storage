@@ -20,7 +20,7 @@ function createStorage<T extends StorageModuleSchema>(
   const itemRefDict = {} as Record<keyof T, Ref<UnwrapRef<T[keyof T]>>>;
   const properties: (keyof T)[] = [];
 
-  function useItemRef(item: StorageItem<T[keyof T]>, property: keyof T): Ref<UnwrapRef<T[keyof T]>> {
+  function useItemRef(item: StorageItem<T, keyof T>, property: keyof T): Ref<UnwrapRef<T[keyof T]>> {
     if (properties.indexOf(property) > -1) {
       return itemRefDict[property];
     }
