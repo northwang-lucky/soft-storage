@@ -6,7 +6,7 @@ Smart Storage 提供三种方式来管理存储：
 - 结合 **React**中的 `useState` API
 - 在任何支持 `cjs` 模块或 `esm` 模块的项目中独立使用
 
-## Vue 3
+## Vue 3 <Badge text="vue >= 3.1.0" />
 
 ### 安装
 
@@ -73,7 +73,7 @@ const onSignOut = () => {
 </template>
 ```
 
-## React
+## React <Badge text="vue >= 3.1.0" />
 
 ### 安装
 
