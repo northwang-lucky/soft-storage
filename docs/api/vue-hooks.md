@@ -24,7 +24,7 @@ function createLocalStorage<T extends object>(options: CreateStorageOptions<T>):
     storageModuleKey: string;
     /* Initial value (non-nullable properties must be initialized, 
     and optional properties cannot be initialized) */
-    initial: T;
+    initial: PickNonNullable<T>;
     /* Whether to enable module protection */
     protect?: boolean;
     /* Version number of the storage module */

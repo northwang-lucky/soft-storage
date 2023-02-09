@@ -6,7 +6,8 @@ Smart Storage provides a hook function called `useStorageHelper` to use the othe
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks'; // or @smart-storage/react-hooks
+import { createLocalStorage } from '@smart-storage/vue-hooks'; 
+// import { createLocalStorage } from '@smart-storage/react-hooks';
 
 type UserInfo = {
   token?: string;
@@ -36,10 +37,6 @@ storageHelper.contains('nonexistent');
 storageHelper.initialize();
 </script>
 ```
-
-::: warning
-The `storageHelper.clear()` is not recommended in the framework because in the framework, properties in the storage module are associated with variables in the component one by one. If `storageHelper.clear()` is used to clear the storage module, variables in the component cannot sense that the storage module is cleared. As a result, non-nullable properties in the storage module and corresponding variables in the component are out of sync, resulting in unexpected errors.
-:::
 
 ## For Standalone Use
 
@@ -72,6 +69,10 @@ storageHelper.contains('nonexistent');
 // Restore the storage module to its initial state
 // (that is, the value of the initial attribute when the storage module was created)
 storageHelper.initialize();
-// Clear storage module
-storageHelper.clear();
 ```
+
+## How about `clear()` API?
+
+::: tip
+`storageHelper.clear()` is an unsupported API. Click [Q&A](./../other/qa.html#why-isn-t-storagehelper-clear-provided) for more details.
+:::

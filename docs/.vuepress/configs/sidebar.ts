@@ -10,6 +10,11 @@ export const sidebar_en: SidebarConfig4Multiple = {
       collapsable: false,
       children: prefixed('/guide/', ['advanced/storage-helper', 'advanced/module-protect', 'advanced/version-control']),
     },
+    {
+      title: 'Other',
+      collapsable: false,
+      children: prefixed('/guide/', ['other/qa']),
+    },
   ],
   '/api/': [
     {

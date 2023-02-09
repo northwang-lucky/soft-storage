@@ -1,7 +1,7 @@
 import { NavItem } from 'vuepress/config';
 
 export const nav_en: NavItem[] = [
-  { text: 'Guide', link: '/guide/introduction.html' },
+  { text: 'Guide', link: '/guide/' },
   { text: 'API', link: '/api/' },
   {
     text: 'Demos',
@@ -13,7 +13,7 @@ export const nav_en: NavItem[] = [
 ];
 
 export const nav_zh: NavItem[] = [
-  { text: '指南', link: '/zh/guide/introduction.html' },
+  { text: '指南', link: '/zh/guide/' },
   { text: 'API', link: '/zh/api/' },
   {
     text: '演示',

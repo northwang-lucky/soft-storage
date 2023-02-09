@@ -6,8 +6,10 @@ Smart Storage provides three ways to manage storage:
 - Combined with `useState` API in **React**
 - Standalone use in any project that supports **cjs modules** or **esm modules**
 
+In addition, if you only want to use a shallow modular wrapper for the browser's Storage API, you can go straight to the [Raw Usage](#raw-usage) section.
+
 ::: warning
-Attention please! You should never use `interface` to define a type in Smart Storage. Because the key of the type defined by `interface` does not have a `string` type signature. But Smart Storage sets type constraints like `Record<string, unknown>` for the incoming generics. So, use `type` to instead of it.
+Attention please! You should never use `interface` to define a type in Smart Storage, to instead of it, you can use `type`. Click [Q&A](./other/qa.html#why-can-t-i-use-interface-to-define-typescript-types) for more details.
 :::
 
 ## For Vue 3
@@ -197,7 +199,7 @@ function UserInfoFC() {
 export default UserInfoFC;
 ```
 
-## Standalone Use
+## For Standalone Use
 
 ### Install
 
@@ -270,12 +272,18 @@ const { token, hasSigned } = useStorage();
 })();
 
 const onSignOut = () => {
-  token.remove(); // Will delete the key and value from storage module
-  // Or, you can either use "token.reset()", it can set value to initial value
-  hasSigned.set(false);
+  token.reset(); // Set value to initial value, if not, it is set to undefined
+  hasSigned.reset(); 
   console.log(token.get(), token.exist()); // Output: undefined, false
+  console.log(hasSigned.get(), hasSigned.exist()); // Output: false, true
 };
 ```
+
+## How about `remove()` API?
+
+::: tip
+`remove()` is an unsupported API. Click [Q&A](./other/qa.html#why-isn-t-storagehelper-clear-provided) for more details.
+:::
 
 ## Raw Usage
 
