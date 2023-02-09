@@ -8,4 +8,4 @@ export type OptionalKeys<T extends object> = {
   [K in keyof T]-?: IsOptional<T, K>;
 }[keyof T];
 
-export type ExtractNonNullable<T extends object> = Omit<T, OptionalKeys<T>>;
+export type PickNonNullable<T extends object> = Omit<T, OptionalKeys<T>>;

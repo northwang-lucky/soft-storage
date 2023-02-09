@@ -1,5 +1,5 @@
 import { StorageType } from '@smart-storage/core';
-import { ExtractNonNullable, StorageModuleSchema } from '@smart-storage/shared';
+import { PickNonNullable, StorageModuleSchema } from '@smart-storage/shared';
 
 export type StorageItem<T extends StorageModuleSchema, K extends keyof T> = {
   get(): T[K];
@@ -32,7 +32,7 @@ export interface CreateStorageBaseOptions<T extends StorageModuleSchema> {
   protect?: boolean;
   version?: number;
   preVersion?: number;
-  initial: ExtractNonNullable<T> extends T ? ExtractNonNullable<T> : never;
+  initial: PickNonNullable<T> extends T ? PickNonNullable<T> : never;
 }
 
 export type CreateStorageOptions<T extends StorageModuleSchema> = Omit<CreateStorageBaseOptions<T>, 'type'>;
