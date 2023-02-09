@@ -1,16 +1,15 @@
 import { StorageType } from '@smart-storage/core';
 import { ExtractNonNullable, StorageModuleSchema } from '@smart-storage/shared';
 
-export type StorageItem<T> = {
-  get(): T;
-  set(value: T): void;
-  remove(): void;
+export type StorageItem<T extends StorageModuleSchema, K extends keyof T> = {
+  get(): T[K];
+  set(value: T[K]): void;
   reset(): void;
   exist(): boolean;
 };
 
 export type StorageInstance<T extends StorageModuleSchema> = Required<{
-  [K in keyof T]: StorageItem<T[K]>;
+  [K in keyof T]: StorageItem<T, K>;
 }>;
 
 export type StorageHelper = {

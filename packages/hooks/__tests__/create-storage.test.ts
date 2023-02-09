@@ -22,18 +22,9 @@ function useTestCase(useStorage: UseStorage<TestStorage>, useStorageHelper: UseS
   expect(num.get()).toBe(1);
   expect(storageHelper.size()).toBe(3);
 
-  num.remove();
+  num.reset();
   expect(num.get()).toBe(undefined);
   expect(storageHelper.size()).toBe(2);
-
-  try {
-    expect(bool.get()).toBe(true);
-    bool.remove();
-  } catch (err: any) {
-    expect(err.message).toBe('You cannot remove a non-nullable key!');
-  } finally {
-    expect(storageHelper.size()).toBe(2);
-  }
 
   str.reset();
   expect(str.get()).toBe(undefined);

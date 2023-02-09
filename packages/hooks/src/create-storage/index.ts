@@ -28,29 +28,21 @@ function createStorage<T extends StorageModuleSchema>({
 
   return {
     useStorage: () => {
-      const proxyGetter = (_: object, property: string): StorageItem<T[keyof T]> => ({
+      const proxyGetter = (_: object, property: string): StorageItem<T, keyof T> => ({
         get: () => storageModule.getItem(property) as T[keyof T],
         set: (value: T[keyof T]) => storageModule.setItem(property, value),
-        remove: (): void => {
-          if (Object.prototype.hasOwnProperty.call(initial, property)) {
-            throw new Error('You cannot remove a non-nullable key!');
-          }
-          storageModule.removeItem(property);
-        },
-        reset: (): void => {
+        exist: () => storageModule.contains(property),
+        reset: () => {
           if (Object.prototype.hasOwnProperty.call(initial, property)) {
             storageModule.setItem(property, initial[property] as T[keyof T]);
             return;
           }
           storageModule.setItem(property, undefined as T[keyof T]);
         },
-        exist: () => storageModule.contains(property),
       });
       return createProxy<object, StorageInstance<T>>({}, { get: proxyGetter });
     },
     useStorageHelper: () => ({
-      // The function storageModule.size contains this pointer inside
-      //  please do not use the function directly for assignment
       size: () => storageModule.size(),
       contains: (key: string) => storageModule.contains(key),
       initialize: () => helper.setModule(initial),
