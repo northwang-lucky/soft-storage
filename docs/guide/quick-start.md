@@ -9,7 +9,7 @@ Smart Storage provides three ways to manage storage:
 In addition, if you only want to use a shallow modular wrapper for the browser's Storage API, you can go straight to the [Raw Usage](#raw-usage) section.
 
 ::: warning
-Attention please! You should never use `interface` to define a type in Smart Storage, to instead of it, you can use `type`. Click [Q&A](./other/qa.html#about-interface) for more details.
+Attention please! You should never use `interface` to define a type in Smart Storage, to instead of it, you can use `type`. Click [Q&A > About Interface](./other/questions-and-answers.html#about-interface) for more details.
 :::
 
 ## For Vue 3 <Badge text="vue >= 3.1.0" />
@@ -282,7 +282,7 @@ const onSignOut = () => {
 ## How about `remove()` API?
 
 ::: tip
-`remove()` is an unsupported API. Click [Q&A](./other/qa.html#about-remove-and-clear) for more details.
+`remove()` is an unsupported API. Click [Q&A > About Remove and Clear](./other/questions-and-answers.html#about-remove-and-clear) for more details.
 :::
 
 ## Raw Usage

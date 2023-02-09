@@ -74,5 +74,5 @@ storageHelper.initialize();
 ## How about `clear()` API?
 
 ::: tip
-`storageHelper.clear()` is an unsupported API. Click [Q&A](./../other/qa.html#about-remove-and-clear) for more details.
+`storageHelper.clear()` is an unsupported API. Click [Q&A > About Remove and Clear](./../other/questions-and-answers.html#about-remove-and-clear) for more details.
 :::
