@@ -1,5 +1,4 @@
 import { Ref, ref, UnwrapRef, watch } from 'vue';
-import cloneDeep from 'lodash/cloneDeep';
 import {
   createLocalStorage as createLocalStorageRaw,
   createSessionStorage as createSessionStorageRaw,
@@ -13,8 +12,7 @@ import { CreateStorage, StorageCheckers, StorageRefs, StorageResetters } from '.
 
 function createStorage<T extends StorageModuleSchema>(
   useStorage: UseStorage<T>,
-  useStorageHelper: UseStorageHelper,
-  { initial }: CreateStorageOptions<T>
+  useStorageHelper: UseStorageHelper
 ): CreateStorage<T> {
   const storage = useStorage();
   const storageHelperRaw = useStorageHelper();
@@ -35,21 +33,6 @@ function createStorage<T extends StorageModuleSchema>(
 
   return {
     useStorage: () => {
-      const resetter = (
-        property: keyof T,
-        itemRef: Ref<UnwrapRef<T[keyof T]>>,
-        item: StorageItem<T[keyof T]>
-      ): void => {
-        if (initial && Object.prototype.hasOwnProperty.call(initial, property)) {
-          const defVal = initial[property];
-          itemRef.value = (defVal instanceof Object ? cloneDeep(defVal) : defVal) as UnwrapRef<T[keyof T]>;
-          item.set(defVal);
-          return;
-        }
-        itemRef.value = undefined as UnwrapRef<T[keyof T]>;
-        item.remove();
-      };
-
       const refs = createProxy<object, StorageRefs<T>>(
         {},
         {
@@ -67,7 +50,10 @@ function createStorage<T extends StorageModuleSchema>(
             const property = restorePrefixedKey(p, 'reset') as keyof T;
             const item = storage[property];
             const itemRef = useItemRef(item, property);
-            return () => resetter(property, itemRef, item);
+            return () => {
+              item.reset();
+              itemRef.value = item.get() as UnwrapRef<T[keyof T]>;
+            };
           },
         }
       );
@@ -92,12 +78,8 @@ function createStorage<T extends StorageModuleSchema>(
         storageHelperRaw.initialize();
         for (let i = 0; i < properties.length; ++i) {
           const key = properties[i];
-          if (initial && Object.prototype.hasOwnProperty.call(initial, key)) {
-            const defVal = initial[key];
-            itemRefDict[key].value = (defVal instanceof Object ? cloneDeep(defVal) : defVal) as UnwrapRef<T[keyof T]>;
-          } else {
-            itemRefDict[key].value = undefined as UnwrapRef<T[keyof T]>;
-          }
+          const item = storage[key];
+          itemRefDict[key].value = item.get() as UnwrapRef<T[keyof T]>;
         }
       },
     }),
@@ -106,12 +88,12 @@ function createStorage<T extends StorageModuleSchema>(
 
 export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createLocalStorageRaw<T>(options);
-  return createStorage(useStorage, useStorageHelper, options);
+  return createStorage(useStorage, useStorageHelper);
 }
 
 export function createSessionStorage<T extends StorageModuleSchema>(
   options: CreateStorageOptions<T>
 ): CreateStorage<T> {
   const { useStorage, useStorageHelper } = createSessionStorageRaw<T>(options);
-  return createStorage(useStorage, useStorageHelper, options);
+  return createStorage(useStorage, useStorageHelper);
 }
