@@ -317,18 +317,40 @@ pnpm add @smart-storage/core
 
 </CodeSwitcher>
 
-### Usage
+### Create a Storage Module
 
 ```ts
-import { StorageModule, StorageType } from '@smart-storage/core';
-import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
-
+// storage.ts
 type UserInfo = {
   token?: string;
   hasSigned: boolean;
 };
 
 const storageModule = new StorageModule<UserInfo>('user_info', StorageType.SESSION);
+
+const helper = storageModule.getHelper();
+if (!helper.getExistence()) {
+  // Here the initialization is arbitrary, no restrictions
+  helper.setModule({ 
+    token: '',
+    hasSigned: false,
+  });
+}
+
+export { storageModule };
+```
+
+### Use in any script file
+
+```ts
+import { StorageModule, StorageType } from '@smart-storage/core';
+import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
+import { storageModule } from './storage.ts';
+
+type UserInfo = {
+  token?: string;
+  hasSigned: boolean;
+};
 
 (() => {
   getUserInfo().then(res => {

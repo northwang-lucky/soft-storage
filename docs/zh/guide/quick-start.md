@@ -207,18 +207,40 @@ const onSignOut = () => {
 npm install @smart-storage/core --save
 ```
 
-### 使用
+### 创建一个存储模块
 
 ```ts
-import { StorageModule, StorageType } from '@smart-storage/core';
-import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
-
+// storage.ts
 type UserInfo = {
   token?: string;
   hasSigned: boolean;
 };
 
 const storageModule = new StorageModule<UserInfo>('user_info', StorageType.SESSION);
+
+const helper = storageModule.getHelper();
+if (!helper.getExistence()) {
+  // 这里的初始化是随心所欲的，没有限制
+  helper.setModule({ 
+    token: '',
+    hasSigned: false,
+  });
+}
+
+export { storageModule };
+```
+
+### 在脚本中使用
+
+```ts
+import { StorageModule, StorageType } from '@smart-storage/core';
+import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
+import { storageModule } from './storage.ts';
+
+type UserInfo = {
+  token?: string;
+  hasSigned: boolean;
+};
 
 (() => {
   getUserInfo().then(res => {
