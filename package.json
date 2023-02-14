@@ -20,7 +20,7 @@
     "lint-staged": "lint-staged",
     "lint-staged:format": "prettier -w",
     "lint-staged:eslint": "eslint",
-    "commitlint": "commitlint --edit $1",
+    "commitlint": "commitlint --edit",
     "clean-all": "pnpx rimraf \"./node_modules\" --impl=native && pnpm -F \"*\" clean",
     "force-update": "pnpx rimraf ./pnpm-lock.yaml && pnpm install && pnpm build && pnpm clean-all && pnpx rimraf ./pnpm-lock.yaml && pnpm install"
   },
