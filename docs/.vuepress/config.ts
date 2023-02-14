@@ -19,7 +19,7 @@ export default defineConfig4CustomTheme<ThemeConfig>({
     '/zh/': {
       lang: 'zh-CN',
       title: 'Smart Storage',
-      description: '更“聪明”的WebStorage管理',
+      description: '更“聪明”的 Web Storage 管理',
     },
   },
   markdown: {

@@ -18,7 +18,7 @@
 
 ## 工作原理
 
-Smart Storage 将读取项目中创建的存储对象，并使用 JSON 将它们序列化为字符串。然后在内部调用浏览器的 WebStorage API 来创建存储。
+Smart Storage 将读取项目中创建的存储对象，并使用 `JSON` 将它们序列化为字符串。然后在内部调用浏览器的 [Web Storage API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API) 来创建存储。
 
 此外，Smart Storage 会使用 `Proxy` API 创建 Vue 或 React 响应式变量，方便开发者修改存储值。
 
