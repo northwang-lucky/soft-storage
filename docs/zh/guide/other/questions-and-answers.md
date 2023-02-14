@@ -4,11 +4,11 @@
 
 - 为什么我不能使用 `interface` 为 Smart Storage 定义类型？
 
-- 因为 `interface` 定义的键属性没有 `string` 签名。但 Smart Storage 为传入的类型设置了类型约束 `Record<string, unknown>`。故请使用 `type` 取代之。
+- 因为 `interface` 定义的属性没有 `string` 签名，但 Smart Storage 为传入的类型设置了像这样的 `Record<string, unknown>` 类型约束，所以请使用 `type` 代替。
 
 ## 关于 remove() 和 clear() 函数
 
-- 为什么不提供 `remove()` 和 `clear()` 方法？
+- 为什么不提供 `remove()` 和 `clear()` 函数？
 
 - 有两个原因：
 
@@ -18,4 +18,4 @@
 
   - **属性的“不可为空”定义**
 
-    语义上，`remove()` 和 `clear()` 用于删除存储模块中的键值对，包括非空属性。这样的话，这些非空属性违反了它们对“不可为空”的定义。
+    语义上，`remove()` 和 `clear()` 用于删除存储模块中的键值对，包括非空属性。如此，这些非空属性就违反了它们对“不可为空”的定义。

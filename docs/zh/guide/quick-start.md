@@ -9,7 +9,7 @@ Smart Storage 提供三种方式来管理存储：
 此外，如果您只想使用 Web Storage 的浅层模块化封装，您可以直接转到 [直接使用](#直接使用) 部分。
 
 ::: warning
-请注意，永远不要使用`interface`来为 Smart Storage 定义类型。请使用`type`取代之。点击 [常见问题](./other/questions-and-answers.html#) 查看更多。
+请注意，永远不要使用`interface`来为 Smart Storage 定义类型。请使用`type`取代之。点击 [常见问题 > 关于 Interface](./other/questions-and-answers.html#关于-interface) 查看更多。
 :::
 
 ## Vue 3 用户 <Badge text="vue >= 3.1.0" />
@@ -280,7 +280,7 @@ const onSignOut = () => {
 ## 关于 remove() API
 
 ::: tip
-`remove()` 是不受支持的 API。点击 [常见问题 > 关于 Interface](./other/questions-and-answers.html#关于-remove-和-clear-方法) 了解更多。
+`remove()` 是不受支持的 API。点击 [常见问题 > 关于 remove() 和 clear() 函数](./other/questions-and-answers.html#关于-remove-和-clear-方法) 了解更多。
 :::
 
 ## 直接使用
