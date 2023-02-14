@@ -34,5 +34,10 @@ export const sidebar_zh: SidebarConfig4Multiple = {
       collapsable: false,
       children: prefixed('/zh/guide/', ['advanced/storage-helper', 'advanced/module-protect']),
     },
+    {
+      title: '其他',
+      collapsable: false,
+      children: prefixed('/zh/guide/', ['other/questions-and-answers']),
+    },
   ],
 };

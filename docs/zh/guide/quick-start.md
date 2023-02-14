@@ -6,13 +6,43 @@ Smart Storage 提供三种方式来管理存储：
 - 结合 **React**中的 `useState` API
 - 在任何支持 `cjs` 模块或 `esm` 模块的项目中独立使用
 
-## Vue 3 <Badge text="vue >= 3.1.0" />
+此外，如果您只想使用 Web Storage 的浅层模块化封装，您可以直接转到 [直接使用](#直接使用) 部分。
+
+::: warning
+请注意，永远不要使用`interface`来为 Smart Storage 定义类型。请使用`type`取代之。点击 [常见问题](./other/questions-and-answers.html#) 查看更多。
+:::
+
+## Vue 3 用户 <Badge text="vue >= 3.1.0" />
 
 ### 安装
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+::: slot npm
+
 ```sh
-npm install @smart-storage/vue-hooks --save
+npm install @smart-storage/vue-hooks
 ```
+
+:::
+
+::: slot yarn
+
+```sh
+yarn add @smart-storage/vue-hooks
+```
+
+:::
+
+::: slot pnpm
+
+```sh
+pnpm add @smart-storage/vue-hooks
+```
+
+:::
+
+</CodeSwitcher>
 
 ### 创建存储模块
 
@@ -73,13 +103,37 @@ const onSignOut = () => {
 </template>
 ```
 
-## React <Badge text="vue >= 3.1.0" />
+## React 用户 <Badge text="react >= 16.8.0" />
 
 ### 安装
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+::: slot npm
+
 ```sh
-npm install @smart-storage/react-hooks --save
+npm install @smart-storage/react-hooks
 ```
+
+:::
+
+::: slot yarn
+
+```sh
+yarn add @smart-storage/react-hooks
+```
+
+:::
+
+::: slot pnpm
+
+```sh
+pnpm add @smart-storage/react-hooks
+```
+
+:::
+
+</CodeSwitcher>
 
 ### 创建存储模块
 
@@ -147,9 +201,33 @@ export default UserInfoFC;
 
 ### 安装
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+::: slot npm
+
 ```sh
-npm install @smart-storage/hooks --save
+npm install @smart-storage/hooks
 ```
+
+:::
+
+::: slot yarn
+
+```sh
+yarn add @smart-storage/hooks
+```
+
+:::
+
+::: slot pnpm
+
+```sh
+pnpm add @smart-storage/hooks
+```
+
+:::
+
+</CodeSwitcher>
 
 ### 创建存储模块
 
@@ -192,20 +270,50 @@ const { token, hasSigned } = useStorage();
 })();
 
 const onSignOut = () => {
-  token.remove(); // 从存储模块中删除此键值对
-  // 或者，您可以使用“token.reset()”，它可以将值设置为初始值
-  hasSigned.set(false);
+  token.reset(); // 将值设置为初始值。若未提供初始值，将设为 undefined
+  hasSigned.reset();
   console.log(token.get(), token.exist()); // undefined, false
+  console.log(hasSigned.get(), hasSigned.exist()); // false, true
 };
 ```
+
+## 关于 remove() API
+
+::: tip
+`remove()` 是不受支持的 API。点击 [常见问题 > 关于 Interface](./other/questions-and-answers.html#关于-remove-和-clear-方法) 了解更多。
+:::
 
 ## 直接使用
 
 ### 安装
 
+<CodeSwitcher :languages="{ npm: 'npm', yarn: 'yarn', pnpm: 'pnpm' }">
+
+::: slot npm
+
 ```sh
-npm install @smart-storage/core --save
+npm install @smart-storage/core
 ```
+
+:::
+
+::: slot yarn
+
+```sh
+yarn add @smart-storage/core
+```
+
+:::
+
+::: slot pnpm
+
+```sh
+pnpm add @smart-storage/core
+```
+
+:::
+
+</CodeSwitcher>
 
 ### 创建一个存储模块
 
@@ -221,7 +329,7 @@ const storageModule = new StorageModule<UserInfo>('user_info', StorageType.SESSI
 const helper = storageModule.getHelper();
 if (!helper.getExistence()) {
   // 这里的初始化是随心所欲的，没有限制
-  helper.setModule({ 
+  helper.setModule({
     token: '',
     hasSigned: false,
   });
@@ -257,7 +365,7 @@ const onSignOut = () => {
   console.log(storageModule.getItem('token')); // undefined
   console.log(storageModule.size()); // 1
 
-  // Or
+  // 或者
   storageModule.clear();
   console.log(storageModule.size()); // 0
 };
