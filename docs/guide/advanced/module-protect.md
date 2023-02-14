@@ -29,7 +29,7 @@ And then, someone writes code that looks like this:
 window.localStorage.setItem('unprotected_storage_key', 'foo');
 ```
 
-So we all know that once this line of code is executed, the data structure of the storage module will be destroyed:
+However, we all know that once this line of code is executed, the data structure of the storage module will be destroyed:
 
 ![foo-storage](~@imgs/advanced/module-protect/foo-storage.jpg)
 
@@ -55,7 +55,7 @@ export const { useStorage } = createLocalStorage<ProtectedStorage>({
 });
 ```
 
-After opening the module protection like this, the three functions `setItem()`, `removeItem()` and `clear()` will be overridden by `Proxy` (let's say we're using `localStorage`):
+After opening the module protection like this, the three apis `setItem()`, `removeItem()` and `clear()` will be overridden by `Proxy` (let's say we're using `localStorage`):
 
 - When calling `localStorage.setItem('protected_storage_key', 'foo')`, you will receive an error like this:
 
