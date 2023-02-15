@@ -32,12 +32,16 @@ export const sidebar_zh: SidebarConfig4Multiple = {
     {
       title: '进阶指南',
       collapsable: false,
-      children: prefixed('/zh/guide/', ['advanced/storage-helper', 'advanced/module-protect']),
+      children: prefixed('/zh/guide/', [
+        'advanced/storage-helper',
+        'advanced/module-protect',
+        'advanced/version-control',
+      ]),
     },
     {
       title: '其他',
       collapsable: false,
-      children: prefixed('/zh/guide/', ['other/questions-and-answers']),
+      children: prefixed('/zh/guide/', ['other/questions-and-answers', 'other/how-to-contribute']),
     },
   ],
 };
