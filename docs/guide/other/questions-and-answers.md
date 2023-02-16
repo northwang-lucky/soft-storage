@@ -8,7 +8,7 @@
 
 ## About Remove and Clear
 
-- Q: Why Isn't `remove()` and `clear()` Provided?
+- Q: Why isn't `remove()` and `clear()` provided?
 
 - A: There are two reasons:
 
