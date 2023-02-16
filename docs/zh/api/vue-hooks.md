@@ -104,9 +104,9 @@ type UseStorage<T> = () => StorageReactions<T>;
 
 返回一个对象，包括：
 
-- [`refs: StorageRefs<T>`](../type-definition/vue-hooks.html#storagerefs)
-- [`resetters: StorageResetters<T>`](../type-definition/vue-hooks.html#storageresetters)
-- [`checkers: StorageCheckers<T>`](../type-definition/vue-hooks.html#storagecheckers)
+- [`refs: StorageRefs<T>`](type-definition/vue-hooks.html#storagerefs)
+- [`resetters: StorageResetters<T>`](type-definition/vue-hooks.html#storageresetters)
+- [`checkers: StorageCheckers<T>`](type-definition/vue-hooks.html#storagecheckers)
 
 ```ts
 type StorageReactions<T> = {

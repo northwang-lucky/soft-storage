@@ -23,6 +23,12 @@ export const sidebar_en: SidebarConfig4Multiple = {
       collapsable: false,
       children: prefixed('/api/', ['vue-hooks', 'react-hooks', 'hooks', 'core', 'shared']),
     },
+    {
+      title: 'Type Definition',
+      path: '/api/#Type-Definition',
+      collapsable: false,
+      children: prefixed('/api/type-definition/', ['vue-hooks', 'react-hooks', 'hooks', 'core', 'shared']),
+    },
   ],
 };
 

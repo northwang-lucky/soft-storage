@@ -105,9 +105,9 @@ type UseStorage<T> = () => StorageReactions<T>;
 
 The function returns an object containing:
 
-- [`refs: StorageRefs<T>`](../type-definition/vue-hooks.html#storagerefs)
-- [`resetters: StorageResetters<T>`](../type-definition/vue-hooks.html#storageresetters)
-- [`checkers: StorageCheckers<T>`](../type-definition/vue-hooks.html#storagecheckers)
+- [`refs: StorageRefs<T>`](type-definition/vue-hooks.html#storagerefs)
+- [`resetters: StorageResetters<T>`](type-definition/vue-hooks.html#storageresetters)
+- [`checkers: StorageCheckers<T>`](type-definition/vue-hooks.html#storagecheckers)
 
 ```ts
 type StorageReactions<T> = {

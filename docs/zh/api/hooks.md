@@ -102,7 +102,7 @@ type UseStorage<T> = () => StorageInstance<T>;
 
 ### 返回值
 
-返回一个对象，包括模块中的所有存储项（类型为 [`StorageItem<T[K]>`](../type-definition/hooks.html#storageitem)）
+返回一个对象，包括模块中的所有存储项（类型为 [`StorageItem<T[K]>`](type-definition/hooks.html#storageitem)）
 
 ```ts
 type StorageInstance<T> = Required<{

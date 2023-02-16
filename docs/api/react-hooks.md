@@ -103,7 +103,7 @@ type UseStorage<T> = () => StorageStates<T>;
 
 ### Return Value
 
-The function returns a `Record` object, whose key type is [`StateKey<T>`](../type-definition/react-hooks.html#statekey), value type is [`StorageState<T, K extends keyof T>`](../type-definition/react-hooks.html#storagestate):
+The function returns a `Record` object, whose key type is [`StateKey<T>`](type-definition/react-hooks.html#statekey), value type is [`StorageState<T, K extends keyof T>`](type-definition/react-hooks.html#storagestate):
 
 ```ts
 type StorageStates<T> = {
@@ -114,19 +114,19 @@ type StorageStates<T> = {
 ```
 
 ::: tip
-[`RestoreSuffixedKey<SK, 'state'>`](../type-definition/shared.html#restoresuffixedkey) here is used to restore the `StateKey<T>`, for example, the "tokenState" will be restored to "token".
+[`RestoreSuffixedKey<SK, 'state'>`](type-definition/shared.html#restoresuffixedkey) here is used to restore the `StateKey<T>`, for example, the "tokenState" will be restored to "token".
 :::
 
 <hr>
 
-[`StateKey<T>`](../type-definition/react-hooks.html#statekey) is a string (such as "tokenState"):
+[`StateKey<T>`](type-definition/react-hooks.html#statekey) is a string (such as "tokenState"):
 
 ```ts
 type StateKey<T> = SuffixedKeys<T, 'state'>;
 ```
 
 ::: tip
-[`SuffixedKeys<T, 'state'>`](../type-definition/shared.html#suffixedkeys) here is used to add suffix, for example, the "token" will become to "tokenState".
+[`SuffixedKeys<T, 'state'>`](type-definition/shared.html#suffixedkeys) here is used to add suffix, for example, the "token" will become to "tokenState".
 :::
 
 <hr>
@@ -134,9 +134,9 @@ type StateKey<T> = SuffixedKeys<T, 'state'>;
 And the `StorageState<T, K extends keyof T>` is an object containing:
 
 - `xxx: T[K]`
-- [`setXxx: Setter<T[K]>`](../type-definition/react-hooks.html#setter), type of `setXxx` is [`SetterKey<K>`](../type-definition/react-hooks.html#setterkey)
-- [`resetXxx: Resetter`](../type-definition/react-hooks.html#resetter), type of `resetXxx` is [`ResetterKey<K>`](../type-definition/react-hooks.html#resetterkey)
-- [`containsXxx: Checker`](../type-definition/react-hooks.html#checker), type of `containsXxx` is [`CheckerKey<K>`](../type-definition/react-hooks.html#checkerkey)
+- [`setXxx: Setter<T[K]>`](type-definition/react-hooks.html#setter), type of `setXxx` is [`SetterKey<K>`](type-definition/react-hooks.html#setterkey)
+- [`resetXxx: Resetter`](type-definition/react-hooks.html#resetter), type of `resetXxx` is [`ResetterKey<K>`](type-definition/react-hooks.html#resetterkey)
+- [`containsXxx: Checker`](type-definition/react-hooks.html#checker), type of `containsXxx` is [`CheckerKey<K>`](type-definition/react-hooks.html#checkerkey)
 
 ```ts
 type StorageState<T, K extends keyof T> = {

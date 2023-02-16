@@ -103,7 +103,7 @@ type UseStorage<T> = () => StorageInstance<T>;
 
 ### Return Value
 
-The function returns an object containing the items (type is [`StorageItem<T[K]>`](../type-definition/hooks.html#storageitem)) of storage module:
+The function returns an object containing the items (type is [`StorageItem<T[K]>`](type-definition/hooks.html#storageitem)) of storage module:
 
 ```ts
 type StorageInstance<T> = Required<{
