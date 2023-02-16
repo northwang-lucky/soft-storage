@@ -20,7 +20,7 @@ Attention please! You should never use `interface` to define a type in Smart Sto
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/vue-hooks
 ```
 
@@ -28,7 +28,7 @@ npm install @smart-storage/vue-hooks
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/vue-hooks
 ```
 
@@ -36,7 +36,7 @@ yarn add @smart-storage/vue-hooks
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/vue-hooks
 ```
 
@@ -112,7 +112,7 @@ const onSignOut = () => {
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/react-hooks
 ```
 
@@ -120,7 +120,7 @@ npm install @smart-storage/react-hooks
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/react-hooks
 ```
 
@@ -128,7 +128,7 @@ yarn add @smart-storage/react-hooks
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/react-hooks
 ```
 
@@ -207,7 +207,7 @@ export default UserInfoFC;
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/hooks
 ```
 
@@ -215,7 +215,7 @@ npm install @smart-storage/hooks
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/hooks
 ```
 
@@ -223,7 +223,7 @@ yarn add @smart-storage/hooks
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/hooks
 ```
 
@@ -273,7 +273,7 @@ const { token, hasSigned } = useStorage();
 
 const onSignOut = () => {
   token.reset(); // Set value to initial value, if not, it is set to undefined
-  hasSigned.reset(); 
+  hasSigned.reset();
   console.log(token.get(), token.exist()); // Output: undefined, false
   console.log(hasSigned.get(), hasSigned.exist()); // Output: false, true
 };
@@ -293,7 +293,7 @@ const onSignOut = () => {
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/core
 ```
 
@@ -301,7 +301,7 @@ npm install @smart-storage/core
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/core
 ```
 
@@ -309,7 +309,7 @@ yarn add @smart-storage/core
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/core
 ```
 
@@ -331,7 +331,7 @@ const storageModule = new StorageModule<UserInfo>('user_info', StorageType.SESSI
 const helper = storageModule.getHelper();
 if (!helper.getExistence()) {
   // Here the initialization is arbitrary, no restrictions
-  helper.setModule({ 
+  helper.setModule({
     token: '',
     hasSigned: false,
   });

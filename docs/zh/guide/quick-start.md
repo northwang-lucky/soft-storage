@@ -20,7 +20,7 @@ Smart Storage 提供三种方式来管理存储：
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/vue-hooks
 ```
 
@@ -28,7 +28,7 @@ npm install @smart-storage/vue-hooks
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/vue-hooks
 ```
 
@@ -36,7 +36,7 @@ yarn add @smart-storage/vue-hooks
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/vue-hooks
 ```
 
@@ -111,7 +111,7 @@ const onSignOut = () => {
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/react-hooks
 ```
 
@@ -119,7 +119,7 @@ npm install @smart-storage/react-hooks
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/react-hooks
 ```
 
@@ -127,7 +127,7 @@ yarn add @smart-storage/react-hooks
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/react-hooks
 ```
 
@@ -205,7 +205,7 @@ export default UserInfoFC;
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/hooks
 ```
 
@@ -213,7 +213,7 @@ npm install @smart-storage/hooks
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/hooks
 ```
 
@@ -221,7 +221,7 @@ yarn add @smart-storage/hooks
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/hooks
 ```
 
@@ -291,7 +291,7 @@ const onSignOut = () => {
 
 ::: slot npm
 
-```sh
+```bash
 npm install @smart-storage/core
 ```
 
@@ -299,7 +299,7 @@ npm install @smart-storage/core
 
 ::: slot yarn
 
-```sh
+```bash
 yarn add @smart-storage/core
 ```
 
@@ -307,7 +307,7 @@ yarn add @smart-storage/core
 
 ::: slot pnpm
 
-```sh
+```bash
 pnpm add @smart-storage/core
 ```
 
