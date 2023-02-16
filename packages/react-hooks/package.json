@@ -46,8 +46,6 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@smart-storage/hooks": "latest",
-    "@smart-storage/shared": "latest",
     "@types/react": ">=16.8.0",
     "react": ">=16.8.0"
   },

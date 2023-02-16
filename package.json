@@ -21,8 +21,9 @@
     "lint-staged:format": "prettier -w",
     "lint-staged:eslint": "eslint",
     "commitlint": "commitlint --edit",
-    "clean-all": "pnpx rimraf \"./node_modules\" --impl=native && pnpm -F \"*\" clean",
-    "force-update": "pnpx rimraf ./pnpm-lock.yaml && pnpm install && pnpm build && pnpm clean-all && pnpx rimraf ./pnpm-lock.yaml && pnpm install"
+    "clean": "pnpx rimraf \"./node_modules\" --impl=native && pnpm -F \"*\" clean",
+    "update:deps": "pnpx rimraf ./pnpm-lock.yaml && pnpm install",
+    "update:project": "pnpm update:deps && pnpm clean && pnpm update:deps && pnpm build"
   },
   "private": true,
   "license": "MIT",
@@ -34,7 +35,6 @@
     "@rollup/plugin-terser": "0.3.0",
     "@rollup/plugin-typescript": "11.0.0",
     "@types/jest": "29.2.5",
-    "@vuepress/plugin-back-to-top": "1.9.8",
     "eslint": "8.22.0",
     "eslint-config-airbnb-typescript-prettier": "5.0.0",
     "fs-extra": "11.1.0",
