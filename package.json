@@ -23,7 +23,9 @@
     "commitlint": "commitlint --edit",
     "clean": "pnpx rimraf \"./node_modules\" --impl=native && pnpm -F \"*\" clean",
     "update:deps": "pnpx rimraf ./pnpm-lock.yaml && pnpm install",
-    "update:project": "pnpm update:deps && pnpm clean && pnpm update:deps && pnpm build"
+    "update:project": "pnpm update:deps && pnpm clean && pnpm update:deps && pnpm build",
+    "update-china:deps": "pnpx rimraf ./pnpm-lock.yaml && pnpm install --registry=https://registry.npmmirror.com/",
+    "update-china:project": "pnpm update-china:deps && pnpm clean && pnpm update-china:deps && pnpm build"
   },
   "private": true,
   "license": "MIT",
