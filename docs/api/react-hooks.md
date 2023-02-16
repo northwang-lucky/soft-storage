@@ -103,7 +103,7 @@ type UseStorage<T> = () => StorageStates<T>;
 
 ### Return Value
 
-The function returns an object containing the pair of [`StateKey<T>`](../type-definition/react-hooks.html#statekey) and [`StorageState<T, K extends keyof T>`](../type-definition/react-hooks.html#storagestate):
+The function returns a `Record` object, whose key type is [`StateKey<T>`](../type-definition/react-hooks.html#statekey), value type is [`StorageState<T, K extends keyof T>`](../type-definition/react-hooks.html#storagestate):
 
 ```ts
 type StorageStates<T> = {

@@ -6,29 +6,29 @@ extractApiHeaders: [2]
 
 ## createProxy()
 
-Create a `Proxy` instance.
+创建一个 `Proxy` 实例
 
-### Type
+### 类型
 
 ```ts
 function createProxy<T extends object = object, R = T>(target: T, handler: ProxyHandler<T>): R;
 ```
 
-### Parameters
+### 参数
 
 - `target: T`
 
-  The target object to be brokered.
+  被代理的对象
 
 - `handler: ProxyHandler<T>`
 
-  Same as handler for `Proxy` 👉🏻 [Handler Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/Proxy#handler_functions)
+  与 `Proxy` 的 `handler` 相同 👉🏻 [Handler Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/Proxy#handler_functions)
 
-### Return Value
+### 返回值
 
-Proxy-wrapped object.
+代理包装过的对象
 
-### Example
+### 示例
 
 ```ts
 type Greeter = {
@@ -52,7 +52,7 @@ proxy.hello(); // Output: hello
 
 ## restorePrefixedString()
 
-Restore a prefixed string.
+还原一个加了前缀的字符串
 
 ### Type
 
@@ -64,19 +64,19 @@ function restorePrefixedString(target: string, prefix: string, uncapitalize?: bo
 
 - `target: string`
 
-  Prefixed string.
+  加了前缀的字符串
 
 - `prefix: string`
 
-  Prefix string.
+  前缀
 
 - `uncapitalize?: boolean = true`
 
-  Whether to automatically change the first letter of the restored string to lower case.
+  是否自动将还原后的字符串的首字母改为小写
 
 ### Return Value
 
-Restored string.
+还原后的字符串
 
 ### Example
 
@@ -87,7 +87,7 @@ const key = restorePrefixedString(prefixed, 'set'); // key = 'token'
 
 ## restoreSuffixedString()
 
-Restore a suffixed string.
+还原一个加了后缀的字符串
 
 ### Type
 
@@ -99,19 +99,19 @@ function restoreSuffixedString(target: string, suffix: string, autoCapitalizeSuf
 
 - `target: string`
 
-  Suffixed string.
+  加了后缀的字符串
 
 - `suffix: string`
 
-  Suffix string.
+  后缀
 
 - `autoCapitalizeSuffix?: boolean = true`
 
-  Whether to automatically capitalize the first letter of the `suffix`.
+  是否自动将 `suffix` 的第一个字母大写
 
 ### Return Value
 
-Restored string.
+还原后的字符串
 
 ### Example
 

@@ -6,19 +6,19 @@ extractApiHeaders: [2]
 
 ## StorageModule()
 
-Create a storage module.
+创建一个存储模块
 
-### Type
+### 类型
 
 ```ts
 new StorageModule<T>(key: string, storageType: StorageType, noUniqueVerify?: boolean): StorageModule<T>;
 ```
 
-### Parameters
+### 参数
 
 - `key: string`
 
-  Key of storage module.
+  存储模块的 key
 
 - `storageType: StorageType`
 
@@ -31,13 +31,13 @@ new StorageModule<T>(key: string, storageType: StorageType, noUniqueVerify?: boo
 
 - `noUniqueVerify?: boolean = false`
 
-  If set to `true`, the `StorageModule` will not verify the uniqueness of the key.
+  当值为 `true` 时，`StorageModule` 不会校验 key 的唯一性
 
-### Return Value
+### 返回值
 
 A new `StorageModule` instance.
 
-### Example
+### 示例
 
 ```ts
 const storageModule = new StorageModule('user_info', StorageType.LOCAL);
@@ -45,25 +45,25 @@ const storageModule = new StorageModule('user_info', StorageType.LOCAL);
 
 ## storageModule.getItem()
 
-Get value of an storage item from storage module.
+从存储模块获取存储项的值
 
-### Type
+### 类型
 
 ```ts
 StorageModule<T>.getItem<K extends keyof T>(key: K): T[K] | undefined;
 ```
 
-### Parameters
+### 参数
 
 - `key: K`
 
-  Key of storage module.
+  存储模块的 key
 
-### Return Value
+### 返回值
 
-The value of storage item.
+存储项的值
 
-### Example
+### 示例
 
 ```ts
 const token = storageModule.getItem('token');
@@ -71,25 +71,25 @@ const token = storageModule.getItem('token');
 
 ## storageModule.setItem()
 
-Set value for an storage item in storage module.
+在存储模块中设置存储项的值
 
-### Type
+### 类型
 
 ```ts
 StorageModule<T>.setItem<K extends keyof T>(key: K, value: T[K]): void;
 ```
 
-### Parameters
+### 参数
 
 - `key: K`
 
-  Key of storage module.
+  存储模块的 key
 
 - `value: T[K]`
 
-  New Value.
+  要设置的值
 
-### Example
+### 示例
 
 ```ts
 storageModule.setItem('token', 'xxx');
@@ -97,21 +97,21 @@ storageModule.setItem('token', 'xxx');
 
 ## storageModule.removeItem()
 
-Delete key and its value from storage module.
+从存储模块中删除 key 及其值
 
-### Type
+### 类型
 
 ```ts
 StorageModule<T>.removeItem<K extends keyof T>(key: K): void;
 ```
 
-### Parameters
+### 参数
 
 - `key: K`
 
-  Key of storage module.
+  存储模块的 key
 
-### Example
+### 示例
 
 ```ts
 storageModule.removeItem('token');
@@ -119,15 +119,15 @@ storageModule.removeItem('token');
 
 ## storageModule.clear()
 
-Delete all keys and their values from storage module.
+从存储模块中删除所有 key 及其值
 
-### Type
+### 类型
 
 ```ts
 StorageModule<T>.clear(): void;
 ```
 
-### Example
+### 示例
 
 ```ts
 storageModule.clear();
@@ -135,25 +135,25 @@ storageModule.clear();
 
 ## storageModule.contains()
 
-Get whether the key exists in the storage module.
+获取存储模块中是否存在该 key
 
-### Type
+### 类型
 
 ```ts
 StorageModule<T>.contains(key: string): boolean
 ```
 
-### Parameters
+### 参数
 
 - `key: K`
 
-  Key of storage module.
+  存储模块的 key
 
-### Return Value
+### 返回值
 
-Whether the key exists in the storage module.
+存储模块中是否存在该 key
 
-### Example
+### 示例
 
 ```ts
 storageModule.contains('token');
@@ -161,19 +161,19 @@ storageModule.contains('token');
 
 ## storageModule.size()
 
-Get the number of storage items in the storage module.
+获取存储模块中的存储项的数量
 
-### Type
+### 类型
 
 ```ts
 StorageModule<T>.size(): number;
 ```
 
-### Return Value
+### 返回值
 
-The number of storage items in the storage module.
+存储模块中的存储项的数量
 
-### Example
+### 示例
 
 ```ts
 const size = storageModule.size();
@@ -181,17 +181,17 @@ const size = storageModule.size();
 
 ## storageModule.getHelper()
 
-Get `IStorageModuleHelper` instance for storage module.
+获取存储模块的 `IStorageModuleHelper` 实例
 
-### Type
+### 类型
 
 ```ts
 StorageModule<T>.getHelper(): IStorageModuleHelper<T>;
 ```
 
-### Return Value
+### 返回值
 
-A `IStorageModuleHelper` instance for storage module:
+存储模块的 `IStorageModuleHelper` 实例
 
 ```ts
 interface IStorageModuleHelper<T> {
@@ -206,7 +206,7 @@ interface IStorageModuleHelper<T> {
 }
 ```
 
-### Example
+### 示例
 
 ```ts
 const helper = storageModule.getHelper();
@@ -214,19 +214,19 @@ const helper = storageModule.getHelper();
 
 ## helper.getModule()
 
-Get the value of the storage module as a JSON object.
+以 JSON 对象的格式获取存储模块的值
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.getModule(): T;
 ```
 
-### Return Value
+### 返回值
 
-All key-value pairs in storage module.
+存储模块中的所有键值对
 
-### Example
+### 示例
 
 ```ts
 const valueDict = helper.getModule();
@@ -234,21 +234,21 @@ const valueDict = helper.getModule();
 
 ## helper.setModule()
 
-Set a JSON object as the value of the storage module. <Badge text="Overlay Update" type="warning" />
+设置一个 JSON 对象作为存储模块的值 <Badge text="覆盖式更新" type="warning" />
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.setModule(root: T): void;
 ```
 
-### Parameters
+### 参数
 
 - `root: T`
 
-  A JSON object, which will be the value of storage module.
+  一个 JSON 对象，它将会成为存储模块的值
 
-### Example
+### 示例
 
 ```ts
 helper.setModule({ token: 'xxx', hasSigned: true });
@@ -256,15 +256,15 @@ helper.setModule({ token: 'xxx', hasSigned: true });
 
 ## helper.clearModule()
 
-Clear storage module.
+清空存储模块
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.clearModule(): void;
 ```
 
-### Example
+### 示例
 
 ```ts
 helper.clearModule();
@@ -272,19 +272,19 @@ helper.clearModule();
 
 ## helper.getStorageKey()
 
-Get the key of storage module.
+获取存储模块的 key
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.getStorageKey(): string;
 ```
 
-### Return Value
+### 返回值
 
-Storage module key.
+存储模块的 key
 
-### Example
+### 示例
 
 ```ts
 const storageModuleKey = helper.getStorageKey();
@@ -292,15 +292,15 @@ const storageModuleKey = helper.getStorageKey();
 
 ## helper.getStorageType()
 
-Get the type of storage module.
+获取存储模块的类型
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.getStorageType(): StorageType;
 ```
 
-### Return Value
+### 返回值
 
 ```ts
 enum StorageType {
@@ -309,7 +309,7 @@ enum StorageType {
 }
 ```
 
-### Example
+### 示例
 
 ```ts
 const storageType = helper.getStorageType();
@@ -317,19 +317,19 @@ const storageType = helper.getStorageType();
 
 ## helper.getExistence()
 
-Determine whether the storage module exists.
+判断存储模块是否存在
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.getExistence(): boolean;
 ```
 
-### Return Value
+### 返回值
 
-Whether the storage module exists.
+存储模块是否存在
 
-### Example
+### 示例
 
 ```ts
 const exist = helper.getExistence();
@@ -337,15 +337,15 @@ const exist = helper.getExistence();
 
 ## helper.protect()
 
-Enable [storage module protect](/guide/advanced/module-protect.html).
+开启[模块保护](/zh/guide/advanced/module-protect.html)
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.protect(): void;
 ```
 
-### Example
+### 示例
 
 ```ts
 helper.protect();
@@ -353,15 +353,15 @@ helper.protect();
 
 ## helper.cancelProtect()
 
-Disable [storage module protect](/guide/advanced/module-protect.html).
+关闭[模块保护](/zh/guide/advanced/module-protect.html)
 
-### Type
+### 类型
 
 ```ts
 IStorageModuleHelper<T>.cancelProtect(): void;
 ```
 
-### Example
+### 示例
 
 ```ts
 helper.cancelProtect();

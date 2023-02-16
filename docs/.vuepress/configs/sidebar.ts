@@ -44,4 +44,12 @@ export const sidebar_zh: SidebarConfig4Multiple = {
       children: prefixed('/zh/guide/', ['other/questions-and-answers', 'other/how-to-contribute']),
     },
   ],
+  '/zh/api/': [
+    {
+      title: 'API',
+      path: '/zh/api/',
+      collapsable: false,
+      children: prefixed('/zh/api/', ['vue-hooks', 'react-hooks', 'hooks', 'core', 'shared']),
+    },
+  ],
 };
