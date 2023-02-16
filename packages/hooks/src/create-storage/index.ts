@@ -51,11 +51,11 @@ function createStorage<T extends StorageModuleSchema>({
 }
 
 export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): CreateStorage<T> {
-  return createStorage<T>({ type: StorageType.LOCAL, ...options });
+  return createStorage<T>(Object.assign({ type: StorageType.LOCAL }, options));
 }
 
 export function createSessionStorage<T extends StorageModuleSchema>(
   options: CreateStorageOptions<T>
 ): CreateStorage<T> {
-  return createStorage<T>({ type: StorageType.SESSION, ...options });
+  return createStorage<T>(Object.assign({ type: StorageType.SESSION }, options));
 }

@@ -28,6 +28,7 @@
     "no-plusplus": "off",
     "no-underscore-dangle": "off",
     "no-void": "off",
+    "prefer-object-spread": "off",
     "prefer-spread": "off",
     "react/function-component-definition": "off",
     "react-hooks/rules-of-hooks": "off"
