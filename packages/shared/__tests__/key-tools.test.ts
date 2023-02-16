@@ -1,15 +1,15 @@
-import { restorePrefixedKey, restoreSuffixedKey } from '../src';
+import { restorePrefixedString, restoreSuffixedString } from '../src';
 
-test('restorePrefixedKey', () => {
-  let key = restorePrefixedKey('resetStr', 'reset');
+test('restorePrefixedString', () => {
+  let key = restorePrefixedString('resetStr', 'reset');
   expect(key).toBe('str');
-  key = restorePrefixedKey('resetStr', 'reset', false);
+  key = restorePrefixedString('resetStr', 'reset', false);
   expect(key).toBe('Str');
 });
 
-test('restoreSuffixedKey', () => {
-  let key = restoreSuffixedKey('strState', 'state');
+test('restoreSuffixedString', () => {
+  let key = restoreSuffixedString('strState', 'state');
   expect(key).toBe('str');
-  key = restoreSuffixedKey('strState', 'State', false);
+  key = restoreSuffixedString('strState', 'State', false);
   expect(key).toBe('str');
 });

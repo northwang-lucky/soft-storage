@@ -7,7 +7,7 @@ import {
   UseStorage,
   UseStorageHelper,
 } from '@smart-storage/hooks';
-import { createProxy, restorePrefixedKey, Runnable, Supplier, StorageModuleSchema } from '@smart-storage/shared';
+import { createProxy, restorePrefixedString, Runnable, Supplier, StorageModuleSchema } from '@smart-storage/shared';
 import { CreateStorage, StorageCheckers, StorageRefs, StorageResetters } from './types';
 
 function createStorage<T extends StorageModuleSchema>(
@@ -47,7 +47,7 @@ function createStorage<T extends StorageModuleSchema>(
         {},
         {
           get: (_, p: string): Runnable => {
-            const property = restorePrefixedKey(p, 'reset') as keyof T;
+            const property = restorePrefixedString(p, 'reset') as keyof T;
             const item = storage[property];
             const itemRef = useItemRef(item, property);
             return () => {
@@ -62,7 +62,7 @@ function createStorage<T extends StorageModuleSchema>(
         {},
         {
           get: (_, p: string): Supplier<boolean> => {
-            const property = restorePrefixedKey(p, 'contains') as keyof T;
+            const property = restorePrefixedString(p, 'contains') as keyof T;
             const item = storage[property];
             return () => item.exist();
           },

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Checker, createProxy, Resetter, StorageModuleSchema } from '@smart-storage/shared';
+import { Checker, createProxy, Resetter, restoreSuffixedString, StorageModuleSchema } from '@smart-storage/shared';
 import {
   createLocalStorage as createLocalStorageRaw,
   createSessionStorage as createSessionStorageRaw,
@@ -23,7 +23,7 @@ function createStorage<T extends StorageModuleSchema>(
     useStorage: () => {
       const proxyGetter = useCallback((_: object, p: string) => {
         const stateKey = p as StateKey<T>;
-        const property = stateKey.replace(/^([a-zA-Z]+)State$/, (_ch, first) => first) as keyof T;
+        const property = restoreSuffixedString(stateKey, 'state') as keyof T;
 
         if (properties.indexOf(property) < 0) {
           properties.push(property);

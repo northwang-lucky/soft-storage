@@ -7,9 +7,9 @@ import { storageModulePool } from '../root-node-pool';
 export class StorageModule<T extends StorageModuleSchema> implements IStorageModule<T> {
   private helper: IStorageModuleHelper<T>;
 
-  public constructor(key: string, storageType: StorageType, outOfPool?: boolean) {
+  public constructor(key: string, storageType: StorageType, noUniqueVerify?: boolean) {
     this.helper = new StorageModuleHelper(key, storageType);
-    if (!outOfPool) {
+    if (!noUniqueVerify) {
       storageModulePool.addStorageModule(this);
     }
   }
