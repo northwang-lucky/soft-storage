@@ -57,5 +57,11 @@ export const sidebar_zh: SidebarConfig4Multiple = {
       collapsable: false,
       children: prefixed('/zh/api/', ['vue-hooks', 'react-hooks', 'hooks', 'core', 'shared']),
     },
+    {
+      title: '类型定义',
+      path: '/zh/api/#类型定义',
+      collapsable: false,
+      children: prefixed('/zh/api/type-definition/', ['vue-hooks']),
+    },
   ],
 };
