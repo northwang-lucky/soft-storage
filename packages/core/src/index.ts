@@ -1,3 +1,3 @@
-export * from './root-node-helper/types';
-export * from './root-node';
-export * from './root-node/types';
+export * from './storage-module-helper/types';
+export * from './storage-module';
+export * from './storage-module/types';

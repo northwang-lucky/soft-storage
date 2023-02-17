@@ -1,5 +1,5 @@
 import { StorageModuleSchema } from '@smart-storage/shared';
-import { IStorageModuleHelper } from '../root-node-helper/types';
+import { IStorageModuleHelper } from '../storage-module-helper/types';
 
 export interface IStorageModule<T extends StorageModuleSchema> {
   getItem<K extends keyof T>(key: K): T[K] | undefined;

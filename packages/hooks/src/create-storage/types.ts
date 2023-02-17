@@ -26,13 +26,13 @@ export type CreateStorage<T extends StorageModuleSchema> = {
   useStorageHelper: UseStorageHelper;
 };
 
-export interface CreateStorageBaseOptions<T extends StorageModuleSchema> {
+export type CreateStorageBaseOptions<T extends StorageModuleSchema> = {
   type: StorageType;
   storageModuleKey: string;
   protect?: boolean;
   version?: number;
   preVersion?: number;
   initial: PickNonNullable<T> extends T ? PickNonNullable<T> : never;
-}
+};
 
 export type CreateStorageOptions<T extends StorageModuleSchema> = Omit<CreateStorageBaseOptions<T>, 'type'>;

@@ -1,6 +1,6 @@
 import { StorageModuleSchema } from '@smart-storage/shared';
-import { StorageType } from '../root-node-helper/types';
-import { IStorageModule } from '../root-node/types';
+import { StorageType } from '../storage-module-helper/types';
+import { IStorageModule } from '../storage-module/types';
 
 class StorageModulePool {
   private storageModulesLocal: IStorageModule<StorageModuleSchema>[];

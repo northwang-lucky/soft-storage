@@ -1,5 +1,5 @@
 import { BiFunction, createProxy } from '@smart-storage/shared';
-import { StorageType } from '../root-node-helper/types';
+import { StorageType } from '../storage-module-helper/types';
 
 class StorageGuard {
   private localStorageProtectedKeys: string[];

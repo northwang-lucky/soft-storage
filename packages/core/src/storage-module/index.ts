@@ -1,8 +1,8 @@
 import { StorageModuleSchema } from '@smart-storage/shared';
 import { IStorageModule } from './types';
-import { IStorageModuleHelper, StorageType } from '../root-node-helper/types';
-import { StorageModuleHelper } from '../root-node-helper';
-import { storageModulePool } from '../root-node-pool';
+import { IStorageModuleHelper, StorageType } from '../storage-module-helper/types';
+import { StorageModuleHelper } from '../storage-module-helper';
+import { storageModulePool } from '../storage-module-pool';
 
 export class StorageModule<T extends StorageModuleSchema> implements IStorageModule<T> {
   private helper: IStorageModuleHelper<T>;
