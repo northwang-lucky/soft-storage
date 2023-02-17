@@ -2,7 +2,7 @@
 extractApiHeaders: [2]
 ---
 
-# Vue Hooks 类型定义
+# Vue Hooks 类型集
 
 ## StorageRefs
 
@@ -72,3 +72,7 @@ type CreateStorage<T> = {
   useStorageHelper: UseStorageHelper;
 };
 ```
+
+## CreateStorageOptions
+
+[Hooks 类型集 > CreateStorageOptions](./hooks.html#createstorageoptions)
