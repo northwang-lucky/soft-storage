@@ -4,6 +4,13 @@ extractApiHeaders: [2]
 
 # React Hooks Types
 
+## Setter
+
+```ts
+// The type of the second item returned by React.useState.
+type Setter<T> = Dispatch<SetStateAction<T>>;
+```
+
 ## SetterKey
 
 ```ts
@@ -22,7 +29,6 @@ type SetterKey<T> = PrefixedKey<T, 'set'>;
 type StorageState<T, K extends keyof T> = {
   [Key in K]: T[K];
 } & {
-  // Setter is the type of the second item returned by useState.
   [Key in SetterKey<K>]: Setter<T[K]>;
 } & {
   [Key in ResetterKey<K>]: Resetter;
@@ -88,3 +94,7 @@ type CreateStorage<T> = {
   useStorageHelper: UseStorageHelper;
 };
 ```
+
+## CreateStorageOptions
+
+[Hooks Types > CreateStorageOptions](./hooks.html#createstorageoptions)

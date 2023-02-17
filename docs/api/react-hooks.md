@@ -135,8 +135,8 @@ And the `StorageState<T, K extends keyof T>` is an object containing:
 
 - `xxx: T[K]`
 - [`setXxx: Setter<T[K]>`](type-definition/react-hooks.html#setter), type of `setXxx` is [`SetterKey<K>`](type-definition/react-hooks.html#setterkey)
-- [`resetXxx: Resetter`](type-definition/react-hooks.html#resetter), type of `resetXxx` is [`ResetterKey<K>`](type-definition/react-hooks.html#resetterkey)
-- [`containsXxx: Checker`](type-definition/react-hooks.html#checker), type of `containsXxx` is [`CheckerKey<K>`](type-definition/react-hooks.html#checkerkey)
+- [`resetXxx: Resetter`](type-definition/shared.html#resetter), type of `resetXxx` is [`ResetterKey<K>`](type-definition/shared.html#resetterkey)
+- [`containsXxx: Checker`](type-definition/shared.html#checker), type of `containsXxx` is [`CheckerKey<K>`](type-definition/shared.html#checkerkey)
 
 ```ts
 type StorageState<T, K extends keyof T> = {

@@ -72,3 +72,7 @@ type CreateStorage<T> = {
   useStorageHelper: UseStorageHelper;
 };
 ```
+
+## CreateStorageOptions
+
+[Hooks Types > CreateStorageOptions](./hooks.html#createstorageoptions)
