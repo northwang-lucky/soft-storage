@@ -1,5 +1,5 @@
 import { StorageModule, StorageType } from '../src';
-import { storageModulePool } from '../src/root-node-pool';
+import { storageModulePool } from '../src/storage-module-pool';
 
 type TestStorage = {
   num: number;

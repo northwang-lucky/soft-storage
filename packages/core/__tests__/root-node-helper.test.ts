@@ -1,5 +1,5 @@
 import { StorageType } from '../src';
-import { StorageModuleHelper } from '../src/root-node-helper';
+import { StorageModuleHelper } from '../src/storage-module-helper';
 
 type TestStorage = {
   key: string;
