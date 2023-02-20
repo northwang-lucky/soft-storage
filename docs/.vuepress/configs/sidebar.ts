@@ -8,12 +8,12 @@ export const sidebar_en: SidebarConfig4Multiple = {
     {
       title: 'Advanced',
       collapsable: false,
-      children: prefixed('/guide/', ['advanced/storage-helper', 'advanced/module-protect', 'advanced/version-control']),
+      children: prefixed('/guide/advanced/', ['storage-helper', 'module-protect', 'version-control']),
     },
     {
       title: 'Other',
       collapsable: false,
-      children: prefixed('/guide/', ['other/questions-and-answers', 'other/how-to-contribute']),
+      children: prefixed('/guide/other/', ['questions-and-answers', 'how-to-contribute', 'developer-guide']),
     },
   ],
   '/api/': [
@@ -38,16 +38,12 @@ export const sidebar_zh: SidebarConfig4Multiple = {
     {
       title: '进阶指南',
       collapsable: false,
-      children: prefixed('/zh/guide/', [
-        'advanced/storage-helper',
-        'advanced/module-protect',
-        'advanced/version-control',
-      ]),
+      children: prefixed('/zh/guide/advanced/', ['storage-helper', 'module-protect', 'version-control']),
     },
     {
       title: '其他',
       collapsable: false,
-      children: prefixed('/zh/guide/', ['other/questions-and-answers', 'other/how-to-contribute']),
+      children: prefixed('/zh/guide/other/', ['questions-and-answers', 'how-to-contribute', 'developer-guide']),
     },
   ],
   '/zh/api/': [
