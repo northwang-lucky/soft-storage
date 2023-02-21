@@ -26,7 +26,7 @@ The basic directory structure of your project looks like this:
 - Node LTS
 - PNPM >= 7.1.0
 
-## Optional suggestion
+## Optional Suggestions
 
 Use [Visual Studio Code](https://code.visualstudio.com/) as a code editor for Smart Storage, and install the following extension:
 

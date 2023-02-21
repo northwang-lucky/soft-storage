@@ -42,6 +42,26 @@ type StorageCheckers<T> = {
 
 </ReferencedTypes>
 
+## SmartStorage
+
+```ts
+type SmartStorage<T extends StorageModuleSchema> = {
+  storage: Required<{ [K in keyof T]: StorageItem<T, K> }>;
+  storageHelper: StorageHelper;
+  itemRefDict: Record<keyof T, Ref<UnwrapRef<T[keyof T]>> /* It's Vue's ref */>;
+  properties: (keyof T)[];
+};
+```
+
+<ReferencedTypes>
+
+- [`StorageItem`](hooks.html#storageitem)
+- [`StorageHelper`](hooks.html#storagehelper)
+
+</ReferencedTypes>
+
+<Divider />
+
 ## StorageReactions
 
 ```ts
@@ -52,26 +72,7 @@ type StorageReactions<T> = {
 };
 ```
 
-## UseStorage
-
-```ts
-type UseStorage<T> = () => StorageReactions<T>;
-```
-
-## UseStorageHelper
-
-```ts
-type UseStorageHelper = () => StorageHelper;
-```
-
-## CreateStorage
-
-```ts
-type CreateStorage<T> = {
-  useStorage: UseStorage<T>;
-  useStorageHelper: UseStorageHelper;
-};
-```
+<Divider />
 
 ## CreateStorageOptions
 

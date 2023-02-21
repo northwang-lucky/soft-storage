@@ -6,7 +6,7 @@ Smart Storage provides a hook function called `useStorageHelper` to use the othe
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks'; 
+import { createLocalStorage } from '@smart-storage/vue-hooks';
 // import { createLocalStorage } from '@smart-storage/react-hooks';
 
 type UserInfo = {
@@ -14,19 +14,20 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorageHelper } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
 ```
 
-Now, you can use the hook in a component (React is the same as Vue):
+Now, you can use the `useStorageHelper` hook in a component (React is the same as Vue):
 
 ```vue
 <script setup lang="ts">
-import { useStorageHelper } from './storage';
+import { useStorageHelper } from '@smart-storage/vue-hooks';
+import { storage } from './storage';
 
-const storageHelper = useStorageHelper();
+const storageHelper = useStorageHelper(storage);
 
 // Get the size of storage module (the count of keys)
 storageHelper.size();
@@ -49,7 +50,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorageHelper } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
@@ -58,9 +59,10 @@ export const { useStorageHelper } = createLocalStorage<UserInfo>({
 Use anywhere:
 
 ```ts
-import { useStorageHelper } from './storage.ts';
+import { useStorageHelper } from '@smart-storage/hooks';
+import { storage } from './storage';
 
-const storageHelper = useStorageHelper();
+const storageHelper = useStorageHelper(storage);
 
 // Get the size of storage module (the count of keys)
 storageHelper.size();

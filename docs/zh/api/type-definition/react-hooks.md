@@ -11,6 +11,33 @@ extractApiHeaders: [2]
 type Setter<T> = Dispatch<SetStateAction<T>>;
 ```
 
+## UseState
+
+```ts
+// React.useState的返回值
+type UseState<T> = [T, Setter<T>];
+```
+
+## SmartStorage
+
+```ts
+type SmartStorage<T> = {
+  storage: Required<{ [K in keyof T]: StorageItem<T, K> }>;
+  storageHelper: StorageHelper;
+  itemStateDict: Record<keyof T, UseState<T[keyof T]>>;
+  properties: (keyof T)[];
+};
+```
+
+<ReferencedTypes>
+
+- [`StorageItem`](hooks.html#storageitem)
+- [`StorageHelper`](hooks.html#storagehelper)
+
+</ReferencedTypes>
+
+<Divider />
+
 ## SetterKey
 
 ```ts
@@ -68,32 +95,7 @@ type StorageStates<T> = {
 };
 ```
 
-## UseState
-
-```ts
-type UseState<T> = [T, Setter<T>];
-```
-
-## UseStorage
-
-```ts
-type UseStorage<T> = () => StorageStates<T>;
-```
-
-## UseStorageHelper
-
-```ts
-type UseStorageHelper = () => StorageHelper;
-```
-
-## CreateStorage
-
-```ts
-type CreateStorage<T> = {
-  useStorage: UseStorage<T>;
-  useStorageHelper: UseStorageHelper;
-};
-```
+<Divider />
 
 ## CreateStorageOptions
 

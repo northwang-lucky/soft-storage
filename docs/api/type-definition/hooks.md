@@ -4,45 +4,23 @@ extractApiHeaders: [2]
 
 # Hooks Types
 
-## StorageItem
+## SmartStorage
 
 ```ts
-type StorageItem<T, K extends keyof T> = {
-  get(): T[K];
-  set(value: T[K]): void;
-  reset(): void;
-  exist(): boolean;
+type SmartStorage<T> = {
+  storageModule: IStorageModule<T>;
+  helper: IStorageModuleHelper<T>;
+  initial: Initial<T>;
 };
 ```
 
-## StorageHelper
+<ReferencedTypes>
 
-```ts
-type StorageInstance<T> = Required<{
-  [K in keyof T]: StorageItem<T, K>;
-}>;
-```
+- [`IStorageModule`](core.html#istoragemodule)
+- [`IStorageModuleHelper`](core.html#istoragemodulehelper)
+- [`Initial`](shared.html#initial)
 
-## UseStorage
-
-```ts
-type UseStorage<T> = () => StorageInstance<T>;
-```
-
-## UseStorageHelper
-
-```ts
-type UseStorageHelper = () => StorageHelper;
-```
-
-## CreateStorage
-
-```ts
-type CreateStorage<T> = {
-  useStorage: UseStorage<T>;
-  useStorageHelper: UseStorageHelper;
-};
-```
+</ReferencedTypes>
 
 ## CreateStorageBaseOptions
 
@@ -68,4 +46,37 @@ type CreateStorageBaseOptions<T> = {
 
 ```ts
 type CreateStorageOptions<T> = Omit<CreateStorageBaseOptions<T>, 'type'>;
+```
+
+<Divider />
+
+## StorageItem
+
+```ts
+type StorageItem<T, K extends keyof T> = {
+  get(): T[K];
+  set(value: T[K]): void;
+  reset(): void;
+  exist(): boolean;
+};
+```
+
+## StorageInstance
+
+```ts
+type StorageInstance<T> = Required<{
+  [K in keyof T]: StorageItem<T, K>;
+}>;
+```
+
+<Divider />
+
+## StorageHelper
+
+```ts
+type StorageHelper = {
+  size: () => number;
+  contains: (key: string) => boolean;
+  initialize: () => void;
+};
 ```

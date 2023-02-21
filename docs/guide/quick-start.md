@@ -57,7 +57,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   // This is storage key
   storageModuleKey: 'user_info',
   // Used to initialize
@@ -74,7 +74,8 @@ export const { useStorage } = createLocalStorage<UserInfo>({
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
-import { useStorage } from './storage';
+import { useStorage } from '@smart-storage/vue-hooks';
+import { storage } from './storage';
 
 /* You can easily deconstruct the hook's return value,
 because TypeScript will give you great type hints */
@@ -82,7 +83,7 @@ const {
   refs: { token, hasSigned },
   resetters: { resetToken, resetHasSigned },
   checkers: { containsToken, containsHasSigned },
-} = useStorage();
+} = useStorage(storage);
 
 onMounted(() => {
   getUserInfo().then(res => {
@@ -149,7 +150,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createSessionStorage<UserInfo>({
+export const storage = createSessionStorage<UserInfo>({
   // This is storage key
   storageModuleKey: 'user_info',
   // Used to initialize
@@ -165,7 +166,8 @@ export const { useStorage } = createSessionStorage<UserInfo>({
 ```tsx
 import React, { useEffect } from 'react';
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
-import { useStorage } from './storage';
+import { useStorage } from '@smart-storage/react-hooks';
+import { storage } from './storage';
 
 function UserInfoFC() {
   /* You can easily deconstruct the hook's return value,
@@ -173,7 +175,7 @@ function UserInfoFC() {
   const {
     tokenState: { token, setToken, resetToken, containsToken },
     hasSignedState: { hasSigned, setHasSigned, resetHasSigned, containsHasSigned },
-  } = useStorage();
+  } = useStorage(storage);
 
   useEffect(() => {
     getUserInfo().then(res => {
@@ -244,7 +246,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createSessionStorage<UserInfo>({
+export const storage = createSessionStorage<UserInfo>({
   // This is storage key
   storageModuleKey: 'user_info',
   // Used to initialize
@@ -259,9 +261,10 @@ export const { useStorage } = createSessionStorage<UserInfo>({
 
 ```ts
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
-import { useStorage } from './storage';
+import { useStorage } from '@smart-storage/hooks';
+import { storage } from './storage';
 
-const { token, hasSigned } = useStorage();
+const { token, hasSigned } = useStorage(storage);
 
 (() => {
   getUserInfo().then(res => {

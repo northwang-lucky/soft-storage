@@ -12,7 +12,7 @@ type AlwaysChangeStorage = {
   foo: string;
 };
 
-export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
+export const storage = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
   initial: { foo: 'Why is it always change?' },
 });
@@ -50,7 +50,7 @@ type AlwaysChangeStorage = {
   bar: string;
 };
 
-export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
+export const storage = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
   version: 2, // It defaults to 1 when not passed in, and now we can upgrade it to 2
   initial: { bar: "I don't know." }, // Now you can safely modify the values here
@@ -73,7 +73,7 @@ type AlwaysChangeStorage = {
   bar: string;
 };
 
-export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
+export const storage = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
   version: 3, // It defaults to 1 when not passed in, and now we can upgrade it to 3
   preVersion: 1, // For cross-version upgrade, this configuration item is required, it represents the version number before the upgrade

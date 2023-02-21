@@ -12,7 +12,7 @@ type AlwaysChangeStorage = {
   foo: string;
 };
 
-export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
+export const storage = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
   initial: { foo: 'Why is it always change?' },
 });
@@ -48,7 +48,7 @@ type AlwaysChangeStorage = {
   bar: string;
 };
 
-export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
+export const storage = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
   version: 2, // 它在未传入时默认为1，现在我们可以将它升级为2
   initial: { bar: "I don't know." }, // 现在您可以安全地修改这里的值了
@@ -71,7 +71,7 @@ type AlwaysChangeStorage = {
   bar: string;
 };
 
-export const { useStorage } = createLocalStorage<AlwaysChangeStorage>({
+export const storage = createLocalStorage<AlwaysChangeStorage>({
   storageModuleKey: 'always_change_storage',
   version: 3, // 它在未传入时默认为1，现在我们可以将它升级为3
   preVersion: 1, // 跨版本升级时，该配置项为必选项，表示升级前的版本号

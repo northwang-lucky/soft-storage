@@ -13,7 +13,7 @@ type UnprotectedStorage = {
   num?: number;
 };
 
-export const { useStorage } = createLocalStorage<UnprotectedStorage>({
+export const storage = createLocalStorage<UnprotectedStorage>({
   storageModuleKey: 'unprotected_storage_key',
   initial: { str: '' },
 });
@@ -48,7 +48,7 @@ type ProtectedStorage = {
   num?: number;
 };
 
-export const { useStorage } = createLocalStorage<ProtectedStorage>({
+export const storage = createLocalStorage<ProtectedStorage>({
   storageModuleKey: 'protected_storage_key',
   protect: true, // 只需要把它设为true
   initial: { str: '' },

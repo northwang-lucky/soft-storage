@@ -6,26 +6,28 @@ Smart Storage 提供了 hook 函数 `useStorageHelper`，可以使用存储模�
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks'; // 或@smart-storage/react-hooks
+import { createLocalStorage } from '@smart-storage/vue-hooks';
+// import { createLocalStorage } from '@smart-storage/react-hooks';
 
 type UserInfo = {
   token?: string;
   hasSigned: boolean;
 };
 
-export const { useStorageHelper } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
 ```
 
-现在，您可以在组件中使用 hook（React 与 Vue 相同）：
+现在，您可以在组件中使用 `useStorageHelper` hook（React 与 Vue 相同）：
 
 ```vue
 <script setup lang="ts">
-import { useStorageHelper } from './storage';
+import { useStorageHelper } from '@smart-storage/vue-hooks';
+import { storage } from './storage';
 
-const storageHelper = useStorageHelper();
+const storageHelper = useStorageHelper(storage);
 
 // 获取存储模块的大小（存储键的总数）
 storageHelper.size();
@@ -47,7 +49,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorageHelper } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
@@ -56,9 +58,10 @@ export const { useStorageHelper } = createLocalStorage<UserInfo>({
 在任一地方使用:
 
 ```ts
-import { useStorageHelper } from './storage.ts';
+import { useStorageHelper } from '@smart-storage/hooks';
+import { storage } from './storage';
 
-const storageHelper = useStorageHelper();
+const storageHelper = useStorageHelper(storage);
 
 // 获取存储模块的大小(存储键的总数)
 storageHelper.size();
@@ -71,5 +74,5 @@ storageHelper.initialize();
 ## 关于 clear() API
 
 ::: tip
-`storageHelper.clear()` 是不受支持的 API。点击 [常见问题 > 关于remove()和clear()函数](./../other/questions-and-answers.html#关于-remove-和-clear-方法) 了解更多。
+`storageHelper.clear()` 是不受支持的 API。点击 [常见问题 > 关于 remove()和 clear()函数](./../other/questions-and-answers.html#关于-remove-和-clear-方法) 了解更多。
 :::

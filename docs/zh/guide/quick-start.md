@@ -57,7 +57,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   // 存储键
   storageModuleKey: 'user_info',
   // 用于初始化
@@ -74,14 +74,15 @@ export const { useStorage } = createLocalStorage<UserInfo>({
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
-import { useStorage } from './storage';
+import { useStorage } from '@smart-storage/vue-hooks';
+import { storage } from './storage';
 
 /* 在Typescript的帮助下，您可以轻松地解构hook的返回值 */
 const {
   refs: { token, hasSigned },
   resetters: { resetToken, resetHasSigned },
   checkers: { containsToken, containsHasSigned },
-} = useStorage();
+} = useStorage(storage);
 
 onMounted(() => {
   getUserInfo().then(res => {
@@ -148,7 +149,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createSessionStorage<UserInfo>({
+export const storage = createSessionStorage<UserInfo>({
   // 存储键
   storageModuleKey: 'user_info',
   // 用于初始化
@@ -164,14 +165,15 @@ export const { useStorage } = createSessionStorage<UserInfo>({
 ```tsx
 import React, { useEffect } from 'react';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
-import { useStorage } from './storage';
+import { useStorage } from '@smart-storage/react-hooks';
+import { storage } from './storage';
 
 function UserInfoFC() {
   /* 在Typescript的帮助下，您可以轻松地解构hook的返回值 */
   const {
     tokenState: { token, setToken, resetToken, containsToken },
     hasSignedState: { hasSigned, setHasSigned, resetHasSigned, containsHasSigned },
-  } = useStorage();
+  } = useStorage(storage);
 
   useEffect(() => {
     getUserInfo().then(res => {
@@ -242,7 +244,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createSessionStorage<UserInfo>({
+export const storage = createSessionStorage<UserInfo>({
   // 存储键
   storageModuleKey: 'user_info',
   // 用于初始化
@@ -257,9 +259,10 @@ export const { useStorage } = createSessionStorage<UserInfo>({
 
 ```ts
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
-import { useStorage } from './storage';
+import { useStorage } from '@smart-storage/hooks';
+import { storage } from './storage';
 
-const { token, hasSigned } = useStorage();
+const { token, hasSigned } = useStorage(storage);
 
 (() => {
   getUserInfo().then(res => {

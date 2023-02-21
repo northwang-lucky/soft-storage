@@ -11,7 +11,7 @@ Create a storage module by `localStorage`.
 ### Type
 
 ```ts
-function createLocalStorage<T>(options: CreateStorageOptions<T>): CreateStorage<T>;
+function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
 
 ### Parameters
@@ -36,14 +36,7 @@ function createLocalStorage<T>(options: CreateStorageOptions<T>): CreateStorage<
 
 ### Return Value
 
-The function returns an object containing two hooks, [`useStorage`](#usestorage) and [`useStorageHelper`](#usestoragehelper).
-
-```ts
-type CreateStorage<T> = {
-  useStorage: UseStorage<T>;
-  useStorageHelper: UseStorageHelper;
-};
-```
+The function returns an object ([`SmartStorage`](type-definition/react-hooks.html#smartstorage)) that includes some required variables for [`useStorage`](#usestorage) and [`useStorageHelper`](#usestoragehelper).
 
 ### Example
 
@@ -53,7 +46,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
@@ -66,7 +59,7 @@ Create a storage module by `sessionStorage`.
 ### Type
 
 ```ts
-function createSessionStorage<T>(options: CreateStorageOptions<T>): CreateStorage<T>;
+function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
 
 ### Parameters
@@ -85,7 +78,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createSessionStorage<UserInfo>({
+export const storage = createSessionStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
@@ -98,8 +91,14 @@ Get `states`, `setters`, `resetters` and `checkers` from storage module.
 ### Type
 
 ```ts
-type UseStorage<T> = () => StorageStates<T>;
+function useStorage<T>(storage: SmartStorage<T>): StorageStates<T>;
 ```
+
+### Parameters
+
+- `storage: SmartStorage<T>`
+
+  An object returned by [`createLocalStorage`](#createlocalstorage) or [`createSessionStorage`](#createsessionstorage).
 
 ### Return Value
 
@@ -153,9 +152,10 @@ type StorageState<T, K extends keyof T> = {
 ### Example
 
 ```ts
+import { storage } from './storage';
 const {
   tokenState: { token, setToken, resetToken, containsToken },
-} = useStorage();
+} = useStorage(storage);
 ```
 
 ## useStorageHelper()
@@ -165,7 +165,7 @@ Get instance of storage module helper.
 ### Type
 
 ```ts
-type UseStorageHelper = () => StorageHelper;
+function useStorageHelper<T>(storage: SmartStorage<T>): StorageHelper;
 ```
 
 ### Return Value
@@ -181,5 +181,6 @@ type StorageHelper = {
 ### Example
 
 ```ts
-const storageHelper = useStorageHelper();
+import { storage } from './storage';
+const storageHelper = useStorageHelper(storage);
 ```

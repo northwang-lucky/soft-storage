@@ -36,7 +36,7 @@ export type Consumer<T> = (arg: T) => void;
 export type BiConsumer<T extends Array<unknown>> = (...arg: T) => void;
 ```
 
-<hr :style="{ marginTop: '62px' }" />
+<Divider />
 
 ## StorageModuleSchema
 
@@ -44,7 +44,37 @@ export type BiConsumer<T extends Array<unknown>> = (...arg: T) => void;
 type StorageModuleSchema = Record<string, unknown>;
 ```
 
-<hr :style="{ marginTop: '62px' }" />
+## Initial
+
+```ts
+type Initial<T extends object> = PickNonNullable<T> extends T ? PickNonNullable<T> : never;
+```
+
+## ResetterKey
+
+```ts
+type ResetterKey<T> = PrefixedKey<T, 'reset'>;
+```
+
+## CheckerKey
+
+```ts
+type CheckerKey<T> = PrefixedKey<T, 'contains'>;
+```
+
+## Resetter
+
+```ts
+type Resetter = () => void;
+```
+
+## Checker
+
+```ts
+type Checker = () => boolean;
+```
+
+<Divider />
 
 ## PrefixedKey
 
@@ -82,31 +112,7 @@ type PrefixedKeys<T, Prefix extends string> = PrefixedKey<keyof T, Prefix>;
 type SuffixedKeys<T, Suffix extends string> = SuffixedKey<keyof T, Suffix>;
 ```
 
-## ResetterKey
-
-```ts
-type ResetterKey<T> = PrefixedKey<T, 'reset'>;
-```
-
-## CheckerKey
-
-```ts
-type CheckerKey<T> = PrefixedKey<T, 'contains'>;
-```
-
-## Resetter
-
-```ts
-type Resetter = () => void;
-```
-
-## Checker
-
-```ts
-type Checker = () => boolean;
-```
-
-<hr :style="{ marginTop: '62px' }" />
+<Divider />
 
 ## IsOptional
 

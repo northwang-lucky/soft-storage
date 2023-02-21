@@ -11,7 +11,7 @@ extractApiHeaders: [2]
 ### 类型
 
 ```ts
-function createLocalStorage<T>(options: CreateStorageOptions<T>): CreateStorage<T>;
+function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
 
 ### 参数
@@ -35,14 +35,7 @@ function createLocalStorage<T>(options: CreateStorageOptions<T>): CreateStorage<
 
 ### 返回值
 
-返回一个包含两个钩子函数（[`useStorage`](#usestorage) 和 [`useStorageHelper`](#usestoragehelper)）的对象
-
-```ts
-type CreateStorage<T> = {
-  useStorage: UseStorage<T>;
-  useStorageHelper: UseStorageHelper;
-};
-```
+返回一个对象（[`SmartStorage`](type-definition/react-hooks.html#smartstorage)），该对象包括[`useStorage`](#usestorage) 和 [`useStorageHelper`](#usestoragehelper)所必需的变量
 
 ### 示例
 
@@ -52,7 +45,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createLocalStorage<UserInfo>({
+export const storage = createLocalStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
@@ -65,7 +58,7 @@ export const { useStorage } = createLocalStorage<UserInfo>({
 ### 类型
 
 ```ts
-function createSessionStorage<T>(options: CreateStorageOptions<T>): CreateStorage<T>;
+function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
 
 ### 参数
@@ -84,7 +77,7 @@ type UserInfo = {
   hasSigned: boolean;
 };
 
-export const { useStorage } = createSessionStorage<UserInfo>({
+export const storage = createSessionStorage<UserInfo>({
   storageModuleKey: 'user_info',
   initial: { hasSigned: false },
 });
@@ -97,8 +90,14 @@ export const { useStorage } = createSessionStorage<UserInfo>({
 ### 类型
 
 ```ts
-type UseStorage<T> = () => StorageReactions<T>;
+function useStorage<T>(storage: SmartStorage<T>): StorageReactions<T>;
 ```
+
+### 参数
+
+- `storage: SmartStorage<T>`
+
+  [`createLocalStorage`](#createlocalstorage)或者[`createSessionStorage`](#createsessionstorage)返回的对象
 
 ### 返回值
 
@@ -119,11 +118,12 @@ type StorageReactions<T> = {
 ### 示例
 
 ```ts
+import { storage } from './storage';
 const {
   refs: { token },
   resetters: { resetToken },
   checkers: { containsToken },
-} = useStorage();
+} = useStorage(storage);
 ```
 
 ## useStorageHelper()
@@ -133,7 +133,7 @@ const {
 ### 类型
 
 ```ts
-type UseStorageHelper = () => StorageHelper;
+function useStorageHelper<T>(storage: SmartStorage<T>): StorageHelper;
 ```
 
 ### 返回值
@@ -149,5 +149,6 @@ type StorageHelper = {
 ### 示例
 
 ```ts
-const storageHelper = useStorageHelper();
+import { storage } from './storage';
+const storageHelper = useStorageHelper(storage);
 ```
