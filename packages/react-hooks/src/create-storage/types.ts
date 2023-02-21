@@ -1,43 +1,13 @@
+import { StorageHelper, StorageItem } from '@smart-storage/hooks';
+import { StorageModuleSchema } from '@smart-storage/shared';
 import { Dispatch, SetStateAction } from 'react';
-import { StorageHelper } from '@smart-storage/hooks';
-import {
-  Checker,
-  CheckerKey,
-  PrefixedKey,
-  Resetter,
-  ResetterKey,
-  RestoreSuffixedKey,
-  StorageModuleSchema,
-  SuffixedKeys,
-} from '@smart-storage/shared';
 
 export type Setter<T> = Dispatch<SetStateAction<T>>;
-export type SetterKey<T> = PrefixedKey<T, 'set'>;
-
-export type StorageState<T extends StorageModuleSchema, K extends keyof T> = {
-  [Key in K]: T[K];
-} & {
-  [Key in SetterKey<K>]: Setter<T[K]>;
-} & {
-  [Key in ResetterKey<K>]: Resetter;
-} & {
-  [Key in CheckerKey<K>]: Checker;
-};
-
-export type StateKey<T extends StorageModuleSchema> = SuffixedKeys<T, 'state'>;
-export type StorageStates<T extends StorageModuleSchema> = {
-  [SK in StateKey<T>]: RestoreSuffixedKey<SK, 'state'> extends keyof T
-    ? StorageState<T, RestoreSuffixedKey<SK, 'state'>>
-    : never;
-};
-
 export type UseState<T> = [T, Setter<T>];
 
-export type UseStorage<T extends StorageModuleSchema> = () => StorageStates<T>;
-
-export type UseStorageHelper = () => StorageHelper;
-
-export type CreateStorage<T extends StorageModuleSchema> = {
-  useStorage: UseStorage<T>;
-  useStorageHelper: UseStorageHelper;
+export type SmartStorage<T extends StorageModuleSchema> = {
+  storage: Required<{ [K in keyof T]: StorageItem<T, K> }>;
+  storageHelper: StorageHelper;
+  itemStateDict: Record<keyof T, UseState<T[keyof T]>>;
+  properties: (keyof T)[];
 };

@@ -18,13 +18,7 @@
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "no-extend-native": "off",
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": ["result", "itemRef"]
-      }
-    ],
+    "no-param-reassign": "off",
     "no-plusplus": "off",
     "no-underscore-dangle": "off",
     "no-void": "off",

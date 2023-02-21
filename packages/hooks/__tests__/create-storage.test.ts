@@ -1,5 +1,4 @@
-import { createLocalStorage, createSessionStorage } from '../src';
-import { UseStorage, UseStorageHelper } from '../src/create-storage/types';
+import { createLocalStorage, createSessionStorage, SmartStorage, useStorage, useStorageHelper } from '../src';
 
 type TestStorage = {
   str?: string;
@@ -7,9 +6,9 @@ type TestStorage = {
   bool: boolean;
 };
 
-function useTestCase(useStorage: UseStorage<TestStorage>, useStorageHelper: UseStorageHelper): void {
-  const { str, num, bool } = useStorage();
-  const storageHelper = useStorageHelper();
+function useTestCase(storage: SmartStorage<TestStorage>): void {
+  const { str, num, bool } = useStorage(storage);
+  const storageHelper = useStorageHelper(storage);
 
   str.set('string');
   expect(str.get()).toBe('string');
@@ -47,30 +46,30 @@ function useTestCase(useStorage: UseStorage<TestStorage>, useStorageHelper: UseS
 }
 
 test('createLocalStorage', () => {
-  const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>({
+  const storage = createLocalStorage<TestStorage>({
     storageModuleKey: 'createLocalStorageTest',
     initial: { bool: true },
   });
-  useTestCase(useStorage, useStorageHelper);
+  useTestCase(storage);
 });
 
 test('createSessionStorage', () => {
-  const { useStorage, useStorageHelper } = createSessionStorage<TestStorage>({
+  const storage = createSessionStorage<TestStorage>({
     storageModuleKey: 'createSessionStorageTest',
     initial: { bool: true },
   });
-  useTestCase(useStorage, useStorageHelper);
+  useTestCase(storage);
 });
 
 test('storageProtect', () => {
-  const { useStorage } = createSessionStorage<TestStorage>({
+  const storage = createSessionStorage<TestStorage>({
     storageModuleKey: 'storageProtectTest',
     protect: true,
     initial: { bool: true },
   });
 
   ((): void => {
-    const { bool } = useStorage();
+    const { bool } = useStorage(storage);
     try {
       window.sessionStorage.setItem('storageProtectTest', '123');
     } catch (err: any) {
@@ -98,27 +97,27 @@ test('storageVersion', () => {
     initial: { key: 1 },
   });
 
-  const { useStorageHelper } = createSessionStorage({
+  const storage = createSessionStorage({
     storageModuleKey: 'storageVersionKey',
     version: 2,
     initial: { newKey: 1 },
   });
 
   ((): void => {
-    const storageHelper = useStorageHelper();
+    const storageHelper = useStorageHelper(storage);
     expect(storageHelper.contains('newKey')).toBe(true);
     expect(storageHelper.contains('key')).toBe(false);
   })();
 });
 
 test('storagePreVersion', () => {
-  const { useStorageHelper } = createLocalStorage({
+  const storage = createLocalStorage({
     storageModuleKey: 'storagePreVersionKey',
     version: 2,
     initial: { key: 1 },
   });
 
-  const { useStorageHelper: useNewStorageHelper } = createLocalStorage({
+  const newStorage = createLocalStorage({
     storageModuleKey: 'storagePreVersionKey',
     version: 4,
     preVersion: 2,
@@ -126,8 +125,8 @@ test('storagePreVersion', () => {
   });
 
   ((): void => {
-    const storageHelper = useStorageHelper();
-    const storageNewHelper = useNewStorageHelper();
+    const storageHelper = useStorageHelper(storage);
+    const storageNewHelper = useStorageHelper(newStorage);
     expect(storageHelper.contains('key')).toBe(false);
     expect(storageNewHelper.contains('newKey')).toBe(true);
   })();

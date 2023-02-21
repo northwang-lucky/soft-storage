@@ -1,5 +1,5 @@
 import { createApp, defineComponent } from 'vue';
-import { createLocalStorage, createSessionStorage, UseStorage, UseStorageHelper } from '../src';
+import { createLocalStorage, createSessionStorage, SmartStorage, useStorage, useStorageHelper } from '../src';
 
 type TestStorage = {
   str?: string;
@@ -8,12 +8,7 @@ type TestStorage = {
   arr: number[];
 };
 
-function useTestCase(
-  useStorage: UseStorage<TestStorage>,
-  useStorageHelper: UseStorageHelper,
-  protect = false,
-  type: 'local' | 'session' = 'local'
-): void {
+function useTestCase(storage: SmartStorage<TestStorage>, type: 'local' | 'session', protect = false): void {
   const container = document.createElement('div');
   const App = defineComponent({
     template: 'vue',
@@ -22,8 +17,8 @@ function useTestCase(
         refs: { str, num, bool, arr },
         resetters: { resetNum, resetBool, resetArr },
         checkers: { containsStr, containsNum },
-      } = useStorage();
-      const storageHelper = useStorageHelper();
+      } = useStorage(storage);
+      const storageHelper = useStorageHelper(storage);
 
       /* When I tried to execute the test code with onMounted, some strange errors occurred, 
       such as not being able to trigger updates to itemRef. But it works fine in a browser environment, 
@@ -93,26 +88,26 @@ function useTestCase(
 }
 
 test('createLocalStorage', () => {
-  const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>({
+  const storage = createLocalStorage<TestStorage>({
     storageModuleKey: 'createLocalStorageTest',
     initial: { bool: true, arr: [] },
   });
-  useTestCase(useStorage, useStorageHelper);
+  useTestCase(storage, 'local');
 });
 
 test('createSessionStorage', () => {
-  const { useStorage, useStorageHelper } = createSessionStorage<TestStorage>({
+  const storage = createSessionStorage<TestStorage>({
     storageModuleKey: 'createSessionStorageTest',
     initial: { bool: true, arr: [] },
   });
-  useTestCase(useStorage, useStorageHelper);
+  useTestCase(storage, 'session');
 });
 
 test('createProtectStorage', () => {
-  const { useStorage, useStorageHelper } = createSessionStorage<TestStorage>({
+  const storage = createSessionStorage<TestStorage>({
     storageModuleKey: 'createProtectStorageTest',
     protect: true,
     initial: { bool: true, arr: [] },
   });
-  useTestCase(useStorage, useStorageHelper, true);
+  useTestCase(storage, 'session', true);
 });

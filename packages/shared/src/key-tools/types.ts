@@ -6,9 +6,3 @@ export type RestoreSuffixedKey<T, Suffix extends string> = T extends `${infer U}
 
 export type PrefixedKeys<T, Prefix extends string> = PrefixedKey<keyof T, Prefix>;
 export type SuffixedKeys<T, Suffix extends string> = SuffixedKey<keyof T, Suffix>;
-
-export type ResetterKey<T> = PrefixedKey<T, 'reset'>;
-export type CheckerKey<T> = PrefixedKey<T, 'contains'>;
-
-export type Resetter = () => void;
-export type Checker = () => boolean;

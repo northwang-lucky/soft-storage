@@ -1,6 +1,7 @@
 import { ToRef } from '@vue/reactivity';
-import { StorageHelper } from '@smart-storage/hooks';
+import { StorageHelper, StorageItem } from '@smart-storage/hooks';
 import { Checker, CheckerKey, Resetter, ResetterKey, StorageModuleSchema } from '@smart-storage/shared';
+import { Ref, UnwrapRef } from 'vue';
 
 export type StorageRefs<T extends StorageModuleSchema> = Required<{
   [K in keyof T]: ToRef<T[K]>;
@@ -12,17 +13,9 @@ export type StorageCheckers<T extends StorageModuleSchema> = {
   [K in CheckerKey<keyof T>]: Checker;
 };
 
-export type StorageReactions<T extends StorageModuleSchema> = {
-  refs: StorageRefs<T>;
-  resetters: StorageResetters<T>;
-  checkers: StorageCheckers<T>;
-};
-
-export type UseStorage<T extends StorageModuleSchema> = () => StorageReactions<T>;
-
-export type UseStorageHelper = () => StorageHelper;
-
-export type CreateStorage<T extends StorageModuleSchema> = {
-  useStorage: UseStorage<T>;
-  useStorageHelper: UseStorageHelper;
+export type SmartStorage<T extends StorageModuleSchema> = {
+  storage: Required<{ [K in keyof T]: StorageItem<T, K> }>;
+  storageHelper: StorageHelper;
+  itemRefDict: Record<keyof T, Ref<UnwrapRef<T[keyof T]>>>;
+  properties: (keyof T)[];
 };

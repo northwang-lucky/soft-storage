@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { createLocalStorage, createSessionStorage, UseStorage, UseStorageHelper } from '../src';
+import { createLocalStorage, createSessionStorage, SmartStorage, useStorage, useStorageHelper } from '../src';
 
 type TestStorage = {
   str?: string;
@@ -8,21 +8,33 @@ type TestStorage = {
   bool: boolean;
 };
 
-const { useStorage: useLocalStorage, useStorageHelper: useLocalStorageHelper } = createLocalStorage<TestStorage>({
+const localStorage = createLocalStorage<TestStorage>({
   storageModuleKey: 'createLocalStorageTest',
   initial: { bool: true },
 });
 
-const { useStorage: useSessionStorage, useStorageHelper: useSessionStorageHelper } = createSessionStorage<TestStorage>({
+const sessionStorage = createSessionStorage<TestStorage>({
   storageModuleKey: 'createSessionStorageTest',
   initial: { bool: true },
 });
 
-const { useStorage: useProtectStorage, useStorageHelper: useProtectStorageHelper } = createSessionStorage<TestStorage>({
+const protectStorage = createSessionStorage<TestStorage>({
   storageModuleKey: 'createProtectStorageTest',
   protect: true,
   initial: { bool: true },
 });
+
+const getStorage = (protect: boolean, type: 'local' | 'session'): SmartStorage<TestStorage> => {
+  let smartStorage: SmartStorage<TestStorage>;
+  if (protect) {
+    smartStorage = protectStorage;
+  } else if (type === 'local') {
+    smartStorage = localStorage;
+  } else {
+    smartStorage = sessionStorage;
+  }
+  return smartStorage;
+};
 
 function App(props: { type: 'local' | 'session'; protect: boolean }): JSX.Element {
   const { type, protect } = props;
@@ -31,14 +43,8 @@ function App(props: { type: 'local' | 'session'; protect: boolean }): JSX.Elemen
     strState: { str, setStr, containsStr },
     numState: { num, setNum, resetNum },
     boolState: { bool, setBool, resetBool },
-  } = ((): UseStorage<TestStorage> => {
-    if (protect) return useProtectStorage;
-    return type === 'local' ? useLocalStorage : useSessionStorage;
-  })()();
-  const storageHelper = ((): UseStorageHelper => {
-    if (protect) return useProtectStorageHelper;
-    return type === 'local' ? useLocalStorageHelper : useSessionStorageHelper;
-  })()();
+  } = useStorage(getStorage(protect, type));
+  const storageHelper = useStorageHelper(getStorage(protect, type));
 
   return (
     <>
