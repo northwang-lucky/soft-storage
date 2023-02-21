@@ -1,18 +1,19 @@
 <script setup lang="tsx">
+import { useStorage, useStorageHelper } from '@smart-storage/vue-hooks';
 import { ref } from 'vue';
-import { useProtectedStorage, useStorage, useStorageHelper } from './storage';
+import { storage, protectedStorage } from './storage';
 
 const {
   refs: { str, num, bool, arr, obj, nestedObj },
   resetters: { resetStr, resetNum, resetBool, resetArr, resetObj, resetNestedObj },
   checkers: { containsStr, containsNum, containsBool, containsArr, containsObj, containsNestedObj },
-} = useStorage();
+} = useStorage(storage);
 
-const storageHelper = useStorageHelper();
+const storageHelper = useStorageHelper(storage);
 
 const {
   refs: { test },
-} = useProtectedStorage();
+} = useStorage(protectedStorage);
 
 const arrItem = ref('');
 const objKey = ref('');

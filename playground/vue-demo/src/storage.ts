@@ -12,7 +12,7 @@ type TestStorage = {
   };
 };
 
-export const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>({
+export const storage = createLocalStorage<TestStorage>({
   storageModuleKey: 'vue_test_key',
   initial: {
     bool: false,
@@ -25,7 +25,7 @@ export const { useStorage, useStorageHelper } = createLocalStorage<TestStorage>(
   },
 });
 
-export const { useStorage: useProtectedStorage } = createLocalStorage<{ test: string }>({
+export const protectedStorage = createLocalStorage<{ test: string }>({
   storageModuleKey: 'vue_test_protect_key',
   protect: true,
   initial: { test: '456' },

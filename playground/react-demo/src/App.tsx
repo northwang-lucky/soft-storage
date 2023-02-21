@@ -1,5 +1,6 @@
+import { useStorage, useStorageHelper } from '@smart-storage/react-hooks';
 import { useCallback, useState } from 'react';
-import { useProtectedStorage, useStorage, useStorageHelper } from './storage';
+import { storage, protectedStorage } from './storage';
 import './App.css';
 
 function App() {
@@ -10,13 +11,13 @@ function App() {
     arrState: { arr, setArr, resetArr, containsArr },
     objState: { obj, setObj, resetObj, containsObj },
     nestedObjState: { nestedObj, setNestedObj, resetNestedObj, containsNestedObj },
-  } = useStorage();
+  } = useStorage(storage);
 
-  const storageHelper = useStorageHelper();
+  const storageHelper = useStorageHelper(storage);
 
   const {
     testState: { test, setTest },
-  } = useProtectedStorage();
+  } = useStorage(protectedStorage);
 
   const [arrItem, setArrItem] = useState('');
   const [objKey, setObjKey] = useState('');
