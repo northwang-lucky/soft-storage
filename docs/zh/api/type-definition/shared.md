@@ -44,12 +44,6 @@ export type BiConsumer<T extends Array<unknown>> = (...arg: T) => void;
 type StorageModuleSchema = Record<string, unknown>;
 ```
 
-## Initial
-
-```ts
-type Initial<T extends object> = PickNonNullable<T> extends T ? PickNonNullable<T> : never;
-```
-
 ## ResetterKey
 
 ```ts

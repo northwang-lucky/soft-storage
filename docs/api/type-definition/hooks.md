@@ -10,7 +10,7 @@ extractApiHeaders: [2]
 type SmartStorage<T> = {
   storageModule: IStorageModule<T>;
   helper: IStorageModuleHelper<T>;
-  initial: Initial<T>;
+  initial: PickNonNullable<T>;
 };
 ```
 
@@ -18,7 +18,7 @@ type SmartStorage<T> = {
 
 - [`IStorageModule`](core.html#istoragemodule)
 - [`IStorageModuleHelper`](core.html#istoragemodulehelper)
-- [`Initial`](shared.html#initial)
+- [`PickNonNullable`](shared.html#picknonnullable)
 
 </ReferencedTypes>
 
@@ -31,7 +31,7 @@ type CreateStorageBaseOptions<T> = {
   protect?: boolean;
   version?: number;
   preVersion?: number;
-  initial: PickNonNullable<T> extends T ? PickNonNullable<T> : never;
+  initial: PickNonNullable<T>;
 };
 ```
 
