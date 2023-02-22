@@ -3,5 +3,9 @@
 </template>
 
 <script>
-export default { name: 'Divider' };
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'Divider',
+});
 </script>

@@ -1,23 +1,25 @@
 <template>
   <Details>
-      <Summary>{{ summary }}</Summary>
-    <slot />
+    <Summary>{{ summary }}</Summary>
+    <slot></slot>
   </Details>
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'ReferencedTypes',
   data() {
     return {
       summary: 'Referenced Types',
-    }
+    };
   },
   beforeMount() {
     const path = location.pathname;
     if (path.indexOf('/smart-storage/docs/zh/') === 0) {
-      this.summary = '引用的类型'
+      this.summary = '引用的类型';
     }
   },
-};
+});
 </script>
