@@ -1,30 +1,36 @@
 <template>
-  <div class="h-scroller">
-    <div ref="contentRef">
-      <slot></slot>
-    </div>
-    <div
-      ref="thumbRef"
-      class="thumb"
-      :style="{ width: `${thumbWidth}px`, transform: `translateX(${thumbTranslateX}px)` }"
-    ></div>
-    <div
-      class="thumb-mask"
-      :class="{ moving: mouseDowning }"
-      :style="{
-        width: `${thumbWidth}px`,
-        transform: `translate(${thumbMaskTranslateX}px, ${thumbMaskTranslateY}px)`,
-        ...(mouseDowning
-          ? {
-              top: `${thumbMaskTop}px`,
-              left: `${thumbMaskLeft}px`,
-            }
-          : {}),
-      }"
-      @mousedown.stop="handleMouseDown"
-      @mouseup.stop="handleMouseUp"
-      @mousemove.stop="handleMouseMove"
-    ></div>
+  <div :class="{ 'h-scroller': !isMobile }">
+    <slot v-if="isMobile"></slot>
+    <template v-else>
+      <div ref="contentRef">
+        <slot></slot>
+      </div>
+      <div
+        ref="thumbRef"
+        class="thumb"
+        :style="{ width: `${thumbWidth}px`, transform: `translateX(${thumbTranslateX}px)` }"
+        @mousedown="restoreMask"
+        @mouseup="restoreMask"
+      ></div>
+      <div
+        ref="thumbMaskRef"
+        class="thumb-mask"
+        :class="{ moving: mouseDowning }"
+        :style="{
+          width: `${thumbWidth}px`,
+          transform: `translate(${thumbMaskTranslateX}px, ${thumbMaskTranslateY}px)`,
+          ...(mouseDowning
+            ? {
+                top: `${thumbMaskTop}px`,
+                left: `${thumbMaskLeft}px`,
+              }
+            : {}),
+        }"
+        @mousedown.stop="handleMouseDown"
+        @mouseup.stop="handleMouseUp"
+        @mousemove.stop="handleMouseMove"
+      ></div>
+    </template>
   </div>
 </template>
 
@@ -53,18 +59,19 @@ export default defineComponent({
       mouseDowning: false,
       prevMouseX: 0,
       prevMouseY: 0,
+
+      isMobile: false,
     };
   },
   mounted() {
-    const isMobile = 'ontouchstart' in document.documentElement;
-    if (!isMobile && this.$refs.contentRef && this.$refs.thumbRef) {
+    this.isMobile = 'ontouchstart' in document.documentElement;
+    if (!this.isMobile && this.$refs.contentRef && this.$refs.thumbRef) {
       this.getThumbWidth();
       window.addEventListener('resize', this.handleReSize);
     }
   },
   beforeDestroy() {
-    const isMobile = 'ontouchstart' in document.documentElement;
-    if (!isMobile) {
+    if (!this.isMobile) {
       window.removeEventListener('resize', this.handleReSize);
     }
   },
