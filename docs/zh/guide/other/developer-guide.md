@@ -58,3 +58,22 @@
 ```text
 feat/open-api
 ```
+
+## 目录与文件命名规范
+
+除具有约定性质的配置文件外，我们建议您采用以下的基本格式来创建和命名目录与文件：
+
+```toml
+.
+├── open-api             # 目录使用kebab-case风格命名，作为一个模块
+│   ├── index.ts         # 含有主要导出API的文件，命名为index，作为其他模块的导入源
+│   ├── types.ts         # 含有主要导出类型的文件，命名为types，作为其他模块的导入源
+│   └── useful-tools.ts  # 其他在该模块内部会用到的代码文件，也使用kebab-case风格命名
+├── ...
+```
+
+## 开发 SOP
+
+标准的开发作业流程规范可参考下面的流程图：
+
+![dev-sop](~@imgs/guide/other/developer-guide/dev-sop-zh.png)

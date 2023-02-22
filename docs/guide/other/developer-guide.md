@@ -58,3 +58,22 @@ Then, using no more than three words that explicitly express the meaning of the 
 ```text
 feat/open-api
 ```
+
+## Directories and Files Naming Conventions
+
+In addition to the conventional configuration files, we recommend that you use the following basic format for creating and naming directories and files:
+
+```toml
+.
+├── open-api             # The directory is named using the kebab-case style, as a module
+│   ├── index.ts         # The file containing the main export API, named index, that serves as an import source for other modules
+│   ├── types.ts         # A file with the main export types, named types, that serves as an import source for other modules
+│   └── useful-tools.ts  # Other code files used within the module are also named in the kebab-case style
+├── ...
+```
+
+## Development SOP
+
+The standard development workflow specification can be referred to the following flow chart:
+
+![dev-sop](~@imgs/guide/other/developer-guide/dev-sop-en.png)
