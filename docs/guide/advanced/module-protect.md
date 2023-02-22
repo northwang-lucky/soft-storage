@@ -21,7 +21,7 @@ export const storage = createLocalStorage<UnprotectedStorage>({
 
 We can then see our storage module in chrome's developer tool:
 
-![devtools-storage](~@imgs/advanced/module-protect/origin-storage.jpg)
+![devtools-storage](~@imgs/guide/advanced/module-protect/origin-storage.jpg)
 
 And then, someone writes code that looks like this:
 
@@ -31,7 +31,7 @@ window.localStorage.setItem('unprotected_storage_key', 'foo');
 
 However, we all know that once this line of code is executed, the data structure of the storage module will be destroyed:
 
-![foo-storage](~@imgs/advanced/module-protect/foo-storage.jpg)
+![foo-storage](~@imgs/guide/advanced/module-protect/foo-storage.jpg)
 
 And once the storage module is destroyed, Smart Storage will not work normally!!!
 
@@ -59,11 +59,11 @@ After opening the module protection like this, the three apis `setItem()`, `remo
 
 - When calling `localStorage.setItem('protected_storage_key', 'foo')`, you will receive an error like this:
 
-  ![set-item-error](~@imgs/advanced/module-protect/set-item-error.png)
+  ![set-item-error](~@imgs/guide/advanced/module-protect/set-item-error.png)
 
 - When calling `localStorage.removeItem('protected_storage_key')`, you will receive an error like this:
 
-  ![remove-item-error](~@imgs/advanced/module-protect/remove-item-error.png)
+  ![remove-item-error](~@imgs/guide/advanced/module-protect/remove-item-error.png)
 
 - When calling `localStorage.clear()`, **"protected_storage_key" and its corresponding value will be kept**, the others will be deleted.
 

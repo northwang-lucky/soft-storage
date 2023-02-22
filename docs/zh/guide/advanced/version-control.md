@@ -20,7 +20,7 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 
 并且，该存储模块已经在生产环境中运行：
 
-![always-change-storage-v1](~@imgs/advanced/version-control/always-change-storage-v1.png)
+![always-change-storage-v1](~@imgs/guide/advanced/version-control/always-change-storage-v1.png)
 
 有一天，您遇到了一个需求，为了实现该需求，您不得不更改存储模块中字段的名称。但是，由于该存储模块已经在生产环境中运行，如果强行更改字段名，新版本和旧版本将会出现不兼容的问题。
 
@@ -57,7 +57,7 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 
 现在存储模块是这样的：
 
-![always-change-storage-v2](~@imgs/advanced/version-control/always-change-storage-v2.png)
+![always-change-storage-v2](~@imgs/guide/advanced/version-control/always-change-storage-v2.png)
 
 ## 跨版本升级
 

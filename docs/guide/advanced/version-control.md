@@ -20,7 +20,7 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 
 And the storage module is already running in the production environment:
 
-![always-change-storage-v1](~@imgs/advanced/version-control/always-change-storage-v1.png)
+![always-change-storage-v1](~@imgs/guide/advanced/version-control/always-change-storage-v1.png)
 
 One day, you get a requirement that requires you to change the name of the field in the storage module in order to implement the requirement. However, since the storage module is already running in a production environment, if you change the field name, the new and old versions will be incompatible.
 
@@ -59,7 +59,7 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 
 And the storage will become like this:
 
-![always-change-storage-v2](~@imgs/advanced/version-control/always-change-storage-v2.png)
+![always-change-storage-v2](~@imgs/guide/advanced/version-control/always-change-storage-v2.png)
 
 ## Cross Version Upgrade
 

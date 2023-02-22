@@ -21,7 +21,7 @@ export const storage = createLocalStorage<UnprotectedStorage>({
 
 我们可以在 chrome 的开发者工具中看到我们的存储模块：
 
-![devtools-storage](~@imgs/advanced/module-protect/origin-storage.jpg)
+![devtools-storage](~@imgs/guide/advanced/module-protect/origin-storage.jpg)
 
 然后，有人写了这样的代码：
 
@@ -31,7 +31,7 @@ window.localStorage.setItem('unprotected_storage_key', 'foo');
 
 然而，我们都知道，一旦执行了这行代码，存储模块的数据结构就会被破坏：
 
-![foo-storage](~@imgs/advanced/module-protect/foo-storage.jpg)
+![foo-storage](~@imgs/guide/advanced/module-protect/foo-storage.jpg)
 
 而一旦存储模块被破坏，Smart Storage 将无法正常工作！！！
 
@@ -59,11 +59,11 @@ export const storage = createLocalStorage<ProtectedStorage>({
 
 - 当调用 `localStorage.setItem('protected_storage_key', 'foo')` 时，你会收到一个像这样的报错：
 
-  ![set-item-error](~@imgs/advanced/module-protect/set-item-error.png)
+  ![set-item-error](~@imgs/guide/advanced/module-protect/set-item-error.png)
 
 - 当调用 `localStorage.removeItem('protected_storage_key')` 时，你会收到一个像这样的报错：
 
-  ![remove-item-error](~@imgs/advanced/module-protect/remove-item-error.png)
+  ![remove-item-error](~@imgs/guide/advanced/module-protect/remove-item-error.png)
 
 - 当调用 `localStorage.clear()` 时，**“protected_storage_key” 和其关联的 value 将会被保留**，其余的将会被删除。
 
