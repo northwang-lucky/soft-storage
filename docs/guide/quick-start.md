@@ -343,7 +343,7 @@ if (!helper.getExistence()) {
 export { storageModule };
 ```
 
-### Use in any script file
+### Use in Any Script File
 
 ```ts
 import { StorageModule, StorageType } from '@smart-storage/core';
