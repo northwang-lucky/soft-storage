@@ -6,6 +6,8 @@ extractApiHeaders: [2]
 
 ## SmartStorage
 
+<CodeScroll>
+
 ```ts
 type SmartStorage<T> = {
   storageModule: IStorageModule<T>;
@@ -13,6 +15,8 @@ type SmartStorage<T> = {
   initial: PickNonNullable<T>;
 };
 ```
+
+</CodeScroll>
 
 <ReferencedTypes>
 
@@ -23,6 +27,8 @@ type SmartStorage<T> = {
 </ReferencedTypes>
 
 ## CreateStorageBaseOptions
+
+<CodeScroll>
 
 ```ts
 type CreateStorageBaseOptions<T> = {
@@ -35,6 +41,8 @@ type CreateStorageBaseOptions<T> = {
 };
 ```
 
+</CodeScroll>
+
 <ReferencedTypes>
 
 - [`StorageType`](core.html#storagetype)
@@ -44,13 +52,19 @@ type CreateStorageBaseOptions<T> = {
 
 ## CreateStorageOptions
 
+<CodeScroll>
+
 ```ts
 type CreateStorageOptions<T> = Omit<CreateStorageBaseOptions<T>, 'type'>;
 ```
 
+</CodeScroll>
+
 <Divider />
 
 ## StorageItem
+
+<CodeScroll>
 
 ```ts
 type StorageItem<T, K extends keyof T> = {
@@ -61,7 +75,11 @@ type StorageItem<T, K extends keyof T> = {
 };
 ```
 
+</CodeScroll>
+
 ## StorageInstance
+
+<CodeScroll>
 
 ```ts
 type StorageInstance<T> = Required<{
@@ -69,9 +87,13 @@ type StorageInstance<T> = Required<{
 }>;
 ```
 
+</CodeScroll>
+
 <Divider />
 
 ## StorageHelper
+
+<CodeScroll>
 
 ```ts
 type StorageHelper = {
@@ -80,3 +102,5 @@ type StorageHelper = {
   initialize: () => void;
 };
 ```
+
+</CodeScroll>

@@ -6,6 +6,8 @@
 
 项目的基本目录结构如下所示：
 
+<CodeScroll>
+
 ```toml
 .
 ├── .github        # 存放GitHub工作流配置文件
@@ -20,6 +22,8 @@
 ├── package.json
 ├── ...
 ```
+
+</CodeScroll>
 
 ## 必要条件
 
@@ -55,13 +59,19 @@
 
 然后，使用不多于 3 个能够明确表达分支中代码含义的单词，通过 `kebab-case` 的方式，与上一步所选的命名空间像这样组合：
 
+<CodeScroll>
+
 ```text
 feat/open-api
 ```
 
+</CodeScroll>
+
 ## 目录与文件命名规范
 
 除具有约定性质的配置文件外，我们建议您采用以下的基本格式来创建和命名目录与文件：
+
+<CodeScroll>
 
 ```toml
 .
@@ -71,6 +81,8 @@ feat/open-api
 │   └── useful-tools.ts  # 其他在该模块内部会用到的代码文件，也使用kebab-case风格命名
 ├── ...
 ```
+
+</CodeScroll>
 
 ## 开发 SOP
 

@@ -6,6 +6,8 @@ This article aims to help you understand the overall Smart Storage development w
 
 The basic directory structure of your project looks like this:
 
+<CodeScroll>
+
 ```toml
 .
 ├── .github        # Store the GitHub workflow profile
@@ -20,6 +22,8 @@ The basic directory structure of your project looks like this:
 ├── package.json
 ├── ...
 ```
+
+</CodeScroll>
 
 ## Contribution Prerequisites
 
@@ -55,13 +59,19 @@ You can choose a branch namespace from the following words:
 
 Then, using no more than three words that explicitly express the meaning of the code in the branch, combined with the namespace selected in the previous step, as in `kebab-case` :
 
+<CodeScroll>
+
 ```text
 feat/open-api
 ```
 
+</CodeScroll>
+
 ## Directories and Files Naming Conventions
 
 In addition to the conventional configuration files, we recommend that you use the following basic format for creating and naming directories and files:
+
+<CodeScroll>
 
 ```toml
 .
@@ -71,6 +81,8 @@ In addition to the conventional configuration files, we recommend that you use t
 │   └── useful-tools.ts  # Other code files used within the module are also named in the kebab-case style
 ├── ...
 ```
+
+</CodeScroll>
 
 ## Development SOP
 

@@ -20,25 +20,37 @@ Smart Storage 提供三种方式来管理存储：
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/vue-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/vue-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/vue-hooks
 ```
+
+</CodeScroll>
 
 :::
 
@@ -47,6 +59,8 @@ pnpm add @smart-storage/vue-hooks
 ### 创建存储模块
 
 在您的项目中随意创建一个文件:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -68,7 +82,11 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ### 在 Vue 组件中使用
+
+<CodeScroll>
 
 ```vue
 <script setup lang="ts">
@@ -104,6 +122,8 @@ const onSignOut = () => {
 </template>
 ```
 
+</CodeScroll>
+
 ## React 用户 <Badge text="react >= 16.8.0" />
 
 ### 安装
@@ -112,25 +132,37 @@ const onSignOut = () => {
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/react-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/react-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/react-hooks
 ```
+
+</CodeScroll>
 
 :::
 
@@ -139,6 +171,8 @@ pnpm add @smart-storage/react-hooks
 ### 创建存储模块
 
 在您的项目中随意创建一个文件:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -160,7 +194,11 @@ export const storage = createSessionStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ### 在函数式组件中使用
+
+<CodeScroll>
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -199,6 +237,8 @@ function UserInfoFC() {
 export default UserInfoFC;
 ```
 
+</CodeScroll>
+
 ## 独立使用
 
 ### 安装
@@ -207,25 +247,37 @@ export default UserInfoFC;
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/hooks
 ```
+
+</CodeScroll>
 
 :::
 
@@ -234,6 +286,8 @@ pnpm add @smart-storage/hooks
 ### 创建存储模块
 
 在您的项目中随意创建一个文件:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -255,7 +309,11 @@ export const storage = createSessionStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ### 在脚本中使用
+
+<CodeScroll>
 
 ```ts
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
@@ -280,6 +338,8 @@ const onSignOut = () => {
 };
 ```
 
+</CodeScroll>
+
 ## 关于 remove() API
 
 ::: tip
@@ -294,31 +354,45 @@ const onSignOut = () => {
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/core
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/core
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/core
 ```
+
+</CodeScroll>
 
 :::
 
 </CodeSwitcher>
 
 ### 创建一个存储模块
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -341,7 +415,11 @@ if (!helper.getExistence()) {
 export { storageModule };
 ```
 
+</CodeScroll>
+
 ### 在脚本中使用
+
+<CodeScroll>
 
 ```ts
 import { StorageModule, StorageType } from '@smart-storage/core';
@@ -373,6 +451,8 @@ const onSignOut = () => {
   console.log(storageModule.size()); // 0
 };
 ```
+
+</CodeScroll>
 
 ## Next
 

@@ -6,19 +6,29 @@ extractApiHeaders: [2]
 
 ## Setter
 
+<CodeScroll>
+
 ```ts
 // React.useState返回值的第二个元素的类型
 type Setter<T> = Dispatch<SetStateAction<T>>;
 ```
 
+</CodeScroll>
+
 ## UseState
+
+<CodeScroll>
 
 ```ts
 // React.useState的返回值
 type UseState<T> = [T, Setter<T>];
 ```
 
+</CodeScroll>
+
 ## SmartStorage
+
+<CodeScroll>
 
 ```ts
 type SmartStorage<T> = {
@@ -28,6 +38,8 @@ type SmartStorage<T> = {
   properties: (keyof T)[];
 };
 ```
+
+</CodeScroll>
 
 <ReferencedTypes>
 
@@ -40,9 +52,13 @@ type SmartStorage<T> = {
 
 ## SetterKey
 
+<CodeScroll>
+
 ```ts
 type SetterKey<T> = PrefixedKey<T, 'set'>;
 ```
+
+</CodeScroll>
 
 <ReferencedTypes>
 
@@ -51,6 +67,8 @@ type SetterKey<T> = PrefixedKey<T, 'set'>;
 </ReferencedTypes>
 
 ## StorageState
+
+<CodeScroll>
 
 ```ts
 type StorageState<T, K extends keyof T> = {
@@ -64,6 +82,8 @@ type StorageState<T, K extends keyof T> = {
 };
 ```
 
+</CodeScroll>
+
 <ReferencedTypes>
 
 - [`ResetterKey`](shared.html#resetterkey)
@@ -75,9 +95,13 @@ type StorageState<T, K extends keyof T> = {
 
 ## StateKey
 
+<CodeScroll>
+
 ```ts
 type StateKey<T> = SuffixedKeys<T, 'state'>;
 ```
+
+</CodeScroll>
 
 <ReferencedTypes>
 
@@ -87,6 +111,8 @@ type StateKey<T> = SuffixedKeys<T, 'state'>;
 
 ## StorageStates
 
+<CodeScroll>
+
 ```ts
 type StorageStates<T> = {
   [SK in StateKey<T>]: RestoreSuffixedKey<SK, 'state'> extends keyof T
@@ -94,6 +120,8 @@ type StorageStates<T> = {
     : never;
 };
 ```
+
+</CodeScroll>
 
 <Divider />
 

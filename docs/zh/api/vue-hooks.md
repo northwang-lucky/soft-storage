@@ -10,13 +10,19 @@ extractApiHeaders: [2]
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
 
+</CodeScroll>
+
 ### 参数
 
 - `options: CreateStorageOptions<T>`
+
+  <CodeScroll>
 
   ```ts
   type CreateStorageOptions<T> = {
@@ -33,11 +39,15 @@ function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T
   };
   ```
 
+  </CodeScroll>
+
 ### 返回值
 
 返回一个对象（[`SmartStorage`](type-definition/react-hooks.html#smartstorage)），该对象包括[`useStorage`](#usestorage) 和 [`useStorageHelper`](#usestoragehelper)所必需的变量
 
 ### 示例
+
+<CodeScroll>
 
 ```ts
 type UserInfo = {
@@ -51,15 +61,21 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ## createSessionStorage()
 
 使用 `sessionStorage` 创建一个存储模块
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -70,6 +86,8 @@ function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage
 与 [`createLocalStorage() > 返回值`](#返回值) 相同
 
 ### 示例
+
+<CodeScroll>
 
 ```ts
 type UserInfo = {
@@ -83,15 +101,21 @@ export const storage = createSessionStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ## useStorage()
 
 从存储模块中获取 `refs`、`resetters` 和 `checkers`
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function useStorage<T>(storage: SmartStorage<T>): StorageReactions<T>;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -107,6 +131,8 @@ function useStorage<T>(storage: SmartStorage<T>): StorageReactions<T>;
 - [`resetters: StorageResetters<T>`](type-definition/vue-hooks.html#storageresetters)
 - [`checkers: StorageCheckers<T>`](type-definition/vue-hooks.html#storagecheckers)
 
+<CodeScroll>
+
 ```ts
 type StorageReactions<T> = {
   refs: StorageRefs<T>;
@@ -115,7 +141,11 @@ type StorageReactions<T> = {
 };
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 import { storage } from './storage';
@@ -126,17 +156,25 @@ const {
 } = useStorage(storage);
 ```
 
+</CodeScroll>
+
 ## useStorageHelper()
 
 获取存储模块助手的实例
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function useStorageHelper<T>(storage: SmartStorage<T>): StorageHelper;
 ```
 
+</CodeScroll>
+
 ### 返回值
+
+<CodeScroll>
 
 ```ts
 type StorageHelper = {
@@ -146,9 +184,15 @@ type StorageHelper = {
 };
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 import { storage } from './storage';
 const storageHelper = useStorageHelper(storage);
 ```
+
+</CodeScroll>

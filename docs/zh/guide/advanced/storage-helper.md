@@ -4,6 +4,8 @@ Smart Storage 提供了 hook 函数 `useStorageHelper`，可以使用存储模�
 
 ## Vue 和 React 用户
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -20,7 +22,11 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 现在，您可以在组件中使用 `useStorageHelper` hook（React 与 Vue 相同）：
+
+<CodeScroll>
 
 ```vue
 <script setup lang="ts">
@@ -38,7 +44,11 @@ storageHelper.initialize();
 </script>
 ```
 
+</CodeScroll>
+
 ## 独立使用
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -55,7 +65,11 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 在任一地方使用:
+
+<CodeScroll>
 
 ```ts
 import { useStorageHelper } from '@smart-storage/hooks';
@@ -70,6 +84,8 @@ storageHelper.contains('nonexistent');
 // 将存储模块恢复到其初始状态（即创建存储模块时为初始化选项提供的值）
 storageHelper.initialize();
 ```
+
+</CodeScroll>
 
 ## 关于 clear() API
 

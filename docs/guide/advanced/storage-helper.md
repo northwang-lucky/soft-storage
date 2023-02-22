@@ -4,6 +4,8 @@ Smart Storage provides a hook function called `useStorageHelper` to use the othe
 
 ## For Vue and React
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -20,7 +22,11 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 Now, you can use the `useStorageHelper` hook in a component (React is the same as Vue):
+
+<CodeScroll>
 
 ```vue
 <script setup lang="ts">
@@ -39,7 +45,11 @@ storageHelper.initialize();
 </script>
 ```
 
+</CodeScroll>
+
 ## For Standalone Use
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -56,7 +66,11 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 Use anywhere:
+
+<CodeScroll>
 
 ```ts
 import { useStorageHelper } from '@smart-storage/hooks';
@@ -72,6 +86,8 @@ storageHelper.contains('nonexistent');
 // (that is, the value of the initial attribute when the storage module was created)
 storageHelper.initialize();
 ```
+
+</CodeScroll>
 
 ## How about `clear()` API?
 

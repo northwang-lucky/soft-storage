@@ -4,6 +4,8 @@
 
 We have used the `createLocalStorage` API to create a storage module whose key content is "unprotected_storage_key":
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -19,15 +21,21 @@ export const storage = createLocalStorage<UnprotectedStorage>({
 });
 ```
 
+</CodeScroll>
+
 We can then see our storage module in chrome's developer tool:
 
 ![devtools-storage](~@imgs/guide/advanced/module-protect/origin-storage.jpg)
 
 And then, someone writes code that looks like this:
 
+<CodeScroll>
+
 ```ts
 window.localStorage.setItem('unprotected_storage_key', 'foo');
 ```
+
+</CodeScroll>
 
 However, we all know that once this line of code is executed, the data structure of the storage module will be destroyed:
 
@@ -38,6 +46,8 @@ And once the storage module is destroyed, Smart Storage will not work normally!!
 ## How to Solve?
 
 To prevent the data structure of the storage module from being corrupted, Smart Storage provides a configuration item that prevents the storage API from making the original call to the storage module key:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -54,6 +64,8 @@ export const storage = createLocalStorage<ProtectedStorage>({
   initial: { str: '' },
 });
 ```
+
+</CodeScroll>
 
 After opening the module protection like this, the three apis `setItem()`, `removeItem()` and `clear()` will be overridden by `Proxy` (let's say we're using `localStorage`):
 

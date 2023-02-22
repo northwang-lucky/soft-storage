@@ -10,9 +10,13 @@ Create a `Proxy` instance.
 
 ### Type
 
+<CodeScroll>
+
 ```ts
 function createProxy<T extends object = object, R = T>(target: T, handler: ProxyHandler<T>): R;
 ```
+
+</CodeScroll>
 
 ### Parameters
 
@@ -29,6 +33,8 @@ function createProxy<T extends object = object, R = T>(target: T, handler: Proxy
 Proxy-wrapped object.
 
 ### Example
+
+<CodeScroll>
 
 ```ts
 type Greeter = {
@@ -50,15 +56,21 @@ const proxy = createProxy<object, Greeter>(
 proxy.hello(); // Output: hello
 ```
 
+</CodeScroll>
+
 ## restorePrefixedString()
 
 Restore a prefixed string.
 
 ### Type
 
+<CodeScroll>
+
 ```ts
 function restorePrefixedString(target: string, prefix: string, uncapitalize?: boolean): string;
 ```
+
+</CodeScroll>
 
 ### Parameters
 
@@ -80,10 +92,14 @@ Restored string.
 
 ### Example
 
+<CodeScroll>
+
 ```ts
 const prefixed = 'setToken';
 const key = restorePrefixedString(prefixed, 'set'); // key = 'token'
 ```
+
+</CodeScroll>
 
 ## restoreSuffixedString()
 
@@ -91,9 +107,13 @@ Restore a suffixed string.
 
 ### Type
 
+<CodeScroll>
+
 ```ts
 function restoreSuffixedString(target: string, suffix: string, autoCapitalizeSuffix?: boolean): string;
 ```
+
+</CodeScroll>
 
 ### Parameters
 
@@ -115,7 +135,11 @@ Restored string.
 
 ### Example
 
+<CodeScroll>
+
 ```ts
 const suffixed = 'tokenState';
 const key = restoreSuffixedString(suffixed, 'state'); // key = 'token'
 ```
+
+</CodeScroll>

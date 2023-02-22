@@ -10,9 +10,13 @@ extractApiHeaders: [2]
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function createProxy<T extends object = object, R = T>(target: T, handler: ProxyHandler<T>): R;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -29,6 +33,8 @@ function createProxy<T extends object = object, R = T>(target: T, handler: Proxy
 代理包装过的对象
 
 ### 示例
+
+<CodeScroll>
 
 ```ts
 type Greeter = {
@@ -50,15 +56,21 @@ const proxy = createProxy<object, Greeter>(
 proxy.hello(); // Output: hello
 ```
 
+</CodeScroll>
+
 ## restorePrefixedString()
 
 还原一个加了前缀的字符串
 
 ### Type
 
+<CodeScroll>
+
 ```ts
 function restorePrefixedString(target: string, prefix: string, uncapitalize?: boolean): string;
 ```
+
+</CodeScroll>
 
 ### Parameters
 
@@ -80,10 +92,14 @@ function restorePrefixedString(target: string, prefix: string, uncapitalize?: bo
 
 ### Example
 
+<CodeScroll>
+
 ```ts
 const prefixed = 'setToken';
 const key = restorePrefixedString(prefixed, 'set'); // key = 'token'
 ```
+
+</CodeScroll>
 
 ## restoreSuffixedString()
 
@@ -91,9 +107,13 @@ const key = restorePrefixedString(prefixed, 'set'); // key = 'token'
 
 ### Type
 
+<CodeScroll>
+
 ```ts
 function restoreSuffixedString(target: string, suffix: string, autoCapitalizeSuffix?: boolean): string;
 ```
+
+</CodeScroll>
 
 ### Parameters
 
@@ -115,7 +135,11 @@ function restoreSuffixedString(target: string, suffix: string, autoCapitalizeSuf
 
 ### Example
 
+<CodeScroll>
+
 ```ts
 const suffixed = 'tokenState';
 const key = restoreSuffixedString(suffixed, 'state'); // key = 'token'
 ```
+
+</CodeScroll>

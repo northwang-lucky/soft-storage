@@ -20,25 +20,37 @@ Attention please! You should never use `interface` to define a type in Smart Sto
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/vue-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/vue-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/vue-hooks
 ```
+
+</CodeScroll>
 
 :::
 
@@ -47,6 +59,8 @@ pnpm add @smart-storage/vue-hooks
 ### Create a Storage Module
 
 Create a new file anywhere, and use like this:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -68,7 +82,11 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ### Use Hooks in Component
+
+<CodeScroll>
 
 ```vue
 <script setup lang="ts">
@@ -105,6 +123,8 @@ const onSignOut = () => {
 </template>
 ```
 
+</CodeScroll>
+
 ## For React <Badge text="react >= 16.8.0" />
 
 ### Install
@@ -113,25 +133,37 @@ const onSignOut = () => {
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/react-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/react-hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/react-hooks
 ```
+
+</CodeScroll>
 
 :::
 
@@ -140,6 +172,8 @@ pnpm add @smart-storage/react-hooks
 ### Create a Storage Module
 
 Create a new file anywhere, and use like this:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -161,7 +195,11 @@ export const storage = createSessionStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ### Use Hooks in Component
+
+<CodeScroll>
 
 ```tsx
 import React, { useEffect } from 'react';
@@ -201,6 +239,8 @@ function UserInfoFC() {
 export default UserInfoFC;
 ```
 
+</CodeScroll>
+
 ## For Standalone Use
 
 ### Install
@@ -209,25 +249,37 @@ export default UserInfoFC;
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/hooks
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/hooks
 ```
+
+</CodeScroll>
 
 :::
 
@@ -236,6 +288,8 @@ pnpm add @smart-storage/hooks
 ### Create a Storage Module
 
 Create a new file anywhere, and use like this:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -257,7 +311,11 @@ export const storage = createSessionStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ### Use Hooks in a Script File
+
+<CodeScroll>
 
 ```ts
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
@@ -282,6 +340,8 @@ const onSignOut = () => {
 };
 ```
 
+</CodeScroll>
+
 ## How about `remove()` API?
 
 ::: tip
@@ -296,31 +356,45 @@ const onSignOut = () => {
 
 ::: slot npm
 
+<CodeScroll>
+
 ```bash
 npm install @smart-storage/core
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot yarn
 
+<CodeScroll>
+
 ```bash
 yarn add @smart-storage/core
 ```
+
+</CodeScroll>
 
 :::
 
 ::: slot pnpm
 
+<CodeScroll>
+
 ```bash
 pnpm add @smart-storage/core
 ```
+
+</CodeScroll>
 
 :::
 
 </CodeSwitcher>
 
 ### Create a Storage Module
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -343,7 +417,11 @@ if (!helper.getExistence()) {
 export { storageModule };
 ```
 
+</CodeScroll>
+
 ### Use in Any Script File
+
+<CodeScroll>
 
 ```ts
 import { StorageModule, StorageType } from '@smart-storage/core';
@@ -375,6 +453,8 @@ const onSignOut = () => {
   console.log(storageModule.size()); // Output: 0
 };
 ```
+
+</CodeScroll>
 
 ## Next
 

@@ -4,6 +4,8 @@
 
 我们已经使用 `createLocalStorage` API 创建了一个 key 为“unprotected_storage_key”的存储模块：
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -19,15 +21,21 @@ export const storage = createLocalStorage<UnprotectedStorage>({
 });
 ```
 
+</CodeScroll>
+
 我们可以在 chrome 的开发者工具中看到我们的存储模块：
 
 ![devtools-storage](~@imgs/guide/advanced/module-protect/origin-storage.jpg)
 
 然后，有人写了这样的代码：
 
+<CodeScroll>
+
 ```ts
 window.localStorage.setItem('unprotected_storage_key', 'foo');
 ```
+
+</CodeScroll>
 
 然而，我们都知道，一旦执行了这行代码，存储模块的数据结构就会被破坏：
 
@@ -38,6 +46,8 @@ window.localStorage.setItem('unprotected_storage_key', 'foo');
 ## 如何解决？
 
 为了防止存储模块的数据结构被破坏，Smart Storage 提供了一个配置项，用来防止存储 API 对存储模块的 key 进行原始调用：
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -54,6 +64,8 @@ export const storage = createLocalStorage<ProtectedStorage>({
   initial: { str: '' },
 });
 ```
+
+</CodeScroll>
 
 像这样打开模块保护之后，`setItem()`, `removeItem()` 和 `clear()` 这三个 API 将会被 `Proxy` 重写（假设我们正在使用 `localStorage`）：
 

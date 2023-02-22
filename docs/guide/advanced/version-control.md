@@ -4,6 +4,8 @@
 
 Suppose we have used the `createLocalStorage` API to create a storage module whose key content is "always_change_storage":
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -17,6 +19,8 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
   initial: { foo: 'Why is it always change?' },
 });
 ```
+
+</CodeScroll>
 
 And the storage module is already running in the production environment:
 
@@ -42,6 +46,8 @@ But at the same time, **the key of the storage module will change to something l
 
 For example:
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -57,6 +63,8 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 });
 ```
 
+</CodeScroll>
+
 And the storage will become like this:
 
 ![always-change-storage-v2](~@imgs/guide/advanced/version-control/always-change-storage-v2.png)
@@ -64,6 +72,8 @@ And the storage will become like this:
 ## Cross Version Upgrade
 
 In the example in the previous section, we upgraded the version of the storage module from 1 to 2. So, can we go straight from 1 to 3? The answer is yes, you just need to pass one more configuration item:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -80,3 +90,5 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
   initial: { bar: "I don't know." }, // Now you can safely modify the values here
 });
 ```
+
+</CodeScroll>

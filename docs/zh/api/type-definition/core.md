@@ -6,6 +6,8 @@ extractApiHeaders: [2]
 
 ## StorageType
 
+<CodeScroll>
+
 ```ts
 enum StorageType {
   LOCAL = 'local',
@@ -13,7 +15,11 @@ enum StorageType {
 }
 ```
 
+</CodeScroll>
+
 ## IStorageModuleHelper
+
+<CodeScroll>
 
 ```ts
 interface IStorageModuleHelper<T> {
@@ -28,7 +34,11 @@ interface IStorageModuleHelper<T> {
 }
 ```
 
+</CodeScroll>
+
 ## IStorageModule
+
+<CodeScroll>
 
 ```ts
 interface IStorageModule<T> {
@@ -41,3 +51,5 @@ interface IStorageModule<T> {
   getHelper(): IStorageModuleHelper<T>;
 }
 ```
+
+</CodeScroll>

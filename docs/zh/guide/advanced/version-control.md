@@ -4,6 +4,8 @@
 
 假设我们已经使用 `createLocalStorage` API 创建了一个 key 为 “always_change_storage”的存储模块:
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -17,6 +19,8 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
   initial: { foo: 'Why is it always change?' },
 });
 ```
+
+</CodeScroll>
 
 并且，该存储模块已经在生产环境中运行：
 
@@ -40,6 +44,8 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 
 举个栗子：
 
+<CodeScroll>
+
 ```ts
 // storage.ts
 import { createLocalStorage } from '@smart-storage/vue-hooks';
@@ -55,6 +61,8 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 });
 ```
 
+</CodeScroll>
+
 现在存储模块是这样的：
 
 ![always-change-storage-v2](~@imgs/guide/advanced/version-control/always-change-storage-v2.png)
@@ -62,6 +70,8 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 ## 跨版本升级
 
 在上一节的示例中，我们将存储模块的版本从 1 升级到 2。那么，我们能直接从 1 升级到 3 吗？答案是可以，只需要再传递一个配置项即可:
+
+<CodeScroll>
 
 ```ts
 // storage.ts
@@ -78,3 +88,5 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
   initial: { bar: "I don't know." }, // 现在您可以安全地修改这里的值了
 });
 ```
+
+</CodeScroll>

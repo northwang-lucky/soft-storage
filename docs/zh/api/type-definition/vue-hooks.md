@@ -6,19 +6,27 @@ extractApiHeaders: [2]
 
 ## StorageRefs
 
+<CodeScroll>
+
 ```ts
 type StorageRefs<T> = Required<{
   [K in keyof T]: ToRef<T[K]>; // ToRef returns a Ref
 }>;
 ```
 
+</CodeScroll>
+
 ## StorageResetters
+
+<CodeScroll>
 
 ```ts
 type StorageResetters<T> = {
   [K in ResetterKey<keyof T>]: Resetter;
 };
 ```
+
+</CodeScroll>
 
 <ReferencedTypes>
 
@@ -29,11 +37,15 @@ type StorageResetters<T> = {
 
 ## StorageCheckers
 
+<CodeScroll>
+
 ```ts
 type StorageCheckers<T> = {
   [K in CheckerKey<keyof T>]: Checker;
 };
 ```
+
+</CodeScroll>
 
 <ReferencedTypes>
 
@@ -44,6 +56,8 @@ type StorageCheckers<T> = {
 
 ## SmartStorage
 
+<CodeScroll>
+
 ```ts
 type SmartStorage<T extends StorageModuleSchema> = {
   storage: Required<{ [K in keyof T]: StorageItem<T, K> }>;
@@ -52,6 +66,8 @@ type SmartStorage<T extends StorageModuleSchema> = {
   properties: (keyof T)[];
 };
 ```
+
+</CodeScroll>
 
 <ReferencedTypes>
 
@@ -64,6 +80,8 @@ type SmartStorage<T extends StorageModuleSchema> = {
 
 ## StorageReactions
 
+<CodeScroll>
+
 ```ts
 type StorageReactions<T> = {
   refs: StorageRefs<T>;
@@ -71,6 +89,8 @@ type StorageReactions<T> = {
   checkers: StorageCheckers<T>;
 };
 ```
+
+</CodeScroll>
 
 <Divider />
 

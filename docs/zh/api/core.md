@@ -10,9 +10,13 @@ extractApiHeaders: [2]
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 new StorageModule<T>(key: string, storageType: StorageType, noUniqueVerify?: boolean): StorageModule<T>;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -22,12 +26,16 @@ new StorageModule<T>(key: string, storageType: StorageType, noUniqueVerify?: boo
 
 - `storageType: StorageType`
 
+  <CodeScroll>
+
   ```ts
   enum StorageType {
     LOCAL = 'local',
     SESSION = 'session',
   }
   ```
+
+  </CodeScroll>
 
 - `noUniqueVerify?: boolean = false`
 
@@ -39,9 +47,13 @@ A new `StorageModule` instance.
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 const storageModule = new StorageModule('user_info', StorageType.LOCAL);
 ```
+
+</CodeScroll>
 
 ## storageModule.getItem()
 
@@ -49,9 +61,13 @@ const storageModule = new StorageModule('user_info', StorageType.LOCAL);
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 StorageModule<T>.getItem<K extends keyof T>(key: K): T[K] | undefined;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -65,9 +81,13 @@ StorageModule<T>.getItem<K extends keyof T>(key: K): T[K] | undefined;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 const token = storageModule.getItem('token');
 ```
+
+</CodeScroll>
 
 ## storageModule.setItem()
 
@@ -75,9 +95,13 @@ const token = storageModule.getItem('token');
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 StorageModule<T>.setItem<K extends keyof T>(key: K, value: T[K]): void;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -91,9 +115,13 @@ StorageModule<T>.setItem<K extends keyof T>(key: K, value: T[K]): void;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 storageModule.setItem('token', 'xxx');
 ```
+
+</CodeScroll>
 
 ## storageModule.removeItem()
 
@@ -101,9 +129,13 @@ storageModule.setItem('token', 'xxx');
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 StorageModule<T>.removeItem<K extends keyof T>(key: K): void;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -113,9 +145,13 @@ StorageModule<T>.removeItem<K extends keyof T>(key: K): void;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 storageModule.removeItem('token');
 ```
+
+</CodeScroll>
 
 ## storageModule.clear()
 
@@ -123,15 +159,23 @@ storageModule.removeItem('token');
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 StorageModule<T>.clear(): void;
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 storageModule.clear();
 ```
+
+</CodeScroll>
 
 ## storageModule.contains()
 
@@ -139,9 +183,13 @@ storageModule.clear();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 StorageModule<T>.contains(key: string): boolean
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -155,9 +203,13 @@ StorageModule<T>.contains(key: string): boolean
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 storageModule.contains('token');
 ```
+
+</CodeScroll>
 
 ## storageModule.size()
 
@@ -165,9 +217,13 @@ storageModule.contains('token');
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 StorageModule<T>.size(): number;
 ```
+
+</CodeScroll>
 
 ### 返回值
 
@@ -175,9 +231,13 @@ StorageModule<T>.size(): number;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 const size = storageModule.size();
 ```
+
+</CodeScroll>
 
 ## storageModule.getHelper()
 
@@ -185,13 +245,19 @@ const size = storageModule.size();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 StorageModule<T>.getHelper(): IStorageModuleHelper<T>;
 ```
 
+</CodeScroll>
+
 ### 返回值
 
 存储模块的 `IStorageModuleHelper` 实例
+
+<CodeScroll>
 
 ```ts
 interface IStorageModuleHelper<T> {
@@ -206,11 +272,17 @@ interface IStorageModuleHelper<T> {
 }
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 const helper = storageModule.getHelper();
 ```
+
+</CodeScroll>
 
 ## helper.getModule()
 
@@ -218,9 +290,13 @@ const helper = storageModule.getHelper();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.getModule(): T;
 ```
+
+</CodeScroll>
 
 ### 返回值
 
@@ -228,9 +304,13 @@ IStorageModuleHelper<T>.getModule(): T;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 const valueDict = helper.getModule();
 ```
+
+</CodeScroll>
 
 ## helper.setModule()
 
@@ -238,9 +318,13 @@ const valueDict = helper.getModule();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.setModule(root: T): void;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -250,9 +334,13 @@ IStorageModuleHelper<T>.setModule(root: T): void;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 helper.setModule({ token: 'xxx', hasSigned: true });
 ```
+
+</CodeScroll>
 
 ## helper.clearModule()
 
@@ -260,15 +348,23 @@ helper.setModule({ token: 'xxx', hasSigned: true });
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.clearModule(): void;
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 helper.clearModule();
 ```
+
+</CodeScroll>
 
 ## helper.getStorageKey()
 
@@ -276,9 +372,13 @@ helper.clearModule();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.getStorageKey(): string;
 ```
+
+</CodeScroll>
 
 ### 返回值
 
@@ -286,9 +386,13 @@ IStorageModuleHelper<T>.getStorageKey(): string;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 const storageModuleKey = helper.getStorageKey();
 ```
+
+</CodeScroll>
 
 ## helper.getStorageType()
 
@@ -296,11 +400,17 @@ const storageModuleKey = helper.getStorageKey();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.getStorageType(): StorageType;
 ```
 
+</CodeScroll>
+
 ### 返回值
+
+<CodeScroll>
 
 ```ts
 enum StorageType {
@@ -309,11 +419,17 @@ enum StorageType {
 }
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 const storageType = helper.getStorageType();
 ```
+
+</CodeScroll>
 
 ## helper.getExistence()
 
@@ -321,9 +437,13 @@ const storageType = helper.getStorageType();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.getExistence(): boolean;
 ```
+
+</CodeScroll>
 
 ### 返回值
 
@@ -331,9 +451,13 @@ IStorageModuleHelper<T>.getExistence(): boolean;
 
 ### 示例
 
+<CodeScroll>
+
 ```ts
 const exist = helper.getExistence();
 ```
+
+</CodeScroll>
 
 ## helper.protect()
 
@@ -341,15 +465,23 @@ const exist = helper.getExistence();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.protect(): void;
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 helper.protect();
 ```
+
+</CodeScroll>
 
 ## helper.cancelProtect()
 
@@ -357,12 +489,20 @@ helper.protect();
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 IStorageModuleHelper<T>.cancelProtect(): void;
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 helper.cancelProtect();
 ```
+
+</CodeScroll>

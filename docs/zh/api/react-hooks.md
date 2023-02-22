@@ -10,13 +10,19 @@ extractApiHeaders: [2]
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
 
+</CodeScroll>
+
 ### 参数
 
 - `options: CreateStorageOptions<T>`
+
+  <CodeScroll>
 
   ```ts
   type CreateStorageOptions<T> = {
@@ -33,11 +39,15 @@ function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T
   };
   ```
 
+  </CodeScroll>
+
 ### 返回值
 
 返回一个对象（[`SmartStorage`](type-definition/react-hooks.html#smartstorage)），该对象包括[`useStorage`](#usestorage) 和 [`useStorageHelper`](#usestoragehelper)所必需的变量
 
 ### 示例
+
+<CodeScroll>
 
 ```ts
 type UserInfo = {
@@ -51,15 +61,21 @@ export const storage = createLocalStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ## createSessionStorage()
 
 使用 `sessionStorage` 创建一个存储模块
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -70,6 +86,8 @@ function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage
 与 [`createLocalStorage() > 返回值`](#返回值) 相同
 
 ### 示例
+
+<CodeScroll>
 
 ```ts
 type UserInfo = {
@@ -83,15 +101,21 @@ export const storage = createSessionStorage<UserInfo>({
 });
 ```
 
+</CodeScroll>
+
 ## useStorage()
 
 从存储模块中获取 `states`、`setters`、`resetters` 和 `checkers`
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function useStorage<T>(storage: SmartStorage<T>): StorageStates<T>;
 ```
+
+</CodeScroll>
 
 ### 参数
 
@@ -103,6 +127,8 @@ function useStorage<T>(storage: SmartStorage<T>): StorageStates<T>;
 
 返回一个 `Record` 对象，它的 key 类型为 [`StateKey<T>`](type-definition/react-hooks.html#statekey)，值类型为 [`StorageState<T, K extends keyof T>`](type-definition/react-hooks.html#storagestate)
 
+<CodeScroll>
+
 ```ts
 type StorageStates<T> = {
   [SK in StateKey<T>]: RestoreSuffixedKey<SK, 'state'> extends keyof T
@@ -110,6 +136,8 @@ type StorageStates<T> = {
     : never;
 };
 ```
+
+</CodeScroll>
 
 ::: tip
 这里的 [`RestoreSuffixedKey<SK, 'state'>`](type-definition/shared.html#restoresuffixedkey) 用来还原 `StateKey<T>`，例如，“tokenState” 会被还原成 “token”
@@ -119,9 +147,13 @@ type StorageStates<T> = {
 
 [`StateKey<T>`](type-definition/react-hooks.html#statekey) 是一个字符串 (例如 “tokenState”):
 
+<CodeScroll>
+
 ```ts
 type StateKey<T> = SuffixedKeys<T, 'state'>;
 ```
+
+</CodeScroll>
 
 ::: tip
 这里的 [`SuffixedKeys<T, 'state'>`](type-definition/shared.html#suffixedkeys) 用来添加后缀，例如，“token” 会变成 “tokenState”
@@ -136,6 +168,8 @@ type StateKey<T> = SuffixedKeys<T, 'state'>;
 - [`resetXxx: Resetter`](type-definition/react-hooks.html#resetter)，`resetXxx` 的类型是 [`ResetterKey<K>`](type-definition/react-hooks.html#resetterkey)
 - [`containsXxx: Checker`](type-definition/react-hooks.html#checker)，`containsXxx` 的类型是 [`CheckerKey<K>`](type-definition/react-hooks.html#checkerkey)
 
+<CodeScroll>
+
 ```ts
 type StorageState<T, K extends keyof T> = {
   [Key in K]: T[K];
@@ -148,7 +182,11 @@ type StorageState<T, K extends keyof T> = {
 };
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 import { storage } from './storage';
@@ -157,17 +195,25 @@ const {
 } = useStorage(storage);
 ```
 
+</CodeScroll>
+
 ## useStorageHelper()
 
 获取存储模块助手的实例
 
 ### 类型
 
+<CodeScroll>
+
 ```ts
 function useStorageHelper<T>(storage: SmartStorage<T>): StorageHelper;
 ```
 
+</CodeScroll>
+
 ### 返回值
+
+<CodeScroll>
 
 ```ts
 type StorageHelper = {
@@ -177,9 +223,15 @@ type StorageHelper = {
 };
 ```
 
+</CodeScroll>
+
 ### 示例
+
+<CodeScroll>
 
 ```ts
 import { storage } from './storage';
 const storageHelper = useStorageHelper(storage);
 ```
+
+</CodeScroll>
