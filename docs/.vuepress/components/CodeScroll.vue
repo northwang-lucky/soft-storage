@@ -14,8 +14,12 @@
       :style="{
         width: `${thumbWidth}px`,
         transform: `translate(${thumbMaskTranslateX}px, ${thumbMaskTranslateY}px)`,
-        top: `${thumbMaskTop}px`,
-        left: `${thumbMaskLeft}px`,
+        ...(mouseDowning
+          ? {
+              top: `${thumbMaskTop}px`,
+              left: `${thumbMaskLeft}px`,
+            }
+          : {}),
       }"
       @mousedown.stop="handleMouseDown"
       @mouseup.stop="handleMouseUp"
@@ -85,9 +89,6 @@ export default defineComponent({
       }
 
       const thumbInfo = this.$refs.thumbRef.getBoundingClientRect();
-      this.thumbMaskTop = thumbInfo.y;
-      this.thumbMaskLeft = thumbInfo.x;
-
       this.thumbMaxLimitX = preWidth - this.thumbWidth;
       this.middleOfThumb = thumbInfo.x + this.thumbWidth / 2;
     },
@@ -106,6 +107,11 @@ export default defineComponent({
       this.prevMouseY = ev.y;
 
       this.restoreMask();
+
+      // Redraw mask in position: fixed
+      const thumbInfo = this.$refs.thumbRef.getBoundingClientRect();
+      this.thumbMaskTop = thumbInfo.y;
+      this.thumbMaskLeft = thumbInfo.x;
 
       // Transform mask to middle point
       this.fitMiddleDiff = ev.x - this.middleOfThumb;
@@ -173,12 +179,16 @@ export default defineComponent({
   .thumb-mask
     height 7px
     background-color rgba(255, 255, 255, 0)
-    position fixed
+    position absolute
+    bottom 0.85rem
+    left 0
     cursor pointer
     z-index 11
 
     &.moving
       height: 500px
+      position fixed
+      bottom auto
 
   .no-scroll
     overflow: hidden
