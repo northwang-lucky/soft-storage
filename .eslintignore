@@ -2,3 +2,4 @@ dist
 .gitignore
 docs
 playground
+scripts
