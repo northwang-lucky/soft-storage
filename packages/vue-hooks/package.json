@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@types/lodash": "4.14.191",
+    "standard-version": "9.5.0",
     "vue": "3.2.0"
   }
 }

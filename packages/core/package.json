@@ -45,5 +45,8 @@
   "license": "MIT",
   "dependencies": {
     "@smart-storage/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "standard-version": "9.5.0"
   }
 }
