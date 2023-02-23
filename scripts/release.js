@@ -115,7 +115,7 @@ inquirer
       if (index < commands.length - 1) {
         cmd += ' --skip.changelog true --skip.commit true --skip.tag true --scripts.postbump "git add ."';
       } else {
-        cmd += ` --infile ${changelogPath} --commit-all`;
+        cmd += ` --infile ${changelogPath} --commit-all --scripts.postchangelog "prettier -w ${changelogPath}"`;
       }
 
       const workPath = path.resolve(__dirname, `../packages/${repo}`);
