@@ -126,7 +126,7 @@ inquirer
     });
 
     if (autoPush === 'Yes') {
-      const result = sh.exec(`cd ${rootPath} && git push origin --tags && git push`);
+      const result = sh.exec(`cd ${rootPath} && git push && git push origin --tags`);
       if (result.code !== 0) {
         return Promise.reject(result.stderr);
       }
