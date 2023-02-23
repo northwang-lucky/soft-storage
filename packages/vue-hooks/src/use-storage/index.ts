@@ -1,5 +1,5 @@
 import { createProxy, Runnable, restorePrefixedString, Supplier, StorageModuleSchema } from '@smart-storage/shared';
-import { ref, Ref, UnwrapRef, watch } from 'vue';
+import { onUnmounted, ref, Ref, UnwrapRef, watch } from 'vue';
 import { StorageRefs, StorageResetters, StorageCheckers, SmartStorage } from '../create-storage/types';
 import { GetItemRefArgs, StorageReactions } from './types';
 
@@ -11,7 +11,8 @@ function getItemRef<T extends StorageModuleSchema>(
     return itemRefDict[property];
   }
   const itemRef = ref(item.get());
-  watch(itemRef, value => item.set(value as T[keyof T]), { deep: true });
+  const unwatch = watch(itemRef, value => item.set(value as T[keyof T]), { deep: true });
+  onUnmounted(() => unwatch());
   itemRefDict[property] = itemRef;
   properties.push(property);
   return itemRef;
