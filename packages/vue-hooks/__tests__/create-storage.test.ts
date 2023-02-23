@@ -1,113 +1,186 @@
-import { createApp, defineComponent } from 'vue';
+import { render, fireEvent } from '@testing-library/vue';
+import { defineComponent, PropType } from 'vue';
 import { createLocalStorage, createSessionStorage, SmartStorage, useStorage, useStorageHelper } from '../src';
 
 type TestStorage = {
   str?: string;
   num?: number;
   bool: boolean;
-  arr: number[];
+  arr: {
+    name: string;
+    age: number;
+  }[];
 };
 
-function useTestCase(storage: SmartStorage<TestStorage>, type: 'local' | 'session', protect = false): void {
-  const container = document.createElement('div');
-  const App = defineComponent({
-    template: 'vue',
-    setup() {
-      const {
-        refs: { str, num, bool, arr },
-        resetters: { resetNum, resetBool, resetArr },
-        checkers: { containsStr, containsNum },
-      } = useStorage(storage);
-      const storageHelper = useStorageHelper(storage);
+const localStorage = createLocalStorage<TestStorage>({
+  storageModuleKey: 'createLocalStorageTest',
+  initial: { bool: true, arr: [] },
+});
 
-      /* When I tried to execute the test code with onMounted, some strange errors occurred, 
-      such as not being able to trigger updates to itemRef. But it works fine in a browser environment, 
-      so I tested it directly in setup. */
+const sessionStorage = createSessionStorage<TestStorage>({
+  storageModuleKey: 'createSessionStorageTest',
+  initial: { bool: true, arr: [] },
+});
 
-      str.value = 'string';
-      expect(str.value).toBe('string');
-      expect(containsStr()).toBe(true);
+const protectStorage = createSessionStorage<TestStorage>({
+  storageModuleKey: 'createProtectStorageTest',
+  protect: true,
+  initial: { bool: true, arr: [] },
+});
 
-      expect(storageHelper.contains('num')).toBe(false);
-      expect(storageHelper.size()).toBe(3);
+const getStorage = (protect: boolean, type: 'local' | 'session'): SmartStorage<TestStorage> => {
+  let smartStorage: SmartStorage<TestStorage>;
+  if (protect) {
+    smartStorage = protectStorage;
+  } else if (type === 'local') {
+    smartStorage = localStorage;
+  } else {
+    smartStorage = sessionStorage;
+  }
+  return smartStorage;
+};
 
-      num.value = 1;
-      expect(num.value).toBe(1);
-      expect(containsNum()).toBe(true);
-      expect(storageHelper.size()).toBe(4);
+const App = defineComponent({
+  name: 'App',
+  template: /* html */ `
+    <span data-testid="str">{{ str }}</span>
+    <span data-testid="str-exist">{{ containsStr().toString() }}</span>
+    <button data-testid="str-set" type="button" @click="str = 'string'">Set str to &apos;string&apos;</button>
 
-      expect(bool.value).toBe(true);
-      resetBool();
-      expect(storageHelper.size()).toBe(4);
-      expect(bool.value).toBe(true);
+    <span data-testid="num">{{ num }}</span>
+    <button data-testid="num-set" type="button" @click="num = 1">Set num to 1</button>
+    <button data-testid="num-reset" type="button" @click="resetNum">Reset num</button>
 
-      resetNum();
-      expect(storageHelper.size()).toBe(3);
-      expect(num.value).toBe(undefined);
+    <span data-testid="bool">{{ bool.toString() }}</span>
+    <button data-testid="bool-set" type="button" @click="bool = false">Set bool to false</button>
+    <button data-testid="bool-reset" type="button" @click="resetBool">Reset bool</button>
 
-      storageHelper.initialize();
-      expect(storageHelper.size()).toBe(2);
+    <span data-testid="num-contains">{{ storageHelper.contains('num').toString() }}</span>
+    <span data-testid="size">{{ storageHelper.size() }}</span>
+    <button data-testid="initialize" type="button" @click="storageHelper.initialize">Initialize</button>
 
-      arr.value.push(1);
-      expect(arr.value).toStrictEqual([1]);
-      resetArr();
-      expect(arr.value).toStrictEqual([]);
-
-      if (protect) {
-        let windowStorage: Storage;
-        if (type === 'local') {
-          windowStorage = window.localStorage;
-        } else {
-          windowStorage = window.sessionStorage;
-        }
-
-        try {
-          windowStorage.setItem('createProtectStorageTest', '123');
-        } catch (err: any) {
-          const message = `Direct calls for setItem to "createProtectStorageTest" are disabled! Do not use the 'protect' property if this is not your preference.`;
-          expect(err.message).toBe(message);
-        }
-
-        try {
-          windowStorage.removeItem('createProtectStorageTest');
-        } catch (err: any) {
-          const message = `Direct calls for removeItem to "createProtectStorageTest" are disabled! Do not use the 'protect' property if this is not your preference.`;
-          expect(err.message).toBe(message);
-        }
-
-        expect(bool.value).toBe(true);
-
-        bool.value = false;
-        expect(bool.value).toBe(false);
-      }
-
-      return { str, num, bool };
+    <span data-testid="arr">{{ JSON.stringify(arr) }}</span>
+    <button data-testid="arr-push" @click="handleArrPush">Push</button>
+    <button data-testid="arr-reset" @click="resetArr">Reset Arr</button>
+    <button data-testid="arr-delete" @click="handleArrDelete">Delete Item</button>
+  `,
+  props: {
+    type: {
+      type: String as PropType<'local' | 'session'>,
+      required: true,
     },
-  });
-  createApp(App).mount(container);
+    protect: {
+      type: Boolean,
+      required: true,
+    },
+  },
+  setup(props) {
+    const {
+      refs: { str, num, bool, arr },
+      resetters: { resetNum, resetBool, resetArr },
+      checkers: { containsStr },
+    } = useStorage(getStorage(props.protect, props.type));
+    const storageHelper = useStorageHelper(getStorage(props.protect, props.type));
+
+    const handleArrPush = (): void => {
+      arr.value.push({ name: 'sakura', age: 18 });
+    };
+
+    const handleArrDelete = (): void => {
+      delete arr.value[0];
+    };
+
+    return {
+      str,
+      num,
+      bool,
+      arr,
+      resetNum,
+      resetBool,
+      resetArr,
+      containsStr,
+      storageHelper,
+      handleArrPush,
+      handleArrDelete,
+    };
+  },
+});
+
+async function useTestCase(type: 'local' | 'session', protect = false): Promise<void> {
+  const { getByTestId } = render(App, { props: { type, protect } });
+
+  await fireEvent.click(getByTestId('str-set'));
+  expect(getByTestId('str').textContent).toBe('string');
+  expect(getByTestId('str-exist').textContent).toBe('true');
+
+  expect(getByTestId('num-contains').textContent).toBe('false');
+  expect(getByTestId('size').textContent).toBe('3');
+
+  await fireEvent.click(getByTestId('num-set'));
+  expect(getByTestId('num').textContent).toBe('1');
+  expect(getByTestId('size').textContent).toBe('4');
+
+  expect(getByTestId('bool').textContent).toBe('true');
+  await fireEvent.click(getByTestId('bool-reset'));
+  expect(getByTestId('bool').textContent).toBe('true');
+  expect(getByTestId('size').textContent).toBe('4');
+
+  await fireEvent.click(getByTestId('num-reset'));
+  expect(getByTestId('size').textContent).toBe('3');
+  expect(getByTestId('num').textContent).toBe('');
+
+  await fireEvent.click(getByTestId('initialize'));
+  expect(getByTestId('size').textContent).toBe('2');
+
+  await fireEvent.click(getByTestId('arr-push'));
+  let arrValue = JSON.parse(getByTestId('arr').textContent ?? '[]');
+  expect(arrValue).toStrictEqual([{ name: 'sakura', age: 18 }]);
+
+  await fireEvent.click(getByTestId('arr-delete'));
+  arrValue = JSON.parse(getByTestId('arr').textContent ?? '[]');
+  expect(arrValue).toStrictEqual([null]);
+
+  await fireEvent.click(getByTestId('arr-reset'));
+  arrValue = JSON.parse(getByTestId('arr').textContent ?? '[]');
+  expect(arrValue).toStrictEqual([]);
+
+  if (protect) {
+    let windowStorage: Storage;
+    if (type === 'local') {
+      windowStorage = window.localStorage;
+    } else {
+      windowStorage = window.sessionStorage;
+    }
+
+    try {
+      windowStorage.setItem('createProtectStorageTest', '123');
+    } catch (err: any) {
+      const message = `Direct calls for setItem to "createProtectStorageTest" are disabled! Do not use the 'protect' property if this is not your preference.`;
+      expect(err.message).toBe(message);
+    }
+
+    try {
+      windowStorage.removeItem('createProtectStorageTest');
+    } catch (err: any) {
+      const message = `Direct calls for removeItem to "createProtectStorageTest" are disabled! Do not use the 'protect' property if this is not your preference.`;
+      expect(err.message).toBe(message);
+    }
+
+    expect(getByTestId('bool').textContent).toBe('true');
+
+    await fireEvent.click(getByTestId('bool-set'));
+    expect(getByTestId('bool').textContent).toBe('false');
+  }
 }
 
 test('createLocalStorage', () => {
-  const storage = createLocalStorage<TestStorage>({
-    storageModuleKey: 'createLocalStorageTest',
-    initial: { bool: true, arr: [] },
-  });
-  useTestCase(storage, 'local');
+  useTestCase('local');
 });
 
 test('createSessionStorage', () => {
-  const storage = createSessionStorage<TestStorage>({
-    storageModuleKey: 'createSessionStorageTest',
-    initial: { bool: true, arr: [] },
-  });
-  useTestCase(storage, 'session');
+  useTestCase('session');
 });
 
 test('createProtectStorage', () => {
-  const storage = createSessionStorage<TestStorage>({
-    storageModuleKey: 'createProtectStorageTest',
-    protect: true,
-    initial: { bool: true, arr: [] },
-  });
-  useTestCase(storage, 'session', true);
+  useTestCase('session', true);
 });

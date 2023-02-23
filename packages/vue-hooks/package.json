@@ -53,8 +53,9 @@
     "@smart-storage/shared": "workspace:*"
   },
   "devDependencies": {
-    "@types/lodash": "4.14.191",
+    "@testing-library/vue": "6.6.1",
+    "@vue/compiler-sfc": "3.2.47",
     "standard-version": "9.5.0",
-    "vue": "3.2.0"
+    "vue": "3.2.47"
   }
 }
