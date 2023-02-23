@@ -1,0 +1,76 @@
+name: Release & Publish
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v*
+
+env:
+  APP_NAME: Lark
+  WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+jobs:
+  notify-start:
+    runs-on: ubuntu-latest
+    name: Report Start
+    steps:
+      - name: Notify Start
+        uses: northwang-lucky/chatbot-webhook-client@v1.1.1
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          template: file://.template/lark-message-card.json
+          params: >-
+            {
+              "header_color": "blue",
+              "header_title": "Workflow Start",
+              "repository": "${{ github.repository }}",
+              "workflow": "${{ github.workflow }}",
+              "workflow_url": "${{ env.WORKFLOW_URL }}"
+            }
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Set up Node 16
+        if: success()
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Set up PNPM
+        if: success()
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
+      - name: Get PNPM Store Directory
+        id: pnpm-cache
+        if: success()
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Setup PNPM Cache
+        if: success()
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install Dependencies
+        if: success()
+        run: pnpm install
+      - name: Run Build
+        if: success()
+        run: pnpm build-only
+      - name: Run Test
+        if: success()
+        run: pnpm test:cov
+  # release:
