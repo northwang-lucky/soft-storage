@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/vue';
+import { render, fireEvent, screen } from '@testing-library/vue';
 import { defineComponent, PropType } from 'vue';
 import { createLocalStorage, createSessionStorage, SmartStorage, useStorage, useStorageHelper } from '../src';
 
@@ -107,41 +107,41 @@ const App = defineComponent({
 });
 
 async function useTestCase(type: 'local' | 'session', protect = false): Promise<void> {
-  const { getByTestId } = render(App, { props: { type, protect } });
+  render(App, { props: { type, protect } });
 
-  await fireEvent.click(getByTestId('str-set'));
-  expect(getByTestId('str').textContent).toBe('string');
-  expect(getByTestId('str-exist').textContent).toBe('true');
+  await fireEvent.click(screen.getByTestId('str-set'));
+  expect(screen.getByTestId('str').textContent).toBe('string');
+  expect(screen.getByTestId('str-exist').textContent).toBe('true');
 
-  expect(getByTestId('num-contains').textContent).toBe('false');
-  expect(getByTestId('size').textContent).toBe('3');
+  expect(screen.getByTestId('num-contains').textContent).toBe('false');
+  expect(screen.getByTestId('size').textContent).toBe('3');
 
-  await fireEvent.click(getByTestId('num-set'));
-  expect(getByTestId('num').textContent).toBe('1');
-  expect(getByTestId('size').textContent).toBe('4');
+  await fireEvent.click(screen.getByTestId('num-set'));
+  expect(screen.getByTestId('num').textContent).toBe('1');
+  expect(screen.getByTestId('size').textContent).toBe('4');
 
-  expect(getByTestId('bool').textContent).toBe('true');
-  await fireEvent.click(getByTestId('bool-reset'));
-  expect(getByTestId('bool').textContent).toBe('true');
-  expect(getByTestId('size').textContent).toBe('4');
+  expect(screen.getByTestId('bool').textContent).toBe('true');
+  await fireEvent.click(screen.getByTestId('bool-reset'));
+  expect(screen.getByTestId('bool').textContent).toBe('true');
+  expect(screen.getByTestId('size').textContent).toBe('4');
 
-  await fireEvent.click(getByTestId('num-reset'));
-  expect(getByTestId('size').textContent).toBe('3');
-  expect(getByTestId('num').textContent).toBe('');
+  await fireEvent.click(screen.getByTestId('num-reset'));
+  expect(screen.getByTestId('size').textContent).toBe('3');
+  expect(screen.getByTestId('num').textContent).toBe('');
 
-  await fireEvent.click(getByTestId('initialize'));
-  expect(getByTestId('size').textContent).toBe('2');
+  await fireEvent.click(screen.getByTestId('initialize'));
+  expect(screen.getByTestId('size').textContent).toBe('2');
 
-  await fireEvent.click(getByTestId('arr-push'));
-  let arrValue = JSON.parse(getByTestId('arr').textContent ?? '[]');
+  await fireEvent.click(screen.getByTestId('arr-push'));
+  let arrValue = JSON.parse(screen.getByTestId('arr').textContent ?? '[]');
   expect(arrValue).toStrictEqual([{ name: 'sakura', age: 18 }]);
 
-  await fireEvent.click(getByTestId('arr-delete'));
-  arrValue = JSON.parse(getByTestId('arr').textContent ?? '[]');
+  await fireEvent.click(screen.getByTestId('arr-delete'));
+  arrValue = JSON.parse(screen.getByTestId('arr').textContent ?? '[]');
   expect(arrValue).toStrictEqual([null]);
 
-  await fireEvent.click(getByTestId('arr-reset'));
-  arrValue = JSON.parse(getByTestId('arr').textContent ?? '[]');
+  await fireEvent.click(screen.getByTestId('arr-reset'));
+  arrValue = JSON.parse(screen.getByTestId('arr').textContent ?? '[]');
   expect(arrValue).toStrictEqual([]);
 
   if (protect) {
@@ -166,10 +166,9 @@ async function useTestCase(type: 'local' | 'session', protect = false): Promise<
       expect(err.message).toBe(message);
     }
 
-    expect(getByTestId('bool').textContent).toBe('true');
-
-    await fireEvent.click(getByTestId('bool-set'));
-    expect(getByTestId('bool').textContent).toBe('false');
+    expect((await screen.findByTestId('bool')).textContent).toBe('true');
+    await fireEvent.click(screen.getByTestId('bool-set'));
+    expect((await screen.findByTestId('bool')).textContent).toBe('false');
   }
 }
 

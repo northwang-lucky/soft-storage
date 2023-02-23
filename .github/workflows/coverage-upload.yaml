@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Report Start
     steps:
-      - name: Notify start
+      - name: Notify Start
         uses: northwang-lucky/chatbot-webhook-client@v1.1.1
         with:
           app: ${{ env.APP_NAME }}
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Test
     steps:
-      - name: Checkout main branch
+      - name: Checkout Main Branch
         uses: actions/checkout@v3
         with:
           ref: main
@@ -56,13 +56,13 @@ jobs:
         with:
           version: 7
           run_install: false
-      - name: Get PNPM store directory
+      - name: Get PNPM Store Directory
         id: pnpm-cache
         if: success()
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-      - name: Setup pnpm cache
+      - name: Setup PNPM Cache
         if: success()
         uses: actions/cache@v3
         with:
@@ -70,16 +70,16 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: Install dependencies
+      - name: Install Dependencies
         if: success()
         run: pnpm install
-      - name: Run build
+      - name: Run Build
         if: success()
         run: pnpm build-only
       - name: Run Test
         if: success()
         run: pnpm test:cov
-      - name: Upload coverage
+      - name: Upload Coverage
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -91,7 +91,7 @@ jobs:
     name: Report Success
     needs: test-and-upload
     steps:
-      - name: Notify success
+      - name: Notify Success
         uses: northwang-lucky/chatbot-webhook-client@v1.1.1
         with:
           app: ${{ env.APP_NAME }}
@@ -113,7 +113,7 @@ jobs:
     name: Report Failure
     needs: test-and-upload
     steps:
-      - name: Notify failure
+      - name: Notify Failure
         uses: northwang-lucky/chatbot-webhook-client@v1.1.1
         with:
           app: ${{ env.APP_NAME }}
