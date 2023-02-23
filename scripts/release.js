@@ -7,7 +7,7 @@ const sh = require('shelljs');
 /** @typedef {Omit<import('inquirer').ListQuestion<Answers>, 'name'>} ListQuestion */
 /** @typedef {Omit<import('inquirer').InputQuestion<Answers>, 'name'>} InputQuestion */
 
-/** @typedef {{ targetRepos: CheckboxQuestion; releaseType: ListQuestion; customRelease: InputQuestion; isPrerelease: ListQuestion; prereleaseType: ListQuestion; skipChangelog: ListQuestion; autoPush: ListQuestion }} Questions */
+/** @typedef {{ releaseType: ListQuestion; customRelease: InputQuestion; isPrerelease: ListQuestion; prereleaseType: ListQuestion; autoPush: ListQuestion }} Questions */
 /** @typedef {Record<keyof Questions, string>} Answers */
 /** @typedef {import('inquirer').Question<Answers>[]} QuestionList */
 
@@ -26,16 +26,10 @@ const repositories = fs.readdirSync(path.resolve(__dirname, '../packages')).filt
 const boolChoices = ['No', 'Yes'];
 
 const questions = defineQuestions({
-  targetRepos: {
-    type: 'checkbox',
-    message: 'Please select repositories that are going to release:',
-    choices: repositories,
-  },
   releaseType: {
     type: 'list',
     message: 'Please select a release type:',
     choices: [
-      'current',
       {
         name: 'patch (0.0.1)',
         value: 'patch',
@@ -48,6 +42,7 @@ const questions = defineQuestions({
         name: 'major (1.0.0)',
         value: 'major',
       },
+      'current',
       'custom',
     ],
   },
@@ -61,7 +56,7 @@ const questions = defineQuestions({
     type: 'list',
     message: 'Is is a prerelease?',
     choices: boolChoices,
-    when: ({ releaseType }) => releaseType !== 'custom',
+    when: ({ releaseType }) => !['custom', 'current'].includes(releaseType),
   },
   prereleaseType: {
     type: 'list',
@@ -69,94 +64,68 @@ const questions = defineQuestions({
     choices: ['alpha', 'beta', 'rc'],
     when: ({ isPrerelease }) => isPrerelease === 'Yes',
   },
-  skipChangelog: {
-    type: 'list',
-    message: 'Do you want to skip generate the changelog?',
-    choices: boolChoices,
-  },
   autoPush: {
     type: 'list',
-    message: 'Do you want to push commit and tag automatically after the task over?',
+    message: 'Do you want to push commits and tag automatically after the task over?',
     choices: boolChoices,
   },
 });
 
 inquirer
   .prompt(questions)
-  .then(({ targetRepos, releaseType, customRelease, isPrerelease, prereleaseType, skipChangelog, autoPush }) => {
+  .then(({ releaseType, customRelease, isPrerelease, prereleaseType, autoPush }) => {
+    /** @type {{ repo: string; cmd: string }[]} */
     const commands = [];
-    for (const targetRepo of targetRepos) {
-      let cmd = `pnpx standard-version`;
+    repositories.forEach(repo => {
+      let cmd = `npx standard-version`;
 
       /*---------- releaseType ----------*/
       // current
       if (releaseType === 'current') {
-        // Get the current version from package.json
-        const packageJson = fs.readFileSync(path.resolve(__dirname, `../packages/${targetRepo}/package.json`));
-        const packageInfo = JSON.parse(packageJson);
-        let currentVersion = packageInfo.version;
-
-        // Precess isPrerelease
-        if (isPrerelease === 'Yes') {
-          if (/^[0-9]+\.[0-9]+\.[0-9]+$/.test(currentVersion)) {
-            currentVersion = `${currentVersion}-${prereleaseType}.0`;
-          } else if (currentVersion.includes(prereleaseType)) {
-            const versionArr = currentVersion.split('.');
-            const prevPreVersionNum = versionArr.pop();
-            versionArr.push(Number(prevPreVersionNum) + 1);
-            currentVersion = versionArr.join('.');
-          } else {
-            const versionArr = currentVersion.split('-');
-            versionArr.pop();
-            versionArr.push(`${prereleaseType}.0`);
-            currentVersion = versionArr.join('-');
-          }
-        }
-
-        cmd = `${cmd} --release-as ${currentVersion}`;
+        cmd = `${cmd} --first-release`;
       }
-
       // custom
       else if (releaseType === 'custom') {
         cmd = `${cmd} --release-as ${customRelease}`;
       }
-
       // major/minor/patch
       else {
         cmd = `${cmd} --release-as ${releaseType}`;
       }
 
       /*---------- isPrerelease ----------*/
-      if (isPrerelease === 'Yes' && releaseType !== 'current' && releaseType !== 'custom') {
+      if (isPrerelease === 'Yes') {
         cmd = `${cmd} --prerelease ${prereleaseType}`;
       }
 
-      /*---------- skipChangelog ----------*/
-      if (skipChangelog === 'Yes') {
-        cmd = `${cmd} --skip.changelog true`;
-      }
-
-      commands.push({ targetRepo, cmd });
-    }
+      commands.push({ repo, cmd });
+    });
 
     return { commands, autoPush };
   })
   .then(({ commands, autoPush }) => {
-    for (const command of commands) {
-      const cmd = `${command.cmd} --releaseCommitMessageFormat "chore(${command.targetRepo}-release): {{currentTag}}"`;
+    const rootPath = path.resolve(__dirname, '..');
+    const changelogPath = path.resolve(__dirname, '../CHANGELOG.md');
+
+    commands.forEach(({ repo, cmd }, index) => {
       console.log('\n* ============================= *');
-      console.log(`* Command: ${cmd} *`);
+      console.log(`* Command: ${cmd}`);
       console.log('* ============================= *\n');
 
-      const workPath = path.resolve(__dirname, `../packages/${command.targetRepo}`);
+      if (index < commands.length - 1) {
+        cmd += ' --skip.changelog true --skip.commit true --skip.tag true --scripts.postbump "git add ."';
+      } else {
+        cmd += ` --infile ${changelogPath} --commit-all`;
+      }
+
+      const workPath = path.resolve(__dirname, `../packages/${repo}`);
       const result = sh.exec(`cd ${workPath} && ${cmd}`);
       if (result.code !== 0) {
         return Promise.reject(result.stderr);
       }
-    }
+    });
 
     if (autoPush === 'Yes') {
-      const rootPath = path.resolve(__dirname, '..');
       const result = sh.exec(`cd ${rootPath} && git push origin --tags && git push`);
       if (result.code !== 0) {
         return Promise.reject(result.stderr);

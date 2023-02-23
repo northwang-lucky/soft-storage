@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "postchangelog": "prettier -w ../../CHANGELOG.md"
+  }
+}
