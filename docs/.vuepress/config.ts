@@ -9,7 +9,10 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   base: '/smart-storage/docs/',
   title: 'Smart Storage',
   description: 'Smarter storage management',
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['script', { type: 'text/javascript', src: 'https://forward-51la.vercel.app/api/21557383.js' }],
+  ],
   locales: {
     '/': {
       lang: 'en-US',
