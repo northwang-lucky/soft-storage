@@ -18,17 +18,5 @@ fs.moveSync(path.resolve(__dirname, '../playground/vue-demo/dist'), path.resolve
 fs.moveSync(path.resolve(__dirname, '../playground/react-demo/dist'), path.resolve(outputPath, './react-demo'));
 fs.moveSync(path.resolve(__dirname, '../docs/.vuepress/dist'), path.resolve(outputPath, './docs'));
 
-const vercelConfigPath = path.resolve(outputPath, './vercel.json');
-fs.createFileSync(vercelConfigPath);
-fs.writeJsonSync(
-  vercelConfigPath,
-  {
-    rewrites: [
-      {
-        source: '/smart-storage/docs',
-        destination: '/docs',
-      },
-    ],
-  },
-  { spaces: 2 }
-);
+const vercelPath = path.resolve(__dirname, '../.vercel');
+fs.copySync(vercelPath, outputPath);
