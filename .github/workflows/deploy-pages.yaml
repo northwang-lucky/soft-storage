@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - .github/workflows/deploy-pages.yaml
+      - vercel/**/*
       - config/rollup.config.cjs
       - config/tsconfig.base.json
       - docs/**/*
@@ -87,9 +88,10 @@ jobs:
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.SMART_STORAGE_PAGES_TOKEN }}
+          external_repository: northwang-lucky/smart-storage-pages
           publish_dir: ./dist
-          publish_branch: gh-pages
+          publish_branch: main
           full_commit_message: ${{ github.event.head_commit.message }}
   notify-success:
     if: success()

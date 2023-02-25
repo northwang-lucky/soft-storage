@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/smart-storage/(.*)",
+      "destination": "/api/proxy"
+    }
+  ]
+}
