@@ -1,8 +1,12 @@
+import { DOMAIN_CN } from '@smart-storage-lib/config';
+import fs from 'fs-extra';
 import { resolve } from 'path';
 import { ThemeConfig } from 'vuepress-theme-vt';
 import { defineConfig4CustomTheme } from 'vuepress/config';
 import { nav_en, nav_zh } from './configs/nav';
 import { sidebar_en, sidebar_zh } from './configs/sidebar';
+
+const __51la_js__ = fs.readFileSync(resolve(__dirname, './51la/index.js'), 'utf-8').replace('__DOMAIN_CN__', DOMAIN_CN);
 
 export default defineConfig4CustomTheme<ThemeConfig>({
   port: 5175,
@@ -11,32 +15,7 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   description: 'Smarter storage management',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    [
-      'script',
-      {},
-      /* js */ `
-      !(function (p) {
-        'use strict';
-        !(function (t) {
-          var s = window,
-            e = document,
-            i = p,
-            c = ''.concat('https:' === e.location.protocol ? 'https://' : 'http://', 'sdk.51.la/js-sdk-pro.min.js'),
-            n = e.createElement('script'),
-            r = e.getElementsByTagName('script')[0];
-          (n.type = 'text/javascript'),
-            n.setAttribute('charset', 'UTF-8'),
-            (n.async = !0),
-            (n.src = c),
-            (n.id = 'LA_COLLECT'),
-            (i.d = n);
-          var o = function () {
-            s.LA.ids.push(i);
-          };
-          s.LA ? s.LA.ids && o() : ((s.LA = p), (s.LA.ids = []), o()), r.parentNode.insertBefore(n, r);
-        })();
-      })({ id: 'Jz3z8mTL8bi2NMgJ', ck: 'Jz3z8mTL8bi2NMgJ', autoTrack: true, hashMode: true });`,
-    ],
+    ['script', {}, __51la_js__],
   ],
   locales: {
     '/': {
