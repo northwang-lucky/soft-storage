@@ -9,7 +9,11 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   base: '/docs/',
   title: 'Smart Storage',
   description: 'Smarter storage management',
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['script', { charset: 'UTF-8', id: 'LA_COLLECT', src: 'https://sdk.51.la/js-sdk-pro.min.js' }],
+    ['script', {}, 'LA.init({id:"Jz3z8mTL8bi2NMgJ",ck:"Jz3z8mTL8bi2NMgJ",hashMode:true})'],
+  ],
   locales: {
     '/': {
       lang: 'en-US',
