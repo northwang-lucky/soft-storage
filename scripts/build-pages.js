@@ -14,6 +14,21 @@ if (result.code !== 0) {
 }
 
 fs.mkdirSync(outputPath);
-fs.moveSync(path.resolve(__dirname, '../playground/vue-demo/dist'), path.resolve(__dirname, '../dist/vue-demo'));
-fs.moveSync(path.resolve(__dirname, '../playground/react-demo/dist'), path.resolve(__dirname, '../dist/react-demo'));
-fs.moveSync(path.resolve(__dirname, '../docs/.vuepress/dist'), path.resolve(__dirname, '../dist/docs'));
+fs.moveSync(path.resolve(__dirname, '../playground/vue-demo/dist'), path.resolve(outputPath, './vue-demo'));
+fs.moveSync(path.resolve(__dirname, '../playground/react-demo/dist'), path.resolve(outputPath, './react-demo'));
+fs.moveSync(path.resolve(__dirname, '../docs/.vuepress/dist'), path.resolve(outputPath, './docs'));
+
+const vercelConfigPath = path.resolve(outputPath, './vercel.json');
+fs.createFileSync(vercelConfigPath);
+fs.writeJsonSync(
+  vercelConfigPath,
+  {
+    rewrites: [
+      {
+        source: '/smart-storage/(.*)',
+        destination: '/',
+      },
+    ],
+  },
+  { spaces: 2 }
+);
