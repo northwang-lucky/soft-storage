@@ -22,3 +22,7 @@ const vercelPath = path.resolve(__dirname, '../vercel');
 fs.copySync(vercelPath, outputPath, {
   filter: src => !src.endsWith('node_modules'),
 });
+
+const indexHtmlPath = path.resolve(outputPath, './index.html');
+fs.createFileSync(indexHtmlPath);
+fs.writeFileSync(indexHtmlPath, /* html */ `<script>window.location.href = './docs/'</script>`);
