@@ -1,5 +1,5 @@
+import { BASE_PATH, DOMAIN } from '@smart-storage-lib/config';
 import { NavItem } from 'vuepress/config';
-import { BASE_NAME } from './base';
 
 export const nav_en: NavItem[] = [
   { text: 'Guide', link: '/guide/' },
@@ -7,8 +7,8 @@ export const nav_en: NavItem[] = [
   {
     text: 'Demos',
     items: [
-      { text: 'Vue 3 Demo', link: `https://northwang-lucky.github.io/${BASE_NAME}/vue-demo/` },
-      { text: 'React Demo', link: `https://northwang-lucky.github.io/${BASE_NAME}/react-demo/` },
+      { text: 'Vue 3 Demo', link: `https://${DOMAIN}${BASE_PATH}/vue-demo/` },
+      { text: 'React Demo', link: `https://${DOMAIN}${BASE_PATH}/react-demo/` },
     ],
   },
 ];
@@ -19,8 +19,8 @@ export const nav_zh: NavItem[] = [
   {
     text: '演示',
     items: [
-      { text: 'Vue 3 演示', link: `https://northwang-lucky.github.io/${BASE_NAME}/vue-demo/` },
-      { text: 'React 演示', link: `https://northwang-lucky.github.io/${BASE_NAME}/react-demo/` },
+      { text: 'Vue 3 演示', link: `https://${DOMAIN}${BASE_PATH}/vue-demo/` },
+      { text: 'React 演示', link: `https://${DOMAIN}${BASE_PATH}/react-demo/` },
     ],
   },
 ];

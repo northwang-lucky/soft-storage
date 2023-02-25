@@ -16,6 +16,7 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@smart-storage-lib/config": "workspace:*",
     "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",

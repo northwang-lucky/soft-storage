@@ -31,4 +31,4 @@ In addition, Smart Storage will use `Proxy` API to create Vue or React responsiv
 
 ## Demo Projects
 
-Here are two demonstration projects (<BeautyLink :href="`/${$baseName}/vue-demo/`">Vue 3 Demo</BeautyLink> | <BeautyLink :href="`/${$baseName}/react-demo/`">React Demo</BeautyLink>) showing the basic usage of Smart Storage, you can take a look!
+Here are two demonstration projects (<BeautyLink :href="`${$basePath}/vue-demo/`">Vue 3 Demo</BeautyLink> | <BeautyLink :href="`${$basePath}/react-demo/`">React Demo</BeautyLink>) showing the basic usage of Smart Storage, you can take a look!

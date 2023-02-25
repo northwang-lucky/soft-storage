@@ -18,11 +18,6 @@ fs.moveSync(path.resolve(__dirname, '../playground/vue-demo/dist'), path.resolve
 fs.moveSync(path.resolve(__dirname, '../playground/react-demo/dist'), path.resolve(outputPath, './react-demo'));
 fs.moveSync(path.resolve(__dirname, '../docs/.vuepress/dist'), path.resolve(outputPath, './docs'));
 
-const vercelPath = path.resolve(__dirname, '../vercel');
-fs.copySync(vercelPath, outputPath, {
-  filter: src => !src.endsWith('node_modules'),
-});
-
 const indexHtmlPath = path.resolve(outputPath, './index.html');
 fs.createFileSync(indexHtmlPath);
 fs.writeFileSync(indexHtmlPath, /* html */ `<script>window.location.href = './docs/'</script>`);
