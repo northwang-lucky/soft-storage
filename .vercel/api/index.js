@@ -3,14 +3,12 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
-app.use('/api/proxy/*', (req, rsp, next) => {
+app.use('/smart-storage', (req, rsp, next) => {
   const target = `${req.protocol}://${req.headers.host}`;
   const proxy = createProxyMiddleware({
     target,
     changeOrigin: true,
-    pathRewrite: {
-      '/api/proxy': '',
-    },
+    pathRewrite: { '/smart-storage': '' },
     logger: console,
   });
   proxy(req, rsp, next);
