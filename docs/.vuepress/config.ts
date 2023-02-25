@@ -1,4 +1,3 @@
-import { BASE_PATH } from '@smart-storage-lib/config';
 import { resolve } from 'path';
 import { ThemeConfig } from 'vuepress-theme-vt';
 import { defineConfig4CustomTheme } from 'vuepress/config';
@@ -7,13 +6,10 @@ import { sidebar_en, sidebar_zh } from './configs/sidebar';
 
 export default defineConfig4CustomTheme<ThemeConfig>({
   port: 5175,
-  base: `${BASE_PATH}/docs/`,
+  base: '/docs/',
   title: 'Smart Storage',
   description: 'Smarter storage management',
-  head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['script', { type: 'text/javascript' }, `window.BASE_PATH = '${BASE_PATH}'`],
-  ],
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   locales: {
     '/': {
       lang: 'en-US',

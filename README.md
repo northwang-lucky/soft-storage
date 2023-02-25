@@ -6,13 +6,19 @@ A smarter storage management.
 
 ## 📚 Usage
 
-🚧 (WIP) [English][en-doc-url] | [简体中文][zh-doc-url]
+**Smart Storage has detailed documentation, please choose your preferred language to visit:**
+
+[English][en-doc-url] | [简体中文][zh-doc-url]
 
 ## 🚀 Demo
 
-> If you would like to open these hyper links in a new tab, please use context menu.
+If you are not in Chinese mainland, I suggest you to choose the following address:
 
 [Vue 3 Demo][vue-demo-url] | [React Demo][react-demo-url]
+
+如果您是中国大陆的用户，推荐您选择以下地址访问：
+
+[Vue 3 示例][vue-demo-url-cn] | [React 示例][react-demo-url-cn]
 
 ## ⚠️ Warning
 
@@ -34,13 +40,12 @@ A smarter storage management.
 [codecov]: https://img.shields.io/codecov/c/gh/northwang-lucky/smart-storage
 [codecov-url]: https://app.codecov.io/gh/northwang-lucky/smart-storage
 [license]: https://img.shields.io/github/license/northwang-lucky/smart-storage
-
-[en-doc-url]: https://northwang-lucky.github.io/smart-storage/docs/
-[zh-doc-url]: https://northwang-lucky.github.io/smart-storage/docs/zh/
-
-[vue-demo-url]: https://northwang-lucky.github.io/smart-storage/vue-demo/
-[react-demo-url]: https://northwang-lucky.github.io/smart-storage/react-demo/
-
+[en-doc-url]: https://smart-storage.vercel.app/docs/
+[zh-doc-url]: https://smart-storage.northwang-lucky.com/docs/zh/
+[vue-demo-url]: https://smart-storage.vercel.app/vue-demo/
+[react-demo-url]: https://smart-storage.vercel.app/react-demo/
+[vue-demo-url-cn]: https://smart-storage.northwang-lucky.com/vue-demo/
+[react-demo-url-cn]: https://smart-storage.northwang-lucky.com/react-demo/
 [stars-users]: https://reporoster.com/stars/northwang-lucky/smart-storage
 [stars-users-url]: https://github.com/northwang-lucky/smart-storage/stargazers
 [fork-users]: https://reporoster.com/forks/northwang-lucky/smart-storage

@@ -1,2 +1,2 @@
 export const DOMAIN: string;
-export const BASE_PATH: `/${string}`;
+export const DOMAIN_CN: string;

@@ -1,9 +1,7 @@
-const MODE = process.env.MODE || 'vercel';
-
-const DOMAIN = MODE === 'github' ? 'northwang-lucky.github.io' : 'smart-storage.vercel.app';
-const BASE_PATH = MODE === 'github' ? '/smart-storage-pages' : '';
+const DOMAIN = 'smart-storage.vercel.app';
+const DOMAIN_CN = 'smart-storage.northwang-lucky.com';
 
 module.exports = {
   DOMAIN,
-  BASE_PATH,
+  DOMAIN_CN,
 };

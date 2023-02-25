@@ -15,7 +15,6 @@ importers:
       '@types/inquirer': 8.2.5
       '@types/jest': 29.2.5
       commitizen: 4.3.0
-      cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
       eslint: 8.22.0
       eslint-config-airbnb-typescript-prettier: 5.0.0
@@ -49,7 +48,6 @@ importers:
       '@types/inquirer': 8.2.5
       '@types/jest': 29.2.5
       commitizen: 4.3.0
-      cross-env: 7.0.3
       cz-conventional-changelog: 3.3.0
       eslint: 8.22.0
       eslint-config-airbnb-typescript-prettier: 5.0.0_lh4kvruaqi3rgcnkbt7axv7w5i
@@ -5702,14 +5700,6 @@ packages:
 
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
-    dev: true
-
-  /cross-env/7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/6.0.5:
