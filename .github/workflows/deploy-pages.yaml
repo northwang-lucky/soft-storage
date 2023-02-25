@@ -7,7 +7,6 @@ on:
       - main
     paths:
       - .github/workflows/deploy-pages.yaml
-      - .vercel/**/*
       - config/rollup.config.cjs
       - config/tsconfig.base.json
       - docs/**/*
