@@ -3,6 +3,10 @@
     {
       "source": "/smart-storage/(.*)",
       "destination": "/api/proxy"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
     }
   ]
 }
