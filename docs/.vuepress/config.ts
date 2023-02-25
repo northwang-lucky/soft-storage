@@ -11,8 +11,32 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   description: 'Smarter storage management',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['script', { charset: 'UTF-8', id: 'LA_COLLECT', src: 'https://sdk.51.la/js-sdk-pro.min.js' }],
-    ['script', {}, 'LA.init({id:"Jz3z8mTL8bi2NMgJ",ck:"Jz3z8mTL8bi2NMgJ",hashMode:true})'],
+    [
+      'script',
+      {},
+      /* js */ `
+      !(function (p) {
+        'use strict';
+        !(function (t) {
+          var s = window,
+            e = document,
+            i = p,
+            c = ''.concat('https:' === e.location.protocol ? 'https://' : 'http://', 'sdk.51.la/js-sdk-pro.min.js'),
+            n = e.createElement('script'),
+            r = e.getElementsByTagName('script')[0];
+          (n.type = 'text/javascript'),
+            n.setAttribute('charset', 'UTF-8'),
+            (n.async = !0),
+            (n.src = c),
+            (n.id = 'LA_COLLECT'),
+            (i.d = n);
+          var o = function () {
+            s.LA.ids.push(i);
+          };
+          s.LA ? s.LA.ids && o() : ((s.LA = p), (s.LA.ids = []), o()), r.parentNode.insertBefore(n, r);
+        })();
+      })({ id: 'Jz3z8mTL8bi2NMgJ', ck: 'Jz3z8mTL8bi2NMgJ', autoTrack: true, hashMode: true });`,
+    ],
   ],
   locales: {
     '/': {
