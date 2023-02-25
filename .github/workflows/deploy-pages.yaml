@@ -7,14 +7,15 @@ on:
       - main
     paths:
       - .github/workflows/deploy-pages.yaml
-      - scripts/build-pages.js
-      - config/rollup.config.js
+      - config/rollup.config.cjs
       - config/tsconfig.base.json
       - docs/**/*
       - packages/*/src/**/*
       - packages/*/package.json
+      - packages/*/rollup.config.cjs
       - packages/*/tsconfig.json
       - playground/**/*
+      - scripts/build-pages.js
 
 env:
   APP_NAME: Lark

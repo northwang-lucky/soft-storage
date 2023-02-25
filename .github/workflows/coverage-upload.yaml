@@ -7,8 +7,7 @@ on:
       - main
     paths:
       - .github/workflows/coverage-upload.yaml
-      - scripts/cov-move.js
-      - config/rollup.config.js
+      - config/rollup.config.cjs
       - config/tsconfig.base.json
       - packages/**/*
 
