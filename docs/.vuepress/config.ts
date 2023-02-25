@@ -12,7 +12,6 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   description: 'Smarter storage management',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['script', { type: 'text/javascript', src: 'https://forward-51la.wybfiles.cn/api/21557383.js' }],
     ['script', { type: 'text/javascript' }, `window.BASE_PATH = '${BASE_PATH}'`],
   ],
   locales: {

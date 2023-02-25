@@ -45,7 +45,7 @@ jobs:
             }
   vercel-build-and-deploy:
     runs-on: ubuntu-latest
-    name: Vercel Build Pages
+    name: Build Vercel Pages
     permissions:
       contents: write
     steps:
@@ -95,7 +95,7 @@ jobs:
           full_commit_message: ${{ github.event.head_commit.message }}
   github-build-and-deploy:
     runs-on: ubuntu-latest
-    name: GitHub Build Pages
+    name: Build GitHub Pages
     permissions:
       contents: write
     steps:
