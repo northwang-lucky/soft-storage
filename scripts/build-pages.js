@@ -25,8 +25,8 @@ fs.writeJsonSync(
   {
     rewrites: [
       {
-        source: '/smart-storage/(.*)',
-        destination: '/',
+        source: '/smart-storage/docs',
+        destination: '/docs',
       },
     ],
   },
