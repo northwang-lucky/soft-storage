@@ -28,7 +28,9 @@
     "update:deps": "pnpm install && pnpm clean && pnpm install",
     "update:repos": "pnpm update:deps && pnpm build",
     "force-update:deps": "pnpm install && pnpm clean && pnpx rimraf ./pnpm-lock.yaml && pnpm install",
-    "force-update:repos": "pnpm force-update:deps && pnpm build"
+    "force-update:repos": "pnpm force-update:deps && pnpm build",
+    "link-readme:unix": "pnpm -F \"@soft-storage/*\" link-readme:unix",
+    "link-readme:win": "pnpm -F \"@soft-storage/*\" link-readme:win"
   },
   "license": "MIT",
   "devDependencies": {
