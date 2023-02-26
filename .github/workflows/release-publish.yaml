@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - v*
+      - v**
 
 env:
   APP_NAME: Lark
@@ -73,4 +73,70 @@ jobs:
       - name: Run Test
         if: success()
         run: pnpm test:cov
-  # release:
+  release:
+    runs-on: ubuntu-latest
+    name: Release
+    needs: test
+    if: success()
+    permissions:
+      contents: write
+    steps:
+      - name: Release
+        uses: northwang-lucky/auto-release@v0.0.2
+        with:
+          filepath: CHANGELOG.md
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish
+    needs: release
+    if: success()
+    steps:
+      - name: Publish
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+          pnpm -F "@smart-storage/*" publish
+  notify-success:
+    if: success()
+    runs-on: ubuntu-latest
+    name: Report Success
+    needs: publish
+    steps:
+      - name: Notify Success
+        uses: northwang-lucky/chatbot-webhook-client@v1.1.1
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          template: file://.template/lark-message-card.json
+          params: >-
+            {
+              "header_color": "green",
+              "header_title": "Workflow Succeed",
+              "repository": "${{ github.repository }}",
+              "workflow": "${{ github.workflow }}",
+              "workflow_url": "${{ env.WORKFLOW_URL }}"
+            }
+  notify-failure:
+    if: failure()
+    runs-on: ubuntu-latest
+    name: Report Failure
+    needs: publish
+    steps:
+      - name: Notify Failure
+        uses: northwang-lucky/chatbot-webhook-client@v1.1.1
+        with:
+          app: ${{ env.APP_NAME }}
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          template: file://.template/lark-message-card.json
+          params: >-
+            {
+              "header_color": "red",
+              "header_title": "Workflow Failed",
+              "repository": "${{ github.repository }}",
+              "workflow": "${{ github.workflow }}",
+              "workflow_url": "${{ env.WORKFLOW_URL }}"
+            }
