@@ -1,6 +1,6 @@
 {
   "name": "@soft-storage/react-hooks",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Softer storage management for React",
   "homepage": "https://github.com/northwang-lucky/soft-storage",
   "repository": {
