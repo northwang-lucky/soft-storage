@@ -80,9 +80,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
         if: success()
-        run: |
-          pnpm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-          pnpm publish
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
   notify-success:
     if: success()
     runs-on: ubuntu-latest
