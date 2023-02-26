@@ -93,10 +93,21 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: main
+      - name: Set up Node 16
+        if: success()
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Set up PNPM
+        if: success()
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
       - name: Publish
         run: |
-          npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-          npx pnpm publish
+          pnpm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+          pnpm publish
   notify-success:
     if: success()
     runs-on: ubuntu-latest
