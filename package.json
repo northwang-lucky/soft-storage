@@ -17,6 +17,7 @@
     "build:pages": "pnpm build && pnpm build:docs && node ./scripts/build-pages.js",
     "build-only": "pnpm -F \"@smart-storage/*\" build-only",
     "release": "node ./scripts/release.js",
+    "publish:packages": "pnpm -F \"@smart-storage/*\" publish --access public",
     "commit": "cz",
     "commit:lint": "commitlint --edit",
     "husky:pre-commit-hook": "husky add .husky/pre-commit \"pnpm lint-staged\"",
