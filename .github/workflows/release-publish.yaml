@@ -9,6 +9,7 @@ on:
 env:
   APP_NAME: Lark
   WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   notify-start:
@@ -80,8 +81,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
         if: success()
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm publish:packages
   notify-success:
     if: success()
