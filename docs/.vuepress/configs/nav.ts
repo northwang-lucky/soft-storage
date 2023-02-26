@@ -1,4 +1,4 @@
-import { DOMAIN, DOMAIN_CN } from '@smart-storage-lib/config';
+import { DOMAIN, DOMAIN_CN } from '@soft-storage-lib/config';
 import { NavItem } from 'vuepress/config';
 
 export const nav_en: NavItem[] = [

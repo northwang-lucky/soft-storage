@@ -1,11 +1,11 @@
 {
-  "name": "@smart-storage/hooks",
-  "version": "0.0.1",
-  "description": "Smarter storage management",
-  "homepage": "https://github.com/northwang-lucky/smart-storage",
+  "name": "@soft-storage/hooks",
+  "version": "0.0.0",
+  "description": "Softer storage management",
+  "homepage": "https://github.com/northwang-lucky/soft-storage",
   "repository": {
     "type": "git",
-    "url": "https://github.com/northwang-lucky/smart-storage.git",
+    "url": "https://github.com/northwang-lucky/soft-storage.git",
     "directory": "packages/hooks"
   },
   "author": {
@@ -45,8 +45,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@smart-storage/core": "workspace:*",
-    "@smart-storage/shared": "workspace:*"
+    "@soft-storage/core": "workspace:*",
+    "@soft-storage/shared": "workspace:*"
   },
   "devDependencies": {
     "standard-version": "9.5.0"

@@ -1,4 +1,4 @@
-import { StorageModuleSchema } from '@smart-storage/shared';
+import { StorageModuleSchema } from '@soft-storage/shared';
 
 export type StorageItem<T extends StorageModuleSchema, K extends keyof T> = {
   get(): T[K];

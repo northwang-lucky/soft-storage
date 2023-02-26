@@ -1,8 +1,8 @@
 ---
 home: true
 heroImage: /logo.png
-heroText: Smart Storage
-tagline: Smarter storage management
+heroText: Soft Storage
+tagline: Softer storage management
 actionText: Get Started
 actionLink: /guide/introduction.html
 features:

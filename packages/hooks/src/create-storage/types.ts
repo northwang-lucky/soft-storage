@@ -1,7 +1,7 @@
-import { IStorageModule, IStorageModuleHelper, StorageType } from '@smart-storage/core';
-import { PickNonNullable, StorageModuleSchema } from '@smart-storage/shared';
+import { IStorageModule, IStorageModuleHelper, StorageType } from '@soft-storage/core';
+import { PickNonNullable, StorageModuleSchema } from '@soft-storage/shared';
 
-export type SmartStorage<T extends StorageModuleSchema> = {
+export type SoftStorage<T extends StorageModuleSchema> = {
   storageModule: IStorageModule<T>;
   helper: IStorageModuleHelper<T>;
   initial: PickNonNullable<T>;

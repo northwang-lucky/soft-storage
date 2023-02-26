@@ -1,11 +1,11 @@
 {
-  "name": "@smart-storage/shared",
-  "version": "0.0.1",
-  "description": "Shared codes for @smart-storage",
-  "homepage": "https://github.com/northwang-lucky/smart-storage",
+  "name": "@soft-storage/shared",
+  "version": "0.0.0",
+  "description": "Shared codes for @soft-storage",
+  "homepage": "https://github.com/northwang-lucky/soft-storage",
   "repository": {
     "type": "git",
-    "url": "https://github.com/northwang-lucky/smart-storage.git",
+    "url": "https://github.com/northwang-lucky/soft-storage.git",
     "directory": "packages/shared"
   },
   "author": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/northwang-lucky"
   },
   "keywords": [
-    "smart-storage"
+    "soft-storage"
   ],
   "config": {
     "name": "shared"

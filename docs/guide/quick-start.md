@@ -1,6 +1,6 @@
 # Quick Start
 
-Smart Storage provides three ways to manage storage:
+Soft Storage provides three ways to manage storage:
 
 - Combined with the `ref` API in **Vue 3**
 - Combined with `useState` API in **React**
@@ -9,7 +9,7 @@ Smart Storage provides three ways to manage storage:
 In addition, if you only want to use a shallow modular wrapper for the browser's Storage API, you can go straight to the [Raw Usage](#raw-usage) section.
 
 ::: warning
-Attention please! You should never use `interface` to define a type in Smart Storage, to instead of it, you can use `type`. Click [Q&A > About Interface](./other/questions-and-answers.html#about-interface) for more details.
+Attention please! You should never use `interface` to define a type in Soft Storage, to instead of it, you can use `type`. Click [Q&A > About Interface](./other/questions-and-answers.html#about-interface) for more details.
 :::
 
 ## For Vue 3 <Badge text="vue >= 3.1.0" />
@@ -23,7 +23,7 @@ Attention please! You should never use `interface` to define a type in Smart Sto
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/vue-hooks
+npm install @soft-storage/vue-hooks
 ```
 
 </CodeScroll>
@@ -35,7 +35,7 @@ npm install @smart-storage/vue-hooks
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/vue-hooks
+yarn add @soft-storage/vue-hooks
 ```
 
 </CodeScroll>
@@ -47,7 +47,7 @@ yarn add @smart-storage/vue-hooks
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/vue-hooks
+pnpm add @soft-storage/vue-hooks
 ```
 
 </CodeScroll>
@@ -64,7 +64,7 @@ Create a new file anywhere, and use like this:
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type UserInfo = {
   token?: string;
@@ -92,7 +92,7 @@ export const storage = createLocalStorage<UserInfo>({
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
-import { useStorage } from '@smart-storage/vue-hooks';
+import { useStorage } from '@soft-storage/vue-hooks';
 import { storage } from './storage';
 
 /* You can easily deconstruct the hook's return value,
@@ -136,7 +136,7 @@ const onSignOut = () => {
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/react-hooks
+npm install @soft-storage/react-hooks
 ```
 
 </CodeScroll>
@@ -148,7 +148,7 @@ npm install @smart-storage/react-hooks
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/react-hooks
+yarn add @soft-storage/react-hooks
 ```
 
 </CodeScroll>
@@ -160,7 +160,7 @@ yarn add @smart-storage/react-hooks
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/react-hooks
+pnpm add @soft-storage/react-hooks
 ```
 
 </CodeScroll>
@@ -177,7 +177,7 @@ Create a new file anywhere, and use like this:
 
 ```ts
 // storage.ts
-import { createSessionStorage } from '@smart-storage/react-hooks';
+import { createSessionStorage } from '@soft-storage/react-hooks';
 
 type UserInfo = {
   token?: string;
@@ -204,7 +204,7 @@ export const storage = createSessionStorage<UserInfo>({
 ```tsx
 import React, { useEffect } from 'react';
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
-import { useStorage } from '@smart-storage/react-hooks';
+import { useStorage } from '@soft-storage/react-hooks';
 import { storage } from './storage';
 
 function UserInfoFC() {
@@ -252,7 +252,7 @@ export default UserInfoFC;
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/hooks
+npm install @soft-storage/hooks
 ```
 
 </CodeScroll>
@@ -264,7 +264,7 @@ npm install @smart-storage/hooks
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/hooks
+yarn add @soft-storage/hooks
 ```
 
 </CodeScroll>
@@ -276,7 +276,7 @@ yarn add @smart-storage/hooks
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/hooks
+pnpm add @soft-storage/hooks
 ```
 
 </CodeScroll>
@@ -293,7 +293,7 @@ Create a new file anywhere, and use like this:
 
 ```ts
 // storage.ts
-import { createSessionStorage } from '@smart-storage/hooks';
+import { createSessionStorage } from '@soft-storage/hooks';
 
 type UserInfo = {
   token?: string;
@@ -319,7 +319,7 @@ export const storage = createSessionStorage<UserInfo>({
 
 ```ts
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
-import { useStorage } from '@smart-storage/hooks';
+import { useStorage } from '@soft-storage/hooks';
 import { storage } from './storage';
 
 const { token, hasSigned } = useStorage(storage);
@@ -359,7 +359,7 @@ const onSignOut = () => {
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/core
+npm install @soft-storage/core
 ```
 
 </CodeScroll>
@@ -371,7 +371,7 @@ npm install @smart-storage/core
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/core
+yarn add @soft-storage/core
 ```
 
 </CodeScroll>
@@ -383,7 +383,7 @@ yarn add @smart-storage/core
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/core
+pnpm add @soft-storage/core
 ```
 
 </CodeScroll>
@@ -424,7 +424,7 @@ export { storageModule };
 <CodeScroll>
 
 ```ts
-import { StorageModule, StorageType } from '@smart-storage/core';
+import { StorageModule, StorageType } from '@soft-storage/core';
 import { getUserInfo } from '@/api'; // Suppose you have a function that gets user information
 import { storageModule } from './storage.ts';
 

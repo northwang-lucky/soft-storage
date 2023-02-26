@@ -1,5 +1,5 @@
-import { IStorageModule, StorageModule, StorageType } from '@smart-storage/core';
-import { StorageModuleSchema } from '@smart-storage/shared';
+import { IStorageModule, StorageModule, StorageType } from '@soft-storage/core';
+import { StorageModuleSchema } from '@soft-storage/shared';
 
 export function processVersion<T extends StorageModuleSchema>(
   storageModuleKey: string,

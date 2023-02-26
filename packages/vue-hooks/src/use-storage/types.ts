@@ -1,5 +1,5 @@
-import { StorageItem } from '@smart-storage/hooks';
-import { StorageModuleSchema } from '@smart-storage/shared';
+import { StorageItem } from '@soft-storage/hooks';
+import { StorageModuleSchema } from '@soft-storage/shared';
 import { Ref, UnwrapRef } from 'vue';
 import { StorageRefs, StorageResetters, StorageCheckers } from '../create-storage/types';
 

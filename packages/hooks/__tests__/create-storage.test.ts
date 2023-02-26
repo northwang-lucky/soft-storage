@@ -1,4 +1,4 @@
-import { createLocalStorage, createSessionStorage, SmartStorage, useStorage, useStorageHelper } from '../src';
+import { createLocalStorage, createSessionStorage, SoftStorage, useStorage, useStorageHelper } from '../src';
 
 type TestStorage = {
   str?: string;
@@ -6,7 +6,7 @@ type TestStorage = {
   bool: boolean;
 };
 
-function useTestCase(storage: SmartStorage<TestStorage>): void {
+function useTestCase(storage: SoftStorage<TestStorage>): void {
   const { str, num, bool } = useStorage(storage);
   const storageHelper = useStorageHelper(storage);
 

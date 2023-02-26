@@ -8,7 +8,7 @@
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type AlwaysChangeStorage = {
   foo: string;
@@ -48,7 +48,7 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type AlwaysChangeStorage = {
   bar: string;
@@ -75,7 +75,7 @@ export const storage = createLocalStorage<AlwaysChangeStorage>({
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type AlwaysChangeStorage = {
   bar: string;

@@ -1,6 +1,6 @@
 # 开发者指南
 
-本篇文章旨在帮助您了解整个 Smart Storage 的开发工作流，以便于更好地参与到共建之中。
+本篇文章旨在帮助您了解整个 Soft Storage 的开发工作流，以便于更好地参与到共建之中。
 
 ## 目录结构
 
@@ -32,7 +32,7 @@
 
 ## 可选建议
 
-使用 [Visual Studio Code](https://code.visualstudio.com/) 作为 Smart Storage 的代码编辑器，并安装以下扩展：
+使用 [Visual Studio Code](https://code.visualstudio.com/) 作为 Soft Storage 的代码编辑器，并安装以下扩展：
 
 - Code Spell Checker
 - ESLint

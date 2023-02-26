@@ -1,4 +1,4 @@
-import { useStorage, useStorageHelper } from '@smart-storage/react-hooks';
+import { useStorage, useStorageHelper } from '@soft-storage/react-hooks';
 import { useCallback, useState } from 'react';
 import { storage, protectedStorage } from './storage';
 import './App.css';
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <h1>Hello Smart Storage</h1>
+      <h1>Hello Soft Storage</h1>
       <h2>react_test_key</h2>
       <div className="tool-bar">
         Actions:&nbsp;

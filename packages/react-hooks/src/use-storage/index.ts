@@ -1,13 +1,13 @@
-import { Checker, createProxy, Resetter, restoreSuffixedString, StorageModuleSchema } from '@smart-storage/shared';
+import { Checker, createProxy, Resetter, restoreSuffixedString, StorageModuleSchema } from '@soft-storage/shared';
 import { useCallback, useState } from 'react';
-import { Setter, SmartStorage } from '../create-storage/types';
+import { Setter, SoftStorage } from '../create-storage/types';
 import { StateKey, StorageStates } from './types';
 
 export function useStorage<T extends StorageModuleSchema>({
   storage,
   itemStateDict,
   properties,
-}: SmartStorage<T>): StorageStates<T> {
+}: SoftStorage<T>): StorageStates<T> {
   const proxyGetter = useCallback(
     (_: object, p: string) => {
       const stateKey = p as StateKey<T>;

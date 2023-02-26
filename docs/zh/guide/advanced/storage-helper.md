@@ -1,6 +1,6 @@
 # 存储模块助手
 
-Smart Storage 提供了 hook 函数 `useStorageHelper`，可以使用存储模块的其他能力。
+Soft Storage 提供了 hook 函数 `useStorageHelper`，可以使用存储模块的其他能力。
 
 ## Vue 和 React 用户
 
@@ -8,8 +8,8 @@ Smart Storage 提供了 hook 函数 `useStorageHelper`，可以使用存储模�
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
-// import { createLocalStorage } from '@smart-storage/react-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
+// import { createLocalStorage } from '@soft-storage/react-hooks';
 
 type UserInfo = {
   token?: string;
@@ -30,7 +30,7 @@ export const storage = createLocalStorage<UserInfo>({
 
 ```vue
 <script setup lang="ts">
-import { useStorageHelper } from '@smart-storage/vue-hooks';
+import { useStorageHelper } from '@soft-storage/vue-hooks';
 import { storage } from './storage';
 
 const storageHelper = useStorageHelper(storage);
@@ -52,7 +52,7 @@ storageHelper.initialize();
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/hooks';
+import { createLocalStorage } from '@soft-storage/hooks';
 
 type UserInfo = {
   token?: string;
@@ -72,7 +72,7 @@ export const storage = createLocalStorage<UserInfo>({
 <CodeScroll>
 
 ```ts
-import { useStorageHelper } from '@smart-storage/hooks';
+import { useStorageHelper } from '@soft-storage/hooks';
 import { storage } from './storage';
 
 const storageHelper = useStorageHelper(storage);

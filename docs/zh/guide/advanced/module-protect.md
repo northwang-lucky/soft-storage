@@ -8,7 +8,7 @@
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type UnprotectedStorage = {
   str: string;
@@ -41,17 +41,17 @@ window.localStorage.setItem('unprotected_storage_key', 'foo');
 
 ![foo-storage](~@imgs/guide/advanced/module-protect/foo-storage.jpg)
 
-而一旦存储模块被破坏，Smart Storage 将无法正常工作！！！
+而一旦存储模块被破坏，Soft Storage 将无法正常工作！！！
 
 ## 如何解决？
 
-为了防止存储模块的数据结构被破坏，Smart Storage 提供了一个配置项，用来防止存储 API 对存储模块的 key 进行原始调用：
+为了防止存储模块的数据结构被破坏，Soft Storage 提供了一个配置项，用来防止存储 API 对存储模块的 key 进行原始调用：
 
 <CodeScroll>
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type ProtectedStorage = {
   str: string;

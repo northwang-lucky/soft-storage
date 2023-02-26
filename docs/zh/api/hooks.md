@@ -13,7 +13,7 @@ extractApiHeaders: [2]
 <CodeScroll>
 
 ```ts
-function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
+function createLocalStorage<T>(options: CreateStorageOptions<T>): SoftStorage<T>;
 ```
 
 </CodeScroll>
@@ -43,7 +43,7 @@ function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T
 
 ### 返回值
 
-返回一个对象（[`SmartStorage`](type-definition/hooks.html#smartstorage)），该对象包括[`useStorage`](#usestorage) 和 [`useStorageHelper`](#usestoragehelper)所必需的变量
+返回一个对象（[`SoftStorage`](type-definition/hooks.html#softstorage)），该对象包括[`useStorage`](#usestorage) 和 [`useStorageHelper`](#usestoragehelper)所必需的变量
 
 ### 示例
 
@@ -72,7 +72,7 @@ export const storage = createLocalStorage<UserInfo>({
 <CodeScroll>
 
 ```ts
-function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
+function createSessionStorage<T>(options: CreateStorageOptions<T>): SoftStorage<T>;
 ```
 
 </CodeScroll>
@@ -112,14 +112,14 @@ export const storage = createSessionStorage<UserInfo>({
 <CodeScroll>
 
 ```ts
-function useStorage<T>(storage: SmartStorage<T>): StorageInstance<T>;
+function useStorage<T>(storage: SoftStorage<T>): StorageInstance<T>;
 ```
 
 </CodeScroll>
 
 ### 参数
 
-- `storage: SmartStorage<T>`
+- `storage: SoftStorage<T>`
 
   [`createLocalStorage`](#createlocalstorage)或者[`createSessionStorage`](#createsessionstorage)返回的对象
 
@@ -157,14 +157,14 @@ const { token } = useStorage(storage);
 <CodeScroll>
 
 ```ts
-function useStorageHelper<T>(storage: SmartStorage<T>): StorageHelper;
+function useStorageHelper<T>(storage: SoftStorage<T>): StorageHelper;
 ```
 
 </CodeScroll>
 
 ### 参数
 
-- `storage: SmartStorage<T>`
+- `storage: SoftStorage<T>`
 
   [`createLocalStorage`](#createlocalstorage)或者[`createSessionStorage`](#createsessionstorage)返回的对象
 

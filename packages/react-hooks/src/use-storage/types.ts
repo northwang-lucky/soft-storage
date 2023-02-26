@@ -7,7 +7,7 @@ import {
   RestoreSuffixedKey,
   StorageModuleSchema,
   SuffixedKeys,
-} from '@smart-storage/shared';
+} from '@soft-storage/shared';
 import { Setter } from '../create-storage/types';
 
 export type SetterKey<T> = PrefixedKey<T, 'set'>;

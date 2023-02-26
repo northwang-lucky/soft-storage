@@ -1,4 +1,4 @@
-import { StorageModuleSchema } from '@smart-storage/shared';
+import { StorageModuleSchema } from '@soft-storage/shared';
 
 export enum StorageType {
   LOCAL = 'local',

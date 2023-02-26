@@ -88,8 +88,8 @@ jobs:
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.SMART_STORAGE_PAGES_TOKEN }}
-          external_repository: northwang-lucky/smart-storage-pages
+          personal_token: ${{ secrets.SOFT_STORAGE_PAGES_TOKEN }}
+          external_repository: northwang-lucky/soft-storage-pages
           publish_dir: ./dist
           publish_branch: vercel
           full_commit_message: ${{ github.event.head_commit.message }}

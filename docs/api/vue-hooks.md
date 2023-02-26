@@ -13,7 +13,7 @@ Create a storage module by `localStorage`.
 <CodeScroll>
 
 ```ts
-function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
+function createLocalStorage<T>(options: CreateStorageOptions<T>): SoftStorage<T>;
 ```
 
 </CodeScroll>
@@ -44,7 +44,7 @@ function createLocalStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T
 
 ### Return Value
 
-The function returns an object ([`SmartStorage`](type-definition/react-hooks.html#smartstorage)) that includes some required variables for [`useStorage`](#usestorage) and [`useStorageHelper`](#usestoragehelper).
+The function returns an object ([`SoftStorage`](type-definition/react-hooks.html#softstorage)) that includes some required variables for [`useStorage`](#usestorage) and [`useStorageHelper`](#usestoragehelper).
 
 ### Example
 
@@ -73,7 +73,7 @@ Create a storage module by `sessionStorage`.
 <CodeScroll>
 
 ```ts
-function createSessionStorage<T>(options: CreateStorageOptions<T>): SmartStorage<T>;
+function createSessionStorage<T>(options: CreateStorageOptions<T>): SoftStorage<T>;
 ```
 
 </CodeScroll>
@@ -113,14 +113,14 @@ Get `refs`, `resetters` and `checkers` from storage module.
 <CodeScroll>
 
 ```ts
-function useStorage<T>(storage: SmartStorage<T>): StorageReactions<T>;
+function useStorage<T>(storage: SoftStorage<T>): StorageReactions<T>;
 ```
 
 </CodeScroll>
 
 ### Parameters
 
-- `storage: SmartStorage<T>`
+- `storage: SoftStorage<T>`
 
   An object returned by [`createLocalStorage`](#createlocalstorage) or [`createSessionStorage`](#createsessionstorage).
 
@@ -168,7 +168,7 @@ Get instance of storage module helper.
 <CodeScroll>
 
 ```ts
-function useStorageHelper<T>(storage: SmartStorage<T>): StorageHelper;
+function useStorageHelper<T>(storage: SoftStorage<T>): StorageHelper;
 ```
 
 </CodeScroll>

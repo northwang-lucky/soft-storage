@@ -1,11 +1,11 @@
 {
-  "name": "@smart-storage/core",
-  "version": "0.0.1",
-  "description": "It is the core dependency package for @smart-storage/hooks",
-  "homepage": "https://github.com/northwang-lucky/smart-storage",
+  "name": "@soft-storage/core",
+  "version": "0.0.0",
+  "description": "It is the core dependency package for @soft-storage/hooks",
+  "homepage": "https://github.com/northwang-lucky/soft-storage",
   "repository": {
     "type": "git",
-    "url": "https://github.com/northwang-lucky/smart-storage.git",
+    "url": "https://github.com/northwang-lucky/soft-storage.git",
     "directory": "packages/core"
   },
   "author": {
@@ -44,7 +44,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@smart-storage/shared": "workspace:*"
+    "@soft-storage/shared": "workspace:*"
   },
   "devDependencies": {
     "standard-version": "9.5.0"

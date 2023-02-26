@@ -1,4 +1,4 @@
-import { StorageModuleSchema } from '@smart-storage/shared';
+import { StorageModuleSchema } from '@soft-storage/shared';
 import { StorageType } from '../storage-module-helper/types';
 import { IStorageModule } from '../storage-module/types';
 

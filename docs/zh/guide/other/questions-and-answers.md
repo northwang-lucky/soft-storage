@@ -2,9 +2,9 @@
 
 ## 关于 Interface
 
-- 为什么我不能使用 `interface` 为 Smart Storage 定义类型？
+- 为什么我不能使用 `interface` 为 Soft Storage 定义类型？
 
-- 因为 `interface` 定义的属性没有 `string` 签名，但 Smart Storage 为传入的类型设置了像这样的 `Record<string, unknown>` 类型约束，所以请使用 `type` 代替。
+- 因为 `interface` 定义的属性没有 `string` 签名，但 Soft Storage 为传入的类型设置了像这样的 `Record<string, unknown>` 类型约束，所以请使用 `type` 代替。
 
 ## 关于 remove() 和 clear() 函数
 

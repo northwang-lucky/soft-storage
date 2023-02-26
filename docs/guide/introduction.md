@@ -18,9 +18,9 @@ But now it's like this:
 
 ## How It Works?
 
-Smart Storage will read the storage objects created in the project and serialize them into strings using `JSON`. Then internally call the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) to create storage.
+Soft Storage will read the storage objects created in the project and serialize them into strings using `JSON`. Then internally call the [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) to create storage.
 
-In addition, Smart Storage will use `Proxy` API to create Vue or React responsive variables to facilitate developers to modify storage values
+In addition, Soft Storage will use `Proxy` API to create Vue or React responsive variables to facilitate developers to modify storage values
 
 ::: warning
 
@@ -31,4 +31,4 @@ In addition, Smart Storage will use `Proxy` API to create Vue or React responsiv
 
 ## Demo Projects
 
-Here are two demonstration projects (<BeautyLink href="/vue-demo/">Vue 3 Demo</BeautyLink> | <BeautyLink href="/react-demo/">React Demo</BeautyLink>) showing the basic usage of Smart Storage, you can take a look!
+Here are two demonstration projects (<BeautyLink href="/vue-demo/">Vue 3 Demo</BeautyLink> | <BeautyLink href="/react-demo/">React Demo</BeautyLink>) showing the basic usage of Soft Storage, you can take a look!

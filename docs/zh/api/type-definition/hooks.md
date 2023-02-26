@@ -4,12 +4,12 @@ extractApiHeaders: [2]
 
 # Hooks 类型集
 
-## SmartStorage
+## SoftStorage
 
 <CodeScroll>
 
 ```ts
-type SmartStorage<T> = {
+type SoftStorage<T> = {
   storageModule: IStorageModule<T>;
   helper: IStorageModuleHelper<T>;
   initial: PickNonNullable<T>;

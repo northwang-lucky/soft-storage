@@ -1,11 +1,11 @@
 {
-  "name": "@smart-storage/react-hooks",
-  "version": "0.0.1",
-  "description": "Smarter storage management for React",
-  "homepage": "https://github.com/northwang-lucky/smart-storage",
+  "name": "@soft-storage/react-hooks",
+  "version": "0.0.0",
+  "description": "Softer storage management for React",
+  "homepage": "https://github.com/northwang-lucky/soft-storage",
   "repository": {
     "type": "git",
-    "url": "https://github.com/northwang-lucky/smart-storage.git",
+    "url": "https://github.com/northwang-lucky/soft-storage.git",
     "directory": "packages/react-hooks"
   },
   "author": {
@@ -50,8 +50,8 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "@smart-storage/hooks": "workspace:*",
-    "@smart-storage/shared": "workspace:*"
+    "@soft-storage/hooks": "workspace:*",
+    "@soft-storage/shared": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/react": "13.4.0",

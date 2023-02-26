@@ -4,7 +4,7 @@
 
 - Q: Why can't I use `interface` to define TypeScript types?
 
-- A: Because the key of the type defined by `interface` does not have a `string` type signature. But Smart Storage sets type constraints like `Record<string, unknown>` for the incoming generics. So, use `type` to instead of it.
+- A: Because the key of the type defined by `interface` does not have a `string` type signature. But Soft Storage sets type constraints like `Record<string, unknown>` for the incoming generics. So, use `type` to instead of it.
 
 ## About Remove and Clear
 

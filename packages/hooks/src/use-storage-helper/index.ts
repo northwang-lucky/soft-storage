@@ -1,12 +1,12 @@
-import { StorageModuleSchema } from '@smart-storage/shared';
-import { SmartStorage } from '../create-storage/types';
+import { StorageModuleSchema } from '@soft-storage/shared';
+import { SoftStorage } from '../create-storage/types';
 import { StorageHelper } from './types';
 
 export function useStorageHelper<T extends StorageModuleSchema>({
   storageModule,
   helper,
   initial,
-}: SmartStorage<T>): StorageHelper {
+}: SoftStorage<T>): StorageHelper {
   return {
     size: () => storageModule.size(),
     contains: (key: string) => storageModule.contains(key),

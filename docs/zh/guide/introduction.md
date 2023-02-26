@@ -18,9 +18,9 @@
 
 ## 工作原理
 
-Smart Storage 将读取项目中创建的存储对象，并使用 `JSON` 将它们序列化为字符串。然后在内部调用浏览器的 [Web Storage API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API) 来创建存储。
+Soft Storage 将读取项目中创建的存储对象，并使用 `JSON` 将它们序列化为字符串。然后在内部调用浏览器的 [Web Storage API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API) 来创建存储。
 
-此外，Smart Storage 会使用 `Proxy` API 创建 Vue 或 React 响应式变量，方便开发者修改存储值。
+此外，Soft Storage 会使用 `Proxy` API 创建 Vue 或 React 响应式变量，方便开发者修改存储值。
 
 ::: warning
 
@@ -31,4 +31,4 @@ Smart Storage 将读取项目中创建的存储对象，并使用 `JSON` 将它�
 
 ## 演示项目
 
-这里有两个演示项目 (<BeautyLink href="/vue-demo/">Vue 3 示例</BeautyLink> | <BeautyLink href="/react-demo/">React 示例</BeautyLink>) 展示了 Smart Storage 的基本用法，你可以去看看！
+这里有两个演示项目 (<BeautyLink href="/vue-demo/">Vue 3 示例</BeautyLink> | <BeautyLink href="/react-demo/">React 示例</BeautyLink>) 展示了 Soft Storage 的基本用法，你可以去看看！

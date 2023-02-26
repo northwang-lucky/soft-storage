@@ -1,7 +1,6 @@
 {
-  "name": "smart-storage-react-demo",
+  "name": "soft-storage-react-demo",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -11,7 +10,7 @@
     "clean": "pnpx rimraf \"./node_modules\" --impl=native"
   },
   "dependencies": {
-    "@smart-storage/react-hooks": "workspace:*",
+    "@soft-storage/react-hooks": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

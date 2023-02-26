@@ -1,6 +1,6 @@
-import { createProxy, Runnable, restorePrefixedString, Supplier, StorageModuleSchema } from '@smart-storage/shared';
+import { createProxy, Runnable, restorePrefixedString, Supplier, StorageModuleSchema } from '@soft-storage/shared';
 import { onUnmounted, ref, Ref, UnwrapRef, watch } from 'vue';
-import { StorageRefs, StorageResetters, StorageCheckers, SmartStorage } from '../create-storage/types';
+import { StorageRefs, StorageResetters, StorageCheckers, SoftStorage } from '../create-storage/types';
 import { GetItemRefArgs, StorageReactions } from './types';
 
 function getItemRef<T extends StorageModuleSchema>(
@@ -22,7 +22,7 @@ export function useStorage<T extends StorageModuleSchema>({
   storage,
   itemRefDict,
   properties,
-}: SmartStorage<T>): StorageReactions<T> {
+}: SoftStorage<T>): StorageReactions<T> {
   const refs = createProxy<object, StorageRefs<T>>(
     {},
     {

@@ -8,7 +8,7 @@ Suppose we have used the `createLocalStorage` API to create a storage module who
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type AlwaysChangeStorage = {
   foo: string;
@@ -50,7 +50,7 @@ For example:
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type AlwaysChangeStorage = {
   bar: string;
@@ -77,7 +77,7 @@ In the example in the previous section, we upgraded the version of the storage m
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type AlwaysChangeStorage = {
   bar: string;

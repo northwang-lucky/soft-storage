@@ -1,4 +1,4 @@
-import { createLocalStorage } from '@smart-storage/react-hooks';
+import { createLocalStorage } from '@soft-storage/react-hooks';
 
 type TestStorage = {
   str?: string;

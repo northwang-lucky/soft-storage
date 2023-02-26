@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { createLocalStorage, createSessionStorage, SmartStorage, useStorage, useStorageHelper } from '../src';
+import { createLocalStorage, createSessionStorage, SoftStorage, useStorage, useStorageHelper } from '../src';
 
 type TestStorage = {
   str?: string;
@@ -24,16 +24,16 @@ const protectStorage = createSessionStorage<TestStorage>({
   initial: { bool: true },
 });
 
-const getStorage = (protect: boolean, type: 'local' | 'session'): SmartStorage<TestStorage> => {
-  let smartStorage: SmartStorage<TestStorage>;
+const getStorage = (protect: boolean, type: 'local' | 'session'): SoftStorage<TestStorage> => {
+  let softStorage: SoftStorage<TestStorage>;
   if (protect) {
-    smartStorage = protectStorage;
+    softStorage = protectStorage;
   } else if (type === 'local') {
-    smartStorage = localStorage;
+    softStorage = localStorage;
   } else {
-    smartStorage = sessionStorage;
+    softStorage = sessionStorage;
   }
-  return smartStorage;
+  return softStorage;
 };
 
 function App(props: { type: 'local' | 'session'; protect: boolean }): JSX.Element {

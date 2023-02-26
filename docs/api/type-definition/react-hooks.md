@@ -26,12 +26,12 @@ type UseState<T> = [T, Setter<T>];
 
 </CodeScroll>
 
-## SmartStorage
+## SoftStorage
 
 <CodeScroll>
 
 ```ts
-type SmartStorage<T> = {
+type SoftStorage<T> = {
   storage: Required<{ [K in keyof T]: StorageItem<T, K> }>;
   storageHelper: StorageHelper;
   itemStateDict: Record<keyof T, UseState<T[keyof T]>>;

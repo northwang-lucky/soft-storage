@@ -8,7 +8,7 @@ We have used the `createLocalStorage` API to create a storage module whose key c
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type UnprotectedStorage = {
   str: string;
@@ -41,17 +41,17 @@ However, we all know that once this line of code is executed, the data structure
 
 ![foo-storage](~@imgs/guide/advanced/module-protect/foo-storage.jpg)
 
-And once the storage module is destroyed, Smart Storage will not work normally!!!
+And once the storage module is destroyed, Soft Storage will not work normally!!!
 
 ## How to Solve?
 
-To prevent the data structure of the storage module from being corrupted, Smart Storage provides a configuration item that prevents the storage API from making the original call to the storage module key:
+To prevent the data structure of the storage module from being corrupted, Soft Storage provides a configuration item that prevents the storage API from making the original call to the storage module key:
 
 <CodeScroll>
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type ProtectedStorage = {
   str: string;

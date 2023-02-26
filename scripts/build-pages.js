@@ -8,7 +8,7 @@ if (fs.existsSync(outputPath)) {
   fs.rmdirSync(outputPath, { recursive: true, force: true });
 }
 
-const result = sh.exec('pnpm -F "smart-storage-*" build');
+const result = sh.exec('pnpm -F "soft-storage-*" build');
 if (result.code !== 0) {
   throw new Error(result.stderr);
 }

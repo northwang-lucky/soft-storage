@@ -54,12 +54,12 @@ type StorageCheckers<T> = {
 
 </ReferencedTypes>
 
-## SmartStorage
+## SoftStorage
 
 <CodeScroll>
 
 ```ts
-type SmartStorage<T extends StorageModuleSchema> = {
+type SoftStorage<T extends StorageModuleSchema> = {
   storage: Required<{ [K in keyof T]: StorageItem<T, K> }>;
   storageHelper: StorageHelper;
   itemRefDict: Record<keyof T, Ref<UnwrapRef<T[keyof T]>> /* It's Vue's ref */>;

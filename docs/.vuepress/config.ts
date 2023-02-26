@@ -1,4 +1,4 @@
-import { DOMAIN_CN } from '@smart-storage-lib/config';
+import { DOMAIN_CN } from '@soft-storage-lib/config';
 import fs from 'fs-extra';
 import { resolve } from 'path';
 import { ThemeConfig } from 'vuepress-theme-vt';
@@ -11,8 +11,8 @@ const __51la_js__ = fs.readFileSync(resolve(__dirname, './51la/index.js'), 'utf-
 export default defineConfig4CustomTheme<ThemeConfig>({
   port: 5175,
   base: '/docs/',
-  title: 'Smart Storage',
-  description: 'Smarter storage management',
+  title: 'Soft Storage',
+  description: 'Softer storage management',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['script', {}, __51la_js__],
@@ -20,13 +20,13 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'Smart Storage',
-      description: 'Smarter storage management',
+      title: 'Soft Storage',
+      description: 'Softer storage management',
     },
     '/zh/': {
       lang: 'zh-CN',
-      title: 'Smart Storage',
-      description: '更“聪明”的 Web Storage 管理',
+      title: 'Soft Storage',
+      description: '更“舒适”的 Web Storage 管理',
     },
   },
   markdown: {
@@ -36,7 +36,7 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   themeConfig: {
     logo: '/logo.png',
     docsDir: 'docs',
-    repo: 'northwang-lucky/smart-storage',
+    repo: 'northwang-lucky/soft-storage',
     docsBranch: 'main',
     editLinks: true,
     lastUpdated: true,

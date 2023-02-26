@@ -1,6 +1,6 @@
 # Storage Helper
 
-Smart Storage provides a hook function called `useStorageHelper` to use the other capabilities of the storage module.
+Soft Storage provides a hook function called `useStorageHelper` to use the other capabilities of the storage module.
 
 ## For Vue and React
 
@@ -8,8 +8,8 @@ Smart Storage provides a hook function called `useStorageHelper` to use the othe
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
-// import { createLocalStorage } from '@smart-storage/react-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
+// import { createLocalStorage } from '@soft-storage/react-hooks';
 
 type UserInfo = {
   token?: string;
@@ -30,7 +30,7 @@ Now, you can use the `useStorageHelper` hook in a component (React is the same a
 
 ```vue
 <script setup lang="ts">
-import { useStorageHelper } from '@smart-storage/vue-hooks';
+import { useStorageHelper } from '@soft-storage/vue-hooks';
 import { storage } from './storage';
 
 const storageHelper = useStorageHelper(storage);
@@ -53,7 +53,7 @@ storageHelper.initialize();
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/hooks';
+import { createLocalStorage } from '@soft-storage/hooks';
 
 type UserInfo = {
   token?: string;
@@ -73,7 +73,7 @@ Use anywhere:
 <CodeScroll>
 
 ```ts
-import { useStorageHelper } from '@smart-storage/hooks';
+import { useStorageHelper } from '@soft-storage/hooks';
 import { storage } from './storage';
 
 const storageHelper = useStorageHelper(storage);

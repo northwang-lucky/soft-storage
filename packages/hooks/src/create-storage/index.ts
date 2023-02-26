@@ -1,6 +1,6 @@
-import { StorageType } from '@smart-storage/core';
-import { StorageModuleSchema } from '@smart-storage/shared';
-import { CreateStorageBaseOptions, CreateStorageOptions, SmartStorage } from './types';
+import { StorageType } from '@soft-storage/core';
+import { StorageModuleSchema } from '@soft-storage/shared';
+import { CreateStorageBaseOptions, CreateStorageOptions, SoftStorage } from './types';
 import { processVersion } from './version';
 
 function createStorage<T extends StorageModuleSchema>({
@@ -10,7 +10,7 @@ function createStorage<T extends StorageModuleSchema>({
   version = 1,
   preVersion,
   initial,
-}: CreateStorageBaseOptions<T>): SmartStorage<T> {
+}: CreateStorageBaseOptions<T>): SoftStorage<T> {
   const storageModule = processVersion<T>(storageModuleKey, type, version, preVersion);
   const helper = storageModule.getHelper();
 
@@ -29,10 +29,10 @@ function createStorage<T extends StorageModuleSchema>({
   return { storageModule, helper, initial };
 }
 
-export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): SmartStorage<T> {
+export function createLocalStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): SoftStorage<T> {
   return createStorage<T>(Object.assign({ type: StorageType.LOCAL }, options));
 }
 
-export function createSessionStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): SmartStorage<T> {
+export function createSessionStorage<T extends StorageModuleSchema>(options: CreateStorageOptions<T>): SoftStorage<T> {
   return createStorage<T>(Object.assign({ type: StorageType.SESSION }, options));
 }

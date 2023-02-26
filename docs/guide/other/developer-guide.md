@@ -1,6 +1,6 @@
 # Developer Guide
 
-This article aims to help you understand the overall Smart Storage development workflow so that you can better participate in the construction.
+This article aims to help you understand the overall Soft Storage development workflow so that you can better participate in the construction.
 
 ## Directory Structure
 
@@ -32,7 +32,7 @@ The basic directory structure of your project looks like this:
 
 ## Optional Suggestions
 
-Use [Visual Studio Code](https://code.visualstudio.com/) as a code editor for Smart Storage, and install the following extension:
+Use [Visual Studio Code](https://code.visualstudio.com/) as a code editor for Soft Storage, and install the following extension:
 
 - Code Spell Checker
 - ESLint

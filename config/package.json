@@ -1,5 +1,5 @@
 {
-  "name": "@smart-storage-lib/config",
+  "name": "@soft-storage-lib/config",
   "version": "0.0.0",
   "private": true,
   "main": "index.js",

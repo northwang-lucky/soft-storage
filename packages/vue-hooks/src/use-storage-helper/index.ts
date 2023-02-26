@@ -1,14 +1,14 @@
-import { StorageHelper } from '@smart-storage/hooks';
-import { StorageModuleSchema } from '@smart-storage/shared';
+import { StorageHelper } from '@soft-storage/hooks';
+import { StorageModuleSchema } from '@soft-storage/shared';
 import { UnwrapRef } from 'vue';
-import { SmartStorage } from '../create-storage/types';
+import { SoftStorage } from '../create-storage/types';
 
 export function useStorageHelper<T extends StorageModuleSchema>({
   storage,
   storageHelper,
   itemRefDict,
   properties,
-}: SmartStorage<T>): StorageHelper {
+}: SoftStorage<T>): StorageHelper {
   const size = (): number => {
     return storageHelper.size();
   };

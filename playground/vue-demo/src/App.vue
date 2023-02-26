@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { useStorage, useStorageHelper } from '@smart-storage/vue-hooks';
+import { useStorage, useStorageHelper } from '@soft-storage/vue-hooks';
 import { ref } from 'vue';
 import { storage, protectedStorage } from './storage';
 
@@ -26,7 +26,7 @@ const triggerError = () => {
 </script>
 
 <template>
-  <h1>Hello Smart Storage</h1>
+  <h1>Hello Soft Storage</h1>
   <h2>vue_test_key</h2>
   <div class="tool-bar">
     Actions:

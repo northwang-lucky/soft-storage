@@ -1,4 +1,4 @@
-import { BiFunction, createProxy } from '@smart-storage/shared';
+import { BiFunction, createProxy } from '@soft-storage/shared';
 import { StorageType } from '../storage-module-helper/types';
 
 class StorageGuard {

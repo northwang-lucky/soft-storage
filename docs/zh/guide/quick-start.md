@@ -1,6 +1,6 @@
 # 快速开始
 
-Smart Storage 提供三种方式来管理存储：
+Soft Storage 提供三种方式来管理存储：
 
 - 结合 **Vue 3**中的 `ref` API
 - 结合 **React**中的 `useState` API
@@ -9,7 +9,7 @@ Smart Storage 提供三种方式来管理存储：
 此外，如果您只想使用 Web Storage 的浅层模块化封装，您可以直接转到 [直接使用](#直接使用) 部分。
 
 ::: warning
-请注意，永远不要使用`interface`来为 Smart Storage 定义类型。请使用`type`取代之。点击 [常见问题 > 关于 Interface](./other/questions-and-answers.html#关于-interface) 查看更多。
+请注意，永远不要使用`interface`来为 Soft Storage 定义类型。请使用`type`取代之。点击 [常见问题 > 关于 Interface](./other/questions-and-answers.html#关于-interface) 查看更多。
 :::
 
 ## Vue 3 用户 <Badge text="vue >= 3.1.0" />
@@ -23,7 +23,7 @@ Smart Storage 提供三种方式来管理存储：
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/vue-hooks
+npm install @soft-storage/vue-hooks
 ```
 
 </CodeScroll>
@@ -35,7 +35,7 @@ npm install @smart-storage/vue-hooks
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/vue-hooks
+yarn add @soft-storage/vue-hooks
 ```
 
 </CodeScroll>
@@ -47,7 +47,7 @@ yarn add @smart-storage/vue-hooks
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/vue-hooks
+pnpm add @soft-storage/vue-hooks
 ```
 
 </CodeScroll>
@@ -64,7 +64,7 @@ pnpm add @smart-storage/vue-hooks
 
 ```ts
 // storage.ts
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type UserInfo = {
   token?: string;
@@ -92,7 +92,7 @@ export const storage = createLocalStorage<UserInfo>({
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
-import { useStorage } from '@smart-storage/vue-hooks';
+import { useStorage } from '@soft-storage/vue-hooks';
 import { storage } from './storage';
 
 /* 在Typescript的帮助下，您可以轻松地解构hook的返回值 */
@@ -135,7 +135,7 @@ const onSignOut = () => {
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/react-hooks
+npm install @soft-storage/react-hooks
 ```
 
 </CodeScroll>
@@ -147,7 +147,7 @@ npm install @smart-storage/react-hooks
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/react-hooks
+yarn add @soft-storage/react-hooks
 ```
 
 </CodeScroll>
@@ -159,7 +159,7 @@ yarn add @smart-storage/react-hooks
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/react-hooks
+pnpm add @soft-storage/react-hooks
 ```
 
 </CodeScroll>
@@ -176,7 +176,7 @@ pnpm add @smart-storage/react-hooks
 
 ```ts
 // storage.ts
-import { createSessionStorage } from '@smart-storage/react-hooks';
+import { createSessionStorage } from '@soft-storage/react-hooks';
 
 type UserInfo = {
   token?: string;
@@ -203,7 +203,7 @@ export const storage = createSessionStorage<UserInfo>({
 ```tsx
 import React, { useEffect } from 'react';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
-import { useStorage } from '@smart-storage/react-hooks';
+import { useStorage } from '@soft-storage/react-hooks';
 import { storage } from './storage';
 
 function UserInfoFC() {
@@ -250,7 +250,7 @@ export default UserInfoFC;
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/hooks
+npm install @soft-storage/hooks
 ```
 
 </CodeScroll>
@@ -262,7 +262,7 @@ npm install @smart-storage/hooks
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/hooks
+yarn add @soft-storage/hooks
 ```
 
 </CodeScroll>
@@ -274,7 +274,7 @@ yarn add @smart-storage/hooks
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/hooks
+pnpm add @soft-storage/hooks
 ```
 
 </CodeScroll>
@@ -291,7 +291,7 @@ pnpm add @smart-storage/hooks
 
 ```ts
 // storage.ts
-import { createSessionStorage } from '@smart-storage/hooks';
+import { createSessionStorage } from '@soft-storage/hooks';
 
 type UserInfo = {
   token?: string;
@@ -317,7 +317,7 @@ export const storage = createSessionStorage<UserInfo>({
 
 ```ts
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
-import { useStorage } from '@smart-storage/hooks';
+import { useStorage } from '@soft-storage/hooks';
 import { storage } from './storage';
 
 const { token, hasSigned } = useStorage(storage);
@@ -357,7 +357,7 @@ const onSignOut = () => {
 <CodeScroll>
 
 ```bash
-npm install @smart-storage/core
+npm install @soft-storage/core
 ```
 
 </CodeScroll>
@@ -369,7 +369,7 @@ npm install @smart-storage/core
 <CodeScroll>
 
 ```bash
-yarn add @smart-storage/core
+yarn add @soft-storage/core
 ```
 
 </CodeScroll>
@@ -381,7 +381,7 @@ yarn add @smart-storage/core
 <CodeScroll>
 
 ```bash
-pnpm add @smart-storage/core
+pnpm add @soft-storage/core
 ```
 
 </CodeScroll>
@@ -422,7 +422,7 @@ export { storageModule };
 <CodeScroll>
 
 ```ts
-import { StorageModule, StorageType } from '@smart-storage/core';
+import { StorageModule, StorageType } from '@soft-storage/core';
 import { getUserInfo } from '@/api'; // 假设您有一个获取用户信息的异步函数
 import { storageModule } from './storage.ts';
 

@@ -1,4 +1,4 @@
-import { createLocalStorage } from '@smart-storage/vue-hooks';
+import { createLocalStorage } from '@soft-storage/vue-hooks';
 
 type TestStorage = {
   str?: string;
