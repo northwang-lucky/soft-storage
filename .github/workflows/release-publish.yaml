@@ -82,7 +82,7 @@ jobs:
       contents: write
     steps:
       - name: Release
-        uses: northwang-lucky/auto-release@v0.0.2
+        uses: northwang-lucky/auto-release@v0.0.3
         with:
           filepath: CHANGELOG.md
           github-token: ${{ secrets.GITHUB_TOKEN }}
