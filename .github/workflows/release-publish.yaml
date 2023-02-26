@@ -31,9 +31,11 @@ jobs:
               "workflow": "${{ github.workflow }}",
               "workflow_url": "${{ env.WORKFLOW_URL }}"
             }
-  build-test:
+  release-publish:
     runs-on: ubuntu-latest
-    name: Test
+    name: Release & Publish
+    permissions:
+      contents: write
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v3
@@ -70,41 +72,14 @@ jobs:
       - name: Run Build and Test
         if: success()
         run: pnpm build
-  release:
-    runs-on: ubuntu-latest
-    name: Release
-    needs: build-test
-    if: success()
-    permissions:
-      contents: write
-    steps:
       - name: Release
+        if: success()
         uses: northwang-lucky/auto-release@v0.0.3
         with:
           filepath: CHANGELOG.md
           github-token: ${{ secrets.GITHUB_TOKEN }}
-  publish:
-    runs-on: ubuntu-latest
-    name: Publish
-    needs: release
-    if: success()
-    steps:
-      - name: Checkout Main Branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
-      - name: Set up Node 16
-        if: success()
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - name: Set up PNPM
-        if: success()
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
-          run_install: false
       - name: Publish
+        if: success()
         run: |
           pnpm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
           pnpm publish
@@ -112,7 +87,7 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
     name: Report Success
-    needs: publish
+    needs: release-publish
     steps:
       - name: Notify Success
         uses: northwang-lucky/chatbot-webhook-client@v1.1.1
@@ -134,7 +109,7 @@ jobs:
     if: failure()
     runs-on: ubuntu-latest
     name: Report Failure
-    needs: publish
+    needs: release-publish
     steps:
       - name: Notify Failure
         uses: northwang-lucky/chatbot-webhook-client@v1.1.1
