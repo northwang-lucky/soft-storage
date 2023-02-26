@@ -7,7 +7,7 @@ const sh = require('shelljs');
 /** @typedef {Omit<import('inquirer').ListQuestion<Answers>, 'name'>} ListQuestion */
 /** @typedef {Omit<import('inquirer').InputQuestion<Answers>, 'name'>} InputQuestion */
 
-/** @typedef {{ releaseType: ListQuestion; customRelease: InputQuestion; isPrerelease: ListQuestion; prereleaseType: ListQuestion; autoPush: ListQuestion }} Questions */
+/** @typedef {{ forgetReadme: ListQuestion; releaseType: ListQuestion; customRelease: InputQuestion; isPrerelease: ListQuestion; prereleaseType: ListQuestion; autoPush: ListQuestion }} Questions */
 /** @typedef {Record<keyof Questions, string>} Answers */
 /** @typedef {import('inquirer').Question<Answers>[]} QuestionList */
 
@@ -26,6 +26,11 @@ const repositories = fs.readdirSync(path.resolve(__dirname, '../packages')).filt
 const boolChoices = ['No', 'Yes'];
 
 const questions = defineQuestions({
+  forgetReadme: {
+    type: 'list',
+    message: 'Do you forget to update README.md?',
+    choices: [...boolChoices].reverse(),
+  },
   releaseType: {
     type: 'list',
     message: 'Please select a release type:',
@@ -45,6 +50,7 @@ const questions = defineQuestions({
       'current',
       'custom',
     ],
+    when: ({ forgetReadme }) => forgetReadme === 'No',
   },
   customRelease: {
     type: 'input',
@@ -56,7 +62,7 @@ const questions = defineQuestions({
     type: 'list',
     message: 'Is is a prerelease?',
     choices: boolChoices,
-    when: ({ releaseType }) => !['custom', 'current'].includes(releaseType),
+    when: ({ releaseType }) => releaseType && !['custom', 'current'].includes(releaseType),
   },
   prereleaseType: {
     type: 'list',
@@ -68,12 +74,18 @@ const questions = defineQuestions({
     type: 'list',
     message: 'Do you want to push commits and tag automatically after the task over?',
     choices: boolChoices,
+    when: ({ releaseType }) => Boolean(releaseType),
   },
 });
 
 inquirer
   .prompt(questions)
-  .then(({ releaseType, customRelease, isPrerelease, prereleaseType, autoPush }) => {
+  .then(({ forgetReadme, releaseType, customRelease, isPrerelease, prereleaseType, autoPush }) => {
+    if (forgetReadme === 'Yes') {
+      console.log('Go ahead and update the README.md file, and then come back to run "pnpm release" again!!');
+      process.exit();
+    }
+
     /** @type {{ repo: string; cmd: string }[]} */
     const commands = [];
     repositories.forEach(repo => {
@@ -106,11 +118,21 @@ inquirer
   .then(({ commands, autoPush }) => {
     const rootPath = path.resolve(__dirname, '..');
     const changelogPath = path.resolve(__dirname, '../CHANGELOG.md');
+    const readmePath = path.resolve(__dirname, '../README.md');
 
     commands.forEach(({ repo, cmd }, index) => {
       console.log('\n* ============================= *');
       console.log(`* Command: ${cmd}`);
       console.log('* ============================= *\n');
+
+      const workPath = path.resolve(__dirname, `../packages/${repo}`);
+      const workReadmePath = path.resolve(workPath, './README.md');
+      fs.copyFileSync(readmePath, workReadmePath);
+
+      let result = sh.exec(`git add ${workReadmePath}`);
+      if (result.code !== 0) {
+        return Promise.reject(result.stderr);
+      }
 
       if (index < commands.length - 1) {
         cmd += ' --skip.changelog true --skip.commit true --skip.tag true --scripts.postbump "git add ."';
@@ -118,8 +140,7 @@ inquirer
         cmd += ` --infile ${changelogPath} --commit-all --scripts.postchangelog "prettier -w ${changelogPath}"`;
       }
 
-      const workPath = path.resolve(__dirname, `../packages/${repo}`);
-      const result = sh.exec(`cd ${workPath} && ${cmd}`);
+      result = sh.exec(`cd ${workPath} && ${cmd}`);
       if (result.code !== 0) {
         return Promise.reject(result.stderr);
       }
