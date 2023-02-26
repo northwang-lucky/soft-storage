@@ -95,7 +95,7 @@ jobs:
       - name: Publish
         run: |
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-          pnpm -F "@smart-storage/*" publish
+          npx pnpm -F "@smart-storage/*" publish
   notify-success:
     if: success()
     runs-on: ubuntu-latest
