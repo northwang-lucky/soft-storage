@@ -2,14 +2,9 @@
   'use strict';
   !(function (t) {
     var s = window,
-      h = s.location.hostname,
       e = document,
       i = p,
-      c = ''.concat(
-        'https:' === e.location.protocol ? 'https://' : 'http://',
-        (h === '__DOMAIN_CN__' ? 'forward-51la.northwang-lucky.com' : 'forward-51la.vercel.app') +
-          '/api/js-sdk-pro.min.js'
-      ),
+      c = '/js-sdk-pro.min.js',
       n = e.createElement('script'),
       r = e.getElementsByTagName('script')[0];
     (n.type = 'text/javascript'),
