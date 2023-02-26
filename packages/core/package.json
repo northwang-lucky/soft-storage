@@ -1,6 +1,6 @@
 {
   "name": "@smart-storage/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "It is the core dependency package for @smart-storage/hooks",
   "homepage": "https://github.com/northwang-lucky/smart-storage",
   "repository": {
