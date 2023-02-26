@@ -31,7 +31,7 @@ jobs:
               "workflow": "${{ github.workflow }}",
               "workflow_url": "${{ env.WORKFLOW_URL }}"
             }
-  test:
+  build-test:
     runs-on: ubuntu-latest
     name: Test
     steps:
@@ -67,16 +67,13 @@ jobs:
       - name: Install Dependencies
         if: success()
         run: pnpm install
-      - name: Run Build
+      - name: Run Build and Test
         if: success()
-        run: pnpm build-only
-      - name: Run Test
-        if: success()
-        run: pnpm test:cov
+        run: pnpm build
   release:
     runs-on: ubuntu-latest
     name: Release
-    needs: test
+    needs: build-test
     if: success()
     permissions:
       contents: write
@@ -92,10 +89,14 @@ jobs:
     needs: release
     if: success()
     steps:
+      - name: Checkout Main Branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Publish
         run: |
           npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
-          npx pnpm -F "@smart-storage/*" publish
+          npx pnpm publish
   notify-success:
     if: success()
     runs-on: ubuntu-latest

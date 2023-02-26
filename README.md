@@ -2,7 +2,7 @@
 
 A smarter storage management.
 
-[![doc CI][ci-doc]][ci-doc-url] [![GitHub Workflow Status][ci-test]][ci-test-url] [![codecov status][codecov]][codecov-url] ![last commit][last-commit] ![top language][top-lang] ![license][license]
+[![publish CI][ci-publish]][ci-publish-url] [![doc CI][ci-doc]][ci-doc-url] [![GitHub Workflow Status][ci-test]][ci-test-url] [![codecov status][codecov]][codecov-url] ![last commit][last-commit] ![top language][top-lang] ![license][license]
 
 ## 📚 Usage
 
@@ -33,6 +33,8 @@ If you are not in Chinese mainland, I suggest you to choose the following addres
 
 [last-commit]: https://img.shields.io/github/last-commit/northwang-lucky/smart-storage
 [top-lang]: https://img.shields.io/github/languages/top/northwang-lucky/smart-storage
+[ci-publish]: https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/release-publish.yaml?label=publish
+[ci-publish-url]: https://github.com/northwang-lucky/smart-storage/actions/workflows/release-publish.yaml
 [ci-doc]: https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/deploy-pages.yaml?label=build:doc
 [ci-doc-url]: https://github.com/northwang-lucky/smart-storage/actions/workflows/deploy-pages.yaml
 [ci-test]: https://img.shields.io/github/actions/workflow/status/northwang-lucky/smart-storage/coverage-upload.yaml?label=test
