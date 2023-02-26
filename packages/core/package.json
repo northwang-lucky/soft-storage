@@ -1,6 +1,6 @@
 {
   "name": "@soft-storage/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "It is the core dependency package for @soft-storage/hooks",
   "homepage": "https://github.com/northwang-lucky/soft-storage",
   "repository": {
