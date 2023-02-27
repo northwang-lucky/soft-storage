@@ -11,6 +11,7 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   description: 'Softer storage management',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['script', {}, /* js */ `window.NODE_ENV = '${process.env.NODE_ENV}'`],
     ['script', { src: '/inject/analyzation.js' }],
   ],
   locales: {

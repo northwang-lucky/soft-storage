@@ -42,6 +42,7 @@
     "@types/fs-extra": "11.0.1",
     "@types/inquirer": "8.2.5",
     "@types/jest": "29.2.5",
+    "ackee-tracker": "5.1.0",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "8.22.0",

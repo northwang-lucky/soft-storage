@@ -14,6 +14,7 @@ importers:
       '@types/fs-extra': 11.0.1
       '@types/inquirer': 8.2.5
       '@types/jest': 29.2.5
+      ackee-tracker: 5.1.0
       commitizen: 4.3.0
       cz-conventional-changelog: 3.3.0
       eslint: 8.22.0
@@ -47,6 +48,7 @@ importers:
       '@types/fs-extra': 11.0.1
       '@types/inquirer': 8.2.5
       '@types/jest': 29.2.5
+      ackee-tracker: 5.1.0
       commitizen: 4.3.0
       cz-conventional-changelog: 3.3.0
       eslint: 8.22.0
@@ -3659,6 +3661,12 @@ packages:
     dependencies:
       mime-types: 2.1.35
       negotiator: 0.6.3
+    dev: true
+
+  /ackee-tracker/5.1.0:
+    resolution: {integrity: sha512-A7iKkGyUnEXuOzxultQB7hnm4bStYCo1c38MYRRihBfqUP8AImhtZOODb00t9xrXs/BTsg06bz1MKpXeMs9sYw==}
+    dependencies:
+      platform: 1.3.6
     dev: true
 
   /acorn-globals/7.0.1:
@@ -11674,6 +11682,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
+    dev: true
+
+  /platform/1.3.6:
+    resolution: {integrity: sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==}
     dev: true
 
   /portfinder/1.0.32:

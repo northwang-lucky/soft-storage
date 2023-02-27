@@ -15,6 +15,12 @@
   script.dataset = { ackeeServer: host, ackeeDomainId: domainId };
   script.dataset.ackeeServer = host;
   script.dataset.ackeeDomainId = domainId;
-  script.dataset.ackeeOpts = JSON.stringify({ detailed: true });
+  script.dataset.ackeeOpts = JSON.stringify({
+    detailed: true,
+    ignoreOwnVisits: window.NODE_ENV !== 'development',
+  });
   document.head.appendChild(script);
+
+  window.ACKEE_SERVER = host;
+  window.ACKEE_OPTS = script.dataset.ackeeOpts;
 })();
