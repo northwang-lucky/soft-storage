@@ -12,4 +12,5 @@ export function getTracker() {
 
 export const events = {
   show_page: '3b8ba189-1096-4d0d-912a-d42eb2281195',
+  doc_language: 'ca6b6799-c5b8-4dda-bd51-dee0989a2ded',
 };

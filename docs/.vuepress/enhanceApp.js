@@ -7,8 +7,12 @@ export default ({ router, isServer }) => {
 
   const tracker = getTracker();
   router.afterEach(to => {
+    tracker.action(events.doc_language, {
+      key: to.path.startsWith('/zh') ? 'Simplified-Chinese' : 'English',
+      value: 1,
+    });
     tracker.action(events.show_page, {
-      key: to.path,
+      key: to.path.replace(/^\/zh/, ''),
       value: 1,
     });
   });
