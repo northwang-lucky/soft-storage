@@ -1,11 +1,8 @@
-import fs from 'fs-extra';
 import { resolve } from 'path';
 import { ThemeConfig } from 'vuepress-theme-vt';
 import { defineConfig4CustomTheme } from 'vuepress/config';
 import { nav_en, nav_zh } from './configs/nav';
 import { sidebar_en, sidebar_zh } from './configs/sidebar';
-
-const __51la_js__ = fs.readFileSync(resolve(__dirname, './inject/51la.js'), 'utf-8');
 
 export default defineConfig4CustomTheme<ThemeConfig>({
   port: 5175,
@@ -14,8 +11,7 @@ export default defineConfig4CustomTheme<ThemeConfig>({
   description: 'Softer storage management',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    // ['script', { async: true, src: '/scripts/adblock-checker.js' }],
-    ['script', {}, __51la_js__],
+    ['script', { src: '/inject/analyzation.js' }],
   ],
   locales: {
     '/': {
