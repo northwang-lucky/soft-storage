@@ -19,7 +19,6 @@ on:
 env:
   APP_NAME: Lark
   WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   notify-start:
