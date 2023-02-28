@@ -6,7 +6,6 @@ import { sidebar_en, sidebar_zh } from './configs/sidebar';
 
 export default defineConfig4CustomTheme<ThemeConfig>({
   port: 5175,
-  base: '/docs/',
   title: 'Soft Storage',
   description: 'Softer storage management',
   head: [

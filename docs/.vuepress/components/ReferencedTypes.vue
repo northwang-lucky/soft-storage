@@ -17,7 +17,7 @@ export default defineComponent({
   },
   beforeMount() {
     const path = location.pathname;
-    if (path.indexOf('/docs/zh/') === 0) {
+    if (path.indexOf('/zh/') === 0) {
       this.summary = '引用的类型';
     }
   },

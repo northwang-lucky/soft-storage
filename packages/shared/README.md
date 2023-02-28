@@ -2,7 +2,7 @@
 
 A softer storage management.
 
-[![publish CI][ci-publish]][ci-publish-url] [![doc CI][ci-doc]][ci-doc-url] [![GitHub Workflow Status][ci-test]][ci-test-url] [![codecov status][codecov]][codecov-url] ![last commit][last-commit] ![top language][top-lang] ![license][license]
+[![codecov status][codecov]][codecov-url] ![last commit][last-commit] ![top language][top-lang] ![license][license]
 
 ## 📚 Usage
 
@@ -33,17 +33,11 @@ If you are not in Chinese mainland, I suggest you to choose the following addres
 
 [last-commit]: https://img.shields.io/github/last-commit/northwang-lucky/soft-storage
 [top-lang]: https://img.shields.io/github/languages/top/northwang-lucky/soft-storage
-[ci-publish]: https://img.shields.io/github/actions/workflow/status/northwang-lucky/soft-storage/release-publish.yaml?label=publish
-[ci-publish-url]: https://github.com/northwang-lucky/soft-storage/actions/workflows/release-publish.yaml
-[ci-doc]: https://img.shields.io/github/actions/workflow/status/northwang-lucky/soft-storage/deploy-pages.yaml?label=build:doc
-[ci-doc-url]: https://github.com/northwang-lucky/soft-storage/actions/workflows/deploy-pages.yaml
-[ci-test]: https://img.shields.io/github/actions/workflow/status/northwang-lucky/soft-storage/coverage-upload.yaml?label=test
-[ci-test-url]: https://github.com/northwang-lucky/soft-storage/actions/workflows/coverage-upload.yaml
 [codecov]: https://img.shields.io/codecov/c/gh/northwang-lucky/soft-storage
 [codecov-url]: https://app.codecov.io/gh/northwang-lucky/soft-storage
 [license]: https://img.shields.io/github/license/northwang-lucky/soft-storage
-[en-doc-url]: https://soft-storage.vercel.app/docs/
-[zh-doc-url]: https://soft-storage.northwang-lucky.com/docs/zh/
+[en-doc-url]: https://soft-storage.vercel.app/
+[zh-doc-url]: https://soft-storage.northwang-lucky.com/zh/
 [vue-demo-url]: https://soft-storage.vercel.app/vue-demo/
 [react-demo-url]: https://soft-storage.vercel.app/react-demo/
 [vue-demo-url-cn]: https://soft-storage.northwang-lucky.com/vue-demo/

@@ -14,10 +14,6 @@ if (result.code !== 0) {
 }
 
 fs.mkdirSync(outputPath);
+fs.moveSync(path.resolve(__dirname, '../docs/.vuepress/dist'), outputPath, { overwrite: true });
 fs.moveSync(path.resolve(__dirname, '../playground/vue-demo/dist'), path.resolve(outputPath, './vue-demo'));
 fs.moveSync(path.resolve(__dirname, '../playground/react-demo/dist'), path.resolve(outputPath, './react-demo'));
-fs.moveSync(path.resolve(__dirname, '../docs/.vuepress/dist'), path.resolve(outputPath, './docs'));
-
-const indexHtmlPath = path.resolve(outputPath, './index.html');
-fs.createFileSync(indexHtmlPath);
-fs.writeFileSync(indexHtmlPath, /* html */ `<script>window.location.href = './docs/'</script>`);

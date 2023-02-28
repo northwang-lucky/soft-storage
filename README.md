@@ -36,8 +36,8 @@ If you are not in Chinese mainland, I suggest you to choose the following addres
 [codecov]: https://img.shields.io/codecov/c/gh/northwang-lucky/soft-storage
 [codecov-url]: https://app.codecov.io/gh/northwang-lucky/soft-storage
 [license]: https://img.shields.io/github/license/northwang-lucky/soft-storage
-[en-doc-url]: https://soft-storage.vercel.app/docs/
-[zh-doc-url]: https://soft-storage.northwang-lucky.com/docs/zh/
+[en-doc-url]: https://soft-storage.vercel.app/
+[zh-doc-url]: https://soft-storage.northwang-lucky.com/zh/
 [vue-demo-url]: https://soft-storage.vercel.app/vue-demo/
 [react-demo-url]: https://soft-storage.vercel.app/react-demo/
 [vue-demo-url-cn]: https://soft-storage.northwang-lucky.com/vue-demo/

@@ -7,6 +7,7 @@
     "clean": "pnpx rimraf \"./node_modules\" --impl=native && pnpm -F \"*\" clean",
     "eslint": "eslint . --ext .js,.cjs,.mjs,.ts,.cts,.mts",
     "format": "pnpm -F \"@soft-storage/*\" format",
+    "sync:readme": "node ./scripts/sync-readme.js",
     "start:vue-demo": "pnpm -F soft-storage-vue-demo start",
     "start:react-demo": "pnpm -F soft-storage-react-demo start",
     "start:docs": "vuepress dev docs",
